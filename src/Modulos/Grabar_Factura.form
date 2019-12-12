@@ -827,7 +827,7 @@
                   <Color blue="b1" green="f0" red="e0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="14" style="3"/>
+                  <Font name="Arial" size="18" style="3"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="70" red="25" type="rgb"/>
@@ -857,7 +857,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="810" y="502" width="94" height="26"/>
+                  <AbsoluteConstraints x="413" y="500" width="100" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>

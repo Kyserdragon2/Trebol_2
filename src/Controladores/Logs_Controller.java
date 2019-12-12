@@ -12,7 +12,7 @@ public class Logs_Controller {
         Log L = new Log(id_usuario, id_factura, id_comentario, id_estado);
         String sql;
         if (id_comentario == 0) {
-            sql = "INSERT INTO trebol_logs(id_usuario,id_factura,id_estado)\n"
+            sql = "INSERT INTO trebol_logs(id_usuario, id_factura, id_estado)\n"
                     + "VALUES(" + L.getId_usuario() + "," + L.getId_factura() + ", " + L.getId_estado() + ");";
         } else {
             sql = "INSERT INTO trebol_logs(id_usuario,id_factura,id_comentario,id_estado)\n"

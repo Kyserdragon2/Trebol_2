@@ -899,8 +899,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 
     private void jrbtodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtodasActionPerformed
         limpiar_filtros();
-        filtros();
-        llenar_cmb();
+//        filtros();
+//        llenar_cmb();
     }//GEN-LAST:event_jrbtodasActionPerformed
 
     private void jrbFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFinalizadasActionPerformed
@@ -1024,11 +1024,31 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                         estado = String.valueOf(jtfacturas.getValueAt(jtfacturas.getSelectedRow(), 8));
                         asignado = String.valueOf(jtfacturas.getValueAt(jtfacturas.getSelectedRow(), 7));
                         if (jrbPropias.isSelected()) {
-                            if (asignado.equals("Recepción") || asignado.equals("Correspondencia")) {
-                                modificacion_factura(no_factura, proveedor, empresa, estado);
-                            } else {
-                                gestionar_factura(no_factura, proveedor, empresa, estado);
+                            String usuario = lbluser.getText();
+                            switch (UC.area_usuario(usuario)) {
+                                case "Administrativo":
+                                    gestionar_factura(no_factura, proveedor, empresa, estado);
+                                    break;
+                                case "Capital Humano":
+                                case "Compras":
+                                case "Tecnología":
+                                    gestionar_factura(no_factura, proveedor, empresa, estado);
+                                    break;
+                                case "Recepción":
+                                    modificacion_factura(no_factura, proveedor, empresa, estado);
+                                    break;
+                                case "Contabilidad":
+                                    gestionar_factura(no_factura, proveedor, empresa, estado);
+                                    break;
+                                default:
+                                    break;
                             }
+
+//                            if ((asignado.equals("Recepción") || asignado.equals("Correspondencia"))) {
+//                                modificacion_factura(no_factura, proveedor, empresa, estado);
+//                            } else {
+//                                gestionar_factura(no_factura, proveedor, empresa, estado);
+//                            }
                         } else {
                             modificacion_factura(no_factura, proveedor, empresa, estado);
                         }
@@ -1067,6 +1087,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             Grabar_Factura.btnfile.setVisible(false);
             Grabar_Factura.lblrequerido10.setVisible(false);
             Grabar_Factura.lbldocfactura.setVisible(false);
+            Grabar_Factura.jtabedpane.setSelectedIndex(0);
             GF.llenar_campos(no_factura, proveedor, empresa);
             GF.setVisible(true);
         }
@@ -1090,7 +1111,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             String usuario = lbluser.getText();
             String area = UC.area_usuario(usuario);
             Gestionar_Factura.Tabpane.setSelectedIndex(0);
-            GestF.llenar_campos(no_factura, proveedor, empresa, area);
+            GestF.llenar_campos(no_factura, proveedor, empresa, area, estado);
             GestF.setBounds(138, 28, 925, 545);
             GestF.setVisible(true);
         }
@@ -1143,6 +1164,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
+            cmbasignado.setSelectedIndex(0);
         } else if (jrbFinalizadas.isSelected()) {
             LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
@@ -1166,7 +1188,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             case "Capital Humano":
             case "Compras":
             case "Tecnología":
-                cmbestado.setSelectedItem("Gestión");
+                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
+                cmbasignado.setEnabled(false);
+                break;
+            case "Contabilidad":
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbasignado.setEnabled(false);
                 break;

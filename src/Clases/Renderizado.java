@@ -121,4 +121,20 @@ public class Renderizado {
             Logger.getLogger(Renderizado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void Revision(JComboBox cmb) {
+        try (Connection cn = cc.Conexion(); 
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery("SELECT CONCAT(nombres,' ',apellidos) AS 'nombre' "
+                        + "FROM trebol_usuario\n"
+                        + "WHERE id_area=5\n"
+                        + "AND retirado=0\n"
+                        + "ORDER BY nombre ASC")) {
+            while (rs.next()) {
+                cmb.addItem(rs.getString("nombre"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Renderizado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

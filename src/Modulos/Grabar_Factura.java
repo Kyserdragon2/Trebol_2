@@ -390,7 +390,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         btnlimpiar.setBounds(780, 220, 94, 26);
 
         btnmodificar.setBackground(new java.awt.Color(224, 240, 177));
-        btnmodificar.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btnmodificar.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         btnmodificar.setForeground(new java.awt.Color(37, 112, 0));
         btnmodificar.setText("Modificar");
         btnmodificar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
@@ -401,7 +401,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jpgf.add(btnmodificar);
-        btnmodificar.setBounds(810, 502, 94, 26);
+        btnmodificar.setBounds(413, 500, 100, 30);
 
         lblid.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jpgf.add(lblid);
@@ -1086,7 +1086,6 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                 cmbtfactura.setSelectedIndex(F.getId_tipo_factura() - 3);
                 btncrear.setVisible(false);
                 btnlimpiar.setVisible(false);
-                btnmodificar.setLocation(Grabar_Factura.btncrear.getX(), Grabar_Factura.btnmodificar.getY());
                 btnmodificar.setVisible(true);
                 txtruta.setText(F.getUbicacion());
                 lblid.setText(String.valueOf(F.getId()));

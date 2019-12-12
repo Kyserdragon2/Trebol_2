@@ -19,4 +19,12 @@ public class Anticipo {
     public void setId_tipo_factura(int id_tipo_factura) {
         this.id_tipo_factura = id_tipo_factura;
     }
+
+    public Anticipo() {
+    }
+
+    public Anticipo(int id_factura, int id_tipo_factura) {
+        this.id_factura = id_factura;
+        this.id_tipo_factura = id_tipo_factura;
+    }
 }

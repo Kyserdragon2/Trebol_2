@@ -126,4 +126,10 @@ public class Documento_Controller {
         }
         return ub;
     }
+
+    public String existe_doc_cont() {
+        String ub = "";
+        
+        return ub;
+    }
 }

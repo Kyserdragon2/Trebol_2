@@ -218,6 +218,7 @@ public class Llenar_Tablas {
      * @param proveedor
      * @param empresa
      * @param estado
+     * @param asignado
      */
     public void Facturas(JTable tabla, int area, String proveedor, String empresa, String estado, String asignado) {
         Color H = new Color(75, 156, 109);
@@ -229,7 +230,7 @@ public class Llenar_Tablas {
         String estados;
         switch (area) {
             case 1:
-                estados = "2,8";
+                estados = "2,8,4";
                 break;
             case 2:
                 estados = "2,3,4,5,6,8,9,10,11,13";
@@ -358,7 +359,7 @@ public class Llenar_Tablas {
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.getTableHeader().setResizingAllowed(false);
         tabla.getTableHeader().setReorderingAllowed(false);
-        String consulta = "SELECT te.`nom_estado` AS 'Proceso', \n"
+        String consulta = "SELECT DISTINCT te.`nom_estado` AS 'Proceso', \n"
                 + "CONCAT(tu.`nombres`,' ',tu.`apellidos`) AS 'Gestiona', \n"
                 + "tc.`detalle` AS 'Comentario', \n"
                 + "DATE(tl.creacion) AS 'Fecha', \n"
@@ -372,7 +373,7 @@ public class Llenar_Tablas {
         try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
                 ResultSet rs = st.executeQuery(consulta);) {
-            Object[] titulos = {"Proceso", "Gestionado por", "Fecha", "Hora", "Comentario"};
+            Object[] titulos = {"Usuario", "Procedimiento", "Fecha", "Hora", "Comentario"};
             Object[] registros = new Object[5];
             model = new DefaultTableModel(null, titulos) {
                 @Override
@@ -395,8 +396,8 @@ public class Llenar_Tablas {
             sorter = new TableRowSorter(model);
 
             while (rs.next()) {
-                registros[0] = rs.getString("Proceso");
-                registros[1] = rs.getString("Gestiona");
+                registros[0] = rs.getString("Gestiona");
+                registros[1] = rs.getString("Proceso");
                 registros[2] = rs.getDate("Fecha");
                 registros[3] = rs.getString("Hora");
                 registros[4] = rs.getString("Comentario");
@@ -411,13 +412,13 @@ public class Llenar_Tablas {
                 tabla.getColumnModel().getColumn(i).setHeaderRenderer(new Encabezado_Tabla(H, T, tabla.getTableHeader().getDefaultRenderer(), 16));
             }
 
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(115);
-            tabla.getColumnModel().getColumn(1).setPreferredWidth(180);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(180);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(115);
             tabla.getColumnModel().getColumn(2).setPreferredWidth(90);
             tabla.getColumnModel().getColumn(3).setPreferredWidth(80);
             tabla.getColumnModel().getColumn(4).setPreferredWidth(390);
 
-            tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+            tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
             tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
             tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
             tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));

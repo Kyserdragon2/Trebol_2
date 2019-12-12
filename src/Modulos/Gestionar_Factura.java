@@ -37,6 +37,8 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     Llenar_Tablas LT = new Llenar_Tablas();
     TipoDoc_Controller TDC = new TipoDoc_Controller();
     Aprobacion_Controller ApC = new Aprobacion_Controller();
+    Anticipo_Controller AntC = new Anticipo_Controller();
+    suno_controller suno = new suno_controller();
 
     public Gestionar_Factura() {
         initComponents();
@@ -192,10 +194,10 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jsseguimiento = new javax.swing.JScrollPane();
         jtseguimiento = new javax.swing.JTable();
         lblapr = new javax.swing.JLabel();
+        btnaprobar = new javax.swing.JButton();
         jcbeliminar = new javax.swing.JCheckBox();
         btneliminar = new javax.swing.JButton();
         lblnombreu = new javax.swing.JLabel();
-        btnaprobar = new javax.swing.JButton();
         lblant = new javax.swing.JLabel();
 
         setBorder(null);
@@ -223,12 +225,13 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnrechazar.setFocusPainted(false);
         btnrechazar.setRequestFocusEnabled(false);
         jPanel6.add(btnrechazar);
-        btnrechazar.setBounds(30, 480, 83, 26);
+        btnrechazar.setBounds(20, 480, 83, 26);
 
         btnok.setBackground(new java.awt.Color(224, 240, 177));
         btnok.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         btnok.setForeground(new java.awt.Color(37, 112, 0));
-        btnok.setText("Aceptar");
+        btnok.setText("Enviar a Contabilidad");
+        btnok.setToolTipText("");
         btnok.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnok.setFocusPainted(false);
         btnok.setPreferredSize(new java.awt.Dimension(162, 26));
@@ -239,7 +242,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel6.add(btnok);
-        btnok.setBounds(810, 480, 90, 26);
+        btnok.setBounds(720, 480, 180, 26);
 
         jPanel1.setBackground(new java.awt.Color(255, 217, 142));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)), "Información Factura", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
@@ -636,6 +639,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnRefrescar.setFocusPainted(false);
         btnRefrescar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRefrescar.setPreferredSize(new java.awt.Dimension(70, 26));
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
         panelcontabilidad.add(btnRefrescar);
         btnRefrescar.setBounds(325, 20, 88, 26);
 
@@ -655,7 +663,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnuptSC.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnuptSC.setBorderPainted(false);
         btnuptSC.setContentAreaFilled(false);
+        btnuptSC.setEnabled(false);
+        btnuptSC.setFocusPainted(false);
         btnuptSC.setRequestFocusEnabled(false);
+        btnuptSC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuptSCActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnuptSC);
         btnuptSC.setBounds(125, 35, 26, 26);
 
@@ -666,8 +681,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnSC.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnSC.setBorderPainted(false);
         btnSC.setContentAreaFilled(false);
+        btnSC.setEnabled(false);
         btnSC.setFocusPainted(false);
         btnSC.setRequestFocusEnabled(false);
+        btnSC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSCActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnSC);
         btnSC.setBounds(90, 30, 30, 40);
 
@@ -685,8 +706,15 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnDQ.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnDQ.setBorderPainted(false);
         btnDQ.setContentAreaFilled(false);
+        btnDQ.setEnabled(false);
+        btnDQ.setFocusPainted(false);
         btnDQ.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnDQ.setRequestFocusEnabled(false);
+        btnDQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDQActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnDQ);
         btnDQ.setBounds(245, 30, 30, 40);
 
@@ -694,7 +722,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnuptDQ.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnuptDQ.setBorderPainted(false);
         btnuptDQ.setContentAreaFilled(false);
+        btnuptDQ.setEnabled(false);
+        btnuptDQ.setFocusPainted(false);
         btnuptDQ.setRequestFocusEnabled(false);
+        btnuptDQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuptDQActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnuptDQ);
         btnuptDQ.setBounds(280, 35, 26, 26);
 
@@ -712,7 +747,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnNP.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnNP.setBorderPainted(false);
         btnNP.setContentAreaFilled(false);
+        btnNP.setEnabled(false);
+        btnNP.setFocusPainted(false);
         btnNP.setRequestFocusEnabled(false);
+        btnNP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNPActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnNP);
         btnNP.setBounds(395, 30, 30, 40);
 
@@ -720,7 +762,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnuptNP.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnuptNP.setBorderPainted(false);
         btnuptNP.setContentAreaFilled(false);
+        btnuptNP.setEnabled(false);
+        btnuptNP.setFocusPainted(false);
         btnuptNP.setRequestFocusEnabled(false);
+        btnuptNP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuptNPActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnuptNP);
         btnuptNP.setBounds(430, 35, 26, 26);
 
@@ -739,7 +788,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnNI.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnNI.setBorderPainted(false);
         btnNI.setContentAreaFilled(false);
+        btnNI.setEnabled(false);
+        btnNI.setFocusPainted(false);
         btnNI.setRequestFocusEnabled(false);
+        btnNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNIActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnNI);
         btnNI.setBounds(90, 80, 30, 40);
 
@@ -747,7 +803,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnuptNI.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnuptNI.setBorderPainted(false);
         btnuptNI.setContentAreaFilled(false);
+        btnuptNI.setEnabled(false);
+        btnuptNI.setFocusPainted(false);
         btnuptNI.setRequestFocusEnabled(false);
+        btnuptNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuptNIActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnuptNI);
         btnuptNI.setBounds(125, 85, 26, 26);
 
@@ -772,7 +835,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnTB.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnTB.setBorderPainted(false);
         btnTB.setContentAreaFilled(false);
+        btnTB.setEnabled(false);
+        btnTB.setFocusPainted(false);
         btnTB.setRequestFocusEnabled(false);
+        btnTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnTB);
         btnTB.setBounds(395, 80, 30, 40);
 
@@ -780,7 +850,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnuptTB.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnuptTB.setBorderPainted(false);
         btnuptTB.setContentAreaFilled(false);
+        btnuptTB.setEnabled(false);
+        btnuptTB.setFocusPainted(false);
         btnuptTB.setRequestFocusEnabled(false);
+        btnuptTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuptTBActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnuptTB);
         btnuptTB.setBounds(430, 85, 26, 26);
 
@@ -791,7 +868,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnSU.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnSU.setBorderPainted(false);
         btnSU.setContentAreaFilled(false);
+        btnSU.setEnabled(false);
+        btnSU.setFocusPainted(false);
         btnSU.setRequestFocusEnabled(false);
+        btnSU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSUActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnSU);
         btnSU.setBounds(245, 80, 30, 40);
 
@@ -799,7 +883,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnuptSU.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnuptSU.setBorderPainted(false);
         btnuptSU.setContentAreaFilled(false);
+        btnuptSU.setEnabled(false);
+        btnuptSU.setFocusPainted(false);
         btnuptSU.setRequestFocusEnabled(false);
+        btnuptSU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuptSUActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnuptSU);
         btnuptSU.setBounds(280, 85, 26, 26);
 
@@ -1611,6 +1702,21 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel6.add(lblapr);
         lblapr.setBounds(290, 480, 110, 26);
 
+        btnaprobar.setBackground(new java.awt.Color(153, 204, 255));
+        btnaprobar.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btnaprobar.setForeground(new java.awt.Color(0, 102, 204));
+        btnaprobar.setText("Aprobar");
+        btnaprobar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnaprobar.setFocusPainted(false);
+        btnaprobar.setPreferredSize(new java.awt.Dimension(162, 26));
+        btnaprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaprobarActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btnaprobar);
+        btnaprobar.setBounds(421, 480, 78, 26);
+
         jcbeliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jcbeliminar.setText("Retirar");
         jcbeliminar.setContentAreaFilled(false);
@@ -1647,21 +1753,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel6.add(lblnombreu);
         lblnombreu.setBounds(400, 480, 220, 26);
 
-        btnaprobar.setBackground(new java.awt.Color(153, 204, 255));
-        btnaprobar.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btnaprobar.setForeground(new java.awt.Color(0, 102, 204));
-        btnaprobar.setText("Aprobar");
-        btnaprobar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnaprobar.setFocusPainted(false);
-        btnaprobar.setPreferredSize(new java.awt.Dimension(162, 26));
-        btnaprobar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnaprobarActionPerformed(evt);
-            }
-        });
-        jPanel6.add(btnaprobar);
-        btnaprobar.setBounds(421, 480, 78, 26);
-
         lblant.setBackground(new java.awt.Color(255, 255, 153));
         lblant.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblant.setForeground(new java.awt.Color(0, 51, 204));
@@ -1683,7 +1774,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnlimpiarjcbsActionPerformed
 
     private void btnaprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaprobarActionPerformed
-        aprobar_factura();
+        aprobar_factura(1);
     }//GEN-LAST:event_btnaprobarActionPerformed
 
     private void btnfactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfactActionPerformed
@@ -1693,7 +1784,17 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnfactActionPerformed
 
     private void btnokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnokActionPerformed
-//        enviar_a_aprobacion();
+        switch (UC.area_usuario(Principal.lbluser.getText())) {
+            case "Administrativo":
+                enviar_a_contabilidad();
+                break;
+            case "Capital Humano":
+            case "Compras":
+            case "Tecnología":
+                enviar_a_aprobacion();
+                break;
+        }
+
     }//GEN-LAST:event_btnokActionPerformed
 
     private void jcbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbeliminarActionPerformed
@@ -1809,7 +1910,59 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         DC.ver_documento("Transferencia Virtual", Integer.parseInt(lblid.getText()));
     }//GEN-LAST:event_btnTVdocActionPerformed
 
-    public void llenar_campos(String no_factura, String proveedor, String empresa, String area) {
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        docs_cont();
+    }//GEN-LAST:event_btnRefrescarActionPerformed
+
+    private void btnSCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSCActionPerformed
+        DC.ver_documento("Soporte de Causacion", Integer.parseInt(lblid.getText()));
+    }//GEN-LAST:event_btnSCActionPerformed
+
+    private void btnuptSCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptSCActionPerformed
+
+    }//GEN-LAST:event_btnuptSCActionPerformed
+
+    private void btnDQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDQActionPerformed
+        DC.ver_documento("Documento Equivalente Virtual", Integer.parseInt(lblid.getText()));
+    }//GEN-LAST:event_btnDQActionPerformed
+
+    private void btnuptDQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptDQActionPerformed
+
+    }//GEN-LAST:event_btnuptDQActionPerformed
+
+    private void btnNPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNPActionPerformed
+        DC.ver_documento("Nota a Proveedor", Integer.parseInt(lblid.getText()));
+    }//GEN-LAST:event_btnNPActionPerformed
+
+    private void btnuptNPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptNPActionPerformed
+
+    }//GEN-LAST:event_btnuptNPActionPerformed
+
+    private void btnNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNIActionPerformed
+        DC.ver_documento("Nota Interna", Integer.parseInt(lblid.getText()));
+    }//GEN-LAST:event_btnNIActionPerformed
+
+    private void btnuptNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptNIActionPerformed
+
+    }//GEN-LAST:event_btnuptNIActionPerformed
+
+    private void btnSUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUActionPerformed
+
+    }//GEN-LAST:event_btnSUActionPerformed
+
+    private void btnuptSUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptSUActionPerformed
+
+    }//GEN-LAST:event_btnuptSUActionPerformed
+
+    private void btnTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBActionPerformed
+
+    }//GEN-LAST:event_btnTBActionPerformed
+
+    private void btnuptTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptTBActionPerformed
+
+    }//GEN-LAST:event_btnuptTBActionPerformed
+
+    public void llenar_campos(String no_factura, String proveedor, String empresa, String area, String estado) {
         Factura F = FC.buscar(no_factura, proveedor, empresa);
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
         if (F != null) {
@@ -1834,50 +1987,99 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 lblncuenta.setText(F.getConvenio());
                 lblcorresp.setText(F.getNo_radicado());
                 lblid.setText(String.valueOf(F.getId()));
-//                lblid.setVisible(false);
-                componentes_visibles(area);
+                lblid.setVisible(false);
+                componentes_visibles(area, estado);
             } catch (ParseException ex) {
                 Logger.getLogger(Gestionar_Factura.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public void aprobar_factura() {
-        String no_factura = lblnfact.getText();
+    public void aprobar_factura(int aprob) {
         int id_usuario = UC.id_usuario(Principal.lbluser.getText());
-        int id_proveedor = PC.id_proveedor(lblproveedor.getText());
-        int id_empresa = EMPC.id_empresa(lblempresa.getText());
+        int id_area_usuario = UC.id_area_usuario(Principal.lbluser.getText());
         int id_factura = Integer.parseInt(lblid.getText());
-        if (ApC.aprobar_factura(id_factura, 8, id_usuario)) {
-            String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
-            lblnombreu.setText(usuario);
-            btnaprobar.setVisible(false);
-            lblapr.setVisible(true);
-            lblnombreu.setVisible(true);
-            FC.cambiar_estado_factura(no_factura, id_proveedor, id_empresa, 3);
-            LC.crear_log(id_usuario, id_factura, 0, 3);
-            TC.crear_tiempo(id_usuario, id_factura, 8, 3);
-            NS.notificaciones("Aprobación Factura", "Factura " + lblnfact.getText() + " Aprobada.", "correcto");
+        if (aprob == 1) {
+            if (ApC.aprobar_factura(id_factura, id_area_usuario, id_usuario)) {
+                String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), id_area_usuario);
+                lblnombreu.setText(usuario);
+                btnaprobar.setVisible(false);
+                lblapr.setVisible(true);
+                lblnombreu.setVisible(true);
+                LC.crear_log(id_usuario, id_factura, 0, 3);
+                TC.crear_tiempo(id_usuario, id_factura, 3, 3);
+                btnok.setVisible(true);
+                btnok.setText("Enviar para Aprobación.");
+                NS.notificaciones("Aprobación Factura", "Factura " + lblnfact.getText() + " Aprobada.", "correcto");
+            } else {
+                NS.notificaciones("Aprobación Factura", "Factura " + lblnfact.getText() + " no aprobada.", "error");
+                btnok.setVisible(false);
+            }
+        } else if (aprob == 2) {
+            ApC.aprobar_factura(id_factura, id_area_usuario, id_usuario);
+        }
+
+    }
+
+    public void registro_procedimiento(String no_factura, int id_factura, int id_usuario, int estado_prev, int estado_post, String comentario,
+            int id_area_dest, int id_empresa) {
+        String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
+        if (!tacomentario.getText().isEmpty()) {
+            CC.crear_comentario(0, id_usuario, id_factura, estado_prev, comentario);
+            int com = CC.id_comentario(id_factura, id_usuario, estado_prev, comentario);
+            LC.crear_log(id_usuario, id_factura, com, estado_prev);
         } else {
-            NS.notificaciones("Aprobación Factura", "Factura " + lblnfact.getText() + " no aprobada.", "error");
+            LC.crear_log(id_usuario, id_factura, 0, estado_prev);
+        }
+        TC.crear_tiempo(id_usuario, id_factura, estado_prev, estado_post);
+        if (id_empresa == 0) {
+            CorC.crear_correo(id_factura, UC.correos(id_area_dest, 0), "Factura para Aprobar", EC.plantilla_correo("Factura para Aprobar",
+                    no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
+                    lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, ""));
+        } else {
+            CorC.crear_correo(id_factura, UC.correos(id_area_dest, id_empresa), "Factura para Aprobar", EC.plantilla_correo("Factura para Aprobar",
+                    no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
+                    lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, ""));
+        }
+    }
+
+    public void procedimiento_anticipo(int id_factura) {
+        if (jcbanticipo.isSelected()) {
+            if (!AntC.existe_anticipo(id_factura)) {
+                AntC.crear_anticipo(id_factura, 1);
+            } else {
+                AntC.actualizar_anticipo(id_factura, 1);
+            }
+        } else if (jcbantmv.isSelected()) {
+            if (!AntC.existe_anticipo(id_factura)) {
+                AntC.crear_anticipo(id_factura, 2);
+            } else {
+                AntC.actualizar_anticipo(id_factura, 2);
+            }
+        } else if (jcbantMav.isSelected()) {
+            if (!AntC.existe_anticipo(id_factura)) {
+                AntC.crear_anticipo(id_factura, 3);
+            } else {
+                AntC.actualizar_anticipo(id_factura, 3);
+            }
+        } else {
+            AntC.eliminar_anticipo(id_factura);
         }
     }
 
     public void enviar_a_aprobacion() {
         if (lblnombreu.isVisible() && !btnaprobar.isVisible()) {
             String no_factura = lblnfact.getText();
-            String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
             int id_usuario = UC.id_usuario(Principal.lbluser.getText());
             int id_proveedor = PC.id_proveedor(lblproveedor.getText());
             int id_empresa = EMPC.id_empresa(lblempresa.getText());
             int id_factura = Integer.parseInt(lblid.getText());
             if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 2, 1)) {
-                LC.crear_log(id_usuario, id_factura, 0, 2);
-                TC.crear_tiempo(id_usuario, id_factura, 3, 2);
-                CorC.crear_correo(id_factura, UC.correos(1, 0), "Factura para Aprobar", EC.plantilla_correo("Factura para Aprobar",
-                        no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
-                        lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, ""));
+                procedimiento_anticipo(id_factura);
+                registro_procedimiento(no_factura, id_factura, id_usuario, 8, 2, tacomentario.getText(), 1, 0);
+                Principal.btnactualizar.doClick();
                 NS.notificaciones("Gestión Factura", "La Factura " + lblnfact.getText() + " fue enviada para su respectiva aprobacion.", "correcto");
+                this.doDefaultCloseAction();
             } else {
                 NS.notificaciones("Gestión Factura", "La Factura " + lblnfact.getText() + " no  pudo ser enviara para aprobar.", "error");
             }
@@ -1886,8 +2088,31 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         }
     }
 
+    public void enviar_a_contabilidad() {
+        String no_factura = lblnfact.getText();
+        int id_usuario = UC.id_usuario(Principal.lbluser.getText());
+        int id_proveedor = PC.id_proveedor(lblproveedor.getText());
+        int id_empresa = EMPC.id_empresa(lblempresa.getText());
+        int id_factura = Integer.parseInt(lblid.getText());
+        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 4, 4)) {
+            procedimiento_anticipo(id_factura);
+            aprobar_factura(2);
+            registro_procedimiento(no_factura, id_factura, id_usuario, 2, 4, tacomentario.getText(), 4, id_empresa);
+            Principal.btnactualizar.doClick();
+            NS.notificaciones("Aprobación Factura", "La Factura " + lblnfact.getText() + " fue enviada a Contabilidad.", "correcto");
+            this.doDefaultCloseAction();
+        } else {
+            NS.notificaciones("Aprobación Factura", "La Factura " + lblnfact.getText() + " no se envio a Contabilidad.", "error");
+        }
+    }
+
     public void render() {
         R.cmbcentrado(cmbdocCOMP);
+
+        cmbRcont.removeAllItems();
+        cmbRcont.addItem("---");
+        R.Revision(cmbRcont);
+        cmbRcont.setSelectedIndex(0);
 
         cmbtipodoc.removeAllItems();
         cmbtipodoc.addItem("--Seleccione--");
@@ -1920,21 +2145,22 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         });
     }
 
-    public void componentes_visibles(String area) {
-        String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
+    public void componentes_visibles(String area, String estado) {
+        String usuarioapr = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
         switch (area) {
             case "Administrativo":
                 Tabpane.remove(panelcontabilidad);
                 Tabpane.remove(paneltesoreria);
                 tacomentario3.setEnabled(false);
                 lblcoment3.setEnabled(false);
-                lblnombreu.setText("");
                 btnaprobar.setVisible(false);
                 lblapr.setVisible(false);
+                lblnombreu.setText("");
                 lblnombreu.setVisible(false);
                 jcbeliminar.setVisible(true);
                 btneliminar.setVisible(true);
                 lblant.setVisible(false);
+                facturas_anticipadas(1);
                 break;
             case "Capital Humano":
             case "Compras":
@@ -1943,23 +2169,94 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 Tabpane.remove(paneltesoreria);
                 tacomentario3.setEnabled(false);
                 lblcoment3.setEnabled(false);
-                if (!usuario.equals("")) {
-                    lblnombreu.setText(usuario);
+                lblnombreu.setVisible(false);
+                jcbeliminar.setVisible(false);
+                btneliminar.setVisible(false);
+                lblant.setVisible(false);
+                if (!usuarioapr.equals("")) {
+                    lblnombreu.setText(usuarioapr);
                     btnaprobar.setVisible(false);
                     lblapr.setVisible(true);
                     lblnombreu.setVisible(true);
+                    btnok.setVisible(true);
+                    btnok.setText("Enviar para Aprobación.");
                 } else {
                     lblnombreu.setText("");
                     btnaprobar.setVisible(true);
                     lblapr.setVisible(false);
                     lblnombreu.setVisible(false);
+                    btnok.setVisible(false);
+                    if (UC.usuario_aprueba(Principal.lbluser.getText()) == 0) {
+                        Gestionar_Factura.btnaprobar.setVisible(false);
+                    } else {
+                        Gestionar_Factura.btnaprobar.setVisible(true);
+                    }
                 }
+                facturas_anticipadas(1);
                 break;
             case "Contabilidad":
+                Tabpane.remove(panelgestion);
+                Tabpane.remove(paneltesoreria);
+                tacomentario3.setEnabled(false);
+                lblcoment3.setEnabled(false);
+                btnaprobar.setVisible(false);
+                lblapr.setVisible(false);
+                lblnombreu.setText("");
+                lblnombreu.setVisible(false);
+                jcbeliminar.setVisible(false);
+                btneliminar.setVisible(false);
+                facturas_anticipadas(2);
                 break;
             case "Contabilidad_rev":
                 break;
             case "Tesoreria":
+                break;
+        }
+    }
+
+    public void facturas_anticipadas(int opc) {
+        switch (opc) {
+            case 1:
+                switch (AntC.tipo_anticipo(Integer.parseInt(lblid.getText()))) {
+                    case 1:
+                        jcbanticipo.setSelected(true);
+                        break;
+                    case 2:
+                        jcbantmv.setSelected(true);
+                        break;
+                    case 3:
+                        jcbantMav.setSelected(true);
+                        break;
+                    default:
+                        jcbanticipo.setSelected(false);
+                        jcbantmv.setSelected(false);
+                        jcbantMav.setSelected(false);
+                        break;
+                }
+                break;
+            case 2:
+                switch (AntC.tipo_anticipo(Integer.parseInt(lblid.getText()))) {
+                    case 1:
+                        lblant.setVisible(true);
+                        lblant.setText("Con Anticipo");
+                        lblant.setBounds(380, 480, 130, 26);
+                        break;
+                    case 2:
+                        lblant.setVisible(true);
+                        lblant.setText("Con Anticipo de Menor Valor");
+                        lblant.setBounds(310, 480, 270, 26);
+                        break;
+                    case 3:
+                        lblant.setVisible(true);
+                        lblant.setText("Con Anticipo de Mayor Valor");
+                        lblant.setBounds(310, 480, 270, 26);
+                        break;
+                    default:
+                        lblant.setVisible(false);
+                        lblant.setText("");
+                        lblant.setBounds(310, 480, 270, 26);
+                        break;
+                }
                 break;
         }
     }
@@ -2003,7 +2300,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     public void creacion_documento_factura() {
         String documento = cmbtipodoc.getSelectedItem().toString();
         String ruta = txtubA.getText();
-        MD.Cargar_Documento(lblnfact.getText(), lblproveedor.getText(), lblempresa.getText(), documento, ruta, TDC.id_tipo_doc(documento), 
+        MD.Cargar_Documento(lblnfact.getText(), lblproveedor.getText(), lblempresa.getText(), documento, ruta, TDC.id_tipo_doc(documento),
                 "", PC.id_proveedor(lblproveedor.getText()), EMPC.id_empresa(lblempresa.getText()));
         cmbtipodoc.setSelectedIndex(0);
         btncargar.setVisible(true);
@@ -2040,6 +2337,68 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             NS.notificaciones("Creación Tipo Documento", "El tipo de documento ha sido creado con exito.", "correcto");
         } else {
             NS.notificaciones("Creación Tipo Documento", "El tipo de documento no ha sido creado.", "error");
+        }
+    }
+
+    public void docs_cont() {
+        String nit = lblnit.getText();
+        String no_factura = lblnfact.getText();
+        String proveedor = lblproveedor.getText();
+        String empresa = lblempresa.getText();
+        int id_proveedor = PC.id_proveedor(proveedor);
+
+        int id_empresa = EMPC.id_empresa(lblempresa.getText());
+        for (int i = 0; i <= 5; i++) {
+            switch (i) {
+                case 1:
+                    if (suno.existe_documento(nit, id_empresa, 3)) {
+                        btnSC.setEnabled(true);
+                        btnuptSC.setEnabled(true);
+                        String consecutivo = suno.consecutivo_documento(nit, id_empresa, 3);
+                        String ruta = suno.ubicacion_documento(nit, id_empresa, 3);
+                        if (!DC.existe_documento("Soporte de Causacion", Integer.parseInt(lblid.getText()))) {
+                            MD.Cargar_Documento(no_factura, proveedor, empresa, "Soporte de Causacion", ruta, 3, consecutivo, 
+                                    id_proveedor, id_empresa);
+                        }
+                    } else {
+                        btnSC.setEnabled(false);
+                        btnuptSC.setEnabled(false);
+                    }
+                    break;
+                case 2:
+                    if (suno.existe_documento(nit, id_empresa, 4)) {
+                        btnDQ.setEnabled(true);
+                        btnuptDQ.setEnabled(true);
+                        String consecutivo = suno.consecutivo_documento(nit, id_empresa, 4);
+                        String ruta = suno.ubicacion_documento(nit, id_empresa, 4);
+                        if (!DC.existe_documento("Documento Equivalente", Integer.parseInt(lblid.getText()))) {
+                            MD.Cargar_Documento(no_factura, proveedor, empresa, "Documento Equivalente", ruta, 4, consecutivo, 
+                                    id_proveedor, id_empresa);
+                        }
+                    } else {
+                        btnDQ.setEnabled(false);
+                        btnuptDQ.setEnabled(false);
+                    }
+                    break;
+                case 3:
+                    if (suno.existe_documento(nit, id_empresa, 7)) {
+                        btnNP.setEnabled(true);
+                        btnuptNP.setEnabled(true);
+                    } else {
+                        btnNP.setEnabled(false);
+                        btnuptNP.setEnabled(false);
+                    }
+                    break;
+                case 4:
+                    if (suno.existe_documento(nit, id_empresa, 6)) {
+                        btnNI.setEnabled(true);
+                        btnuptNI.setEnabled(true);
+                    } else {
+                        btnNI.setEnabled(false);
+                        btnuptNI.setEnabled(false);
+                    }
+                    break;
+            }
         }
     }
 
@@ -2155,7 +2514,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnaceptarcp;
     private javax.swing.JButton btnactualizar;
     private javax.swing.JButton btnantupt;
-    public javax.swing.JButton btnaprobar;
+    public static javax.swing.JButton btnaprobar;
     public javax.swing.JButton btnaprobar1;
     private javax.swing.JButton btnarchivo;
     public javax.swing.JButton btnbuscarA;
