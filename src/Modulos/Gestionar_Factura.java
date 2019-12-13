@@ -37,7 +37,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     Llenar_Tablas LT = new Llenar_Tablas();
     TipoDoc_Controller TDC = new TipoDoc_Controller();
     Aprobacion_Controller ApC = new Aprobacion_Controller();
-    Anticipo_Controller AntC = new Anticipo_Controller();
+    Anticipo_Factura_Controller AntC = new Anticipo_Factura_Controller();
     suno_controller suno = new suno_controller();
 
     public Gestionar_Factura() {
@@ -114,8 +114,8 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnuptNI = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        btnTB = new javax.swing.JButton();
-        btnuptTB = new javax.swing.JButton();
+        btnTV = new javax.swing.JButton();
+        btnuptTV = new javax.swing.JButton();
         btnSU = new javax.swing.JButton();
         btnuptSU = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -622,7 +622,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         panelgestion.add(btnlimpiarjcbs);
-        btnlimpiarjcbs.setBounds(392, 117, 78, 26);
+        btnlimpiarjcbs.setBounds(287, 117, 78, 26);
 
         Tabpane.addTab("Areas", panelgestion);
 
@@ -659,10 +659,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel6);
         jLabel6.setBounds(15, 30, 70, 40);
 
-        btnuptSC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar.png"))); // NOI18N
+        btnuptSC.setBackground(new java.awt.Color(0, 102, 153));
+        btnuptSC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
         btnuptSC.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnuptSC.setBorderPainted(false);
-        btnuptSC.setContentAreaFilled(false);
         btnuptSC.setEnabled(false);
         btnuptSC.setFocusPainted(false);
         btnuptSC.setRequestFocusEnabled(false);
@@ -672,15 +671,13 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(btnuptSC);
-        btnuptSC.setBounds(125, 35, 26, 26);
+        btnuptSC.setBounds(125, 35, 20, 20);
 
         btnSC.setBackground(new java.awt.Color(224, 240, 177));
         btnSC.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         btnSC.setForeground(new java.awt.Color(37, 112, 0));
         btnSC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
         btnSC.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnSC.setBorderPainted(false);
-        btnSC.setContentAreaFilled(false);
         btnSC.setEnabled(false);
         btnSC.setFocusPainted(false);
         btnSC.setRequestFocusEnabled(false);
@@ -704,8 +701,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnDQ.setForeground(new java.awt.Color(37, 112, 0));
         btnDQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
         btnDQ.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnDQ.setBorderPainted(false);
-        btnDQ.setContentAreaFilled(false);
         btnDQ.setEnabled(false);
         btnDQ.setFocusPainted(false);
         btnDQ.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -718,10 +713,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel2.add(btnDQ);
         btnDQ.setBounds(245, 30, 30, 40);
 
-        btnuptDQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar.png"))); // NOI18N
+        btnuptDQ.setBackground(new java.awt.Color(0, 102, 153));
+        btnuptDQ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
         btnuptDQ.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnuptDQ.setBorderPainted(false);
-        btnuptDQ.setContentAreaFilled(false);
         btnuptDQ.setEnabled(false);
         btnuptDQ.setFocusPainted(false);
         btnuptDQ.setRequestFocusEnabled(false);
@@ -731,7 +725,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(btnuptDQ);
-        btnuptDQ.setBounds(280, 35, 26, 26);
+        btnuptDQ.setBounds(280, 35, 20, 20);
 
         jLabel17.setFont(new java.awt.Font("Arial", 3, 13)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -745,8 +739,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnNP.setForeground(new java.awt.Color(37, 112, 0));
         btnNP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
         btnNP.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnNP.setBorderPainted(false);
-        btnNP.setContentAreaFilled(false);
         btnNP.setEnabled(false);
         btnNP.setFocusPainted(false);
         btnNP.setRequestFocusEnabled(false);
@@ -758,10 +750,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel2.add(btnNP);
         btnNP.setBounds(395, 30, 30, 40);
 
-        btnuptNP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar.png"))); // NOI18N
+        btnuptNP.setBackground(new java.awt.Color(0, 102, 153));
+        btnuptNP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
         btnuptNP.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnuptNP.setBorderPainted(false);
-        btnuptNP.setContentAreaFilled(false);
         btnuptNP.setEnabled(false);
         btnuptNP.setFocusPainted(false);
         btnuptNP.setRequestFocusEnabled(false);
@@ -771,7 +762,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(btnuptNP);
-        btnuptNP.setBounds(430, 35, 26, 26);
+        btnuptNP.setBounds(430, 35, 20, 20);
 
         jLabel16.setFont(new java.awt.Font("Arial", 3, 13)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -786,8 +777,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
         btnNI.setToolTipText("");
         btnNI.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnNI.setBorderPainted(false);
-        btnNI.setContentAreaFilled(false);
         btnNI.setEnabled(false);
         btnNI.setFocusPainted(false);
         btnNI.setRequestFocusEnabled(false);
@@ -799,10 +788,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel2.add(btnNI);
         btnNI.setBounds(90, 80, 30, 40);
 
-        btnuptNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar.png"))); // NOI18N
+        btnuptNI.setBackground(new java.awt.Color(0, 102, 153));
+        btnuptNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
         btnuptNI.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnuptNI.setBorderPainted(false);
-        btnuptNI.setContentAreaFilled(false);
         btnuptNI.setEnabled(false);
         btnuptNI.setFocusPainted(false);
         btnuptNI.setRequestFocusEnabled(false);
@@ -812,7 +800,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(btnuptNI);
-        btnuptNI.setBounds(125, 85, 26, 26);
+        btnuptNI.setBounds(125, 85, 20, 20);
 
         jLabel10.setFont(new java.awt.Font("Arial", 3, 13)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -828,46 +816,41 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel18);
         jLabel18.setBounds(160, 80, 80, 40);
 
-        btnTB.setBackground(new java.awt.Color(224, 240, 177));
-        btnTB.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        btnTB.setForeground(new java.awt.Color(37, 112, 0));
-        btnTB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
-        btnTB.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnTB.setBorderPainted(false);
-        btnTB.setContentAreaFilled(false);
-        btnTB.setEnabled(false);
-        btnTB.setFocusPainted(false);
-        btnTB.setRequestFocusEnabled(false);
-        btnTB.addActionListener(new java.awt.event.ActionListener() {
+        btnTV.setBackground(new java.awt.Color(224, 240, 177));
+        btnTV.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnTV.setForeground(new java.awt.Color(37, 112, 0));
+        btnTV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
+        btnTV.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnTV.setEnabled(false);
+        btnTV.setFocusPainted(false);
+        btnTV.setRequestFocusEnabled(false);
+        btnTV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTBActionPerformed(evt);
+                btnTVActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTB);
-        btnTB.setBounds(395, 80, 30, 40);
+        jPanel2.add(btnTV);
+        btnTV.setBounds(395, 80, 30, 40);
 
-        btnuptTB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar.png"))); // NOI18N
-        btnuptTB.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnuptTB.setBorderPainted(false);
-        btnuptTB.setContentAreaFilled(false);
-        btnuptTB.setEnabled(false);
-        btnuptTB.setFocusPainted(false);
-        btnuptTB.setRequestFocusEnabled(false);
-        btnuptTB.addActionListener(new java.awt.event.ActionListener() {
+        btnuptTV.setBackground(new java.awt.Color(0, 102, 153));
+        btnuptTV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
+        btnuptTV.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnuptTV.setEnabled(false);
+        btnuptTV.setFocusPainted(false);
+        btnuptTV.setRequestFocusEnabled(false);
+        btnuptTV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnuptTBActionPerformed(evt);
+                btnuptTVActionPerformed(evt);
             }
         });
-        jPanel2.add(btnuptTB);
-        btnuptTB.setBounds(430, 85, 26, 26);
+        jPanel2.add(btnuptTV);
+        btnuptTV.setBounds(430, 85, 20, 20);
 
         btnSU.setBackground(new java.awt.Color(224, 240, 177));
         btnSU.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         btnSU.setForeground(new java.awt.Color(37, 112, 0));
         btnSU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
         btnSU.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnSU.setBorderPainted(false);
-        btnSU.setContentAreaFilled(false);
         btnSU.setEnabled(false);
         btnSU.setFocusPainted(false);
         btnSU.setRequestFocusEnabled(false);
@@ -879,10 +862,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel2.add(btnSU);
         btnSU.setBounds(245, 80, 30, 40);
 
-        btnuptSU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar.png"))); // NOI18N
+        btnuptSU.setBackground(new java.awt.Color(0, 102, 153));
+        btnuptSU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
         btnuptSU.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnuptSU.setBorderPainted(false);
-        btnuptSU.setContentAreaFilled(false);
         btnuptSU.setEnabled(false);
         btnuptSU.setFocusPainted(false);
         btnuptSU.setRequestFocusEnabled(false);
@@ -892,7 +874,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel2.add(btnuptSU);
-        btnuptSU.setBounds(280, 85, 26, 26);
+        btnuptSU.setBounds(280, 85, 20, 20);
 
         panelcontabilidad.add(jPanel2);
         jPanel2.setBounds(410, 10, 470, 135);
@@ -1919,7 +1901,17 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSCActionPerformed
 
     private void btnuptSCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptSCActionPerformed
-
+        btnRefrescar.setEnabled(false);
+        btnSC.setEnabled(false);
+        btnuptSC.setEnabled(false);
+        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "¿Desea Actualizar el 'Soporte de Causación'", "Actualizar", JOptionPane.YES_NO_OPTION);
+        if (opc == 0) {
+            actualizar_docs_cont(3, Integer.parseInt(lblid.getText()));
+        } else {
+            btnRefrescar.setEnabled(true);
+            btnSC.setEnabled(true);
+            btnuptSC.setEnabled(true);
+        }
     }//GEN-LAST:event_btnuptSCActionPerformed
 
     private void btnDQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDQActionPerformed
@@ -1927,7 +1919,17 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDQActionPerformed
 
     private void btnuptDQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptDQActionPerformed
-
+        btnRefrescar.setEnabled(false);
+        btnDQ.setEnabled(false);
+        btnuptDQ.setEnabled(false);
+        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "¿Desea Actualizar el 'Documento Equivalente'", "Actualizar", JOptionPane.YES_NO_OPTION);
+        if (opc == 0) {
+            actualizar_docs_cont(4, Integer.parseInt(lblid.getText()));
+        } else {
+            btnRefrescar.setEnabled(true);
+            btnDQ.setEnabled(true);
+            btnuptDQ.setEnabled(true);
+        }
     }//GEN-LAST:event_btnuptDQActionPerformed
 
     private void btnNPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNPActionPerformed
@@ -1935,7 +1937,17 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNPActionPerformed
 
     private void btnuptNPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptNPActionPerformed
-
+        btnRefrescar.setEnabled(false);
+        btnNP.setEnabled(false);
+        btnuptNP.setEnabled(false);
+        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "¿Desea Actualizar el 'Nota a Proveedor'", "Actualizar", JOptionPane.YES_NO_OPTION);
+        if (opc == 0) {
+            actualizar_docs_cont(7, Integer.parseInt(lblid.getText()));
+        } else {
+            btnRefrescar.setEnabled(true);
+            btnNP.setEnabled(true);
+            btnuptNP.setEnabled(true);
+        }
     }//GEN-LAST:event_btnuptNPActionPerformed
 
     private void btnNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNIActionPerformed
@@ -1943,24 +1955,44 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNIActionPerformed
 
     private void btnuptNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptNIActionPerformed
-
+        btnRefrescar.setEnabled(false);
+        btnNI.setEnabled(false);
+        btnuptNI.setEnabled(false);
+        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "¿Desea Actualizar el 'Nota Interna'", "Actualizar", JOptionPane.YES_NO_OPTION);
+        if (opc == 0) {
+            actualizar_docs_cont(6, Integer.parseInt(lblid.getText()));
+        } else {
+            btnRefrescar.setEnabled(true);
+            btnNI.setEnabled(true);
+            btnuptNI.setEnabled(true);
+        }
     }//GEN-LAST:event_btnuptNIActionPerformed
 
     private void btnSUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUActionPerformed
-
+        DC.ver_documento("Causacion en Dolares", Integer.parseInt(lblid.getText()));
     }//GEN-LAST:event_btnSUActionPerformed
 
     private void btnuptSUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptSUActionPerformed
-
+        btnRefrescar.setEnabled(false);
+        btnSU.setEnabled(false);
+        btnuptSU.setEnabled(false);
+        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "¿Desea Actualizar la 'Causacion en Dolares'", "Actualizar", JOptionPane.YES_NO_OPTION);
+        if (opc == 0) {
+            actualizar_docs_cont(10, Integer.parseInt(lblid.getText()));
+        } else {
+            btnRefrescar.setEnabled(true);
+            btnSU.setEnabled(true);
+            btnuptSU.setEnabled(true);
+        }
     }//GEN-LAST:event_btnuptSUActionPerformed
 
-    private void btnTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBActionPerformed
+    private void btnTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTVActionPerformed
+        DC.ver_documento("Nota Interna", Integer.parseInt(lblid.getText()));
+    }//GEN-LAST:event_btnTVActionPerformed
 
-    }//GEN-LAST:event_btnTBActionPerformed
+    private void btnuptTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptTVActionPerformed
 
-    private void btnuptTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptTBActionPerformed
-
-    }//GEN-LAST:event_btnuptTBActionPerformed
+    }//GEN-LAST:event_btnuptTVActionPerformed
 
     public void llenar_campos(String no_factura, String proveedor, String empresa, String area, String estado) {
         Factura F = FC.buscar(no_factura, proveedor, empresa);
@@ -2046,19 +2078,19 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     public void procedimiento_anticipo(int id_factura) {
         if (jcbanticipo.isSelected()) {
             if (!AntC.existe_anticipo(id_factura)) {
-                AntC.crear_anticipo(id_factura, 1);
+                AntC.crear_tipo_anticipo(id_factura, 1);
             } else {
                 AntC.actualizar_anticipo(id_factura, 1);
             }
         } else if (jcbantmv.isSelected()) {
             if (!AntC.existe_anticipo(id_factura)) {
-                AntC.crear_anticipo(id_factura, 2);
+                AntC.crear_tipo_anticipo(id_factura, 2);
             } else {
                 AntC.actualizar_anticipo(id_factura, 2);
             }
         } else if (jcbantMav.isSelected()) {
             if (!AntC.existe_anticipo(id_factura)) {
-                AntC.crear_anticipo(id_factura, 3);
+                AntC.crear_tipo_anticipo(id_factura, 3);
             } else {
                 AntC.actualizar_anticipo(id_factura, 3);
             }
@@ -2077,6 +2109,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 2, 1)) {
                 procedimiento_anticipo(id_factura);
                 registro_procedimiento(no_factura, id_factura, id_usuario, 8, 2, tacomentario.getText(), 1, 0);
+                ApC.crear_aprobacion(id_factura, 1);
                 Principal.btnactualizar.doClick();
                 NS.notificaciones("Gestión Factura", "La Factura " + lblnfact.getText() + " fue enviada para su respectiva aprobacion.", "correcto");
                 this.doDefaultCloseAction();
@@ -2206,6 +2239,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 jcbeliminar.setVisible(false);
                 btneliminar.setVisible(false);
                 facturas_anticipadas(2);
+                docs_cont();
                 break;
             case "Contabilidad_rev":
                 break;
@@ -2340,13 +2374,35 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         }
     }
 
+    public void actualizar_docs_cont(int tipo_doc, int id_factura) {
+        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "¿Desea Actualizar el Documento", "Actualizar", JOptionPane.YES_NO_OPTION);
+        if (opc == 0) {
+            String nit = lblnit.getText();
+            String no_factura = lblnfact.getText();
+            String proveedor = lblproveedor.getText();
+            String empresa = lblempresa.getText();
+            int id_proveedor = PC.id_proveedor(proveedor);
+            int id_empresa = EMPC.id_empresa(lblempresa.getText());
+            String ubsuno = suno.ubicacion_documento(nit, id_empresa, tipo_doc);
+            suno.eliminar_suno(nit, id_empresa, tipo_doc);
+            DC.eliminar_documento(tipo_doc, id_factura);
+            MD.eliminar_documento(ubsuno);
+            try {
+                Thread.sleep(10000);
+                btnRefrescar.setEnabled(true);
+                docs_cont();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Gestionar_Factura.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     public void docs_cont() {
         String nit = lblnit.getText();
         String no_factura = lblnfact.getText();
         String proveedor = lblproveedor.getText();
         String empresa = lblempresa.getText();
         int id_proveedor = PC.id_proveedor(proveedor);
-
         int id_empresa = EMPC.id_empresa(lblempresa.getText());
         for (int i = 0; i <= 5; i++) {
             switch (i) {
@@ -2357,7 +2413,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                         String consecutivo = suno.consecutivo_documento(nit, id_empresa, 3);
                         String ruta = suno.ubicacion_documento(nit, id_empresa, 3);
                         if (!DC.existe_documento("Soporte de Causacion", Integer.parseInt(lblid.getText()))) {
-                            MD.Cargar_Documento(no_factura, proveedor, empresa, "Soporte de Causacion", ruta, 3, consecutivo, 
+                            MD.Cargar_Documento(no_factura, proveedor, empresa, "Soporte de Causacion", ruta, 3, consecutivo,
                                     id_proveedor, id_empresa);
                         }
                     } else {
@@ -2372,7 +2428,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                         String consecutivo = suno.consecutivo_documento(nit, id_empresa, 4);
                         String ruta = suno.ubicacion_documento(nit, id_empresa, 4);
                         if (!DC.existe_documento("Documento Equivalente", Integer.parseInt(lblid.getText()))) {
-                            MD.Cargar_Documento(no_factura, proveedor, empresa, "Documento Equivalente", ruta, 4, consecutivo, 
+                            MD.Cargar_Documento(no_factura, proveedor, empresa, "Documento Equivalente", ruta, 4, consecutivo,
                                     id_proveedor, id_empresa);
                         }
                     } else {
@@ -2509,7 +2565,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSCdoc;
     private javax.swing.JButton btnSU;
     private javax.swing.JButton btnSUdoc;
-    private javax.swing.JButton btnTB;
+    private javax.swing.JButton btnTV;
     private javax.swing.JButton btnTVdoc;
     private javax.swing.JButton btnaceptarcp;
     private javax.swing.JButton btnactualizar;
@@ -2544,7 +2600,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnuptNP;
     private javax.swing.JButton btnuptSC;
     private javax.swing.JButton btnuptSU;
-    private javax.swing.JButton btnuptTB;
+    private javax.swing.JButton btnuptTV;
     private javax.swing.JButton btnvercomp;
     private javax.swing.JButton btnvercp;
     private javax.swing.JButton btnverte;

@@ -42,6 +42,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Manipuacion_Documentos MD = new Manipuacion_Documentos();
     Notificaciones_Sistema NS = new Notificaciones_Sistema();
     TipoFactura_Controller TFC = new TipoFactura_Controller();
+    Precargar_Anticipos PANT;
     Factura_Convenio_Controller FCC = new Factura_Convenio_Controller();
 
     @SuppressWarnings({"CallToThreadStartDuringObjectConstruction", "OverridableMethodCallInConstructor"})
@@ -726,9 +727,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnpreant.setText("<html><p align='center'>Precargar<br>Anticipo</p></html>");
         btnpreant.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnpreant.setDoubleBuffered(true);
-        btnpreant.setEnabled(false);
         btnpreant.setFocusPainted(false);
         btnpreant.setPreferredSize(new java.awt.Dimension(100, 52));
+        btnpreant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpreantActionPerformed(evt);
+            }
+        });
         jpmenu.add(btnpreant);
         btnpreant.setBounds(12, 235, 110, 45);
 
@@ -960,6 +965,26 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void btnpreantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpreantActionPerformed
+        if (PANT == null) {
+            PANT = new Precargar_Anticipos();
+            Principal.Escritorio.add(PANT);
+        }
+        Principal.Escritorio.setSelectedFrame(PANT);
+        try {
+            if (PANT.isIcon()) {
+                PANT.setIcon(false);
+            } else if (PANT.isShowing()) {
+                PANT.toFront();
+            } else {
+                PANT.setBounds(222, 40, 775, 520);
+                PANT.setVisible(true);
+            }
+        } catch (PropertyVetoException e) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_btnpreantActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1188,6 +1213,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             case "Capital Humano":
             case "Compras":
             case "Tecnología":
+                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
+                cmbasignado.setEnabled(false);
+                break;
+            case "Recepción":
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbasignado.setEnabled(false);
                 break;

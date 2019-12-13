@@ -73,4 +73,11 @@ public class Sistema_UNO {
         this.id_tipo_doc = id_tipo_doc;
     }
 
+    public Sistema_UNO(String nit, int id_empresa, int id_tipo_doc) {
+        this.nit = nit;
+        this.id_empresa = id_empresa;
+        this.id_tipo_doc = id_tipo_doc;
+    }
+    
+
 }

@@ -1,9 +1,17 @@
 package Modulos;
 
+import Clases.Llenar_Tablas;
+import Clases.Renderizado;
+
 public class Precargar_Anticipos extends javax.swing.JInternalFrame {
-    
+
+    Renderizado R = new Renderizado();
+    Llenar_Tablas LT = new Llenar_Tablas();
+
     public Precargar_Anticipos() {
         initComponents();
+        render();
+        LT.pre_anticipos(jtant, "", "", "");
     }
 
     @SuppressWarnings("unchecked")
@@ -32,7 +40,7 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setIconifiable(true);
         setTitle("Precargar Anticipos");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Sistema_Imagenes/Trébol2.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Trébol2.png"))); // NOI18N
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -40,16 +48,21 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         jPanel1.setLayout(null);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 153));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sistema_Imagenes/Recargar2.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.setRequestFocusEnabled(false);
         jButton1.setVerifyInputWhenFocusTarget(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(739, 126, 17, 25);
 
-        jScrollPane1.setBackground(new java.awt.Color(102, 102, 102));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black));
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setViewportBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jtant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,14 +75,14 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
 
             }
         ));
+        jtant.setFillsViewportHeight(true);
         jtant.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jtant);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(10, 122, 750, 360);
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)), "Precargar Anticipo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)), "Precargar Anticipo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
         jPanel2.setOpaque(false);
         jPanel2.setLayout(null);
 
@@ -82,7 +95,7 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         cmbproveedor.setEditable(true);
         cmbproveedor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         cmbproveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
-        cmbproveedor.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        cmbproveedor.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         cmbproveedor.setPreferredSize(new java.awt.Dimension(138, 26));
         jPanel2.add(cmbproveedor);
         cmbproveedor.setBounds(90, 30, 610, 26);
@@ -96,8 +109,8 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
 
         cmbempresa.setEditable(true);
         cmbempresa.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        cmbempresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
-        cmbempresa.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        cmbempresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "Aviomar", "Colvan", "Snider" }));
+        cmbempresa.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         cmbempresa.setMinimumSize(new java.awt.Dimension(146, 30));
         cmbempresa.setPreferredSize(new java.awt.Dimension(138, 26));
         jPanel2.add(cmbempresa);
@@ -112,7 +125,7 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
 
         txtvalor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtvalor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtvalor.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        txtvalor.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         txtvalor.setMinimumSize(new java.awt.Dimension(6, 26));
         txtvalor.setPreferredSize(new java.awt.Dimension(6, 26));
         jPanel2.add(txtvalor);
@@ -121,7 +134,7 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         cmbdoc.setEditable(true);
         cmbdoc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         cmbdoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "TB", "CE" }));
-        cmbdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
+        cmbdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel2.add(cmbdoc);
         cmbdoc.setBounds(400, 70, 60, 26);
 
@@ -133,7 +146,7 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
 
         txtdoc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtdoc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
+        txtdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel2.add(txtdoc);
         txtdoc.setBounds(480, 70, 60, 26);
 
@@ -144,6 +157,11 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         btnaprobar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnaprobar.setFocusPainted(false);
         btnaprobar.setPreferredSize(new java.awt.Dimension(162, 26));
+        btnaprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaprobarActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnaprobar);
         btnaprobar.setBounds(620, 70, 78, 26);
 
@@ -157,19 +175,28 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         btnver.setEnabled(false);
         btnver.setFocusPainted(false);
         btnver.setPreferredSize(new java.awt.Dimension(162, 26));
-        btnver.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Sistema_Imagenes/ver3.png"))); // NOI18N
         jPanel2.add(btnver);
-        btnver.setBounds(545, 70, 40, 26);
+        btnver.setBounds(550, 70, 40, 26);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(20, 0, 720, 110);
+        jPanel2.setBounds(20, 5, 720, 110);
 
         getContentPane().add(jPanel1, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnaprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaprobarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnaprobarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void render() {
+        R.razon_social(cmbproveedor);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnaprobar;
     public javax.swing.JButton btnver;

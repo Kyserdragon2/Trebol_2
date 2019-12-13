@@ -510,4 +510,158 @@ public class Llenar_Tablas {
         }
     }
 
+    public void anticipos_prov(JTable tabla, String prov, String emp) {
+        Color H = new Color(75, 156, 109);
+        Color T = new Color(255, 255, 255);
+        Color CB = new Color(255, 255, 255);
+        Color CT = new Color(0, 0, 0);
+        Object[] titulos = {"Doc.", "Cons.", "Valor", "Asociar", "Ver"};
+        Object[] registros = new Object[5];
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabla.getTableHeader().setResizingAllowed(false);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        model = new DefaultTableModel(null, titulos) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Class getColumnClass(int column) {
+                Class returnValue;
+                if (column == 2 && tabla.getRowCount() > 0) {
+                    returnValue = getValueAt(0, column).getClass();
+                } else {
+                    returnValue = Object.class;
+                }
+                return returnValue;
+            }
+        };
+        sorter = new TableRowSorter(model);
+        try (Connection cn = cc.Conexion();
+                Statement stg = cn.createStatement();
+                ResultSet rsg = stg.executeQuery("SELECT ttd.`tipo_doc`,ta.`consecutivo`,ta.`valor`\n"
+                        + "FROM trebol_anticipos ta\n"
+                        + "INNER JOIN trebol_proveedor AS tp ON ta.`id_proveedor`=tp.`id`\n"
+                        + "INNER JOIN trebol_empresa AS te ON ta.`id_empresa`=te.`id`\n"
+                        + "INNER JOIN trebol_tipo_documento AS ttd ON ta.`id_tipo_doc`=ttd.`id`\n"
+                        + "WHERE razon_social LIKE'%" + prov + "%'\n"
+                        + "AND te.`nom_empresa` LIKE '%" + emp + "%'\n"
+                        + "AND ta.estado=1\n"
+                        + "AND ta.cargado=0;");) {
+            while (rsg.next()) {
+                registros[0] = rsg.getString("ttd.tipo_doc");
+                registros[1] = rsg.getString("ta.consecutivo");
+                registros[2] = rsg.getDouble("ta.valor");
+                btnaceptar = new JButton("");
+                btnaceptar.setName("aceptar");
+                registros[3] = btnaceptar;
+                btnver = new JButton("");
+                btnver.setName("ver");
+                registros[4] = btnver;
+                model.addRow(registros);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Llenar_Tablas.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        tabla.setModel(model);
+
+        tabla.setRowSorter(sorter);
+        tabla.setRowHeight(25);
+
+        for (int i = 0; i < 5; i++) {
+            tabla.getColumnModel().getColumn(i).setHeaderRenderer(new Encabezado_Tabla(H, T, tabla.getTableHeader().getDefaultRenderer(), 15));
+        }
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(61);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(61);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(102);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(61);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(50);
+
+        tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(4).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+    }
+
+    public void pre_anticipos(JTable tabla, String id_proveedor, String id_empresa, String valor) {
+        Color H = new Color(75, 156, 109);
+        Color T = new Color(0, 0, 0);
+        Color CB = new Color(255, 255, 255);
+        Color CT = new Color(0, 0, 0);
+        Object[] titulos = {"Proveedor", "Empresa", "Valor", "Cons.", "Ver", "Anular"};
+        Object[] registros = new Object[6];
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabla.getTableHeader().setResizingAllowed(false);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        model = new DefaultTableModel(null, titulos) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Class getColumnClass(int column) {
+                Class returnValue;
+                if (column == 2 && tabla.getRowCount() > 0) {
+                    returnValue = getValueAt(0, column).getClass();
+                } else {
+                    returnValue = Object.class;
+                }
+                return returnValue;
+            }
+        };
+        sorter = new TableRowSorter(model);
+        try (Connection cn = cc.Conexion();
+                Statement stg = cn.createStatement();
+                ResultSet rsg = stg.executeQuery("SELECT tp.razon_social, temp.`nom_empresa`, ta.`valor`, CONCAT(ttd.`tipo_doc`,'-',ta.`consecutivo`) AS 'Consecutivo', ta.`ub_documento`\n"
+                        + "FROM trebol_anticipos AS ta\n"
+                        + "JOIN trebol_proveedor AS tp ON ta.id_proveedor=tp.id\n"
+                        + "JOIN trebol_empresa AS temp ON ta.id_empresa=temp.id\n"
+                        + "JOIN trebol_tipo_documento AS ttd ON ta.id_tipo_doc=ttd.id\n"
+                        + "WHERE id_proveedor LIKE '%" + id_proveedor + "%'\n"
+                        + "AND id_empresa LIKE '%" + id_empresa + "%'\n"
+                        + "AND valor LIKE '%" + valor + "%';");) {
+            while (rsg.next()) {
+                registros[0] = rsg.getString("tp.razon_social");
+                registros[1] = rsg.getString("temp.nom_empresa");
+                registros[2] = rsg.getString("Consecutivo");
+                registros[3] = rsg.getDouble("ta.valor");
+                btnver = new JButton("");
+                btnver.setName("ver");
+                registros[4] = btnver;
+                btnborrar = new JButton("");
+                btnborrar.setName("borrar");
+                registros[5] = btnborrar;
+                model.addRow(registros);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Llenar_Tablas.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        tabla.setModel(model);
+        tabla.setRowSorter(sorter);
+        tabla.setRowHeight(25);
+
+        for (int i = 0; i < 6; i++) {
+            tabla.getColumnModel().getColumn(i).setHeaderRenderer(new Encabezado_Tabla(H, T, tabla.getTableHeader().getDefaultRenderer(), 15));
+        }
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(365);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(70);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(70);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(98);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(60);
+
+        tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(4).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(5).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+    }
 }
