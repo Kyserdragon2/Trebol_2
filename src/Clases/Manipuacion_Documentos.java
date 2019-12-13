@@ -160,4 +160,75 @@ public class Manipuacion_Documentos {
             Logger.getLogger(Manipuacion_Documentos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public String Cargar_Documento_Ant(String Proveedor, String Empresa, String ruta) {
+        String ub = "";
+        try {
+            String url = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Anticipos/";
+            String url2 = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Anticipos/" + Empresa + "/";
+            String url3 = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Anticipos/" + Empresa + "/" + Proveedor + "/";
+            NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Soporte", "Rock2020");
+            SmbFile dir = new SmbFile(url, auth);
+            SmbFile dir2 = new SmbFile(url2, auth);
+            SmbFile dir3 = new SmbFile(url3, auth);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            if (!dir2.exists()) {
+                dir2.mkdir();
+            }
+            if (!dir3.exists()) {
+                dir3.mkdir();
+            }
+            SmbFile origen = new SmbFile("smb:" + ruta, auth);
+            String dst = url3 + origen.getName();
+            SmbFile destino = new SmbFile(dst, auth);
+            origen.copyTo(destino);
+            ub = destino.toString().replace("smb:", "");
+        } catch (IOException ex) {
+            Logger.getLogger(Manipuacion_Documentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ub;
+    }
+
+//    public String Documento_Anticipo(String prov, String emp, String nit, int id_empresa, String tipod, int cons) {
+//        String td, ub = "";
+//        try (Connection cn = cc.Conexion();
+//                Statement st = cn.createStatement();
+//                ResultSet rs = st.executeQuery("SELECT TT.`tipo_doc`, TS.`ubicacion`, TT.`nombre`, TT.`id`, TS.`consecutivo`, TS.`ubicacion`\n"
+//                        + "FROM trebol_suno AS TS\n"
+//                        + "INNER JOIN trebol_tipodoc AS TT ON TS.`id_tipodoc`=TT.`id`\n"
+//                        + "WHERE tipo_doc='" + tipod + "'\n"
+//                        + "AND nit='" + nit + "'\n"
+//                        + "AND empresa=" + id_empresa + "\n"
+//                        + "AND consecutivo=" + cons + ";");) {
+//            if (rs.next()) {
+//                td = rs.getString("TS.ubicacion");
+//                String url = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Anticipos/";
+//                String url2 = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Anticipos/" + emp + "/";
+//                String url3 = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Anticipos/" + emp + "/" + prov + "/";
+//                NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Soporte", "Rock2020");
+//                SmbFile dir = new SmbFile(url, auth);
+//                SmbFile dir2 = new SmbFile(url2, auth);
+//                SmbFile dir3 = new SmbFile(url3, auth);
+//                if (!dir.exists()) {
+//                    dir.mkdir();
+//                }
+//                if (!dir2.exists()) {
+//                    dir2.mkdir();
+//                }
+//                if (!dir3.exists()) {
+//                    dir3.mkdir();
+//                }
+//                SmbFile origen = new SmbFile("smb:" + td, auth);
+//                String dst = url3 + origen.getName();
+//                SmbFile destino = new SmbFile(dst, auth);
+//                origen.copyTo(destino);
+//                ub = destino.toString().replace("smb:", "");
+//            }
+//        } catch (Exception e) {
+//            Logger.getLogger(Manipuacion_Documentos.class.getName()).log(Level.SEVERE, null, e);
+//        }
+//        return ub;
+//    }
 }

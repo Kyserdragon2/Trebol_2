@@ -38,4 +38,20 @@ public class TipoDoc_Controller {
         }
         return id;
     }
+    
+    public int id_tipo_doc_pref(String dato) {
+        int id = 0;
+        String idc = "SELECT id FROM trebol_tipo_documento\n"
+                + "WHERE tipo_doc='" + dato + "'";
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(idc)) {
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(TipoDoc_Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return id;
+    }
 }

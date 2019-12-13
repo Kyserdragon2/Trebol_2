@@ -1,12 +1,39 @@
 package Modulos;
 
+import Clases.Controles_Adicionales;
+import Clases.Envio_Correos;
 import Clases.Llenar_Tablas;
+import Clases.Manipuacion_Documentos;
 import Clases.Renderizado;
+import Controladores.*;
+import Principal.Principal;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-public class Precargar_Anticipos extends javax.swing.JInternalFrame {
+public final class Precargar_Anticipos extends javax.swing.JInternalFrame {
 
     Renderizado R = new Renderizado();
     Llenar_Tablas LT = new Llenar_Tablas();
+    Envio_Correos EC = new Envio_Correos();
+    Anticipo_Controller AntC = new Anticipo_Controller();
+    Area_Controller AC = new Area_Controller();
+    Logs_Controller LC = new Logs_Controller();
+    Tiempo_Controller TC = new Tiempo_Controller();
+    Correo_Controller CorC = new Correo_Controller();
+    Usuario_Controller UC = new Usuario_Controller();
+    Factura_Controller FC = new Factura_Controller();
+    TipoDoc_Controller TDC = new TipoDoc_Controller();
+    Empresa_Controller EMPC = new Empresa_Controller();
+    Proveedor_Controller PC = new Proveedor_Controller();
+    Convenio_Controller CCon = new Convenio_Controller();
+    Documento_Controller DC = new Documento_Controller();
+    Comentario_Controller CC = new Comentario_Controller();
+    Controles_Adicionales CA = new Controles_Adicionales();
+    Aprobacion_Controller ApC = new Aprobacion_Controller();
+    Manipuacion_Documentos MD = new Manipuacion_Documentos();
+    Notificaciones_Sistema NS = new Notificaciones_Sistema();
+    TipoFactura_Controller TFC = new TipoFactura_Controller();
+    suno_controller suno = new suno_controller();
 
     public Precargar_Anticipos() {
         initComponents();
@@ -19,7 +46,7 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnrefrescar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtant = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -32,7 +59,7 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         cmbdoc = new javax.swing.JComboBox<>();
         jLabel31 = new javax.swing.JLabel();
         txtdoc = new javax.swing.JTextField();
-        btnaprobar = new javax.swing.JButton();
+        btncargar = new javax.swing.JButton();
         btnver = new javax.swing.JButton();
 
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -47,18 +74,13 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel1.setLayout(null);
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 153));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setRequestFocusEnabled(false);
-        jButton1.setVerifyInputWhenFocusTarget(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(739, 126, 17, 25);
+        btnrefrescar.setBackground(new java.awt.Color(0, 102, 153));
+        btnrefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
+        btnrefrescar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnrefrescar.setRequestFocusEnabled(false);
+        btnrefrescar.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(btnrefrescar);
+        btnrefrescar.setBounds(739, 126, 17, 25);
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black));
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -77,6 +99,11 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         ));
         jtant.setFillsViewportHeight(true);
         jtant.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jtant.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtantMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtant);
 
         jPanel1.add(jScrollPane1);
@@ -133,7 +160,7 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
 
         cmbdoc.setEditable(true);
         cmbdoc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        cmbdoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "TB", "CE" }));
+        cmbdoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "TV", "CE" }));
         cmbdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel2.add(cmbdoc);
         cmbdoc.setBounds(400, 70, 60, 26);
@@ -147,23 +174,28 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         txtdoc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtdoc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        txtdoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtdocKeyReleased(evt);
+            }
+        });
         jPanel2.add(txtdoc);
         txtdoc.setBounds(480, 70, 60, 26);
 
-        btnaprobar.setBackground(new java.awt.Color(202, 230, 121));
-        btnaprobar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnaprobar.setForeground(new java.awt.Color(72, 96, 0));
-        btnaprobar.setText("Cargar");
-        btnaprobar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnaprobar.setFocusPainted(false);
-        btnaprobar.setPreferredSize(new java.awt.Dimension(162, 26));
-        btnaprobar.addActionListener(new java.awt.event.ActionListener() {
+        btncargar.setBackground(new java.awt.Color(202, 230, 121));
+        btncargar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btncargar.setForeground(new java.awt.Color(72, 96, 0));
+        btncargar.setText("Cargar");
+        btncargar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btncargar.setFocusPainted(false);
+        btncargar.setPreferredSize(new java.awt.Dimension(162, 26));
+        btncargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnaprobarActionPerformed(evt);
+                btncargarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnaprobar);
-        btnaprobar.setBounds(620, 70, 78, 26);
+        jPanel2.add(btncargar);
+        btncargar.setBounds(620, 70, 78, 26);
 
         btnver.setBackground(new java.awt.Color(202, 230, 121));
         btnver.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -175,6 +207,11 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         btnver.setEnabled(false);
         btnver.setFocusPainted(false);
         btnver.setPreferredSize(new java.awt.Dimension(162, 26));
+        btnver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnverActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnver);
         btnver.setBounds(550, 70, 40, 26);
 
@@ -186,24 +223,117 @@ public class Precargar_Anticipos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnaprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaprobarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnaprobarActionPerformed
+    private void btncargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncargarActionPerformed
+        int id_empresa, id_tipo_doc, id_proveedor;
+        String nit, proveedor, empresa, ubicacion, ub_documento, consecutivo;
+        double valor;
+        proveedor = cmbproveedor.getSelectedItem().toString();
+        empresa = cmbempresa.getSelectedItem().toString();
+        id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
+        id_proveedor = PC.id_proveedor(proveedor);
+        id_tipo_doc = TDC.id_tipo_doc_pref(cmbdoc.getSelectedItem().toString());
+        nit = PC.nit_proveedor(cmbproveedor.getSelectedItem().toString());
+        String datof;
+        String datot = txtvalor.getText();
+        String datoreemplazado = datot.replace("$", "");
+        String datoreemplazado2 = datoreemplazado.replace(".", "");
+        String dator1 = datoreemplazado2.replace(")", "");
+        String dator2 = dator1.replace("(", "-");
+        if (dator2.contains(",00")) {
+            String datoreemplazado3 = dator2.replace(",00", "");
+            datof = datoreemplazado3;
+        } else {
+            String datoreemplazado3 = dator2.replace(",", ".");
+            datof = datoreemplazado3;
+        }
+        valor = Double.parseDouble(datof);
+        consecutivo = String.format("%06d", Integer.parseInt(txtdoc.getText()));
+        ubicacion = suno.ubicacion_documento(nit, id_empresa, id_tipo_doc);
+        ub_documento = MD.Cargar_Documento_Ant(proveedor, empresa, ubicacion);
+        if (AntC.crear_anticipo(id_proveedor, id_empresa, id_tipo_doc, consecutivo, ub_documento, valor)) {
+            LT.pre_anticipos(jtant, "", "", "");
+            limpiar();
+        } else {
+            System.out.println("error");
+        }
+    }//GEN-LAST:event_btncargarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void txtdocKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdocKeyReleased
+        if (!txtdoc.getText().equals("")) {
+            int id_empresa, id_tipo_doc;
+            String nit, consecutivo;
+            boolean existe;
+            id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
+            id_tipo_doc = TDC.id_tipo_doc_pref(cmbdoc.getSelectedItem().toString());
+            nit = PC.nit_proveedor(cmbproveedor.getSelectedItem().toString());
+            consecutivo = txtdoc.getText();
+            existe = suno.existe_documento_suno(nit, id_empresa, id_tipo_doc, consecutivo);
+            if (existe) {
+                btnver.setEnabled(true);
+            } else {
+                btnver.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_txtdocKeyReleased
+
+    private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
+        int id_empresa, id_tipo_doc;
+        String nit, ubicacion;
+        id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
+        id_tipo_doc = TDC.id_tipo_doc_pref(cmbdoc.getSelectedItem().toString());
+        nit = PC.nit_proveedor(cmbproveedor.getSelectedItem().toString());
+        ubicacion = suno.ubicacion_documento(nit, id_empresa, id_tipo_doc);
+        suno.ver_documento(ubicacion);
+    }//GEN-LAST:event_btnverActionPerformed
+
+    private void jtantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtantMouseClicked
+        int column = jtant.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / jtant.getRowHeight();
+        int prov, emp, id_td;
+        String cons, td;
+        if (row < jtant.getRowCount() && row >= 0 && column < jtant.getColumnCount() && column >= 0) {
+            Object value = jtant.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+                prov = PC.id_proveedor(jtant.getValueAt(row, 0).toString());
+                emp = EMPC.id_empresa(jtant.getValueAt(row, 1).toString());
+                td = jtant.getValueAt(row, 2).toString().substring(0, 2);
+                id_td = TDC.id_tipo_doc(jtant.getValueAt(row, 2).toString().substring(0, 2));
+                cons = jtant.getValueAt(row, 2).toString().substring(3, 9);
+                switch (boton.getName()) {
+                    case "ver":
+                        JOptionPane.showMessageDialog(Principal.Escritorio, "Ver Documento");
+                        break;
+                    case "borrar":
+                        JOptionPane.showMessageDialog(Principal.Escritorio, "Borrar Documento");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jtantMouseClicked
 
     public void render() {
         R.razon_social(cmbproveedor);
     }
+    
+    public void limpiar(){
+        cmbdoc.setSelectedIndex(0);
+        cmbempresa.setSelectedIndex(0);
+        cmbproveedor.setSelectedIndex(0);
+        txtdoc.setText("");
+        txtvalor.setText("");
+        btnver.setEnabled(false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnaprobar;
+    public javax.swing.JButton btncargar;
+    private javax.swing.JButton btnrefrescar;
     public javax.swing.JButton btnver;
     private javax.swing.JComboBox<String> cmbdoc;
     public static javax.swing.JComboBox<String> cmbempresa;
     public static javax.swing.JComboBox<String> cmbproveedor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel31;

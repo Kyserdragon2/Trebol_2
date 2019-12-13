@@ -2422,7 +2422,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 2:
-                    if (suno.existe_documento(nit, id_empresa, 4)) {
+                if (suno.existe_documento(nit, id_empresa, 4)) {
                         btnDQ.setEnabled(true);
                         btnuptDQ.setEnabled(true);
                         String consecutivo = suno.consecutivo_documento(nit, id_empresa, 4);
