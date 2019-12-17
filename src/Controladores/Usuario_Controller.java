@@ -117,6 +117,42 @@ public class Usuario_Controller {
         return id;
     }
 
+    public int id_usuario_rev(String nombre) {
+        int id = 0;
+        String sql = "SELECT tu.id\n"
+                + "FROM trebol_usuario AS tu\n"
+                + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
+                + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`)='" + nombre + "';";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            while (datos.next()) {
+                id = datos.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            id = 0;
+        }
+        return id;
+    }
+
+    public String nombre_rev(String nombre) {
+        String nom = "";
+        String sql = "SELECT CONCAT(tu.nombres,' ',tu.apellidos) AS 'Nombre'\n"
+                + "FROM trebol_usuario AS tu\n"
+                + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
+                + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            while (datos.next()) {
+                nom = datos.getString("Nombre");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            nom = "";
+        }
+        return nom;
+    }
+
     public int id_area_usuario(String nombre) {
         int id = 0;
         String sql = "SELECT tu.id_area\n"
@@ -144,7 +180,7 @@ public class Usuario_Controller {
         ResultSet datos = cc.consultas(sql);
         try {
             while (datos.next()) {
-            aprueba = datos.getInt("aprueba");
+                aprueba = datos.getInt("aprueba");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);

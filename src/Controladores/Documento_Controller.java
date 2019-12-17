@@ -127,9 +127,22 @@ public class Documento_Controller {
         return ub;
     }
 
-    public String existe_doc_cont() {
-        String ub = "";
-        
-        return ub;
+    public String consecutivo_doc(String doc, int idf) {
+        String cons = "";
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery("SELECT consecutivo\n"
+                        + "FROM trebol_documentos AS td\n"
+                        + "JOIN trebol_tipo_documento AS ttd ON td.`id_tipo_doc`=ttd.`id`"
+                        + "WHERE nombre LIKE '" + doc + "'\n"
+                        + "AND id_factura=" + idf + ";")) {
+            if (rs.next()) {
+                cons = rs.getString("consecutivo");
+            }
+
+        } catch (SQLException e) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return cons;
     }
 }

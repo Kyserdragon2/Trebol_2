@@ -37,8 +37,10 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     Llenar_Tablas LT = new Llenar_Tablas();
     TipoDoc_Controller TDC = new TipoDoc_Controller();
     Aprobacion_Controller ApC = new Aprobacion_Controller();
-    Anticipo_Factura_Controller AntC = new Anticipo_Factura_Controller();
+    Anticipo_Factura_Controller AntfC = new Anticipo_Factura_Controller();
+    Anticipo_Controller AntC = new Anticipo_Controller();
     suno_controller suno = new suno_controller();
+    Revision_Controller RC = new Revision_Controller();
 
     public Gestionar_Factura() {
         initComponents();
@@ -114,10 +116,10 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnuptNI = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        btnTV = new javax.swing.JButton();
-        btnuptTV = new javax.swing.JButton();
+        btnANT = new javax.swing.JButton();
         btnSU = new javax.swing.JButton();
         btnuptSU = new javax.swing.JButton();
+        btndelAnt = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tacomentario1 = new javax.swing.JTextArea();
         cmbRcont = new javax.swing.JComboBox<>();
@@ -125,8 +127,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jLabel30 = new javax.swing.JLabel();
         jpant = new javax.swing.JPanel();
         btnantupt = new javax.swing.JButton();
-        jScrollPane11 = new javax.swing.JScrollPane();
+        jsant_pre = new javax.swing.JScrollPane();
         jtantprov = new javax.swing.JTable();
+        lblnodata = new javax.swing.JLabel();
         paneltesoreria = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -152,24 +155,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnverte = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtdocsT = new javax.swing.JTable();
-        jpdocs = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jtdocumentos = new javax.swing.JTable();
-        jLabel27 = new javax.swing.JLabel();
-        cmbtipodoc = new javax.swing.JComboBox<>();
-        btnbuscarA = new javax.swing.JButton();
-        txtubA = new javax.swing.JTextField();
-        Nuevo_T_Documento = new javax.swing.JPanel();
-        txtnombretd = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        btncreartd = new javax.swing.JButton();
-        btncancelartd = new javax.swing.JButton();
-        jLabel38 = new javax.swing.JLabel();
-        txtnpreftd = new javax.swing.JTextField();
-        btncargar = new javax.swing.JButton();
-        btnctdoc = new javax.swing.JButton();
-        btnactualizar = new javax.swing.JButton();
-        btncancelar = new javax.swing.JButton();
         panelrevision = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         btnSCdoc = new javax.swing.JButton();
@@ -190,6 +175,24 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         lblcoment3 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         tacomentario3 = new javax.swing.JTextArea();
+        jpdocs = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jtdocumentos = new javax.swing.JTable();
+        jLabel27 = new javax.swing.JLabel();
+        cmbtipodoc = new javax.swing.JComboBox<>();
+        btnbuscarA = new javax.swing.JButton();
+        txtubA = new javax.swing.JTextField();
+        Nuevo_T_Documento = new javax.swing.JPanel();
+        txtnombretd = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        btncreartd = new javax.swing.JButton();
+        btncancelartd = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
+        txtnpreftd = new javax.swing.JTextField();
+        btncargar = new javax.swing.JButton();
+        btnctdoc = new javax.swing.JButton();
+        btnactualizar = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
         jpseguimiento = new javax.swing.JPanel();
         jsseguimiento = new javax.swing.JScrollPane();
         jtseguimiento = new javax.swing.JTable();
@@ -816,35 +819,21 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel18);
         jLabel18.setBounds(160, 80, 80, 40);
 
-        btnTV.setBackground(new java.awt.Color(224, 240, 177));
-        btnTV.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
-        btnTV.setForeground(new java.awt.Color(37, 112, 0));
-        btnTV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
-        btnTV.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnTV.setEnabled(false);
-        btnTV.setFocusPainted(false);
-        btnTV.setRequestFocusEnabled(false);
-        btnTV.addActionListener(new java.awt.event.ActionListener() {
+        btnANT.setBackground(new java.awt.Color(224, 240, 177));
+        btnANT.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnANT.setForeground(new java.awt.Color(37, 112, 0));
+        btnANT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok2.png"))); // NOI18N
+        btnANT.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnANT.setEnabled(false);
+        btnANT.setFocusPainted(false);
+        btnANT.setRequestFocusEnabled(false);
+        btnANT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTVActionPerformed(evt);
+                btnANTActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTV);
-        btnTV.setBounds(395, 80, 30, 40);
-
-        btnuptTV.setBackground(new java.awt.Color(0, 102, 153));
-        btnuptTV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recargar2.png"))); // NOI18N
-        btnuptTV.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnuptTV.setEnabled(false);
-        btnuptTV.setFocusPainted(false);
-        btnuptTV.setRequestFocusEnabled(false);
-        btnuptTV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnuptTVActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnuptTV);
-        btnuptTV.setBounds(430, 85, 20, 20);
+        jPanel2.add(btnANT);
+        btnANT.setBounds(395, 80, 30, 40);
 
         btnSU.setBackground(new java.awt.Color(224, 240, 177));
         btnSU.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
@@ -875,6 +864,22 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnuptSU);
         btnuptSU.setBounds(280, 85, 20, 20);
+
+        btndelAnt.setBackground(new java.awt.Color(255, 198, 198));
+        btndelAnt.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btndelAnt.setForeground(new java.awt.Color(153, 0, 0));
+        btndelAnt.setText("X");
+        btndelAnt.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btndelAnt.setEnabled(false);
+        btndelAnt.setFocusPainted(false);
+        btndelAnt.setRequestFocusEnabled(false);
+        btndelAnt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndelAntActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btndelAnt);
+        btndelAnt.setBounds(430, 85, 20, 20);
 
         panelcontabilidad.add(jPanel2);
         jPanel2.setBounds(410, 10, 470, 135);
@@ -914,7 +919,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         panelcontabilidad.add(jLabel30);
         jLabel30.setBounds(410, 155, 90, 26);
 
-        jpant.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.black, null), "Anticipos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
+        jpant.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.black, null), "Anticipos Precargados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
         jpant.setOpaque(false);
         jpant.setLayout(null);
 
@@ -923,12 +928,17 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnantupt.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnantupt.setRequestFocusEnabled(false);
         btnantupt.setVerifyInputWhenFocusTarget(false);
+        btnantupt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnantuptActionPerformed(evt);
+            }
+        });
         jpant.add(btnantupt);
         btnantupt.setBounds(11, 25, 20, 25);
 
-        jScrollPane11.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black));
-        jScrollPane11.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPane11.setViewportBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jsant_pre.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black));
+        jsant_pre.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jsant_pre.setViewportBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jtantprov.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -941,11 +951,24 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane11.setViewportView(jtantprov);
+        jtantprov.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtantprovMouseClicked(evt);
+            }
+        });
+        jsant_pre.setViewportView(jtantprov);
         jtantprov.getAccessibleContext().setAccessibleParent(jpant);
 
-        jpant.add(jScrollPane11);
-        jScrollPane11.setBounds(30, 25, 360, 165);
+        jpant.add(jsant_pre);
+        jsant_pre.setBounds(30, 25, 360, 165);
+
+        lblnodata.setFont(new java.awt.Font("Arial Black", 3, 18)); // NOI18N
+        lblnodata.setForeground(new java.awt.Color(102, 102, 102));
+        lblnodata.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblnodata.setText("<html><div align=\"center\">No existen Anticipos Precargados para este proveedor</div></html>");
+        lblnodata.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jpant.add(lblnodata);
+        lblnodata.setBounds(40, 50, 320, 80);
 
         panelcontabilidad.add(jpant);
         jpant.setBounds(10, 60, 400, 200);
@@ -1163,219 +1186,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel3.setBounds(600, 10, 280, 250);
 
         Tabpane.addTab("Tesoreria", paneltesoreria);
-
-        jpdocs.setBackground(new java.awt.Color(255, 255, 255));
-        jpdocs.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jpdocs.setToolTipText("");
-        jpdocs.setLayout(null);
-
-        jScrollPane6.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black));
-        jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane6.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPane6.setViewportBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jScrollPane6.setMaximumSize(new java.awt.Dimension(527, 154));
-        jScrollPane6.setMinimumSize(new java.awt.Dimension(527, 154));
-        jScrollPane6.setPreferredSize(new java.awt.Dimension(527, 154));
-
-        jtdocumentos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jtdocumentos.setFillsViewportHeight(true);
-        jtdocumentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jtdocumentos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtdocumentosMouseClicked(evt);
-            }
-        });
-        jScrollPane6.setViewportView(jtdocumentos);
-
-        jpdocs.add(jScrollPane6);
-        jScrollPane6.setBounds(365, 8, 518, 250);
-
-        jLabel27.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel27.setText("Tipo de Documento:");
-        jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel27.setPreferredSize(new java.awt.Dimension(55, 26));
-        jpdocs.add(jLabel27);
-        jLabel27.setBounds(10, 5, 160, 21);
-
-        cmbtipodoc.setEditable(true);
-        cmbtipodoc.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-        cmbtipodoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
-        cmbtipodoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        jpdocs.add(cmbtipodoc);
-        cmbtipodoc.setBounds(10, 30, 350, 26);
-
-        btnbuscarA.setBackground(new java.awt.Color(255, 229, 178));
-        btnbuscarA.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btnbuscarA.setForeground(new java.awt.Color(107, 70, 0));
-        btnbuscarA.setText("Seleccionar...");
-        btnbuscarA.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnbuscarA.setEnabled(false);
-        btnbuscarA.setFocusPainted(false);
-        btnbuscarA.setPreferredSize(new java.awt.Dimension(162, 26));
-        btnbuscarA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarAActionPerformed(evt);
-            }
-        });
-        jpdocs.add(btnbuscarA);
-        btnbuscarA.setBounds(10, 60, 110, 26);
-
-        txtubA.setEditable(false);
-        txtubA.setBackground(new java.awt.Color(255, 255, 255));
-        txtubA.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
-        txtubA.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        txtubA.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        txtubA.setEnabled(false);
-        txtubA.setPreferredSize(new java.awt.Dimension(6, 26));
-        jpdocs.add(txtubA);
-        txtubA.setBounds(119, 60, 241, 26);
-
-        Nuevo_T_Documento.setBackground(new java.awt.Color(255, 255, 255));
-        Nuevo_T_Documento.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)), "Nuevo Documento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 16))); // NOI18N
-        Nuevo_T_Documento.setLayout(null);
-
-        txtnombretd.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
-        txtnombretd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        txtnombretd.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        txtnombretd.setPreferredSize(new java.awt.Dimension(6, 26));
-        Nuevo_T_Documento.add(txtnombretd);
-        txtnombretd.setBounds(100, 30, 240, 26);
-
-        jLabel37.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel37.setText("Prefijo");
-        jLabel37.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel37.setPreferredSize(new java.awt.Dimension(55, 26));
-        Nuevo_T_Documento.add(jLabel37);
-        jLabel37.setBounds(10, 65, 80, 26);
-
-        btncreartd.setBackground(new java.awt.Color(224, 240, 177));
-        btncreartd.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btncreartd.setForeground(new java.awt.Color(37, 112, 0));
-        btncreartd.setText("Crear");
-        btncreartd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btncreartd.setFocusPainted(false);
-        btncreartd.setFocusable(false);
-        btncreartd.setPreferredSize(new java.awt.Dimension(83, 26));
-        btncreartd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncreartdActionPerformed(evt);
-            }
-        });
-        Nuevo_T_Documento.add(btncreartd);
-        btncreartd.setBounds(280, 65, 60, 26);
-
-        btncancelartd.setBackground(new java.awt.Color(255, 153, 153));
-        btncancelartd.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btncancelartd.setForeground(new java.awt.Color(153, 0, 0));
-        btncancelartd.setText("Cancelar");
-        btncancelartd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btncancelartd.setFocusPainted(false);
-        btncancelartd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelartdActionPerformed(evt);
-            }
-        });
-        Nuevo_T_Documento.add(btncancelartd);
-        btncancelartd.setBounds(180, 65, 83, 26);
-
-        jLabel38.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel38.setText("Documento");
-        jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel38.setPreferredSize(new java.awt.Dimension(55, 26));
-        Nuevo_T_Documento.add(jLabel38);
-        jLabel38.setBounds(10, 30, 80, 26);
-
-        txtnpreftd.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
-        txtnpreftd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        txtnpreftd.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        txtnpreftd.setPreferredSize(new java.awt.Dimension(6, 26));
-        Nuevo_T_Documento.add(txtnpreftd);
-        txtnpreftd.setBounds(100, 65, 50, 26);
-
-        jpdocs.add(Nuevo_T_Documento);
-        Nuevo_T_Documento.setBounds(10, 90, 350, 110);
-
-        btncargar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btncargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cargar.png"))); // NOI18N
-        btncargar.setText("Cargar");
-        btncargar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btncargar.setBorderPainted(false);
-        btncargar.setContentAreaFilled(false);
-        btncargar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btncargar.setEnabled(false);
-        btncargar.setFocusPainted(false);
-        btncargar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btncargar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btncargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncargarActionPerformed(evt);
-            }
-        });
-        jpdocs.add(btncargar);
-        btncargar.setBounds(220, 90, 140, 45);
-
-        btnctdoc.setBackground(new java.awt.Color(224, 240, 177));
-        btnctdoc.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btnctdoc.setForeground(new java.awt.Color(37, 112, 0));
-        btnctdoc.setText("Nuevo Tipo de Documento");
-        btnctdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnctdoc.setFocusPainted(false);
-        btnctdoc.setFocusable(false);
-        btnctdoc.setPreferredSize(new java.awt.Dimension(83, 26));
-        btnctdoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnctdocActionPerformed(evt);
-            }
-        });
-        jpdocs.add(btnctdoc);
-        btnctdoc.setBounds(10, 230, 200, 26);
-
-        btnactualizar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cargar.png"))); // NOI18N
-        btnactualizar.setText("Actualizar");
-        btnactualizar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnactualizar.setBorderPainted(false);
-        btnactualizar.setContentAreaFilled(false);
-        btnactualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnactualizar.setFocusPainted(false);
-        btnactualizar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnactualizar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnactualizarActionPerformed(evt);
-            }
-        });
-        jpdocs.add(btnactualizar);
-        btnactualizar.setBounds(90, 90, 140, 45);
-
-        btncancelar.setBackground(new java.awt.Color(255, 153, 153));
-        btncancelar.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btncancelar.setForeground(new java.awt.Color(153, 0, 0));
-        btncancelar.setText("Cancelar");
-        btncancelar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btncancelar.setFocusPainted(false);
-        btncancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelarActionPerformed(evt);
-            }
-        });
-        jpdocs.add(btncancelar);
-        btncancelar.setBounds(10, 100, 83, 26);
-
-        Tabpane.addTab("Documentos", jpdocs);
 
         panelrevision.setBackground(new java.awt.Color(255, 255, 255));
         panelrevision.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
@@ -1638,6 +1448,219 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
 
         Tabpane.addTab("Documentos Cargados", panelrevision);
 
+        jpdocs.setBackground(new java.awt.Color(255, 255, 255));
+        jpdocs.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jpdocs.setToolTipText("");
+        jpdocs.setLayout(null);
+
+        jScrollPane6.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black));
+        jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane6.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane6.setViewportBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jScrollPane6.setMaximumSize(new java.awt.Dimension(527, 154));
+        jScrollPane6.setMinimumSize(new java.awt.Dimension(527, 154));
+        jScrollPane6.setPreferredSize(new java.awt.Dimension(527, 154));
+
+        jtdocumentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jtdocumentos.setFillsViewportHeight(true);
+        jtdocumentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jtdocumentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtdocumentosMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jtdocumentos);
+
+        jpdocs.add(jScrollPane6);
+        jScrollPane6.setBounds(365, 8, 518, 250);
+
+        jLabel27.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel27.setText("Tipo de Documento:");
+        jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel27.setPreferredSize(new java.awt.Dimension(55, 26));
+        jpdocs.add(jLabel27);
+        jLabel27.setBounds(10, 5, 160, 21);
+
+        cmbtipodoc.setEditable(true);
+        cmbtipodoc.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        cmbtipodoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        cmbtipodoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jpdocs.add(cmbtipodoc);
+        cmbtipodoc.setBounds(10, 30, 350, 26);
+
+        btnbuscarA.setBackground(new java.awt.Color(255, 229, 178));
+        btnbuscarA.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btnbuscarA.setForeground(new java.awt.Color(107, 70, 0));
+        btnbuscarA.setText("Seleccionar...");
+        btnbuscarA.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnbuscarA.setEnabled(false);
+        btnbuscarA.setFocusPainted(false);
+        btnbuscarA.setPreferredSize(new java.awt.Dimension(162, 26));
+        btnbuscarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarAActionPerformed(evt);
+            }
+        });
+        jpdocs.add(btnbuscarA);
+        btnbuscarA.setBounds(10, 60, 110, 26);
+
+        txtubA.setEditable(false);
+        txtubA.setBackground(new java.awt.Color(255, 255, 255));
+        txtubA.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
+        txtubA.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        txtubA.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtubA.setEnabled(false);
+        txtubA.setPreferredSize(new java.awt.Dimension(6, 26));
+        jpdocs.add(txtubA);
+        txtubA.setBounds(119, 60, 241, 26);
+
+        Nuevo_T_Documento.setBackground(new java.awt.Color(255, 255, 255));
+        Nuevo_T_Documento.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)), "Nuevo Documento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 16))); // NOI18N
+        Nuevo_T_Documento.setLayout(null);
+
+        txtnombretd.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
+        txtnombretd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        txtnombretd.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtnombretd.setPreferredSize(new java.awt.Dimension(6, 26));
+        Nuevo_T_Documento.add(txtnombretd);
+        txtnombretd.setBounds(100, 30, 240, 26);
+
+        jLabel37.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel37.setText("Prefijo");
+        jLabel37.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel37.setPreferredSize(new java.awt.Dimension(55, 26));
+        Nuevo_T_Documento.add(jLabel37);
+        jLabel37.setBounds(10, 65, 80, 26);
+
+        btncreartd.setBackground(new java.awt.Color(224, 240, 177));
+        btncreartd.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btncreartd.setForeground(new java.awt.Color(37, 112, 0));
+        btncreartd.setText("Crear");
+        btncreartd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btncreartd.setFocusPainted(false);
+        btncreartd.setFocusable(false);
+        btncreartd.setPreferredSize(new java.awt.Dimension(83, 26));
+        btncreartd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncreartdActionPerformed(evt);
+            }
+        });
+        Nuevo_T_Documento.add(btncreartd);
+        btncreartd.setBounds(280, 65, 60, 26);
+
+        btncancelartd.setBackground(new java.awt.Color(255, 153, 153));
+        btncancelartd.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btncancelartd.setForeground(new java.awt.Color(153, 0, 0));
+        btncancelartd.setText("Cancelar");
+        btncancelartd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btncancelartd.setFocusPainted(false);
+        btncancelartd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelartdActionPerformed(evt);
+            }
+        });
+        Nuevo_T_Documento.add(btncancelartd);
+        btncancelartd.setBounds(180, 65, 83, 26);
+
+        jLabel38.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel38.setText("Documento");
+        jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel38.setPreferredSize(new java.awt.Dimension(55, 26));
+        Nuevo_T_Documento.add(jLabel38);
+        jLabel38.setBounds(10, 30, 80, 26);
+
+        txtnpreftd.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
+        txtnpreftd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        txtnpreftd.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtnpreftd.setPreferredSize(new java.awt.Dimension(6, 26));
+        Nuevo_T_Documento.add(txtnpreftd);
+        txtnpreftd.setBounds(100, 65, 50, 26);
+
+        jpdocs.add(Nuevo_T_Documento);
+        Nuevo_T_Documento.setBounds(10, 90, 350, 110);
+
+        btncargar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btncargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cargar.png"))); // NOI18N
+        btncargar.setText("Cargar");
+        btncargar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btncargar.setBorderPainted(false);
+        btncargar.setContentAreaFilled(false);
+        btncargar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btncargar.setEnabled(false);
+        btncargar.setFocusPainted(false);
+        btncargar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btncargar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btncargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncargarActionPerformed(evt);
+            }
+        });
+        jpdocs.add(btncargar);
+        btncargar.setBounds(220, 90, 140, 45);
+
+        btnctdoc.setBackground(new java.awt.Color(224, 240, 177));
+        btnctdoc.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btnctdoc.setForeground(new java.awt.Color(37, 112, 0));
+        btnctdoc.setText("Nuevo Tipo de Documento");
+        btnctdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnctdoc.setFocusPainted(false);
+        btnctdoc.setFocusable(false);
+        btnctdoc.setPreferredSize(new java.awt.Dimension(83, 26));
+        btnctdoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnctdocActionPerformed(evt);
+            }
+        });
+        jpdocs.add(btnctdoc);
+        btnctdoc.setBounds(10, 230, 200, 26);
+
+        btnactualizar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cargar.png"))); // NOI18N
+        btnactualizar.setText("Actualizar");
+        btnactualizar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnactualizar.setBorderPainted(false);
+        btnactualizar.setContentAreaFilled(false);
+        btnactualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnactualizar.setFocusPainted(false);
+        btnactualizar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnactualizar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnactualizarActionPerformed(evt);
+            }
+        });
+        jpdocs.add(btnactualizar);
+        btnactualizar.setBounds(90, 90, 140, 45);
+
+        btncancelar.setBackground(new java.awt.Color(255, 153, 153));
+        btncancelar.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        btncancelar.setForeground(new java.awt.Color(153, 0, 0));
+        btncancelar.setText("Cancelar");
+        btncancelar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btncancelar.setFocusPainted(false);
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
+        jpdocs.add(btncancelar);
+        btncancelar.setBounds(10, 100, 83, 26);
+
+        Tabpane.addTab("Documentos", jpdocs);
+
         jpseguimiento.setBackground(new java.awt.Color(255, 255, 255));
         jpseguimiento.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jpseguimiento.setForeground(new java.awt.Color(107, 70, 0));
@@ -1774,6 +1797,15 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             case "Compras":
             case "Tecnología":
                 enviar_a_aprobacion();
+                break;
+            case "Contabilidad":
+                enviar_a_revision();
+                break;
+            case "Contabilidad_Rev":
+                enviar_a_tesoreria();
+                break;
+            case "Tesoreria":
+
                 break;
         }
 
@@ -1986,13 +2018,79 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnuptSUActionPerformed
 
-    private void btnTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTVActionPerformed
-        DC.ver_documento("Nota Interna", Integer.parseInt(lblid.getText()));
-    }//GEN-LAST:event_btnTVActionPerformed
+    private void btnANTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnANTActionPerformed
+        DC.ver_documento("Soporte Anticipo", Integer.parseInt(lblid.getText()));
+    }//GEN-LAST:event_btnANTActionPerformed
 
-    private void btnuptTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuptTVActionPerformed
+    private void btndelAntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelAntActionPerformed
+        int id_factura, id_proveedor, id_empresa, id_tipo_doc;
+        String cons, tipo_doc, ruta_doc, ruta_nueva;
+        String consecutivo = DC.consecutivo_doc("Soporte Anticipo", Integer.parseInt(lblid.getText()));
+        id_factura = Integer.parseInt(lblid.getText());
+        id_proveedor = PC.id_proveedor(lblproveedor.getText());
+        id_empresa = EMPC.id_empresa(lblempresa.getText());
+        ruta_doc = DC.ubicacion_documento("Soporte Anticipo", id_factura);
+        MD.eliminar_documento(ruta_doc);
+        if (!DC.existe_documento("Soporte Anticipo", 16)) {
+            AntC.anticipo_no_cargado(id_proveedor, id_empresa, consecutivo);
+            DC.eliminar_documento(16, id_factura);
+            LT.anticipos_proveedor(jtantprov, lblproveedor.getText(), lblempresa.getText());
+            btnANT.setEnabled(false);
+            btndelAnt.setEnabled(false);
+            facturas_anticipadas(2);
+        }
+    }//GEN-LAST:event_btndelAntActionPerformed
 
-    }//GEN-LAST:event_btnuptTVActionPerformed
+    private void jtantprovMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtantprovMouseClicked
+        int column = jtantprov.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / jtantprov.getRowHeight();
+        int id_factura, id_proveedor, id_empresa, id_tipo_doc;
+        String cons, tipo_doc, ruta_doc, ruta_nueva;
+        if (row < jtantprov.getRowCount() && row >= 0 && column < jtantprov.getColumnCount() && column >= 0) {
+            Object value = jtantprov.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+                id_factura = Integer.parseInt(lblid.getText());
+                id_proveedor = PC.id_proveedor(lblproveedor.getText());
+                id_empresa = EMPC.id_empresa(lblempresa.getText());
+                tipo_doc = jtantprov.getValueAt(row, 0).toString();
+                id_tipo_doc = TDC.id_tipo_doc_pref(tipo_doc);
+                cons = jtantprov.getValueAt(row, 1).toString();
+                ruta_doc = AntC.ubicacion_documento_anticipo(id_proveedor, id_empresa, id_tipo_doc, cons);
+                ruta_nueva = DC.ubicacion_documento("Factura", id_factura);
+                switch (boton.getName()) {
+                    case "ver":
+                        AntC.ver_documento_anticipo(id_proveedor, id_empresa, id_tipo_doc, cons);
+                        break;
+                    case "aceptar":
+                        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio,
+                                "Confirmar el Soporte del Anticipo?", "Soporte Anticipo", JOptionPane.YES_NO_OPTION);
+                        if (opc == 0) {
+                            if (MD.asociar_anticipo(ruta_doc, ruta_nueva, "Soporte Anticipo", 16, id_factura, cons)) {
+                                AntC.anticipo_cargado(id_proveedor, id_empresa, id_tipo_doc, cons);
+                                btnANT.setEnabled(true);
+                                btndelAnt.setEnabled(true);
+                            } else {
+                                System.out.println("error");
+                                btnANT.setEnabled(false);
+                                btndelAnt.setEnabled(false);
+                            }
+                        }
+                        LT.anticipos_proveedor(jtantprov, lblproveedor.getText(), lblempresa.getText());
+                        facturas_anticipadas(2);
+                        break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jtantprovMouseClicked
+
+    private void btnantuptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnantuptActionPerformed
+        int id_proveedor = PC.id_proveedor(lblproveedor.getText());
+        int id_empresa = EMPC.id_empresa(lblempresa.getText());
+        int cant = AntC.registros_anticipos_proveedor(id_proveedor, id_empresa);
+        System.err.println(cant);
+    }//GEN-LAST:event_btnantuptActionPerformed
 
     public void llenar_campos(String no_factura, String proveedor, String empresa, String area, String estado) {
         Factura F = FC.buscar(no_factura, proveedor, empresa);
@@ -2032,7 +2130,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         int id_area_usuario = UC.id_area_usuario(Principal.lbluser.getText());
         int id_factura = Integer.parseInt(lblid.getText());
         if (aprob == 1) {
-            if (ApC.aprobar_factura(id_factura, id_area_usuario, id_usuario)) {
+            if (ApC.aprobar(id_factura, id_area_usuario, id_usuario)) {
                 String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), id_area_usuario);
                 lblnombreu.setText(usuario);
                 btnaprobar.setVisible(false);
@@ -2048,55 +2146,10 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 btnok.setVisible(false);
             }
         } else if (aprob == 2) {
-            ApC.aprobar_factura(id_factura, id_area_usuario, id_usuario);
+            ApC.aprobar(id_factura, id_area_usuario, id_usuario);
+            FC.factura_aprobada(id_factura);
         }
 
-    }
-
-    public void registro_procedimiento(String no_factura, int id_factura, int id_usuario, int estado_prev, int estado_post, String comentario,
-            int id_area_dest, int id_empresa) {
-        String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
-        if (!tacomentario.getText().isEmpty()) {
-            CC.crear_comentario(0, id_usuario, id_factura, estado_prev, comentario);
-            int com = CC.id_comentario(id_factura, id_usuario, estado_prev, comentario);
-            LC.crear_log(id_usuario, id_factura, com, estado_prev);
-        } else {
-            LC.crear_log(id_usuario, id_factura, 0, estado_prev);
-        }
-        TC.crear_tiempo(id_usuario, id_factura, estado_prev, estado_post);
-        if (id_empresa == 0) {
-            CorC.crear_correo(id_factura, UC.correos(id_area_dest, 0), "Factura para Aprobar", EC.plantilla_correo("Factura para Aprobar",
-                    no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
-                    lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, ""));
-        } else {
-            CorC.crear_correo(id_factura, UC.correos(id_area_dest, id_empresa), "Factura para Aprobar", EC.plantilla_correo("Factura para Aprobar",
-                    no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
-                    lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, ""));
-        }
-    }
-
-    public void procedimiento_anticipo(int id_factura) {
-        if (jcbanticipo.isSelected()) {
-            if (!AntC.existe_anticipo(id_factura)) {
-                AntC.crear_tipo_anticipo(id_factura, 1);
-            } else {
-                AntC.actualizar_anticipo(id_factura, 1);
-            }
-        } else if (jcbantmv.isSelected()) {
-            if (!AntC.existe_anticipo(id_factura)) {
-                AntC.crear_tipo_anticipo(id_factura, 2);
-            } else {
-                AntC.actualizar_anticipo(id_factura, 2);
-            }
-        } else if (jcbantMav.isSelected()) {
-            if (!AntC.existe_anticipo(id_factura)) {
-                AntC.crear_tipo_anticipo(id_factura, 3);
-            } else {
-                AntC.actualizar_anticipo(id_factura, 3);
-            }
-        } else {
-            AntC.eliminar_anticipo(id_factura);
-        }
     }
 
     public void enviar_a_aprobacion() {
@@ -2136,6 +2189,88 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             this.doDefaultCloseAction();
         } else {
             NS.notificaciones("Aprobación Factura", "La Factura " + lblnfact.getText() + " no se envio a Contabilidad.", "error");
+        }
+    }
+
+    public void enviar_a_revision() {
+        String no_factura = lblnfact.getText();
+        int id_usuario = UC.id_usuario(Principal.lbluser.getText());
+        int usuario_reviza = UC.id_usuario(cmbRcont.getSelectedItem().toString());
+        int id_proveedor = PC.id_proveedor(lblproveedor.getText());
+        int id_empresa = EMPC.id_empresa(lblempresa.getText());
+        int id_factura = Integer.parseInt(lblid.getText());
+        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 13, 5)) {
+            RC.crear_revision(id_factura, usuario_reviza);
+            registro_procedimiento(no_factura, id_factura, id_usuario, 4, 13, tacomentario1.getText(), 5, id_empresa);
+            Principal.btnactualizar.doClick();
+            NS.notificaciones("Contabilización Factura", "La Factura " + lblnfact.getText() + " fue enviada a Revisión.", "correcto");
+            this.doDefaultCloseAction();
+        } else {
+            NS.notificaciones("Contabilización Factura", "La Factura " + lblnfact.getText() + " no se envio a Revisión.", "error");
+        }
+    }
+
+    public void enviar_a_tesoreria() {
+        String no_factura = lblnfact.getText();
+        int id_usuario = UC.id_usuario(Principal.lbluser.getText());
+        int id_proveedor = PC.id_proveedor(lblproveedor.getText());
+        int id_empresa = EMPC.id_empresa(lblempresa.getText());
+        int id_factura = Integer.parseInt(lblid.getText());
+        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 9, 9)) {
+            FC.factura_revisada(id_factura);
+            RC.revizar(id_factura, id_usuario);
+            registro_procedimiento(no_factura, id_factura, id_usuario, 13, 9, tacomentario3.getText(), 9, id_empresa);
+            Principal.btnactualizar.doClick();
+            NS.notificaciones("Revisión Factura", "La Factura " + lblnfact.getText() + " fue enviada a Tesoreria.", "correcto");
+            this.doDefaultCloseAction();
+        } else {
+            NS.notificaciones("Revisión Factura", "La Factura " + lblnfact.getText() + " no se envio a Tesoreria.", "error");
+        }
+    }
+
+    public void registro_procedimiento(String no_factura, int id_factura, int id_usuario, int estado_prev, int estado_post, String comentario,
+            int id_area_dest, int id_empresa) {
+        String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
+        if (!comentario.equals("")) {
+            CC.crear_comentario(0, id_usuario, id_factura, estado_prev, comentario);
+            int com = CC.id_comentario(id_factura, id_usuario, estado_prev, comentario);
+            LC.crear_log(id_usuario, id_factura, com, estado_prev);
+        } else {
+            LC.crear_log(id_usuario, id_factura, 0, estado_prev);
+        }
+        TC.crear_tiempo(id_usuario, id_factura, estado_prev, estado_post);
+        if (id_empresa == 0) {
+            CorC.crear_correo(id_factura, UC.correos(id_area_dest, 0), "Factura para Aprobar", EC.plantilla_correo("Factura para Aprobar",
+                    no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
+                    lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, ""));
+        } else {
+            CorC.crear_correo(id_factura, UC.correos(id_area_dest, id_empresa), "Factura para Aprobar", EC.plantilla_correo("Factura para Aprobar",
+                    no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
+                    lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, ""));
+        }
+    }
+
+    public void procedimiento_anticipo(int id_factura) {
+        if (jcbanticipo.isSelected()) {
+            if (!AntfC.existe_anticipo(id_factura)) {
+                AntfC.crear_tipo_anticipo(id_factura, 1);
+            } else {
+                AntfC.actualizar_anticipo(id_factura, 1);
+            }
+        } else if (jcbantmv.isSelected()) {
+            if (!AntfC.existe_anticipo(id_factura)) {
+                AntfC.crear_tipo_anticipo(id_factura, 2);
+            } else {
+                AntfC.actualizar_anticipo(id_factura, 2);
+            }
+        } else if (jcbantMav.isSelected()) {
+            if (!AntfC.existe_anticipo(id_factura)) {
+                AntfC.crear_tipo_anticipo(id_factura, 3);
+            } else {
+                AntfC.actualizar_anticipo(id_factura, 3);
+            }
+        } else {
+            AntfC.eliminar_anticipo(id_factura);
         }
     }
 
@@ -2193,6 +2328,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 jcbeliminar.setVisible(true);
                 btneliminar.setVisible(true);
                 lblant.setVisible(false);
+                btnok.setText("Enviar a Contabilidad");
                 facturas_anticipadas(1);
                 break;
             case "Capital Humano":
@@ -2212,7 +2348,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     lblapr.setVisible(true);
                     lblnombreu.setVisible(true);
                     btnok.setVisible(true);
-                    btnok.setText("Enviar para Aprobación.");
+                    btnok.setText("Enviar para Aprobación");
                 } else {
                     lblnombreu.setText("");
                     btnaprobar.setVisible(true);
@@ -2238,10 +2374,25 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 lblnombreu.setVisible(false);
                 jcbeliminar.setVisible(false);
                 btneliminar.setVisible(false);
+                btnok.setText("Enviar a Revisión");
                 facturas_anticipadas(2);
                 docs_cont();
+                LT.anticipos_proveedor(jtantprov, lblproveedor.getText(), lblempresa.getText());
                 break;
-            case "Contabilidad_rev":
+            case "Contabilidad_Rev":
+                Tabpane.remove(panelgestion);
+                Tabpane.remove(panelcontabilidad);
+                Tabpane.remove(paneltesoreria);
+                Tabpane.setTitleAt(0, "Revision Contable");
+                lblcoment3.setEnabled(true);
+                tacomentario3.setEnabled(true);
+                btnaprobar.setVisible(false);
+                lblapr.setVisible(false);
+                lblnombreu.setText("");
+                lblnombreu.setVisible(false);
+                jcbeliminar.setVisible(false);
+                btneliminar.setVisible(false);
+                btnok.setText("Enviar a Tesoreria");
                 break;
             case "Tesoreria":
                 break;
@@ -2249,9 +2400,12 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void facturas_anticipadas(int opc) {
+        int id_proveedor = PC.id_proveedor(lblproveedor.getText());
+        int id_empresa = EMPC.id_empresa(lblempresa.getText());
+        int cant = AntC.registros_anticipos_proveedor(id_proveedor, id_empresa);
         switch (opc) {
             case 1:
-                switch (AntC.tipo_anticipo(Integer.parseInt(lblid.getText()))) {
+                switch (AntfC.tipo_anticipo(Integer.parseInt(lblid.getText()))) {
                     case 1:
                         jcbanticipo.setSelected(true);
                         break;
@@ -2269,26 +2423,57 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 }
                 break;
             case 2:
-                switch (AntC.tipo_anticipo(Integer.parseInt(lblid.getText()))) {
+                switch (AntfC.tipo_anticipo(Integer.parseInt(lblid.getText()))) {
                     case 1:
                         lblant.setVisible(true);
                         lblant.setText("Con Anticipo");
                         lblant.setBounds(380, 480, 130, 26);
+                        if (cant == 0) {
+                            lblnodata.setVisible(true);
+                            jsant_pre.setVisible(false);
+                            btnantupt.setVisible(false);
+                        } else {
+                            lblnodata.setVisible(false);
+                            jsant_pre.setVisible(true);
+                            btnantupt.setVisible(false);
+                        }
                         break;
                     case 2:
                         lblant.setVisible(true);
                         lblant.setText("Con Anticipo de Menor Valor");
                         lblant.setBounds(310, 480, 270, 26);
+                        jsant_pre.setVisible(true);
+                        if (cant == 0) {
+                            lblnodata.setVisible(true);
+                            jsant_pre.setVisible(false);
+                            btnantupt.setVisible(false);
+                        } else {
+                            lblnodata.setVisible(false);
+                            jsant_pre.setVisible(true);
+                            btnantupt.setVisible(false);
+                        }
                         break;
                     case 3:
                         lblant.setVisible(true);
                         lblant.setText("Con Anticipo de Mayor Valor");
                         lblant.setBounds(310, 480, 270, 26);
+                        jsant_pre.setVisible(true);
+                        if (cant == 0) {
+                            lblnodata.setVisible(true);
+                            jsant_pre.setVisible(false);
+                            btnantupt.setVisible(false);
+                        } else {
+                            lblnodata.setVisible(false);
+                            jsant_pre.setVisible(true);
+                            btnantupt.setVisible(false);
+                        }
                         break;
                     default:
                         lblant.setVisible(false);
                         lblant.setText("");
                         lblant.setBounds(310, 480, 270, 26);
+                        jsant_pre.setVisible(false);
+//                        btnantupt.setVisible(false);
                         break;
                 }
                 break;
@@ -2398,13 +2583,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void docs_cont() {
+        int id_factura = Integer.parseInt(lblid.getText());
         String nit = lblnit.getText();
         String no_factura = lblnfact.getText();
         String proveedor = lblproveedor.getText();
         String empresa = lblempresa.getText();
         int id_proveedor = PC.id_proveedor(proveedor);
         int id_empresa = EMPC.id_empresa(lblempresa.getText());
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 6; i++) {
             switch (i) {
                 case 1:
                     if (suno.existe_documento(nit, id_empresa, 3)) {
@@ -2422,7 +2608,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 2:
-                if (suno.existe_documento(nit, id_empresa, 4)) {
+                    if (suno.existe_documento(nit, id_empresa, 4)) {
                         btnDQ.setEnabled(true);
                         btnuptDQ.setEnabled(true);
                         String consecutivo = suno.consecutivo_documento(nit, id_empresa, 4);
@@ -2452,6 +2638,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     } else {
                         btnNI.setEnabled(false);
                         btnuptNI.setEnabled(false);
+                    }
+                case 5:
+                    if (DC.existe_documento("Soporte Anticipo", id_factura)) {
+                        btnANT.setEnabled(true);
+                        btndelAnt.setEnabled(true);
+                    } else {
+                        btnANT.setEnabled(false);
+                        btndelAnt.setEnabled(false);
                     }
                     break;
             }
@@ -2553,6 +2747,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup BGgestion;
     private javax.swing.JPanel Nuevo_T_Documento;
     public static javax.swing.JTabbedPane Tabpane;
+    private javax.swing.JButton btnANT;
     private javax.swing.JButton btnDQ;
     private javax.swing.JButton btnDQdoc;
     private javax.swing.JButton btnIMdoc;
@@ -2565,7 +2760,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSCdoc;
     private javax.swing.JButton btnSU;
     private javax.swing.JButton btnSUdoc;
-    private javax.swing.JButton btnTV;
     private javax.swing.JButton btnTVdoc;
     private javax.swing.JButton btnaceptarcp;
     private javax.swing.JButton btnactualizar;
@@ -2581,6 +2775,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JButton btncargarcp;
     private javax.swing.JButton btncreartd;
     private javax.swing.JButton btnctdoc;
+    private javax.swing.JButton btndelAnt;
     public static javax.swing.JButton btneliminar;
     private javax.swing.JButton btneliminarcp;
     public javax.swing.JButton btnfact;
@@ -2600,7 +2795,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnuptNP;
     private javax.swing.JButton btnuptSC;
     private javax.swing.JButton btnuptSU;
-    private javax.swing.JButton btnuptTV;
     private javax.swing.JButton btnvercomp;
     private javax.swing.JButton btnvercp;
     private javax.swing.JButton btnverte;
@@ -2644,7 +2838,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -2663,6 +2856,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     public static javax.swing.JPanel jpseguimiento;
     private javax.swing.JRadioButton jrbOpc1;
     private javax.swing.JRadioButton jrbOpc2;
+    private javax.swing.JScrollPane jsant_pre;
     private javax.swing.JScrollPane jsseguimiento;
     private javax.swing.JTable jtantprov;
     private javax.swing.JTable jtdocsT;
@@ -2683,6 +2877,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     public static javax.swing.JLabel lblncuenta;
     public static javax.swing.JLabel lblnfact;
     public static javax.swing.JLabel lblnit;
+    private javax.swing.JLabel lblnodata;
     public static javax.swing.JLabel lblnombreu;
     public static javax.swing.JLabel lblproveedor;
     public static javax.swing.JLabel lblvalor;

@@ -54,4 +54,20 @@ public class TipoDoc_Controller {
         }
         return id;
     }
+    
+    public String id_tipo_doc_anticipo(String ubicacion) {
+        String tipo_doc = "";
+        String idc = "SELECT id_tipo_doc FROM trebol_documentos\n"
+                + "WHERE ubicacion='" + ubicacion + "'";
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(idc)) {
+            if (rs.next()) {
+                tipo_doc = rs.getString("nombre");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(TipoDoc_Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return tipo_doc;
+    }
 }

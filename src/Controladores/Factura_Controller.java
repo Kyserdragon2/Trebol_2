@@ -257,4 +257,32 @@ public class Factura_Controller {
         return id;
     }
 
+    public boolean factura_aprobada(int id_factura) {
+        Factura F = new Factura(id_factura);
+        String sql;
+        sql = "UPDATE trebol_facturas\n"
+                + "SET aprobada = 1\n"
+                + "WHERE id = " + F.getId() + ";";
+        try {
+            return cc.sentenciaSQL(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public boolean factura_revisada(int id_factura) {
+        Factura F = new Factura(id_factura);
+        String sql;
+        sql = "UPDATE trebol_facturas\n"
+                + "SET revisada = 1\n"
+                + "WHERE id = " + F.getId() + ";";
+        try {
+            return cc.sentenciaSQL(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
 }

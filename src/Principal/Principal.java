@@ -54,6 +54,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         lblfecha.setText(formatoDeFecha.format(fecha));                             //Envia la informacion de la fecha al label fecha en la interfaz
         h1 = new Thread(this);                                                      //Crea una nueva estancia de la variable h1
         h1.start();
+        R.Revision(cmbfunrev);
         btnactualizar.setVisible(false);
         jrbPropias.setSelected(true);
         render();
@@ -247,6 +248,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         cmbproveedor.setMaximumSize(new java.awt.Dimension(680, 26));
         cmbproveedor.setMinimumSize(new java.awt.Dimension(680, 26));
         cmbproveedor.setPreferredSize(new java.awt.Dimension(680, 26));
+        cmbproveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbproveedorActionPerformed(evt);
+            }
+        });
         jPanel5.add(cmbproveedor);
         cmbproveedor.setBounds(120, 30, 460, 26);
 
@@ -904,8 +910,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
 
     private void jrbtodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtodasActionPerformed
         limpiar_filtros();
-//        filtros();
-//        llenar_cmb();
     }//GEN-LAST:event_jrbtodasActionPerformed
 
     private void jrbFinalizadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbFinalizadasActionPerformed
@@ -985,6 +989,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_btnpreantActionPerformed
 
+    private void cmbproveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbproveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbproveedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1063,6 +1071,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                     modificacion_factura(no_factura, proveedor, empresa, estado);
                                     break;
                                 case "Contabilidad":
+                                    gestionar_factura(no_factura, proveedor, empresa, estado);
+                                    break;
+                                case "Contabilidad_Rev":
                                     gestionar_factura(no_factura, proveedor, empresa, estado);
                                     break;
                                 default:
@@ -1177,24 +1188,26 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         if (cmbfunrev.getSelectedItem().toString().equals("---")) {
             frev = "";
         } else {
-            frev = cmbfunrev.getSelectedItem().toString();
+            int usuario = UC.id_usuario_rev(cmbfunrev.getSelectedItem().toString());
+            frev = String.valueOf(usuario);
         }
         if (jrbPropias.isSelected()) {
-            LT.Facturas(jtfacturas, 1, proveedor, empresa, estado, asignado);
+            LT.Facturas(jtfacturas, 1, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             if (!lbluser.getText().equals("null")) {
                 datousuario(lbluser.getText());
             }
         } else if (jrbtodas.isSelected()) {
-            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado);
+            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbasignado.setSelectedIndex(0);
+            cmbfunrev.setSelectedIndex(0);
         } else if (jrbFinalizadas.isSelected()) {
-            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado);
+            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
         } else if (jrbretiradas.isSelected()) {
-            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado);
+            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
         }
         if (jtfacturas.getRowCount() > 0) {
@@ -1209,22 +1222,35 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         switch (UC.area_usuario(usuario)) {
             case "Administrativo":
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
+                cmbfunrev.setSelectedIndex(0);
+                cmbfunrev.setEnabled(false);
                 break;
             case "Capital Humano":
             case "Compras":
             case "Tecnología":
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbasignado.setEnabled(false);
+                cmbfunrev.setSelectedIndex(0);
+                cmbfunrev.setEnabled(false);
                 break;
             case "Recepción":
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbasignado.setEnabled(false);
+                cmbfunrev.setSelectedIndex(0);
+                cmbfunrev.setEnabled(false);
                 break;
             case "Contabilidad":
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbasignado.setEnabled(false);
+                cmbfunrev.setSelectedIndex(0);
+                cmbfunrev.setEnabled(false);
                 break;
-            default:
+            case "Contabilidad_Rev":
+                if (cmbfunrev.getSelectedIndex() == 0) {
+                    cmbfunrev.setSelectedItem(UC.nombre_rev(lbluser.getText()));
+                }
+                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
+                cmbasignado.setEnabled(true);
                 break;
         }
     }
@@ -1240,6 +1266,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jdchasta.setDate(null);
         filtros();
         llenar_cmb();
+        if (cmbfunrev.getSelectedIndex() != 0 && UC.area_usuario(lbluser.getText()).equals("Contabilidad_Rev")) {
+            cmbfunrev.setSelectedItem(UC.nombre_rev(lbluser.getText()));
+        }
     }
 
     public void filtarporfecha() {

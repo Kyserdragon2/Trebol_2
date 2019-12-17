@@ -79,6 +79,11 @@ public final class Precargar_Anticipos extends javax.swing.JInternalFrame {
         btnrefrescar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnrefrescar.setRequestFocusEnabled(false);
         btnrefrescar.setVerifyInputWhenFocusTarget(false);
+        btnrefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnrefrescarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnrefrescar);
         btnrefrescar.setBounds(739, 126, 17, 25);
 
@@ -289,24 +294,26 @@ public final class Precargar_Anticipos extends javax.swing.JInternalFrame {
     private void jtantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtantMouseClicked
         int column = jtant.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / jtant.getRowHeight();
-        int prov, emp, id_td;
-        String cons, td;
+        int id_proveedor, id_empresa, id_tipo_doc;
+        String cons, tipo_doc;
         if (row < jtant.getRowCount() && row >= 0 && column < jtant.getColumnCount() && column >= 0) {
             Object value = jtant.getValueAt(row, column);
             if (value instanceof JButton) {
                 ((JButton) value).doClick();
                 JButton boton = (JButton) value;
-                prov = PC.id_proveedor(jtant.getValueAt(row, 0).toString());
-                emp = EMPC.id_empresa(jtant.getValueAt(row, 1).toString());
-                td = jtant.getValueAt(row, 2).toString().substring(0, 2);
-                id_td = TDC.id_tipo_doc(jtant.getValueAt(row, 2).toString().substring(0, 2));
+                id_proveedor = PC.id_proveedor(jtant.getValueAt(row, 0).toString());
+                id_empresa = EMPC.id_empresa(jtant.getValueAt(row, 1).toString());
+                tipo_doc = jtant.getValueAt(row, 2).toString().substring(0, 2);
+                id_tipo_doc = TDC.id_tipo_doc_pref(tipo_doc);
                 cons = jtant.getValueAt(row, 2).toString().substring(3, 9);
                 switch (boton.getName()) {
                     case "ver":
                         JOptionPane.showMessageDialog(Principal.Escritorio, "Ver Documento");
+                        AntC.ver_documento_anticipo(id_proveedor, id_empresa, id_tipo_doc, cons);
                         break;
                     case "borrar":
                         JOptionPane.showMessageDialog(Principal.Escritorio, "Borrar Documento");
+                        AntC.anular_ant_prov(id_proveedor, id_empresa, id_tipo_doc, cons);
                         break;
                     default:
                         break;
@@ -315,11 +322,15 @@ public final class Precargar_Anticipos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtantMouseClicked
 
+    private void btnrefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefrescarActionPerformed
+        LT.pre_anticipos(jtant, "", "", "");
+    }//GEN-LAST:event_btnrefrescarActionPerformed
+
     public void render() {
         R.razon_social(cmbproveedor);
     }
-    
-    public void limpiar(){
+
+    public void limpiar() {
         cmbdoc.setSelectedIndex(0);
         cmbempresa.setSelectedIndex(0);
         cmbproveedor.setSelectedIndex(0);

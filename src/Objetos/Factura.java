@@ -169,4 +169,8 @@ public class Factura {
         this.valor = valor;
     }
 
+    public Factura(int id) {
+        this.id = id;
+    }
+
 }

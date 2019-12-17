@@ -65,5 +65,18 @@ public class Anticipo {
         this.ub_documento = ub_documento;
         this.valor = valor;
     }
+
+    public Anticipo(int id_proveedor, int id_empresa, int id_tipo_doc, String consecutivo) {
+        this.id_proveedor = id_proveedor;
+        this.id_empresa = id_empresa;
+        this.id_tipo_doc = id_tipo_doc;
+        this.consecutivo = consecutivo;
+    }
+
+    public Anticipo(int id_proveedor, int id_empresa, String consecutivo) {
+        this.id_proveedor = id_proveedor;
+        this.id_empresa = id_empresa;
+        this.consecutivo = consecutivo;
+    }
     
 }

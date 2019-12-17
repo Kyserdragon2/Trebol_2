@@ -23,7 +23,7 @@ public class Aprobacion_Controller {
         }
     }
 
-    public boolean aprobar_factura(int id_factura, int id_area, int id_usuario) {
+    public boolean aprobar(int id_factura, int id_area, int id_usuario) {
         Aprobacion A = new Aprobacion(id_factura, id_area, id_usuario);
         String sql;
         sql = "UPDATE trebol_aprobaciones\n"
