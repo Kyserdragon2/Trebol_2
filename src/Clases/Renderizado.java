@@ -81,7 +81,7 @@ public class Renderizado {
                 Statement st = cn.createStatement();
                 ResultSet rs = st.executeQuery("SELECT nombre\n"
                         + "FROM trebol_tipo_documento\n"
-                        + "WHERE id NOT IN (3,4,5,6,7,8,9,10,11,12,13,14);")) {
+                        + "WHERE id NOT IN (3,4,5,6,7,8,9,10,11,12,13,14,16,17);")) {
             while (rs.next()) {
                 cmb.addItem(rs.getString("nombre"));
             }

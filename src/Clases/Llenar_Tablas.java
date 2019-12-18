@@ -236,6 +236,12 @@ public class Llenar_Tablas {
             case 2:
                 estados = "2,3,4,5,6,8,9,10,11,13";
                 break;
+            case 3:
+                estados = "7";
+                break;
+            case 4:
+                estados = "1,12";
+                break;
             default:
                 throw new AssertionError();
         }
@@ -243,7 +249,7 @@ public class Llenar_Tablas {
         if (id_rev.equals("")) {
             consulta = "SELECT DISTINCT tf.No_Factura, tp.razon_social, tp.nit, tem.`nom_empresa`, te.`nom_estado`, ta2.`nombre_area`, \n"
                     + "ta.`nombre_area`,IF(td.`ubicacion` IS NULL, '',td.`ubicacion`) AS doc_ubicacion, tf.`valor`,tf.`creacion`,\n"
-                    + "TF.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
+                    + "tf.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
                     + "tipo_fact.`tipo_factura`\n"
                     + "FROM trebol_facturas AS tf\n"
                     + "INNER JOIN trebol_proveedor AS tp ON tf.`id_proveedor`=tp.`id`\n"
@@ -264,7 +270,7 @@ public class Llenar_Tablas {
         } else {
             consulta = "SELECT DISTINCT tf.No_Factura, tp.razon_social, tp.nit, tem.`nom_empresa`, te.`nom_estado`, ta2.`nombre_area`, \n"
                     + "ta.`nombre_area`,IF(td.`ubicacion` IS NULL, '',td.`ubicacion`) AS doc_ubicacion, tf.`valor`,tf.`creacion`,\n"
-                    + "TF.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
+                    + "tf.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
                     + "tipo_fact.`tipo_factura`\n"
                     + "FROM trebol_facturas AS tf\n"
                     + "INNER JOIN trebol_proveedor AS tp ON tf.`id_proveedor`=tp.`id`\n"
@@ -473,7 +479,7 @@ public class Llenar_Tablas {
                 + "FROM trebol_documentos AS td\n"
                 + "JOIN trebol_facturas AS tf ON td.`id_factura`=tf.`id`\n"
                 + "JOIN trebol_tipo_documento AS ttd ON td.`id_tipo_doc`=ttd.`id`\n"
-                + "WHERE TD.`id_tipo_doc` NOT IN (3,4,5,6,7,8,9,10,11,12,13,14)\n"
+                + "WHERE td.`id_tipo_doc` NOT IN (3,4,5,6,7,8,9,10,11,12,13,14)\n"
                 + "AND tf.`id`=" + id + "\n"
                 + "ORDER BY td.id_tipo_doc ASC;";
         try (Connection cn = cc.Conexion();
@@ -533,6 +539,76 @@ public class Llenar_Tablas {
             tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
             tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
 
+        } catch (SQLException ex) {
+            Logger.getLogger(Llenar_Tablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     *
+     * @param tabla
+     * @param id
+     */
+    public void Documentos_Factura(JTable tabla, int id) {
+        Color H = new Color(75, 156, 109);
+        Color T = new Color(255, 255, 255);
+        Color CB = new Color(255, 255, 255);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabla.getTableHeader().setResizingAllowed(false);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        String consulta = "SELECT ttd.`nombre`\n"
+                + "FROM trebol_documentos AS td\n"
+                + "JOIN trebol_facturas AS tf ON td.`id_factura`=tf.`id`\n"
+                + "JOIN trebol_tipo_documento AS ttd ON td.`id_tipo_doc`=ttd.`id`\n"
+                + "WHERE td.`id_tipo_doc` NOT IN (1,3,4,5,6,7,8,9,10,11,12,13,14,16,17)\n"
+                + "AND tf.`id`=" + id + "\n"
+                + "ORDER BY td.id_tipo_doc ASC;";
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(consulta);) {
+            Object[] titulos = {"Documento", "Ver"};
+            Object[] registros = new Object[2];
+            model = new DefaultTableModel(null, titulos) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+                @Override
+                public Class getColumnClass(int column) {
+                    Class returnValue;
+                    if (column == 1 && tabla.getRowCount() > 0) {
+                        returnValue = getValueAt(0, column).getClass();
+                    } else {
+                        returnValue = Object.class;
+                    }
+                    return returnValue;
+                }
+            };
+
+            sorter = new TableRowSorter(model);
+
+            while (rs.next()) {
+                registros[0] = rs.getString("ttd.nombre");
+                btnver = new JButton("");
+                btnver.setName("ver");
+                registros[1] = btnver;
+                model.addRow(registros);
+            }
+
+            tabla.setModel(model);
+            tabla.setRowSorter(sorter);
+            tabla.setRowHeight(30);
+
+            for (int i = 0; i < 2; i++) {
+                tabla.getColumnModel().getColumn(i).setHeaderRenderer(new Encabezado_Tabla(H, T, tabla.getTableHeader().getDefaultRenderer(), 15));
+            }
+
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(256);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(50);
+
+            tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
         } catch (SQLException ex) {
             Logger.getLogger(Llenar_Tablas.class.getName()).log(Level.SEVERE, null, ex);
         }

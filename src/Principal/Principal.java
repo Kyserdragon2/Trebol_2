@@ -22,6 +22,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Thread h1;
     Grabar_Factura GF;
     Gestionar_Factura GestF;
+    Detalles_Factura DetFact;
     Renderizado R = new Renderizado();
     Llenar_Tablas LT = new Llenar_Tablas();
     Envio_Correos EC = new Envio_Correos();
@@ -181,7 +182,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btngestmult = new javax.swing.JButton();
         btnconv = new javax.swing.JButton();
         btnpreant = new javax.swing.JButton();
-        btnpreant1 = new javax.swing.JButton();
+        btnusuarios = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbluser = new javax.swing.JLabel();
@@ -517,6 +518,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         ));
         jtfacturas.setFillsViewportHeight(true);
+        jtfacturas.setRequestFocusEnabled(false);
         jtfacturas.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         scrollfact.setViewportView(jtfacturas);
 
@@ -635,7 +637,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jpmenu.setLayout(null);
 
         btngf.setBackground(new java.awt.Color(0, 102, 153));
-        btngf.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btngf.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
         btngf.setForeground(new java.awt.Color(255, 255, 255));
         btngf.setText("<html><div align='center'>Grabar<br>Factura</div></html>");
         btngf.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
@@ -662,7 +664,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jLabel4.setBounds(6, 7, 120, 120);
 
         btncpro.setBackground(new java.awt.Color(0, 102, 153));
-        btncpro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btncpro.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
         btncpro.setForeground(new java.awt.Color(255, 255, 255));
         btncpro.setText("Proveedores");
         btncpro.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
@@ -680,16 +682,16 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jSeparator3.setBounds(8, 547, 120, 10);
 
         btnlotep.setBackground(new java.awt.Color(0, 102, 153));
-        btnlotep.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnlotep.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
         btnlotep.setForeground(new java.awt.Color(255, 255, 255));
-        btnlotep.setText("Lotes de Pago");
+        btnlotep.setText("<html><p align='center'>Lotes<br>de Pago</p></html>");
         btnlotep.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnlotep.setDoubleBuffered(true);
         btnlotep.setEnabled(false);
         btnlotep.setFocusPainted(false);
         btnlotep.setPreferredSize(new java.awt.Dimension(100, 52));
         jpmenu.add(btnlotep);
-        btnlotep.setBounds(12, 500, 110, 40);
+        btnlotep.setBounds(12, 495, 110, 45);
 
         btnactualizar.setBackground(new java.awt.Color(0, 102, 153));
         btnactualizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -705,7 +707,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnactualizar.setBounds(40, 610, 52, 22);
 
         btngestmult.setBackground(new java.awt.Color(0, 102, 153));
-        btngestmult.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btngestmult.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
         btngestmult.setForeground(new java.awt.Color(255, 255, 255));
         btngestmult.setText("<html><div align='center'>Gestión<br>Multiple</div></html>");
         btngestmult.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
@@ -717,7 +719,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btngestmult.setBounds(12, 185, 110, 45);
 
         btnconv.setBackground(new java.awt.Color(0, 102, 153));
-        btnconv.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnconv.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
         btnconv.setForeground(new java.awt.Color(255, 255, 255));
         btnconv.setText("Convenios");
         btnconv.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
@@ -729,7 +731,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnconv.setBounds(12, 450, 110, 40);
 
         btnpreant.setBackground(new java.awt.Color(0, 102, 153));
-        btnpreant.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnpreant.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
         btnpreant.setForeground(new java.awt.Color(255, 255, 255));
         btnpreant.setText("<html><p align='center'>Precargar<br>Anticipo</p></html>");
         btnpreant.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
@@ -744,21 +746,21 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jpmenu.add(btnpreant);
         btnpreant.setBounds(12, 235, 110, 45);
 
-        btnpreant1.setBackground(new java.awt.Color(0, 102, 153));
-        btnpreant1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnpreant1.setForeground(new java.awt.Color(255, 255, 255));
-        btnpreant1.setText("<html><p align='center'>Usuarios</p></html>");
-        btnpreant1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnpreant1.setDoubleBuffered(true);
-        btnpreant1.setFocusPainted(false);
-        btnpreant1.setPreferredSize(new java.awt.Dimension(100, 52));
-        btnpreant1.addActionListener(new java.awt.event.ActionListener() {
+        btnusuarios.setBackground(new java.awt.Color(0, 102, 153));
+        btnusuarios.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
+        btnusuarios.setForeground(new java.awt.Color(255, 255, 255));
+        btnusuarios.setText("<html><p align='center'>Usuarios</p></html>");
+        btnusuarios.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnusuarios.setDoubleBuffered(true);
+        btnusuarios.setFocusPainted(false);
+        btnusuarios.setPreferredSize(new java.awt.Dimension(100, 52));
+        btnusuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnpreant1ActionPerformed(evt);
+                btnusuariosActionPerformed(evt);
             }
         });
-        jpmenu.add(btnpreant1);
-        btnpreant1.setBounds(12, 555, 110, 40);
+        jpmenu.add(btnusuarios);
+        btnusuarios.setBounds(12, 555, 110, 40);
 
         jPanel1.add(jpmenu);
         jpmenu.setBounds(0, 0, 132, 650);
@@ -849,12 +851,12 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnpreant1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpreant1ActionPerformed
+    private void btnusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuariosActionPerformed
         Usuarios CU = new Usuarios();
         Principal.Escritorio.add(CU);
         CU.setBounds(67, 100, 1075, 435);
         CU.setVisible(true);
-    }//GEN-LAST:event_btnpreant1ActionPerformed
+    }//GEN-LAST:event_btnusuariosActionPerformed
 
     private void btncproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncproActionPerformed
         Proveedores PR = new Proveedores();
@@ -962,7 +964,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int close = JOptionPane.showConfirmDialog(this, "Confirma que desea cerrar la aplicacion?", "Cerrar Trebol", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int close = JOptionPane.showConfirmDialog(this, "Confirma que desea cerrar la aplicación?", "Cerrar Trébol", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (close == 0) {
             if (UC.estado_sesion(0, lbluser.getText())) {
                 System.exit(0);
@@ -1063,10 +1065,12 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                 case "Administrativo":
                                     gestionar_factura(no_factura, proveedor, empresa, estado);
                                     break;
+                                case "Recepción":
+                                    modificacion_factura(no_factura, proveedor, empresa, estado);
+                                    break;
                                 case "Capital Humano":
                                 case "Compras":
                                 case "Tecnología":
-                                case "Recepción":
                                 case "Contabilidad":
                                 case "Contabilidad_Rev":
                                 case "Tesoreria":
@@ -1074,7 +1078,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                     break;
                             }
                         } else {
-                            modificacion_factura(no_factura, proveedor, empresa, estado);
+                            detalle_factura(no_factura, proveedor, empresa, estado);
                         }
                     }
                 }
@@ -1114,6 +1118,29 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             Grabar_Factura.jtabedpane.setSelectedIndex(0);
             GF.llenar_campos(no_factura, proveedor, empresa);
             GF.setVisible(true);
+        }
+    }
+
+    public void detalle_factura(String no_factura, String proveedor, String empresa, String estado) {
+        if (DetFact == null) {
+            DetFact = new Detalles_Factura();
+            Principal.Escritorio.add(DetFact);
+        }
+        Principal.Escritorio.setSelectedFrame(DetFact);
+        if (DetFact.isIcon()) {
+            try {
+                DetFact.setIcon(false);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (DetFact.isShowing()) {
+            DetFact.toFront();
+        } else {
+            String usuario = lbluser.getText();
+            String area = UC.area_usuario(usuario);
+            DetFact.llenar_campos(no_factura, proveedor, empresa, area, estado);
+            DetFact.setBounds(145, 56, 930, 535);
+            DetFact.setVisible(true);
         }
     }
 
@@ -1192,11 +1219,17 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             cmbasignado.setSelectedIndex(0);
             cmbfunrev.setSelectedIndex(0);
         } else if (jrbFinalizadas.isSelected()) {
-            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado, frev);
+            LT.Facturas(jtfacturas, 3, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
+            cmbasignado.setEnabled(true);
+            cmbasignado.setSelectedIndex(0);
+            cmbfunrev.setSelectedIndex(0);
         } else if (jrbretiradas.isSelected()) {
-            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado, frev);
+            LT.Facturas(jtfacturas, 4, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
+            cmbasignado.setEnabled(true);
+            cmbasignado.setSelectedIndex(0);
+            cmbfunrev.setSelectedIndex(0);
         }
         if (jtfacturas.getRowCount() > 0) {
             filtarporfecha();
@@ -1207,9 +1240,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         if (lbluser.getText().equals("null")) {
             lbluser.setText(usuario);
         }
+        cmbasignado.setSelectedItem(UC.area_usuario(usuario));
+        cmbasignado.setEnabled(false);
+        btnpreant.setEnabled(false);
+        btnusuarios.setEnabled(false);
+        btngf.setEnabled(false);
         switch (UC.area_usuario(usuario)) {
             case "Administrativo":
-                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
                 cmbempresa.setEnabled(true);
@@ -1218,24 +1255,19 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             case "Capital Humano":
             case "Compras":
             case "Tecnología":
-                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
-                cmbasignado.setEnabled(false);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
                 cmbempresa.setEnabled(true);
                 cmbempresa.setSelectedIndex(0);
                 break;
             case "Recepción":
-                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
-                cmbasignado.setEnabled(false);
+        btngf.setEnabled(true);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
                 cmbempresa.setEnabled(true);
                 cmbempresa.setSelectedIndex(0);
                 break;
             case "Contabilidad":
-                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
-                cmbasignado.setEnabled(false);
                 cmbempresa.setSelectedItem(UC.empresa_usuario(lbluser.getText()));
                 cmbempresa.setEnabled(false);
                 cmbfunrev.setSelectedIndex(0);
@@ -1245,16 +1277,17 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 if (cmbfunrev.getSelectedIndex() == 0) {
                     cmbfunrev.setSelectedItem(UC.nombre_rev(lbluser.getText()));
                 }
-                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
-                cmbasignado.setEnabled(true);
                 break;
             case "Tesoreria":
-                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
-                cmbasignado.setEnabled(false);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
                 cmbempresa.setEnabled(true);
                 cmbempresa.setSelectedIndex(0);
+                btnpreant.setEnabled(true);
+                break;
+            case "AdminTrebol":
+                btnpreant.setEnabled(true);
+                btnusuarios.setEnabled(true);
                 break;
         }
     }
@@ -1387,8 +1420,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     public static javax.swing.JButton btngf;
     public static javax.swing.JButton btnlotep;
     public static javax.swing.JButton btnpreant;
-    public static javax.swing.JButton btnpreant1;
     private javax.swing.JButton btnrest;
+    public static javax.swing.JButton btnusuarios;
     private javax.swing.JComboBox<String> cmbMes;
     private javax.swing.JComboBox<String> cmbasignado;
     private javax.swing.JComboBox<String> cmbempresa;

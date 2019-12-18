@@ -57,4 +57,10 @@ public class Documento {
         this.consecutivo = consecutivo;
         this.ubicacion = ubicacion;
     }
+
+    public Documento(int id_factura, String ubicacion) {
+        this.id_factura = id_factura;
+        this.ubicacion = ubicacion;
+    }
+
 }

@@ -31,8 +31,8 @@ public class Documento_Controller {
         }
     }
 
-    public boolean modificar_documento(int id_tipo_doc, int id_factura, String consecutivo, String ubicacion, String nueva_ubicacion) {
-        Documento D = new Documento(id_tipo_doc, id_factura, consecutivo, ubicacion);
+    public boolean modificar_documento(int id_factura, String ubicacion, String nueva_ubicacion) {
+        Documento D = new Documento(id_factura, ubicacion);
         String sql;
         sql = "UPDATE trebol_documentos\n"
                 + "SET ubicacion ='" + nueva_ubicacion + "'\n"

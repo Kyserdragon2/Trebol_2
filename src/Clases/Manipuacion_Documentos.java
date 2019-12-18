@@ -72,8 +72,7 @@ public class Manipuacion_Documentos {
         }
     }
 
-    public void modificar_documento(String Factura, String Proveedor, String Empresa, String nombre, String ruta, String ruta_ant,
-            int id_tipo_factura, String consecutivo, int id_proveedor, int id_empresa) {
+    public void modificar_documento(String Factura, String Proveedor, String Empresa, String ruta_ant, int id_factura, int id_proveedor, int id_empresa) {
         try {
             NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Soporte", "Rock2020");
             String url = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Facturas/" + Empresa;
@@ -100,22 +99,13 @@ public class Manipuacion_Documentos {
                 SmbFile fin = new SmbFile(url3 + archivos[i], auth);
                 if (!fin.exists()) {
                     inicio.copyTo(fin);
-                    DC.modificar_documento(id_tipo_factura, id_tipo_factura, consecutivo, inicio.toString().replace("smb:", ""),
+                    DC.modificar_documento(id_factura, inicio.toString().replace("smb:", ""),
                             fin.toString().replace("smb:", ""));
                 }
             }
             if (!url3.equals(rutaanterior.getParent())) {
                 SmbFile eliminar = new SmbFile(rutaanterior.getParent(), auth);
                 eliminar.delete();
-            } else if (!ruta.equals(rutaanterior.toString().replace("smb:", ""))) {
-                SmbFile doc_ant = new SmbFile("smb:" + ruta_ant, auth);
-                Path origen = FileSystems.getDefault().getPath(ruta);
-                SmbFile destino = new SmbFile(doc_ant.toString(), auth);
-                try (OutputStream out = destino.getOutputStream()) {
-                    Files.copy(origen, out);
-                } catch (IOException ex) {
-                    Logger.getLogger(Manipuacion_Documentos.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
         } catch (MalformedURLException | SmbException ex) {
             Logger.getLogger(Manipuacion_Documentos.class.getName()).log(Level.SEVERE, null, ex);
@@ -210,5 +200,49 @@ public class Manipuacion_Documentos {
             Logger.getLogger(Manipuacion_Documentos.class.getName()).log(Level.SEVERE, null, ex);
         }
         return asociado;
+    }
+
+    public void retirar_documentos_factura(String Factura, String Proveedor, String Empresa, String ruta_ant, int id_factura, int id_proveedor, int id_empresa) {
+        try {
+            NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Soporte", "Rock2020");
+            String ret = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Facturas/Retiradas/";
+            String url = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Facturas/Retiradas/" + Empresa;
+            String url2 = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Facturas/Retiradas/" + Empresa + "/" + Proveedor;
+            String url3 = "smb://10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/Facturas/Retiradas/" + Empresa + "/" + Proveedor + "/" + Factura + "/";
+            SmbFile rutaanterior = new SmbFile("smb:" + ruta_ant, auth);
+            SmbFile retdir = new SmbFile(ret, auth);
+            SmbFile dir = new SmbFile(url, auth);
+            SmbFile dir2 = new SmbFile(url2, auth);
+            SmbFile dir3 = new SmbFile(url3, auth);
+            if (!retdir.exists()) {
+                retdir.mkdir();
+            }
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            if (!dir2.exists()) {
+                dir2.mkdir();
+            }
+            if (!dir3.exists()) {
+                dir3.mkdir();
+            }
+            SmbFile ruta1 = new SmbFile(rutaanterior.getParent(), auth);
+            String[] archivos = ruta1.list();
+            int n_archivos = archivos.length;
+            for (int i = 0; i < n_archivos; i++) {
+                SmbFile inicio = new SmbFile(ruta1.toString() + archivos[i], auth);
+                SmbFile fin = new SmbFile(url3 + archivos[i], auth);
+                if (!fin.exists()) {
+                    inicio.copyTo(fin);
+                    DC.modificar_documento(id_factura, inicio.toString().replace("smb:", ""), fin.toString().replace("smb:", ""));
+                }
+            }
+            if (!url3.equals(rutaanterior.getParent())) {
+                SmbFile eliminar = new SmbFile(rutaanterior.getParent(), auth);
+                eliminar.delete();
+            }
+        } catch (MalformedURLException | SmbException ex) {
+            Logger.getLogger(Manipuacion_Documentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

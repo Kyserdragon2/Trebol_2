@@ -35,80 +35,154 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
 
         if (value instanceof JButton) {
             JButton btn = (JButton) value;
-            this.setBackground(new Color(99, 195, 227));
-            this.setForeground(Color.black);
-            switch (btn.getName()) {
-                case "ver":
-                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver2.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    }
-                    break;
-                case "aceptar":
-                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    }
-                    break;
-                case "ver3":
-                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver3.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    }
-                    break;
-                case "editar":
-                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edicion.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    }
-                    break;
-                case "borrar":
-                    btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    }
-                    break;
-                default:
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-                        btn.setBackground(Color.white);
-                        btn.setForeground(Color.black);
-                    }
-                    break;
+            if (row % 2 != 0) {
+                switch (btn.getName()) {
+                    case "ver":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver2.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(138, 193, 213));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(183, 217, 229));
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    case "aceptar":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(138, 193, 213));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(183, 217, 229));
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    case "ver3":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver3.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(138, 193, 213));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(183, 217, 229));
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    case "editar":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edicion.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(138, 193, 213));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(183, 217, 229));
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    case "borrar":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(138, 193, 213));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(183, 217, 229));
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    default:
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(138, 193, 213));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(183, 217, 229));
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                }
+            } else {
+                switch (btn.getName()) {
+                    case "ver":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver2.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(219, 219, 219));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(Color.white);
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    case "aceptar":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(219, 219, 219));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(Color.white);
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    case "ver3":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver3.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(219, 219, 219));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(Color.white);
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    case "editar":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edicion.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(219, 219, 219));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(Color.white);
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    case "borrar":
+                        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png")));
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(219, 219, 219));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(Color.white);
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                    default:
+                        if (isSelected) {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(new Color(219, 219, 219));
+                            btn.setForeground(Color.black);
+                        } else {
+                            btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                            btn.setBackground(Color.white);
+                            btn.setForeground(Color.black);
+                        }
+                        break;
+                }
             }
             btn.setContentAreaFilled(false);
             btn.setBorderPainted(true);
@@ -136,28 +210,13 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
 
         if (row % 2 != 0) {
             if (isSelected) {
-                this.setBackground(new Color(138,193,213));
+                this.setBackground(new Color(138, 193, 213));
                 this.setForeground(Color.black);
                 this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                if (value instanceof JButton) {
-                    JButton btn = (JButton) value;
-                    switch (btn.getName()) {
-                        case "ver":
-                            btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver2.png")));
-                            if (isSelected) {
-                                btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                                btn.setBackground(new Color(99, 195, 227));
-                                btn.setForeground(Color.black);
-                            } else {
-                                this.setBackground(new Color(207, 236, 246));
-                                this.setForeground(Color.black);
-                            }
-                            break;
-                    }
-                }
             } else {
-                this.setBackground(new Color(183,217,229));
+                this.setBackground(new Color(183, 217, 229));
                 this.setForeground(Color.black);
+                this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
             }
         } else {
             if (isSelected) {
@@ -167,6 +226,7 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
             } else {
                 this.setBackground(Color.white);
                 this.setForeground(Color.black);
+                this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
             }
         }
 

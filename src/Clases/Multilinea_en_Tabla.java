@@ -69,6 +69,7 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
             } else {
                 this.setBackground(new Color(183,217,229));
                 this.setForeground(Color.black);
+                this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
             }
         } else {
             if (isSelected) {
@@ -78,6 +79,7 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
             } else {
                 this.setBackground(Color.white);
                 this.setForeground(Color.black);
+                this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
             }
         }
         this.setFont(font);

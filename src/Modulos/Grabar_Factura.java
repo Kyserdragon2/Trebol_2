@@ -1022,9 +1022,11 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                 break;
             case "modificar":
                 int id;
+                int id_factura = Integer.parseInt(lblid.getText());
                 id = Integer.parseInt(lblid.getText());
                 if (FC.modificar_factura(id, id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, no_factura, moneda, fecha_generada,
                         fecha_venc, no_radicado, valor)) {
+                    MD.modificar_documento(no_factura, proveedor, empresa, txtruta.getText(), id_factura, id_proveedor, id_empresa);
                     NS.notificaciones("Modificación de Factura", "La factura " + no_factura + " ha sido modificada con exito.", "correcto");
                     Principal.btnactualizar.doClick();
                     this.doDefaultCloseAction();
@@ -1050,7 +1052,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
 
     public void llenar_campos(String no_factura, String proveedor, String empresa) {
         Factura F = FC.buscar(no_factura, proveedor, empresa);
-            SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
 //        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
         limpiar();
         if (F != null) {
