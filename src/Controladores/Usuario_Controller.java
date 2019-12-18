@@ -207,6 +207,25 @@ public class Usuario_Controller {
         return area;
     }
 
+    public String empresa_usuario(String nombre) {
+        String empresa = "";
+        String sql = "SELECT temp.nom_empresa\n"
+                + "FROM trebol_usuario AS tu\n"
+                + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
+                + "JOIN trebol_empresa AS temp ON tu.id_empresa=temp.id\n"
+                + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            if (datos.next()) {
+                empresa = datos.getString("temp.nom_empresa");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
+//            area = "";
+        }
+        return empresa;
+    }
+
     public boolean existe_usuario(String usuario) {
         boolean existe_u = false;
         String sql = "SELECT tu.id, CONCAT(tu.`nombres`,' ',tu.`apellidos`) AS 'NombreC', tu.usuario, tu.contraseña,\n"

@@ -231,7 +231,7 @@ public class Llenar_Tablas {
         String estados;
         switch (area) {
             case 1:
-                estados = "2,8,4,13";
+                estados = "2,8,9,4,13";
                 break;
             case 2:
                 estados = "2,3,4,5,6,8,9,10,11,13";
@@ -239,28 +239,53 @@ public class Llenar_Tablas {
             default:
                 throw new AssertionError();
         }
-        String consulta = "SELECT DISTINCT tf.No_Factura, tp.razon_social, tp.nit, tem.`nom_empresa`, te.`nom_estado`, ta2.`nombre_area`, \n"
-                + "ta.`nombre_area`,IF(td.`ubicacion` IS NULL, '',td.`ubicacion`) AS doc_ubicacion, tf.`valor`,tf.`creacion`,\n"
-                + "TF.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
-                + "tipo_fact.`tipo_factura`\n"
-                + "FROM trebol_facturas AS tf\n"
-                + "INNER JOIN trebol_proveedor AS tp ON tf.`id_proveedor`=tp.`id`\n"
-                + "INNER JOIN trebol_estados AS te ON tf.`id_estado`=te.`id`\n"
-                + "INNER JOIN trebol_areas AS ta ON tf.`id_area`=ta.`id`\n"
-                + "INNER JOIN trebol_areas AS ta2 ON tf.`id_gestion`=ta2.`id`\n"
-                + "INNER JOIN trebol_empresa AS tem ON tf.`id_empresa`=tem.`id`\n"
-                + "INNER JOIN trebol_tipo_factura AS tipo_fact ON tf.`id_tipo_factura`=tipo_fact.`id`\n"
-                + "INNER JOIN trebol_revisiones AS tr ON tr.`id_factura`=tf.`id`"
-                + "LEFT JOIN trebol_documentos AS td ON td.`id_factura`=tf.`id`\n"
-                + "LEFT JOIN trebol_programaciones AS tprog ON tprog.`id_factura`=tf.`id`\n"
-                + "WHERE te.`id` IN (" + estados + ")\n"
-                + "AND tp.razon_social LIKE '%" + proveedor + "%'\n"
-                + "AND tem.`nom_empresa` LIKE '%" + empresa + "%'\n"
-                + "AND te.nom_estado LIKE '%" + estado + "%'\n"
-                + "AND ta2.nombre_area LIKE '%" + asignado + "'\n"
-                + "AND tr.`id_usuario` LIKE '%" + id_rev + "%'"
-                + "GROUP BY tf.id\n"
-                + "ORDER BY tf.`creacion` DESC;";
+        String consulta;
+        if (id_rev.equals("")) {
+            consulta = "SELECT DISTINCT tf.No_Factura, tp.razon_social, tp.nit, tem.`nom_empresa`, te.`nom_estado`, ta2.`nombre_area`, \n"
+                    + "ta.`nombre_area`,IF(td.`ubicacion` IS NULL, '',td.`ubicacion`) AS doc_ubicacion, tf.`valor`,tf.`creacion`,\n"
+                    + "TF.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
+                    + "tipo_fact.`tipo_factura`\n"
+                    + "FROM trebol_facturas AS tf\n"
+                    + "INNER JOIN trebol_proveedor AS tp ON tf.`id_proveedor`=tp.`id`\n"
+                    + "INNER JOIN trebol_estados AS te ON tf.`id_estado`=te.`id`\n"
+                    + "INNER JOIN trebol_areas AS ta ON tf.`id_area`=ta.`id`\n"
+                    + "INNER JOIN trebol_areas AS ta2 ON tf.`id_gestion`=ta2.`id`\n"
+                    + "INNER JOIN trebol_empresa AS tem ON tf.`id_empresa`=tem.`id`\n"
+                    + "INNER JOIN trebol_tipo_factura AS tipo_fact ON tf.`id_tipo_factura`=tipo_fact.`id`\n"
+                    + "LEFT JOIN trebol_documentos AS td ON td.`id_factura`=tf.`id`\n"
+                    + "LEFT JOIN trebol_programaciones AS tprog ON tprog.`id_factura`=tf.`id`\n"
+                    + "WHERE te.`id` IN (" + estados + ")\n"
+                    + "AND tp.razon_social LIKE '%" + proveedor + "%'\n"
+                    + "AND tem.`nom_empresa` LIKE '%" + empresa + "%'\n"
+                    + "AND te.nom_estado LIKE '%" + estado + "%'\n"
+                    + "AND ta2.nombre_area LIKE '%" + asignado + "'\n"
+                    + "GROUP BY tf.id\n"
+                    + "ORDER BY tf.`creacion` DESC;";
+        } else {
+            consulta = "SELECT DISTINCT tf.No_Factura, tp.razon_social, tp.nit, tem.`nom_empresa`, te.`nom_estado`, ta2.`nombre_area`, \n"
+                    + "ta.`nombre_area`,IF(td.`ubicacion` IS NULL, '',td.`ubicacion`) AS doc_ubicacion, tf.`valor`,tf.`creacion`,\n"
+                    + "TF.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
+                    + "tipo_fact.`tipo_factura`\n"
+                    + "FROM trebol_facturas AS tf\n"
+                    + "INNER JOIN trebol_proveedor AS tp ON tf.`id_proveedor`=tp.`id`\n"
+                    + "INNER JOIN trebol_estados AS te ON tf.`id_estado`=te.`id`\n"
+                    + "INNER JOIN trebol_areas AS ta ON tf.`id_area`=ta.`id`\n"
+                    + "INNER JOIN trebol_areas AS ta2 ON tf.`id_gestion`=ta2.`id`\n"
+                    + "INNER JOIN trebol_empresa AS tem ON tf.`id_empresa`=tem.`id`\n"
+                    + "INNER JOIN trebol_tipo_factura AS tipo_fact ON tf.`id_tipo_factura`=tipo_fact.`id`\n"
+                    + "INNER JOIN trebol_revisiones AS tr ON tr.`id_factura`=tf.`id`"
+                    + "LEFT JOIN trebol_documentos AS td ON td.`id_factura`=tf.`id`\n"
+                    + "LEFT JOIN trebol_programaciones AS tprog ON tprog.`id_factura`=tf.`id`\n"
+                    + "WHERE te.`id` IN (" + estados + ")\n"
+                    + "AND tp.razon_social LIKE '%" + proveedor + "%'\n"
+                    + "AND tem.`nom_empresa` LIKE '%" + empresa + "%'\n"
+                    + "AND te.nom_estado LIKE '%" + estado + "%'\n"
+                    + "AND ta2.nombre_area LIKE '%" + asignado + "'\n"
+                    + "AND tr.`id_usuario` LIKE '%" + id_rev + "%'"
+                    + "GROUP BY tf.id\n"
+                    + "ORDER BY tf.`creacion` DESC;";
+
+        }
         try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
                 ResultSet rs = st.executeQuery(consulta);) {
@@ -751,4 +776,76 @@ public class Llenar_Tablas {
         tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
         tabla.getColumnModel().getColumn(4).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
     }
+
+    public void docs_tesoreria(JTable tabla, int id_factura) {
+        Color H = new Color(75, 156, 109);
+        Color T = new Color(0, 0, 0);
+        Color CB = new Color(255, 255, 255);
+        Color CT = new Color(0, 0, 0);
+        Object[] titulos = {"Doc.", "Cons.", "Ver", "Borrar"};
+        Object[] registros = new Object[4];
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabla.getTableHeader().setResizingAllowed(false);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        model = new DefaultTableModel(null, titulos) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Class getColumnClass(int column) {
+                Class returnValue;
+                if (column == 2 && tabla.getRowCount() > 0) {
+                    returnValue = getValueAt(0, column).getClass();
+                } else {
+                    returnValue = Object.class;
+                }
+                return returnValue;
+            }
+        };
+        sorter = new TableRowSorter(model);
+        try (Connection cn = cc.Conexion();
+                Statement stg = cn.createStatement();
+                ResultSet rsg = stg.executeQuery("SELECT ttd.`tipo_doc`, td.`consecutivo`\n"
+                        + "FROM trebol_documentos AS td\n"
+                        + "JOIN trebol_facturas AS tf ON td.`id_factura`=tf.`id`\n"
+                        + "JOIN trebol_tipo_documento AS ttd ON td.`id_tipo_doc`=ttd.`id`\n"
+                        + "WHERE td.`id_tipo_doc` IN (5,8)\n"
+                        + "AND tf.`id`=" + id_factura + "\n"
+                        + "ORDER BY ttd.`nombre` ASC;");) {
+            while (rsg.next()) {
+                registros[0] = rsg.getString("ttd.tipo_doc");
+                registros[1] = rsg.getString("td.consecutivo");
+                btnaceptar = new JButton("");
+                btnaceptar.setName("ver");
+                registros[2] = btnaceptar;
+                btnver = new JButton("");
+                btnver.setName("borrar");
+                registros[3] = btnver;
+                model.addRow(registros);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Llenar_Tablas.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        tabla.setModel(model);
+        tabla.setRowSorter(sorter);
+        tabla.setRowHeight(25);
+
+        for (int i = 0; i < 4; i++) {
+            tabla.getColumnModel().getColumn(i).setHeaderRenderer(new Encabezado_Tabla(H, T, tabla.getTableHeader().getDefaultRenderer(), 15));
+        }
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(70);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(55);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(50);
+
+        tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+    }
+
 }

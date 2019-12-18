@@ -77,7 +77,7 @@ public class Documento_Controller {
         }
     }
 
-    public String ubicacion_documento(String doc, int idf) {
+    public String ubicacion_documento(String doc, int id_factura) {
         String ub = "";
         try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
@@ -85,7 +85,7 @@ public class Documento_Controller {
                         + "FROM trebol_documentos AS td\n"
                         + "JOIN trebol_tipo_documento AS ttd ON td.`id_tipo_doc`=ttd.`id`"
                         + "WHERE nombre LIKE '" + doc + "'\n"
-                        + "AND id_factura=" + idf + ";")) {
+                        + "AND id_factura=" + id_factura + ";")) {
             if (rs.next()) {
                 ub = rs.getString("ubicacion");
             }

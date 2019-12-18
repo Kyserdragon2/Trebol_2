@@ -41,6 +41,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     Anticipo_Controller AntC = new Anticipo_Controller();
     suno_controller suno = new suno_controller();
     Revision_Controller RC = new Revision_Controller();
+    Programacion_Controller ProgC = new Programacion_Controller();
 
     public Gestionar_Factura() {
         initComponents();
@@ -1010,6 +1011,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jrbOpc1.setText("Programar");
         jrbOpc1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jrbOpc1.setOpaque(false);
+        jrbOpc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbOpc1ActionPerformed(evt);
+            }
+        });
         jPanel15.add(jrbOpc1);
         jrbOpc1.setBounds(20, 25, 110, 26);
 
@@ -1031,6 +1037,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jrbOpc2.setText("Pagar");
         jrbOpc2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jrbOpc2.setOpaque(false);
+        jrbOpc2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbOpc2ActionPerformed(evt);
+            }
+        });
         jPanel15.add(jrbOpc2);
         jrbOpc2.setBounds(180, 30, 70, 26);
 
@@ -1039,7 +1050,13 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnarchivo.setForeground(new java.awt.Color(107, 70, 0));
         btnarchivo.setText("Archivo");
         btnarchivo.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnarchivo.setEnabled(false);
         btnarchivo.setFocusPainted(false);
+        btnarchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnarchivoActionPerformed(evt);
+            }
+        });
         jPanel15.add(btnarchivo);
         btnarchivo.setBounds(490, 30, 77, 26);
 
@@ -1055,7 +1072,13 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btneliminarcp.setForeground(new java.awt.Color(153, 0, 0));
         btneliminarcp.setText("Eliminar");
         btneliminarcp.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btneliminarcp.setEnabled(false);
         btneliminarcp.setFocusPainted(false);
+        btneliminarcp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneliminarcpActionPerformed(evt);
+            }
+        });
         jPanel15.add(btneliminarcp);
         btneliminarcp.setBounds(310, 70, 77, 26);
 
@@ -1065,9 +1088,15 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnvercp.setBorderPainted(false);
         btnvercp.setContentAreaFilled(false);
         btnvercp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnvercp.setEnabled(false);
         btnvercp.setFocusPainted(false);
         btnvercp.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver3.png"))); // NOI18N
         btnvercp.setRequestFocusEnabled(false);
+        btnvercp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvercpActionPerformed(evt);
+            }
+        });
         jPanel15.add(btnvercp);
         btnvercp.setBounds(190, 70, 40, 24);
 
@@ -1076,7 +1105,13 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnmodificarcp.setForeground(new java.awt.Color(37, 112, 0));
         btnmodificarcp.setText("Modificar");
         btnmodificarcp.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnmodificarcp.setEnabled(false);
         btnmodificarcp.setFocusPainted(false);
+        btnmodificarcp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmodificarcpActionPerformed(evt);
+            }
+        });
         jPanel15.add(btnmodificarcp);
         btnmodificarcp.setBounds(400, 70, 77, 26);
 
@@ -1086,6 +1121,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btncancelarcp.setText("Cancelar");
         btncancelarcp.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btncancelarcp.setFocusPainted(false);
+        btncancelarcp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarcpActionPerformed(evt);
+            }
+        });
         jPanel15.add(btncancelarcp);
         btncancelarcp.setBounds(400, 70, 77, 26);
 
@@ -1094,7 +1134,13 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btncargarcp.setForeground(new java.awt.Color(37, 112, 0));
         btncargarcp.setText("Cargar");
         btncargarcp.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btncargarcp.setEnabled(false);
         btncargarcp.setFocusPainted(false);
+        btncargarcp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncargarcpActionPerformed(evt);
+            }
+        });
         jPanel15.add(btncargarcp);
         btncargarcp.setBounds(490, 70, 77, 26);
 
@@ -1104,6 +1150,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnaceptarcp.setText("Aceptar");
         btnaceptarcp.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnaceptarcp.setFocusPainted(false);
+        btnaceptarcp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaceptarcpActionPerformed(evt);
+            }
+        });
         jPanel15.add(btnaceptarcp);
         btnaceptarcp.setBounds(490, 70, 77, 26);
 
@@ -1130,6 +1181,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         txtdocte.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtdocte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtdocte.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        txtdocte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtdocteKeyReleased(evt);
+            }
+        });
         jPanel3.add(txtdocte);
         txtdocte.setBounds(110, 30, 60, 26);
 
@@ -1143,6 +1199,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnokte.setEnabled(false);
         btnokte.setFocusPainted(false);
         btnokte.setVerifyInputWhenFocusTarget(false);
+        btnokte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnokteActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnokte);
         btnokte.setBounds(180, 30, 19, 26);
 
@@ -1160,10 +1221,17 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnverte.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver3.png"))); // NOI18N
         btnverte.setRequestFocusEnabled(false);
         btnverte.setVerifyInputWhenFocusTarget(false);
+        btnverte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnverteActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnverte);
         btnverte.setBounds(210, 30, 40, 26);
 
         jScrollPane4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black));
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane4.setViewportBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jtdocsT.setModel(new javax.swing.table.DefaultTableModel(
@@ -1177,6 +1245,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
 
             }
         ));
+        jtdocsT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtdocsTMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jtdocsT);
 
         jPanel3.add(jScrollPane4);
@@ -1805,10 +1878,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 enviar_a_tesoreria();
                 break;
             case "Tesoreria":
-
+                programar_factura();
                 break;
         }
-
     }//GEN-LAST:event_btnokActionPerformed
 
     private void jcbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbeliminarActionPerformed
@@ -2023,8 +2095,8 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnANTActionPerformed
 
     private void btndelAntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelAntActionPerformed
-        int id_factura, id_proveedor, id_empresa, id_tipo_doc;
-        String cons, tipo_doc, ruta_doc, ruta_nueva;
+        int id_factura, id_proveedor, id_empresa;
+        String ruta_doc;
         String consecutivo = DC.consecutivo_doc("Soporte Anticipo", Integer.parseInt(lblid.getText()));
         id_factura = Integer.parseInt(lblid.getText());
         id_proveedor = PC.id_proveedor(lblproveedor.getText());
@@ -2091,6 +2163,148 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         int cant = AntC.registros_anticipos_proveedor(id_proveedor, id_empresa);
         System.err.println(cant);
     }//GEN-LAST:event_btnantuptActionPerformed
+
+    private void jrbOpc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbOpc1ActionPerformed
+        jdcprogramar.setEnabled(true);
+        txtcomprobante.setText("");
+        btnarchivo.setEnabled(false);
+        btnvercp.setEnabled(false);
+        btncargarcp.setEnabled(false);
+        btneliminarcp.setEnabled(false);
+        btnmodificarcp.setEnabled(false);
+        btnok.setText("Programar");
+    }//GEN-LAST:event_jrbOpc1ActionPerformed
+
+    private void jrbOpc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbOpc2ActionPerformed
+        int id_factura = Integer.parseInt(lblid.getText());
+        String fecha_prog = ProgC.fecha_programada(id_factura);
+        if (!fecha_prog.equals("")) {
+            jrbOpc1.setSelected(false);
+            jdcprogramar.setEnabled(false);
+            btnarchivo.setEnabled(true);
+            btneliminarcp.setEnabled(false);
+            btnmodificarcp.setEnabled(false);
+            btncargarcp.setEnabled(true);
+            btnaceptarcp.setVisible(false);
+            btncancelarcp.setVisible(false);
+            btnok.setText("Confirmar Pago");
+        }
+
+    }//GEN-LAST:event_jrbOpc2ActionPerformed
+
+    private void btnarchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarchivoActionPerformed
+        CA.buscar_documento(txtcomprobante, "ALL");
+    }//GEN-LAST:event_btnarchivoActionPerformed
+
+    private void btncargarcpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncargarcpActionPerformed
+        String ruta = txtcomprobante.getText();
+        MD.Cargar_Documento(lblnfact.getText(), lblproveedor.getText(), lblempresa.getText(), "Comprobante de Pago", ruta, 17,
+                "", PC.id_proveedor(lblproveedor.getText()), EMPC.id_empresa(lblempresa.getText()));
+        estado_pago_factura();
+    }//GEN-LAST:event_btncargarcpActionPerformed
+
+    private void btneliminarcpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarcpActionPerformed
+        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "Confirma que desea eliminar el Comprobante de pago?",
+                "Eliminar Comprobante", JOptionPane.YES_NO_OPTION);
+        if (opc == 0) {
+            int id_factura = Integer.parseInt(lblid.getText());
+            String ruta_eliminar = DC.ubicacion_documento("Comprobante de Pago", id_factura);
+            jdcprogramar.setEnabled(false);
+            MD.eliminar_documento(ruta_eliminar);
+            if (DC.eliminar_documento(17, id_factura)) {
+                estado_pago_factura();
+            }
+        }
+    }//GEN-LAST:event_btneliminarcpActionPerformed
+
+    private void btnmodificarcpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodificarcpActionPerformed
+        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "Confirma que desea actualizar el Comprobante de pago?",
+                "Actualizar Comprobante", JOptionPane.YES_NO_OPTION);
+        if (opc == 0) {
+            txtcomprobante.setText("");
+            btnarchivo.setEnabled(true);
+            btncargarcp.setVisible(false);
+            btneliminarcp.setVisible(false);
+            btnmodificarcp.setVisible(false);
+            btnaceptarcp.setVisible(true);
+            btncancelarcp.setVisible(true);
+        }
+    }//GEN-LAST:event_btnmodificarcpActionPerformed
+
+    private void btncancelarcpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarcpActionPerformed
+        estado_pago_factura();
+    }//GEN-LAST:event_btncancelarcpActionPerformed
+
+    private void btnaceptarcpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaceptarcpActionPerformed
+        int id_tipo_doc = 17;
+        String ruta_ant = DC.ubicacion_documento("Comprobante de Pago", Integer.parseInt(lblid.getText()));
+        String ruta_nueva = txtcomprobante.getText();
+        if (!ruta_nueva.isEmpty()) {
+            MD.actualizar_documento(ruta_nueva, ruta_ant, "Comprobante de Pago", id_tipo_doc, Integer.parseInt(lblid.getText()));
+            estado_pago_factura();
+        } else {
+            JOptionPane.showMessageDialog(Principal.Escritorio, "Por favor seleccionar el nuevo Comprobante de Pago.");
+        }
+    }//GEN-LAST:event_btnaceptarcpActionPerformed
+
+    private void btnvercpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvercpActionPerformed
+        int id_factura = Integer.parseInt(lblid.getText());
+        DC.ver_documento("Comprobante de Pago", id_factura);
+    }//GEN-LAST:event_btnvercpActionPerformed
+
+    private void txtdocteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdocteKeyReleased
+        documentos_tesoreria(3);
+    }//GEN-LAST:event_txtdocteKeyReleased
+
+    private void btnverteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverteActionPerformed
+        documentos_tesoreria(2);
+    }//GEN-LAST:event_btnverteActionPerformed
+
+    private void btnokteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnokteActionPerformed
+        documentos_tesoreria(1);
+    }//GEN-LAST:event_btnokteActionPerformed
+
+    private void jtdocsTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtdocsTMouseClicked
+        int column = jtdocsT.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / jtdocsT.getRowHeight();
+        int id_factura = Integer.parseInt(lblid.getText());
+        if (row < jtdocsT.getRowCount() && row >= 0 && column < jtdocsT.getColumnCount() && column >= 0) {
+            Object value = jtdocsT.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+                String doc = jtdocsT.getValueAt(row, 0).toString();
+                String tipo_doc;
+                switch (boton.getName()) {
+                    case "ver":
+                        if (doc.equals("TV")) {
+                            DC.ver_documento("Transferencia Virtual", id_factura);
+                        } else {
+                            DC.ver_documento("Comprobante de Egreso", id_factura);
+                        }
+                        break;
+                    case "borrar":
+                        int id_tipo_doc = TDC.id_tipo_doc_pref(doc);
+                        int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "Confirma que desea eliminar el documento?",
+                                "Eliminar " + jtdocsT.getValueAt(row, 0).toString(), JOptionPane.YES_NO_OPTION);
+                        if (opc == 0) {
+                            if (doc.equals("TV")) {
+                                tipo_doc = "Transferencia Virtual";
+                            } else {
+                                tipo_doc = "Comprobante de Egreso";
+                            }
+                            MD.eliminar_documento(DC.ubicacion_documento(tipo_doc, id_factura));
+                            if (DC.eliminar_documento(id_tipo_doc, id_factura)) {
+                                LT.docs_tesoreria(jtdocsT, id_factura);
+                            } else {
+                                System.out.println("El documento no pudo ser borrado");
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jtdocsTMouseClicked
 
     public void llenar_campos(String no_factura, String proveedor, String empresa, String area, String estado) {
         Factura F = FC.buscar(no_factura, proveedor, empresa);
@@ -2195,7 +2409,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     public void enviar_a_revision() {
         String no_factura = lblnfact.getText();
         int id_usuario = UC.id_usuario(Principal.lbluser.getText());
-        int usuario_reviza = UC.id_usuario(cmbRcont.getSelectedItem().toString());
+        int usuario_reviza = UC.id_usuario_rev(cmbRcont.getSelectedItem().toString());
         int id_proveedor = PC.id_proveedor(lblproveedor.getText());
         int id_empresa = EMPC.id_empresa(lblempresa.getText());
         int id_factura = Integer.parseInt(lblid.getText());
@@ -2225,6 +2439,18 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             this.doDefaultCloseAction();
         } else {
             NS.notificaciones("Revisión Factura", "La Factura " + lblnfact.getText() + " no se envio a Tesoreria.", "error");
+        }
+    }
+
+    public void programar_factura() {
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha_prog = formatoDeFecha.format(jdcprogramar.getDate());
+        int id_usuario = UC.id_usuario(Principal.lbluser.getText());
+        int id_factura = Integer.parseInt(lblid.getText());
+        if (ProgC.crear_programacion(id_factura, id_usuario, fecha_prog)) {
+            System.out.println("Creada la Programacion");
+        } else {
+            System.out.println("error");
         }
     }
 
@@ -2276,6 +2502,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
 
     public void render() {
         R.cmbcentrado(cmbdocCOMP);
+        R.jdccentrado(jdcprogramar);
 
         cmbRcont.removeAllItems();
         cmbRcont.addItem("---");
@@ -2315,6 +2542,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
 
     public void componentes_visibles(String area, String estado) {
         String usuarioapr = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
+        int id_factura = Integer.parseInt(lblid.getText());
         switch (area) {
             case "Administrativo":
                 Tabpane.remove(panelcontabilidad);
@@ -2392,9 +2620,24 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 lblnombreu.setVisible(false);
                 jcbeliminar.setVisible(false);
                 btneliminar.setVisible(false);
+                facturas_anticipadas(2);
                 btnok.setText("Enviar a Tesoreria");
                 break;
             case "Tesoreria":
+                Tabpane.remove(panelgestion);
+                Tabpane.remove(panelcontabilidad);
+                lblcoment3.setEnabled(false);
+                tacomentario3.setEnabled(false);
+                btnaprobar.setVisible(false);
+                lblapr.setVisible(false);
+                lblnombreu.setText("");
+                lblnombreu.setVisible(false);
+                jcbeliminar.setVisible(false);
+                btneliminar.setVisible(false);
+                facturas_anticipadas(2);
+                estado_pago_factura();
+                LT.docs_tesoreria(jtdocsT, id_factura);
+                btnok.setText("Confirmar Pago");
                 break;
         }
     }
@@ -2473,7 +2716,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                         lblant.setText("");
                         lblant.setBounds(310, 480, 270, 26);
                         jsant_pre.setVisible(false);
-//                        btnantupt.setVisible(false);
                         break;
                 }
                 break;
@@ -2563,10 +2805,6 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "¿Desea Actualizar el Documento", "Actualizar", JOptionPane.YES_NO_OPTION);
         if (opc == 0) {
             String nit = lblnit.getText();
-            String no_factura = lblnfact.getText();
-            String proveedor = lblproveedor.getText();
-            String empresa = lblempresa.getText();
-            int id_proveedor = PC.id_proveedor(proveedor);
             int id_empresa = EMPC.id_empresa(lblempresa.getText());
             String ubsuno = suno.ubicacion_documento(nit, id_empresa, tipo_doc);
             suno.eliminar_suno(nit, id_empresa, tipo_doc);
@@ -2651,7 +2889,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     public void buscar_docs() {
         int idfact = Integer.parseInt(lblid.getText());
         for (int i = 0; i <= 12; i++) {
@@ -2734,13 +2972,119 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 12:
-                    if (DC.existe_documento("Transferencia Virtual", idfact)) {
+                    if (DC.existe_documento("Soporte Anticipo", idfact)) {
                         btnTVdoc.setEnabled(true);
                     } else {
                         btnTVdoc.setEnabled(false);
                     }
                     break;
             }
+        }
+    }
+
+    public void estado_pago_factura() {
+        try {
+            SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
+            int id_factura = Integer.parseInt(lblid.getText());
+            String fecha_prog = ProgC.fecha_programada(id_factura);
+            if (DC.existe_documento("Comprobante de Pago", id_factura)) {
+                String ruta_doc = DC.ubicacion_documento("Comprobante de Pago", id_factura);
+                jrbOpc2.setSelected(true);
+                txtcomprobante.setText(ruta_doc);
+                btnarchivo.setEnabled(false);
+                btncargarcp.setEnabled(false);
+                btneliminarcp.setEnabled(true);
+                btnmodificarcp.setEnabled(true);
+                btncargarcp.setVisible(true);
+                btneliminarcp.setVisible(true);
+                btnmodificarcp.setVisible(true);
+                btnvercp.setEnabled(true);
+                btnaceptarcp.setVisible(false);
+                btncancelarcp.setVisible(false);
+            } else if (!fecha_prog.equals("")) {
+                jrbOpc1.setSelected(true);
+                txtcomprobante.setText("");
+                btnarchivo.setEnabled(false);
+                btncargarcp.setEnabled(false);
+                btneliminarcp.setEnabled(false);
+                btnmodificarcp.setEnabled(false);
+                btncargarcp.setVisible(true);
+                btneliminarcp.setVisible(true);
+                btnmodificarcp.setVisible(true);
+                btnvercp.setEnabled(false);
+                btnaceptarcp.setVisible(false);
+                btncancelarcp.setVisible(false);
+                jdcprogramar.setEnabled(true);
+                jdcprogramar.setDate(formatoDeFecha.parse(fecha_prog));
+            } else {
+                jrbOpc1.setSelected(false);
+                jdcprogramar.setEnabled(false);
+                jdcprogramar.setDate(null);
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(Gestionar_Factura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void documentos_tesoreria(int procedimiento) {
+        int id_factura, id_proveedor, id_empresa, id_tipo_doc;
+        String nit, cons, tipo_doc, ruta_doc, ruta_nueva;
+        String proveedor = lblproveedor.getText();
+        String empresa = lblempresa.getText();
+        id_factura = Integer.parseInt(lblid.getText());
+        id_proveedor = PC.id_proveedor(proveedor);
+        id_empresa = EMPC.id_empresa(empresa);
+        if (!txtdocte.getText().equals("")) {
+            cons = String.format("%06d", Integer.parseInt(txtdocte.getText()));
+        } else {
+            cons = "";
+        }
+        nit = lblnit.getText();
+        String no_factura = lblnfact.getText();
+        id_tipo_doc = TDC.id_tipo_doc_pref(cmbdocte.getSelectedItem().toString());
+        switch (procedimiento) {
+            case 1:
+                if (cmbdocte.getSelectedItem().toString().equals("TV")) {
+                    tipo_doc = "Transferencia Virtual";
+                } else {
+                    tipo_doc = "Comprobante de Egreso";
+                }
+                id_tipo_doc = TDC.id_tipo_doc(tipo_doc);
+                ruta_doc = suno.ubicacion_documento(nit, id_empresa, id_tipo_doc);
+                ruta_nueva = DC.ubicacion_documento("Factura", id_factura);
+                if (suno.existe_documento_suno(nit, id_empresa, id_tipo_doc, cons)) {
+                    MD.Cargar_Documento(no_factura, proveedor, empresa, tipo_doc, ruta_doc, id_tipo_doc, cons, id_proveedor, id_empresa);
+                    LT.docs_tesoreria(jtdocsT, id_factura);
+                    cmbdocte.setSelectedIndex(0);
+                    txtdocte.setText("");
+                    btnverte.setEnabled(false);
+                    btnokte.setEnabled(false);
+                } else {
+                    System.err.println("El documento no se cargara a la factura");
+                }
+                break;
+            case 2:
+                String ubicacion;
+                nit = PC.nit_proveedor(lblproveedor.getText());
+                ubicacion = suno.ubicacion_documento(nit, id_empresa, id_tipo_doc);
+                suno.ver_documento(ubicacion);
+                break;
+            case 3:
+                if (!txtdocte.getText().equals("")) {
+                    String consecutivo;
+                    boolean existe;
+                    nit = PC.nit_proveedor(lblproveedor.getText());
+                    consecutivo = txtdocte.getText();
+                    existe = suno.existe_documento_suno(nit, id_empresa, id_tipo_doc, consecutivo);
+                    if (existe) {
+                        btnokte.setEnabled(true);
+                        btnverte.setEnabled(true);
+                    } else {
+                        btnokte.setEnabled(false);
+                        btnverte.setEnabled(false);
+                    }
+                }
+                break;
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -35,4 +35,21 @@ public class Programacion {
     public void setFecha_prog(String fecha_prog) {
         this.fecha_prog = fecha_prog;
     }
+
+    public Programacion() {
+    }
+
+    public Programacion(int id_factura, int id_usuario, int activo, String fecha_prog) {
+        this.id_factura = id_factura;
+        this.id_usuario = id_usuario;
+        this.activo = activo;
+        this.fecha_prog = fecha_prog;
+    }
+
+    public Programacion(int id_factura, int id_usuario, String fecha_prog) {
+        this.id_factura = id_factura;
+        this.id_usuario = id_usuario;
+        this.fecha_prog = fecha_prog;
+    }
+    
 }

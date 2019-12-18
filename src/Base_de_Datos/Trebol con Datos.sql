@@ -257,10 +257,10 @@ CREATE TABLE `trebol_documentos` (
   `ubicacion` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_tipo_doc`,`id_factura`),
   KEY `id_factura` (`id_factura`),
-  CONSTRAINT `trebol_documentos_ibfk_1` FOREIGN KEY (`id_tipo_doc`) REFERENCES `trebol_tipo_documento` (`id`),
-  CONSTRAINT `trebol_documentos_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `trebol_facturas` (`id`)
+  KEY `id_tipo_doc` (`id_tipo_doc`),
+  CONSTRAINT `trebol_documentos_ibfk_1` FOREIGN KEY (`id_factura`) REFERENCES `trebol_facturas` (`id`),
+  CONSTRAINT `trebol_documentos_ibfk_2` FOREIGN KEY (`id_tipo_doc`) REFERENCES `trebol_tipo_documento` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `trebol_documentos` */
@@ -622,13 +622,9 @@ CREATE TABLE `trebol_sistema_uno` (
   KEY `id_tipo_doc` (`id_tipo_doc`),
   CONSTRAINT `trebol_sistema_uno_ibfk_1` FOREIGN KEY (`id_empresa`) REFERENCES `trebol_empresa` (`id`),
   CONSTRAINT `trebol_sistema_uno_ibfk_2` FOREIGN KEY (`id_tipo_doc`) REFERENCES `trebol_tipo_documento` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `trebol_sistema_uno` */
-
-insert  into `trebol_sistema_uno`(`id`,`nit`,`no_factura`,`valor`,`consecutivo`,`id_empresa`,`id_tipo_doc`,`ubicacion`,`creacion`,`modificacion`) values 
-(1,'900092385','137-5348075',20019.00,'000062',2,3,'//10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/SUNO/Colvan/SOPORTE DE CAUSACION/SC-000062.pdf','2019-12-13 10:41:31','2019-12-13 10:41:31'),
-(2,'900092385',NULL,20019.00,'000038',2,5,'//10.0.2.6/Aviomar-R/APLICACIONES/Treból_V2/SUNO/Colvan/TRANSFERENCIA VIRTUAL/TV-000038.pdf','2019-12-13 10:41:31','2019-12-13 10:41:31');
 
 /*Table structure for table `trebol_tiempos` */
 
@@ -664,7 +660,7 @@ CREATE TABLE `trebol_tipo_documento` (
   `creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `trebol_tipo_documento` */
 
@@ -684,7 +680,8 @@ insert  into `trebol_tipo_documento`(`id`,`tipo_doc`,`nombre`,`creacion`,`modifi
 (13,'ES','Recepción de Servicios','2019-12-09 09:40:02','2019-12-09 09:40:02'),
 (14,'EA','Recepción por Compras','2019-12-09 09:40:08','2019-12-09 09:40:08'),
 (15,'NC','Nota Interna','2019-12-12 10:43:44','2019-12-12 10:43:44'),
-(16,'SA','Soporte Anticipo','2019-12-17 09:13:04','2019-12-17 09:13:04');
+(16,'SA','Soporte Anticipo','2019-12-17 09:13:04','2019-12-17 09:13:04'),
+(17,'CP','Comprobante de Pago','2019-12-17 16:00:38','2019-12-17 16:00:38');
 
 /*Table structure for table `trebol_tipo_factura` */
 

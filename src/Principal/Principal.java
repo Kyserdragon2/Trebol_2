@@ -55,6 +55,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         h1 = new Thread(this);                                                      //Crea una nueva estancia de la variable h1
         h1.start();
         R.Revision(cmbfunrev);
+        R.empresa(cmbempresa);
         btnactualizar.setVisible(false);
         jrbPropias.setSelected(true);
         render();
@@ -1065,26 +1066,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                 case "Capital Humano":
                                 case "Compras":
                                 case "Tecnología":
-                                    gestionar_factura(no_factura, proveedor, empresa, estado);
-                                    break;
                                 case "Recepción":
-                                    modificacion_factura(no_factura, proveedor, empresa, estado);
-                                    break;
                                 case "Contabilidad":
-                                    gestionar_factura(no_factura, proveedor, empresa, estado);
-                                    break;
                                 case "Contabilidad_Rev":
+                                case "Tesoreria":
                                     gestionar_factura(no_factura, proveedor, empresa, estado);
-                                    break;
-                                default:
                                     break;
                             }
-
-//                            if ((asignado.equals("Recepción") || asignado.equals("Correspondencia"))) {
-//                                modificacion_factura(no_factura, proveedor, empresa, estado);
-//                            } else {
-//                                gestionar_factura(no_factura, proveedor, empresa, estado);
-//                            }
                         } else {
                             modificacion_factura(no_factura, proveedor, empresa, estado);
                         }
@@ -1224,6 +1212,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
+                cmbempresa.setEnabled(true);
+                cmbempresa.setSelectedIndex(0);
                 break;
             case "Capital Humano":
             case "Compras":
@@ -1232,16 +1222,22 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 cmbasignado.setEnabled(false);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
+                cmbempresa.setEnabled(true);
+                cmbempresa.setSelectedIndex(0);
                 break;
             case "Recepción":
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbasignado.setEnabled(false);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
+                cmbempresa.setEnabled(true);
+                cmbempresa.setSelectedIndex(0);
                 break;
             case "Contabilidad":
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbasignado.setEnabled(false);
+                cmbempresa.setSelectedItem(UC.empresa_usuario(lbluser.getText()));
+                cmbempresa.setEnabled(false);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
                 break;
@@ -1251,6 +1247,14 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 }
                 cmbasignado.setSelectedItem(UC.area_usuario(usuario));
                 cmbasignado.setEnabled(true);
+                break;
+            case "Tesoreria":
+                cmbasignado.setSelectedItem(UC.area_usuario(usuario));
+                cmbasignado.setEnabled(false);
+                cmbfunrev.setSelectedIndex(0);
+                cmbfunrev.setEnabled(false);
+                cmbempresa.setEnabled(true);
+                cmbempresa.setSelectedIndex(0);
                 break;
         }
     }
@@ -1327,7 +1331,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         } else {
             CA.llenar_cmb_tabla(cmbasignado, jtfacturas, 7);
             CA.llenar_cmb_tabla(cmbestado, jtfacturas, 8);
-            CA.llenar_cmb_tabla(cmbempresa, jtfacturas, 9);
+//            CA.llenar_cmb_tabla(cmbempresa, jtfacturas, 9);
             cmbempresa.setSelectedItem(emp);
             cmbestado.setSelectedItem(est);
         }
@@ -1348,7 +1352,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             cmbasignado.setSelectedItem(asg);
         } else {
             CA.llenar_cmb_tabla(cmbestado, jtfacturas, 8);
-            CA.llenar_cmb_tabla(cmbempresa, jtfacturas, 9);
+//            CA.llenar_cmb_tabla(cmbempresa, jtfacturas, 9);
             CA.llenar_cmb_tabla(cmbproveedor, jtfacturas, 11);
             cmbproveedor.setSelectedItem(rs);
             cmbempresa.setSelectedItem(emp);
@@ -1358,7 +1362,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             CA.llenar_cmb_tabla(cmbestado, jtfacturas, 8);
             cmbestado.setSelectedItem(est);
         } else {
-            CA.llenar_cmb_tabla(cmbempresa, jtfacturas, 9);
+//            CA.llenar_cmb_tabla(cmbempresa, jtfacturas, 9);
             CA.llenar_cmb_tabla(cmbproveedor, jtfacturas, 11);
             cmbproveedor.setSelectedItem(rs);
             cmbempresa.setSelectedItem(emp);
