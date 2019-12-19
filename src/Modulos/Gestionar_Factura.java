@@ -205,6 +205,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btneliminar = new javax.swing.JButton();
         lblnombreu = new javax.swing.JLabel();
         lblant = new javax.swing.JLabel();
+        btncerrar = new javax.swing.JButton();
 
         setBorder(null);
         setClosable(true);
@@ -230,6 +231,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btnrechazar.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnrechazar.setFocusPainted(false);
         btnrechazar.setRequestFocusEnabled(false);
+        btnrechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnrechazarActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnrechazar);
         btnrechazar.setBounds(20, 480, 83, 26);
 
@@ -1849,6 +1855,15 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jPanel6.add(lblant);
         lblant.setBounds(390, 480, 130, 26);
 
+        btncerrar.setText("Cerrar");
+        btncerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncerrarActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btncerrar);
+        btncerrar.setBounds(630, 230, 73, 23);
+
         getContentPane().add(jPanel6, "card2");
 
         pack();
@@ -2320,6 +2335,28 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         retirar_factura();
     }//GEN-LAST:event_btneliminarActionPerformed
 
+    private void btnrechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrechazarActionPerformed
+        String no_factura, proveedor, empresa;
+        int id_factura, id_proveedor, id_empresa, id_usuario, id_estado;
+        no_factura = lblnfact.getText();
+        proveedor = lblproveedor.getText();
+        empresa = lblempresa.getText();
+        id_factura = Integer.parseInt(lblid.getText());
+        id_proveedor = PC.id_proveedor(proveedor);
+        id_empresa = EMPC.id_empresa(empresa);
+        id_usuario = UC.id_usuario(Principal.lbluser.getText());
+        id_estado = FC.id_estado_factura(id_factura);
+        Rechazo_Factura RF = new Rechazo_Factura();
+        Principal.Escritorio.add(RF);
+        RF.Rechazo_Factura(id_usuario, id_factura, id_estado, 11, id_proveedor, id_empresa, no_factura);
+        RF.setBounds(320, 175, 580, 265);
+        RF.setVisible(true);
+    }//GEN-LAST:event_btnrechazarActionPerformed
+
+    private void btncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrarActionPerformed
+        this.doDefaultCloseAction();
+    }//GEN-LAST:event_btncerrarActionPerformed
+
     public void llenar_campos(String no_factura, String proveedor, String empresa, String area, String estado) {
         Factura F = FC.buscar(no_factura, proveedor, empresa);
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -2539,7 +2576,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
 
     public void registro_procedimiento(String no_factura, int id_factura, int id_usuario, int estado_prev, int estado_post, String comentario,
             int id_area_dest, int id_empresa) {
-        String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), 8);
+        String usuario = UC.nombre_rev(Principal.lbluser.getText());
         if (!comentario.equals("")) {
             CC.crear_comentario(0, id_usuario, id_factura, estado_prev, comentario);
             int com = CC.id_comentario(id_factura, id_usuario, estado_prev, comentario);
@@ -3210,6 +3247,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JButton btncancelartd;
     private javax.swing.JButton btncargar;
     private javax.swing.JButton btncargarcp;
+    public static javax.swing.JButton btncerrar;
     private javax.swing.JButton btncreartd;
     private javax.swing.JButton btnctdoc;
     private javax.swing.JButton btndelAnt;

@@ -727,6 +727,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnconv.setEnabled(false);
         btnconv.setFocusPainted(false);
         btnconv.setPreferredSize(new java.awt.Dimension(100, 52));
+        btnconv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconvActionPerformed(evt);
+            }
+        });
         jpmenu.add(btnconv);
         btnconv.setBounds(12, 450, 110, 40);
 
@@ -995,6 +1000,10 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void cmbproveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbproveedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbproveedorActionPerformed
+
+    private void btnconvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnconvActionPerformed
 
     /**
      * @param args the command line arguments

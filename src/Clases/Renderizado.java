@@ -121,9 +121,9 @@ public class Renderizado {
             Logger.getLogger(Renderizado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void Revision(JComboBox cmb) {
-        try (Connection cn = cc.Conexion(); 
+        try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
                 ResultSet rs = st.executeQuery("SELECT CONCAT(nombres,' ',apellidos) AS 'nombre' "
                         + "FROM trebol_usuario\n"
@@ -137,4 +137,35 @@ public class Renderizado {
             Logger.getLogger(Renderizado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void motivos_rechazo(JComboBox cmb, String proc) {
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery("SELECT motivo\n"
+                        + "FROM trebol_motivos_rechazo\n"
+                        + "WHERE id_proceso IN (" + proc + ")"
+                        + "ORDER BY motivo ASC")) {
+            while (rs.next()) {
+                cmb.addItem(rs.getString("motivo"));
+            }
+            cmb.addItem("Otro...");
+        } catch (SQLException ex) {
+            Logger.getLogger(Renderizado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void proceso_rechazo(JComboBox cmb, String proc) {
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery("SELECT proceso\n"
+                        + "FROM trebol_procesos\n"
+                        + "WHERE id IN (" + proc + ");")) {
+            while (rs.next()) {
+                cmb.addItem(rs.getString("proceso"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Renderizado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

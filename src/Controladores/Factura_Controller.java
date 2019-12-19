@@ -257,6 +257,23 @@ public class Factura_Controller {
         return id;
     }
 
+    public int id_estado_factura(int id_factura) {
+        int id_est = 0;
+        String sql = "SELECT DISTINCT id_estado\n"
+                + "FROM trebol_facturas\n"
+                + "WHERE id =" + id_factura + ";";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            while (datos.next()) {
+                id_est = datos.getInt("id_estado");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            id_est = 0;
+        }
+        return id_est;
+    }
+
     public boolean factura_aprobada(int id_factura) {
         Factura F = new Factura(id_factura);
         String sql;

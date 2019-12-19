@@ -34,5 +34,9 @@ public class Revision {
         this.id_factura = id_factura;
         this.id_usuario = id_usuario;
     }
+
+    public Revision(int id_factura) {
+        this.id_factura = id_factura;
+    }
     
 }

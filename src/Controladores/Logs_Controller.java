@@ -2,7 +2,10 @@ package Controladores;
 
 import Clases.Conexion;
 import Objetos.Log;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Logs_Controller {
 
@@ -23,5 +26,24 @@ public class Logs_Controller {
         } catch (SQLException ex) {
             return false;
         }
+    }
+
+    public int area_creacion_fact(int id_factura, int id_estado) {
+        int area = 0;
+        String sql = "SELECT tu.`id_area`\n"
+                + "FROM trebol_logs AS tl\n"
+                + "JOIN trebol_usuario AS tu ON tl.`id_usuario`=tu.`id`\n"
+                + "WHERE tl.`id_factura` = " + id_factura + "\n"
+                + "AND tl.`id_estado` = " + id_estado + ";";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            while (datos.next()) {
+                area = datos.getInt("tu.id_area");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Logs_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            area = 0;
+        }
+        return area;
     }
 }

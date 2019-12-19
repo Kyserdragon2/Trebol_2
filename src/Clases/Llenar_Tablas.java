@@ -231,7 +231,7 @@ public class Llenar_Tablas {
         String estados;
         switch (area) {
             case 1:
-                estados = "2,8,9,4,13";
+                estados = "2,4,5,8,9,10,11,13";
                 break;
             case 2:
                 estados = "2,3,4,5,6,8,9,10,11,13";

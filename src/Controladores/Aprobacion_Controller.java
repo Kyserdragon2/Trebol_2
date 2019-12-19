@@ -38,6 +38,20 @@ public class Aprobacion_Controller {
         }
     }
 
+    public boolean eliminar_aprobacion(int id_factura, int id_area) {
+        Aprobacion A = new Aprobacion(id_factura, id_area);
+        String sql;
+        sql = "DELETE FROM trebol_aprobaciones\n"
+                + "WHERE id_factura=" + A.getId_factura() + "\n"
+                + "AND id_area=" + A.getId_area() + ";";
+        try {
+            return cc.sentenciaSQL(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
     public String aprobado_por(int id_factura, int id_area) {
         String usuario = "";
         String idc = "SELECT CONCAT(tu.`nombres`,' ',tu.`apellidos`) AS 'Nombre'\n"

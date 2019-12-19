@@ -38,4 +38,17 @@ public class Revision_Controller {
         }
     }
 
+    public boolean eliminar_revision(int id_factura) {
+        Revision R = new Revision(id_factura);
+        String sql;
+        sql = "UPDATE trebol_revisiones\n"
+                + "WHERE id_factura=" + R.getId_factura() + ";";
+        try {
+            return cc.sentenciaSQL(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
 }
