@@ -42,6 +42,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     suno_controller suno = new suno_controller();
     Revision_Controller RC = new Revision_Controller();
     Programacion_Controller ProgC = new Programacion_Controller();
+    Firmas signature = new Firmas();
 
     public Gestionar_Factura() {
         initComponents();
@@ -2353,11 +2354,15 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void aprobar_factura(int aprob) {
+        Date fecha = new Date();
         int id_usuario = UC.id_usuario(Principal.lbluser.getText());
         int id_area_usuario = UC.id_area_usuario(Principal.lbluser.getText());
         int id_factura = Integer.parseInt(lblid.getText());
+        SimpleDateFormat fechaactual = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat horaactual = new SimpleDateFormat("HH:mm:ss");
         if (aprob == 1) {
             if (ApC.aprobar(id_factura, id_area_usuario, id_usuario)) {
+                signature.firmar(DC.ubicacion_documento("Factura", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
                 String usuario = ApC.aprobado_por(Integer.parseInt(lblid.getText()), id_area_usuario);
                 lblnombreu.setText(usuario);
                 btnaprobar.setVisible(false);
@@ -2409,12 +2414,16 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void enviar_a_contabilidad() {
+        Date fecha = new Date();
         String no_factura = lblnfact.getText();
         int id_usuario = UC.id_usuario(Principal.lbluser.getText());
         int id_proveedor = PC.id_proveedor(lblproveedor.getText());
         int id_empresa = EMPC.id_empresa(lblempresa.getText());
         int id_factura = Integer.parseInt(lblid.getText());
+        SimpleDateFormat fechaactual = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat horaactual = new SimpleDateFormat("HH:mm:ss");
         if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 4, 4)) {
+            signature.firmar(DC.ubicacion_documento("Factura", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
             procedimiento_anticipo(id_factura);
             aprobar_factura(2);
             registro_procedimiento(no_factura, id_factura, id_usuario, 2, 4, tacomentario.getText(), 4, id_empresa);
