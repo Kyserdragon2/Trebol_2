@@ -87,7 +87,7 @@ public class Envio_Correos {
                 colorbg = "#a04b20";
                 colorfr = "white";
                 break;
-            case "Factura Corregida para Contabilizar":
+            case "Factura Corregida":
                 colorbg = "#ffcc33";
                 colorfr = "black";
                 break;

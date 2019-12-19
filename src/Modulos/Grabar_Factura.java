@@ -39,6 +39,8 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     Llenar_Tablas LT = new Llenar_Tablas();
     TipoDoc_Controller TDC = new TipoDoc_Controller();
     Aprobacion_Controller ApC = new Aprobacion_Controller();
+    Estado_Controller EstC = new Estado_Controller();
+    Revision_Controller RC = new Revision_Controller();
 
     public Grabar_Factura() {
         initComponents();
@@ -1027,9 +1029,10 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                 if (FC.modificar_factura(id, id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, no_factura, moneda, fecha_generada,
                         fecha_venc, no_radicado, valor)) {
                     MD.modificar_documento(no_factura, proveedor, empresa, txtruta.getText(), id_factura, id_proveedor, id_empresa);
-                    NS.notificaciones("Modificación de Factura", "La factura " + no_factura + " ha sido modificada con exito.", "correcto");
-                    Principal.btnactualizar.doClick();
-                    this.doDefaultCloseAction();
+                    corregir_factura("Correción de la Factura");
+//                    NS.notificaciones("Modificación de Factura", "La factura " + no_factura + " ha sido modificada con exito.", "correcto");
+//                    Principal.btnactualizar.doClick();
+//                    this.doDefaultCloseAction();
                 } else {
                     NS.notificaciones("Modificación de Factura", "La factura " + no_factura + " no ha poido ser modificada.", "error");
                 }
@@ -1050,10 +1053,79 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         }
     }
 
+    public void corregir_factura(String comentario) {
+        String no_factura;
+        if (txtpref.getText().isEmpty()) {
+            no_factura = txtnf.getText();
+        } else {
+            no_factura = txtpref.getText() + '-' + txtnf.getText();
+        }
+        int id_usuario = UC.id_usuario(Principal.lbluser.getText());
+        int id_factura = Integer.parseInt(lblid.getText());
+        int id_usuario_rechazo = UC.id_usuario_rechazo(id_factura);
+        int id_proveedor = PC.id_proveedor(cmbproveedor.getSelectedItem().toString());
+        int id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
+        int id_area_rechazo = AC.id_area_rechazo(id_usuario_rechazo);
+        int estado_prev = EstC.estado_prev(id_usuario_rechazo);
+        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, estado_prev, id_area_rechazo)) {
+            registro_procedimiento_correcion(no_factura, id_factura, id_usuario, 11, estado_prev, comentario, id_area_rechazo, id_empresa, "Factura Corregida");
+            switch (id_area_rechazo) {
+                case 1:
+                    ApC.crear_aprobacion(id_factura, 1);
+                    break;
+                case 2:
+                case 3:
+                case 8:
+                    ApC.crear_aprobacion(id_factura, id_area_rechazo);
+                    break;
+                case 5:
+                    RC.crear_revision(id_factura, id_usuario_rechazo);
+                    break;
+
+            }
+            Principal.btnactualizar.doClick();
+            NS.notificaciones("Corrención de la Factura", "Se corrige la factura  " + no_factura + ".", "correcto");
+            this.doDefaultCloseAction();
+        } else {
+            NS.notificaciones("Corrención de la Factura", "La Factura " + no_factura + " no ha podido ser corregida.", "error");
+        }
+    }
+
+    public void registro_procedimiento_correcion(String no_factura, int id_factura, int id_usuario, int estado_prev, int estado_post, String comentario,
+            int id_area_dest, int id_empresa, String asunto) {
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
+        String usuario = UC.nombre_rev(Principal.lbluser.getText());
+        if (!comentario.equals("")) {
+            CC.crear_comentario(0, id_usuario, id_factura, estado_post, comentario);
+            int com = CC.id_comentario(id_factura, id_usuario, estado_post, comentario);
+            LC.crear_log(id_usuario, id_factura, com, estado_post);
+        } else {
+            LC.crear_log(id_usuario, id_factura, 0, 6);
+        }
+        TC.crear_tiempo(id_usuario, id_factura, estado_prev, 6);
+        TC.crear_tiempo(id_usuario, id_factura, 6, estado_post);
+        String fecha_rec = formatoDeFecha.format(new Date());
+        String fecha_generada = formatoDeFecha.format(jdcfechaf.getDate());
+        String fecha_venc;
+        if (jdcfechav.getDate() == null) {
+            fecha_venc = "";
+        } else {
+            fecha_venc = formatoDeFecha.format(jdcfechav.getDate());
+        }
+        if (id_area_dest == 4) {
+            CorC.crear_correo(id_factura, UC.correos(id_area_dest, id_empresa), asunto, EC.plantilla_correo(asunto,
+                    no_factura, lblempresa.getText(), lblnit.getText(), txtccorresp.getText(), lblproveedor.getText(),
+                    lblvalor.getText(), fecha_rec, fecha_generada, fecha_venc, usuario, ""));
+        } else {
+            CorC.crear_correo(id_factura, UC.correos(id_area_dest, 0), asunto, EC.plantilla_correo(asunto,
+                    no_factura, lblempresa.getText(), lblnit.getText(), txtccorresp.getText(), lblproveedor.getText(),
+                    lblvalor.getText(), fecha_rec, fecha_generada, fecha_venc, usuario, ""));
+        }
+    }
+
     public void llenar_campos(String no_factura, String proveedor, String empresa) {
         Factura F = FC.buscar(no_factura, proveedor, empresa);
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
-//        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
         limpiar();
         if (F != null) {
             try {

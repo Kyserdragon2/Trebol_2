@@ -2,6 +2,7 @@ package Controladores;
 
 import Clases.Conexion;
 import Objetos.Usuario_obj;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -375,5 +376,26 @@ public class Usuario_Controller {
             }
         }
         return sesion;
+    }
+
+    public int id_usuario_rechazo(int id_factura) {
+        int aprueba = 0;
+        String sql = "SELECT tt.id_usuario\n"
+                + "FROM trebol_tiempos AS tt\n"
+                + "JOIN trebol_usuario AS tu ON tt.`id_usuario`=tu.`id`\n"
+                + "WHERE tt.`id_estado_post`=11\n"
+                + "AND tt.`id_factura` = "+id_factura+"\n"
+                + "ORDER BY tt.creacion DESC\n"
+                + "LIMIT 1;";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            while (datos.next()) {
+                aprueba = datos.getInt("tt.id_usuario");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            aprueba = 0;
+        }
+        return aprueba;
     }
 }

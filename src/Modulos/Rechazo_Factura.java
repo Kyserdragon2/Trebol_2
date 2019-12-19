@@ -209,14 +209,8 @@ public class Rechazo_Factura extends javax.swing.JInternalFrame {
         int id_area = UC.id_area_usuario(Principal.lbluser.getText());
         switch (id_area) {
             case 1:
-                ApC.eliminar_aprobacion(id_factura, id_area);
-                break;
             case 2:
-                ApC.eliminar_aprobacion(id_factura, id_area);
-                break;
             case 3:
-                ApC.eliminar_aprobacion(id_factura, id_area);
-                break;
             case 8:
                 ApC.eliminar_aprobacion(id_factura, id_area);
                 break;

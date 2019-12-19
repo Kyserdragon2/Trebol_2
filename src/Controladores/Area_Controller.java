@@ -24,4 +24,24 @@ public class Area_Controller {
         }
         return id;
     }
+
+    public int id_area_rechazo(int id_usuario_rechazo) {
+        int id = 0;
+        String idc = "SELECT tu.id_area\n"
+                + "FROM trebol_tiempos AS tt\n"
+                + "JOIN trebol_usuario AS tu ON tt.`id_usuario`=tu.`id`\n"
+                + "WHERE tt.`id_estado_post`=11\n"
+                + "AND tt.`id_usuario` = " + id_usuario_rechazo + "\n"
+                + "ORDER BY tt.creacion DESC;";
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(idc)) {
+            if (rs.next()) {
+                id = rs.getInt("tu.id_area");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Area_Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return id;
+    }
 }
