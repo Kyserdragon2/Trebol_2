@@ -121,6 +121,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         lblrequerido8 = new javax.swing.JLabel();
         lblrequerido9 = new javax.swing.JLabel();
         lblrequerido10 = new javax.swing.JLabel();
+        lblerrorconv = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black));
@@ -817,6 +818,15 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         jpgf.add(lblrequerido10);
         lblrequerido10.setBounds(747, 220, 10, 20);
 
+        lblerrorconv.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblerrorconv.setForeground(new java.awt.Color(204, 0, 0));
+        lblerrorconv.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("MMMM");
+        lblerrorconv.setText("<html><div align='center'>El Convenio ya fue registrado para el mes de "+formatoDeFecha.format(new Date())+ "</div></html>");
+        lblerrorconv.setPreferredSize(new java.awt.Dimension(55, 26));
+        jpgf.add(lblerrorconv);
+        lblerrorconv.setBounds(640, 165, 230, 50);
+
         panelcf.add(jpgf);
         jpgf.setBounds(10, 10, 920, 540);
 
@@ -947,7 +957,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     public void accion(String accion) {
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
         String no_factura, moneda, fecha_generada, fecha_venc, no_radicado, ruta_origen, proveedor, empresa, no_cuenta;
-        int id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa;
+        int id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, id_convenio;
         double valor;
         if (txtpref.getText().isEmpty()) {
             no_factura = txtnf.getText();
@@ -976,15 +986,16 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
             fecha_venc = formatoDeFecha.format(jdcfechav.getDate());
         }
         no_radicado = txtccorresp.getText();
-        id_proveedor = PC.id_proveedor(cmbproveedor.getSelectedItem().toString());
         id_tipo_factura = TFC.id_tipo_factura(cmbtfactura.getSelectedItem().toString());
         id_gestion = AC.id_area(cmbarea.getSelectedItem().toString());
         id_area = AC.id_area(cmbarea.getSelectedItem().toString());
-        id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
         ruta_origen = txtruta.getText();
         proveedor = cmbproveedor.getSelectedItem().toString();
         empresa = cmbempresa.getSelectedItem().toString();
+        id_proveedor = PC.id_proveedor(cmbproveedor.getSelectedItem().toString());
+        id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
         no_cuenta = cmbconvenio.getSelectedItem().toString();
+        id_convenio = CCon.id_convenio(no_cuenta, id_proveedor, id_empresa);
         switch (accion) {
             case "crear":
                 if (FC.crear_factura(0, id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, no_factura, moneda, fecha_generada,
@@ -1308,6 +1319,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void render() {
+        lblerrorconv.setVisible(false);
         cmbproveedor.removeAllItems();
         cmbproveedor.addItem("--Seleccione--");
         R.razon_social(cmbproveedor);
@@ -1368,6 +1380,27 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 datos_proveedor();
                 buscar_convenios();
+            }
+        });
+
+        cmbconvenio.addItemListener((ItemEvent e) -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                if (cmbconvenio.getSelectedIndex() != 0) {
+                    int id_proveedor = PC.id_proveedor(cmbproveedor.getSelectedItem().toString());
+                    int id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
+                    String no_cuenta = cmbconvenio.getSelectedItem().toString();
+                    int id_convenio = CCon.id_convenio(no_cuenta, id_proveedor, id_empresa);
+                    if (CCon.nconvenios(no_cuenta) == CCon.convenios_mes(id_convenio)) {
+//                        JOptionPane.showMessageDialog(Principal.Escritorio, "La factura no puede ser creada debido a que el convenio\n"
+//                                + "ya tiene un registro cargado este mes");
+                        lblerrorconv.setVisible(true);
+                        btncrear.setEnabled(false);
+                    } else {
+//                        JOptionPane.showMessageDialog(Principal.Escritorio, "La factura puede ser creada.");
+                        lblerrorconv.setVisible(false);
+                        btncrear.setEnabled(true);
+                    }
+                }
             }
         });
         cmbempresa.addItemListener((ItemEvent e) -> {
@@ -1554,6 +1587,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblconvenio;
     public static javax.swing.JLabel lbldocfactura;
     private javax.swing.JLabel lblempresa;
+    private javax.swing.JLabel lblerrorconv;
     private javax.swing.JLabel lblgenerada;
     public static javax.swing.JLabel lblid;
     private javax.swing.JLabel lblmoneda;

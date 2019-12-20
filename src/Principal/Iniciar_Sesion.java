@@ -45,52 +45,52 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         setTitle("Iniciar Sesion - Trébol v2.0");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImage(getIconImage());
-        setPreferredSize(new java.awt.Dimension(345, 350));
+        setPreferredSize(new java.awt.Dimension(325, 345));
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 122, 183));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel1.setDoubleBuffered(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(340, 320));
+        jPanel1.setPreferredSize(new java.awt.Dimension(320, 315));
         jPanel1.setLayout(null);
 
         jLabel2.setBackground(new java.awt.Color(239, 255, 239));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo_Empresa (Personalizado).png"))); // NOI18N
-        jLabel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black)));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo_Empresa.png"))); // NOI18N
+        jLabel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jLabel2.setOpaque(true);
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 12, 320, 150);
+        jLabel2.setBounds(10, 12, 300, 160);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black));
         jPanel2.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Usuario");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(55, 30, 70, 26);
+        jLabel3.setBounds(40, 35, 70, 26);
 
         jtxtuser.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jtxtuser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtuser.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black));
         jtxtuser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.add(jtxtuser);
-        jtxtuser.setBounds(130, 30, 160, 25);
+        jtxtuser.setBounds(115, 35, 170, 25);
 
         jLabel5.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         jLabel5.setText("Contraseña");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(25, 70, 99, 26);
+        jLabel5.setBounds(10, 70, 99, 26);
 
         jtxtpass.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jtxtpass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtpass.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black));
         jtxtpass.setNextFocusableComponent(btningreso);
         jPanel2.add(jtxtpass);
-        jtxtpass.setBounds(130, 70, 160, 25);
+        jtxtpass.setBounds(115, 70, 170, 25);
 
         jButton1.setFont(new java.awt.Font("Arial", 3, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 102, 153));
@@ -125,13 +125,13 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btningreso);
-        btningreso.setBounds(200, 110, 90, 26);
+        btningreso.setBounds(195, 110, 90, 26);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(10, 155, 320, 150);
+        jPanel2.setBounds(10, 155, 300, 150);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black));
         jPanel3.setLayout(null);
 
         btndesbloquear.setBackground(new java.awt.Color(0, 102, 153));
@@ -148,7 +148,7 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btndesbloquear);
-        btndesbloquear.setBounds(170, 110, 120, 26);
+        btndesbloquear.setBounds(165, 110, 120, 26);
 
         jtxtpass1.setBackground(new java.awt.Color(153, 153, 153));
         jtxtpass1.setFont(new java.awt.Font("Arial", 3, 13)); // NOI18N
@@ -157,18 +157,18 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         jtxtpass1.setNextFocusableComponent(btndesbloquear);
         jtxtpass1.setOpaque(false);
         jPanel3.add(jtxtpass1);
-        jtxtpass1.setBounds(130, 70, 160, 25);
+        jtxtpass1.setBounds(115, 70, 170, 25);
 
         jLabel6.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         jLabel6.setText("Contraseña");
         jPanel3.add(jLabel6);
-        jLabel6.setBounds(25, 70, 99, 26);
+        jLabel6.setBounds(10, 70, 99, 26);
 
         jLabel4.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Usuario");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(55, 30, 70, 26);
+        jLabel4.setBounds(40, 35, 70, 26);
 
         jtxtuser1.setBackground(new java.awt.Color(153, 153, 153));
         jtxtuser1.setFont(new java.awt.Font("Arial", 3, 13)); // NOI18N
@@ -177,7 +177,7 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         jtxtuser1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jtxtuser1.setOpaque(false);
         jPanel3.add(jtxtuser1);
-        jtxtuser1.setBounds(130, 30, 160, 25);
+        jtxtuser1.setBounds(115, 35, 170, 25);
 
         btncancelar.setBackground(new java.awt.Color(0, 102, 153));
         btncancelar.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
@@ -196,7 +196,7 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         btncancelar.setBounds(20, 110, 90, 26);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 155, 320, 150);
+        jPanel3.setBounds(10, 155, 300, 150);
 
         getContentPane().add(jPanel1, "card2");
 

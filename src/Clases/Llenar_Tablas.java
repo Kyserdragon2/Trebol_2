@@ -363,17 +363,17 @@ public class Llenar_Tablas {
             tabla.getColumnModel().getColumn(10).setPreferredWidth(65);
             tabla.getColumnModel().getColumn(11).setPreferredWidth(220);
 
-            tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(4).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(5).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(6).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(7).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(8).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(9).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
-            tabla.getColumnModel().getColumn(10).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 12));
+            tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(4).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(5).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(6).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(7).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(8).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 8, 12));
+            tabla.getColumnModel().getColumn(9).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(10).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
             tabla.getColumnModel().getColumn(11).setCellRenderer(ajustartabla = new Multilinea_en_Tabla(11, 12));
 
         } catch (SQLException ex) {
@@ -453,7 +453,7 @@ public class Llenar_Tablas {
             tabla.getColumnModel().getColumn(4).setPreferredWidth(390);
 
             tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
-            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 1, 14));
             tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
             tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
             tabla.getColumnModel().getColumn(4).setCellRenderer(ajustartabla = new Multilinea_en_Tabla(4, 14));

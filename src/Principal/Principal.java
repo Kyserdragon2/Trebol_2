@@ -5,6 +5,7 @@ import Modulos.*;
 import java.util.*;
 import javax.swing.*;
 import Controladores.*;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -14,6 +15,10 @@ import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import javax.swing.table.TableRowSorter;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Principal extends javax.swing.JFrame implements Runnable {
 
@@ -198,6 +203,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jpmfactura.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         abrirub.setText("Abrir Ubicación");
+        abrirub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirubActionPerformed(evt);
+            }
+        });
         jpmfactura.add(abrirub);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -520,6 +530,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jtfacturas.setFillsViewportHeight(true);
         jtfacturas.setRequestFocusEnabled(false);
         jtfacturas.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jtfacturas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtfacturasMouseReleased(evt);
+            }
+        });
         scrollfact.setViewportView(jtfacturas);
 
         Escritorio.add(scrollfact);
@@ -1005,6 +1020,30 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnconvActionPerformed
 
+    private void jtfacturasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtfacturasMouseReleased
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            int rowNumber = jtfacturas.rowAtPoint(evt.getPoint());
+            if (rowNumber >= 0 && rowNumber < jtfacturas.getRowCount()) {
+                jtfacturas.getSelectionModel().setSelectionInterval(rowNumber, rowNumber);
+                jpmfactura.show(evt.getComponent(), evt.getX(), evt.getY());
+
+            }
+        }
+    }//GEN-LAST:event_jtfacturasMouseReleased
+
+    private void abrirubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirubActionPerformed
+        int fila = jtfacturas.getSelectedRow();
+        if (fila >= 0) {
+            Path directorio = Paths.get("\\\\10.0.2.6\\Aviomar-R\\APLICACIONES\\Treból\\Facturas\\"
+                    + jtfacturas.getValueAt(jtfacturas.getSelectedRow(), 9) + "\\"
+                    + jtfacturas.getValueAt(jtfacturas.getSelectedRow(), 11) + "\\"
+                    + jtfacturas.getValueAt(jtfacturas.getSelectedRow(), 0));
+            showfolder(directorio);
+        } else {
+            JOptionPane.showMessageDialog(Principal.Escritorio, "Por favor seleccionar una factura");
+        }
+    }//GEN-LAST:event_abrirubActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1024,6 +1063,18 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 new Principal().setVisible(true);
             }
         });
+    }
+
+    private void showfolder(Path path) {
+        if (!Files.exists(path)) {
+            System.out.printf("La carpeta < %s > no existe", path.toString());
+        } else {
+            try {
+                Desktop.getDesktop().open(path.toFile());
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public void render() {

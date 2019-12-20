@@ -1,6 +1,6 @@
 /*
 SQLyog Professional v13.1.1 (64 bit)
-MySQL - 5.7.24 : Database - trebol_2
+MySQL - 5.6.42 : Database - trebol_2
 *********************************************************************
 */
 
@@ -446,9 +446,16 @@ CREATE TABLE `trebol_motivos_rechazo` (
   PRIMARY KEY (`id`),
   KEY `id_proceso` (`id_proceso`),
   CONSTRAINT `trebol_motivos_rechazo_ibfk_1` FOREIGN KEY (`id_proceso`) REFERENCES `trebol_procesos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `trebol_motivos_rechazo` */
+
+insert  into `trebol_motivos_rechazo`(`id`,`motivo`,`id_proceso`,`creacion`,`modificacion`) values 
+(1,'Número de Factura Incorrecto',1,'2019-12-19 09:07:08','2019-12-19 09:07:08'),
+(2,'Distribucion de Centro de Costos',2,'2019-12-19 09:07:33','2019-12-19 09:07:33'),
+(3,'Factura inconsistente',3,'2019-12-19 09:08:38','2019-12-19 09:08:38'),
+(4,'Documento Contable inconsistente',4,'2019-12-19 09:08:53','2019-12-19 09:08:53'),
+(5,'Sin Firma de Revision Contable',5,'2019-12-19 09:09:12','2019-12-19 09:09:12');
 
 /*Table structure for table `trebol_procesos` */
 
@@ -460,9 +467,16 @@ CREATE TABLE `trebol_procesos` (
   `creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `trebol_procesos` */
+
+insert  into `trebol_procesos`(`id`,`proceso`,`creacion`,`modificacion`) values 
+(1,'Recepción de la Factura','2019-12-19 09:05:11','2019-12-19 09:05:11'),
+(2,'Gestión de la Factura','2019-12-19 09:05:46','2019-12-19 09:05:46'),
+(3,'Aprobación de la Factura','2019-12-19 09:05:57','2019-12-19 09:05:57'),
+(4,'Contabilización de la Factura','2019-12-19 09:06:07','2019-12-19 09:06:07'),
+(5,'Revisión de la Factura','2019-12-19 09:06:13','2019-12-19 09:06:13');
 
 /*Table structure for table `trebol_programaciones` */
 
@@ -660,7 +674,7 @@ CREATE TABLE `trebol_tipo_documento` (
   `creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `trebol_tipo_documento` */
 
@@ -679,7 +693,7 @@ insert  into `trebol_tipo_documento`(`id`,`tipo_doc`,`nombre`,`creacion`,`modifi
 (12,'OS','Orden de Servicio','2019-12-09 09:39:53','2019-12-09 09:39:53'),
 (13,'ES','Recepción de Servicios','2019-12-09 09:40:02','2019-12-09 09:40:02'),
 (14,'EA','Recepción por Compras','2019-12-09 09:40:08','2019-12-09 09:40:08'),
-(15,'NC','Nota Interna','2019-12-12 10:43:44','2019-12-12 10:43:44'),
+(15,'DCC','Distribucion Centro de Costos','2019-12-12 10:43:44','2019-12-12 10:43:44'),
 (16,'SA','Soporte Anticipo','2019-12-17 09:13:04','2019-12-17 09:13:04'),
 (17,'CP','Comprobante de Pago','2019-12-17 16:00:38','2019-12-17 16:00:38');
 
