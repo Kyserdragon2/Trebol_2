@@ -1244,7 +1244,7 @@
                   <Font name="Arial" size="14" style="3"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Recebida:"/>
+                <Property name="text" type="java.lang.String" value="Recibida:"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[79, 26]"/>
                 </Property>

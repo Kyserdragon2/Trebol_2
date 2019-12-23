@@ -75,12 +75,12 @@ public class Factura_Controller {
                 F.setNo_factura(datos.getString("tf.no_factura"));
                 F.setValor(datos.getDouble("tf.valor"));
                 F.setMoneda(datos.getString("tf.moneda"));
-                F.setFecha_recepcion(formatoDeFecha.format(datos.getTimestamp("TF.creacion")));
-                F.setFecha_generada(formatoDeFecha.format(datos.getTimestamp("TF.fecha_generada")));
-                if (datos.getTimestamp("TF.fecha_venc") == null) {
+                F.setFecha_recepcion(formatoDeFecha.format(datos.getDate("tf.creacion")));
+                F.setFecha_generada(formatoDeFecha.format(datos.getTimestamp("tf.fecha_generada")));
+                if (datos.getTimestamp("tf.fecha_venc") == null) {
                     F.setFecha_venc("");
                 } else {
-                    F.setFecha_venc(formatoDeFecha.format(datos.getTimestamp("TF.fecha_venc")));
+                    F.setFecha_venc(formatoDeFecha.format(datos.getTimestamp("tf.fecha_venc")));
                 }
                 F.setAprobada(datos.getInt("tf.aprobada"));
                 F.setRevisada(datos.getInt("tf.revisada"));

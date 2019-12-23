@@ -16,7 +16,7 @@ public class Conexion {
     public Connection Conexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conectar = DriverManager.getConnection("jdbc:mysql://10.0.2.3:3306/trebol_2", "admin", "admin");
+            conectar = DriverManager.getConnection("jdbc:mysql://10.0.2.13:3306/trebol_2", "admin", "AdminDB*2019");
 //            conectar = DriverManager.getConnection("jdbc:mysql://localhost:3306/trebol_2", "root", "");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Hubo un error al conectar a la base de datos");

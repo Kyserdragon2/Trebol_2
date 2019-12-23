@@ -956,8 +956,8 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
 
     public void accion(String accion) {
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
-        String no_factura, moneda, fecha_generada, fecha_venc, no_radicado, ruta_origen, proveedor, empresa, no_cuenta;
-        int id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, id_convenio;
+        String nit, no_factura, moneda, fecha_generada, fecha_venc, no_radicado, ruta_origen, proveedor, empresa, no_cuenta;
+        int id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa;
         double valor;
         if (txtpref.getText().isEmpty()) {
             no_factura = txtnf.getText();
@@ -995,31 +995,41 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         id_proveedor = PC.id_proveedor(cmbproveedor.getSelectedItem().toString());
         id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
         no_cuenta = cmbconvenio.getSelectedItem().toString();
-        id_convenio = CCon.id_convenio(no_cuenta, id_proveedor, id_empresa);
+        nit = txtnit.getText();
         switch (accion) {
             case "crear":
-                if (FC.crear_factura(0, id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, no_factura, moneda, fecha_generada,
+                if (FC.crear_factura(0, id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, no_factura.replaceAll(" ", ""), moneda, fecha_generada,
                         fecha_venc, no_radicado, valor)) {
-                    MD.Cargar_Documento(no_factura, cmbproveedor.getSelectedItem().toString(), cmbempresa.getSelectedItem().toString(), "Factura",
+                    MD.Cargar_Documento(no_factura.replaceAll(" ", ""), cmbproveedor.getSelectedItem().toString(), cmbempresa.getSelectedItem().toString(), "Factura",
                             ruta_origen, 1, "", id_proveedor, id_empresa);
                     if (!txtanexo.getText().isEmpty()) {
-                        MD.Cargar_Documento(no_factura, cmbproveedor.getSelectedItem().toString(), cmbempresa.getSelectedItem().toString(),
+                        MD.Cargar_Documento(no_factura.replaceAll(" ", ""), cmbproveedor.getSelectedItem().toString(), cmbempresa.getSelectedItem().toString(),
                                 "Anexo Recibido con la Factura", ruta_origen, 2, "", id_proveedor, id_empresa);
                     }
-                    int id_fact = FC.id_factura(no_factura, id_proveedor, id_empresa);
+                    int id_fact = FC.id_factura(no_factura.replaceAll(" ", ""), id_proveedor, id_empresa);
                     ApC.crear_aprobacion(id_fact, id_area);
                     if (cmbconvenio.isVisible()) {
-                        FCC.crear_factura_convenio(FC.id_factura(no_factura, id_proveedor, id_empresa), CCon.id_convenio(no_cuenta, id_proveedor,
+                        FCC.crear_factura_convenio(FC.id_factura(no_factura.replaceAll(" ", ""), id_proveedor, id_empresa), CCon.id_convenio(no_cuenta, id_proveedor,
                                 id_empresa));
                     }
                     int id_usuario = UC.id_usuario(Principal.lbluser.getText());
                     LC.crear_log(id_usuario, id_fact, 0, 6);
                     TC.crear_tiempo(id_usuario, id_fact, 6, 14);
                     TC.crear_tiempo(id_usuario, id_fact, 14, 8);
+                    SimpleDateFormat formatoDeFecha2 = new SimpleDateFormat("dd/MM/yyyy");
+                    String fecha_rec = formatoDeFecha2.format(new Date());
+                    String fecha_generada2 = formatoDeFecha2.format(jdcfechar.getDate());
+                    String fecha_venc2;
+                    if (jdcfechav.getDate() == null) {
+                        fecha_venc2 = "";
+                    } else {
+                        fecha_venc2 = formatoDeFecha2.format(jdcfechav.getDate());
+                    }
+                    String usuario = UC.nombre_rev(Principal.lbluser.getText());
                     CorC.crear_correo(id_fact, UC.correos(id_area, 0), "Asignacion de Factura",
-                            EC.plantilla_correo("Factura Nueva", no_factura, empresa, "0", no_radicado, proveedor, datot, "01/12/2019", fecha_generada,
-                                    fecha_venc, "Administrador", ""));
-                    NS.notificaciones("Factura Creada", "La factura " + no_factura + " ha sido creada con exito.", "correcto");
+                            EC.plantilla_correo("Factura Nueva", no_factura.replaceAll(" ", ""), empresa, nit, no_radicado, proveedor, datot, fecha_rec, fecha_generada2,
+                                    fecha_venc2, usuario, ""));
+                    NS.notificaciones("Factura Creada", "La factura " + no_factura.replaceAll(" ", "") + " ha sido creada con exito.", "correcto");
                     int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "Desea Cargar otra factura?", "Crear Factura",
                             JOptionPane.YES_NO_OPTION);
                     if (opc == 0) {
@@ -1030,28 +1040,25 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                     }
                     Principal.btnactualizar.doClick();
                 } else {
-                    NS.notificaciones("Factura no Creada", "La factura " + no_factura + " ya existe.", "error");
+                    NS.notificaciones("Factura no Creada", "La factura " + no_factura.replaceAll(" ", "") + " ya existe.", "error");
                 }
                 break;
             case "modificar":
                 int id;
                 int id_factura = Integer.parseInt(lblid.getText());
                 id = Integer.parseInt(lblid.getText());
-                if (FC.modificar_factura(id, id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, no_factura, moneda, fecha_generada,
+                if (FC.modificar_factura(id, id_proveedor, id_tipo_factura, id_gestion, id_area, id_empresa, no_factura.replaceAll(" ", ""), moneda, fecha_generada,
                         fecha_venc, no_radicado, valor)) {
-                    MD.modificar_documento(no_factura, proveedor, empresa, txtruta.getText(), id_factura, id_proveedor, id_empresa);
+                    MD.modificar_documento(no_factura.replaceAll(" ", ""), proveedor, empresa, txtruta.getText(), id_factura, id_proveedor, id_empresa);
                     corregir_factura("Correción de la Factura");
-//                    NS.notificaciones("Modificación de Factura", "La factura " + no_factura + " ha sido modificada con exito.", "correcto");
-//                    Principal.btnactualizar.doClick();
-//                    this.doDefaultCloseAction();
                 } else {
-                    NS.notificaciones("Modificación de Factura", "La factura " + no_factura + " no ha poido ser modificada.", "error");
+                    NS.notificaciones("Modificación de Factura", "La factura " + no_factura.replaceAll(" ", "") + " no ha poido ser modificada.", "error");
                 }
                 break;
             case "crear documento":
                 String documento = cmbtipodoc.getSelectedItem().toString();
                 String ruta = txtubA.getText();
-                MD.Cargar_Documento(no_factura, cmbproveedor.getSelectedItem().toString(), cmbempresa.getSelectedItem().toString(),
+                MD.Cargar_Documento(no_factura.replaceAll(" ", ""), cmbproveedor.getSelectedItem().toString(), cmbempresa.getSelectedItem().toString(),
                         documento, ruta, TDC.id_tipo_doc(documento), "", id_proveedor, id_empresa);
                 cmbtipodoc.setSelectedIndex(0);
                 btncargar.setVisible(true);
@@ -1109,12 +1116,12 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         if (!comentario.equals("")) {
             CC.crear_comentario(0, id_usuario, id_factura, estado_post, comentario);
             int com = CC.id_comentario(id_factura, id_usuario, estado_post, comentario);
-            LC.crear_log(id_usuario, id_factura, com, estado_post);
+            LC.crear_log(id_usuario, id_factura, com, 5);
         } else {
-            LC.crear_log(id_usuario, id_factura, 0, 6);
+            LC.crear_log(id_usuario, id_factura, 0, 5);
         }
-        TC.crear_tiempo(id_usuario, id_factura, estado_prev, 6);
-        TC.crear_tiempo(id_usuario, id_factura, 6, estado_post);
+        TC.crear_tiempo(id_usuario, id_factura, estado_prev, 5);
+        TC.crear_tiempo(id_usuario, id_factura, 5, estado_post);
         String fecha_rec = formatoDeFecha.format(new Date());
         String fecha_generada = formatoDeFecha.format(jdcfechaf.getDate());
         String fecha_venc;
@@ -1280,6 +1287,24 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
+        CA.Borde_Componente(txtanexo, "");
+        CA.Borde_Componente(txtccorresp, "");
+        CA.Borde_Componente(txtpref, "");
+        CA.Borde_Componente(txtnf, "");
+        CA.Borde_Componente(txtnit, "");
+        CA.Borde_Componente(txtruta, "");
+        CA.Borde_Componente(txtvalor, "");
+        CA.Borde_Componente(cmbempresa, "");
+        CA.Borde_Componente(cmbarea, "");
+        CA.Borde_Componente(cmbmoneda, "");
+        CA.Borde_Componente(cmbproveedor, "");
+        CA.Borde_Componente(cmbconvenio, "");
+        CA.Borde_Componente(cmbtfactura, "");
+        CA.Borde_Componente(jdcfechaf, "");
+        CA.Borde_Componente(jdcfechar, "");
+        CA.Borde_Componente(jdcfechav, "");
+        CA.Borde_Componente(jcbanexo, "");
+
         txtanexo.setText("");
         txtccorresp.setText("");
         txtpref.setText("");
@@ -1298,24 +1323,8 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         jdcfechav.setDate(null);
         jcbanexo.setSelected(false);
         btnanexo.setEnabled(false);
-
-        CA.Borde_Componente(txtanexo, "");
-        CA.Borde_Componente(txtccorresp, "");
-        CA.Borde_Componente(txtpref, "");
-        CA.Borde_Componente(txtnf, "");
-        CA.Borde_Componente(txtnit, "");
-        CA.Borde_Componente(txtruta, "");
-        CA.Borde_Componente(txtvalor, "");
-        CA.Borde_Componente(cmbempresa, "");
-        CA.Borde_Componente(cmbarea, "");
-        CA.Borde_Componente(cmbmoneda, "");
-        CA.Borde_Componente(cmbproveedor, "");
-        CA.Borde_Componente(cmbtfactura, "");
-        CA.Borde_Componente(jdcfechaf, "");
-        CA.Borde_Componente(jdcfechar, "");
-        CA.Borde_Componente(jdcfechav, "");
-        CA.Borde_Componente(jcbanexo, "");
-        CA.Borde_Componente(cmbconvenio, "");
+        lblerrorconv.setVisible(false);
+        btncrear.setEnabled(true);
     }
 
     public void render() {
@@ -1391,12 +1400,9 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                     String no_cuenta = cmbconvenio.getSelectedItem().toString();
                     int id_convenio = CCon.id_convenio(no_cuenta, id_proveedor, id_empresa);
                     if (CCon.nconvenios(no_cuenta) == CCon.convenios_mes(id_convenio)) {
-//                        JOptionPane.showMessageDialog(Principal.Escritorio, "La factura no puede ser creada debido a que el convenio\n"
-//                                + "ya tiene un registro cargado este mes");
                         lblerrorconv.setVisible(true);
                         btncrear.setEnabled(false);
                     } else {
-//                        JOptionPane.showMessageDialog(Principal.Escritorio, "La factura puede ser creada.");
                         lblerrorconv.setVisible(false);
                         btncrear.setEnabled(true);
                     }
@@ -1476,6 +1482,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
             lblconvenio.setVisible(false);
             lblrequerido9.setVisible(false);
         }
+        CA.Borde_Componente(cmbconvenio, "");
     }
 
     public void gestion_documentos(java.awt.event.MouseEvent evt) {
@@ -1587,7 +1594,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblconvenio;
     public static javax.swing.JLabel lbldocfactura;
     private javax.swing.JLabel lblempresa;
-    private javax.swing.JLabel lblerrorconv;
+    public static javax.swing.JLabel lblerrorconv;
     private javax.swing.JLabel lblgenerada;
     public static javax.swing.JLabel lblid;
     private javax.swing.JLabel lblmoneda;

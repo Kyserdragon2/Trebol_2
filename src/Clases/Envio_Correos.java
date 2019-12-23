@@ -337,7 +337,7 @@ public class Envio_Correos {
                     + "                </tr>\n"
                     + "                <tr>\n"
                     + "                    <td style=\"font-size: 20px; font-family: Calibri; border: 3px outset " + colorbg + "; background: #ffffff;\"  colspan=\"4\" align=\"Center\">\n"
-                    + "                        <img style=\"margin-right: 10px; margin-left: 10px; opacity: 0.6;\" src=\"http://186.29.91.156/Imagenes%20Publicas/Empresa.png\"/>\n"
+                    + "                        <img style=\"margin-right: 10px; margin-left: 10px; opacity: 0.6;\" src=\"http://186.29.91.156/Imagenes%20Publicas/Empresa2.png\"/>\n"
                     + "                    </td>\n"
                     + "                </tr>\n"
                     + "        </table>\n"

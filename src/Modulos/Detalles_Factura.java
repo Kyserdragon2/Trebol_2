@@ -513,7 +513,7 @@ public class Detalles_Factura extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Recebida:");
+        jLabel4.setText("Recibida:");
         jLabel4.setPreferredSize(new java.awt.Dimension(79, 26));
         jPanel1.add(jLabel4);
         jLabel4.setBounds(371, 70, 80, 26);
@@ -719,8 +719,12 @@ public class Detalles_Factura extends javax.swing.JInternalFrame {
                 lblproveedor.setText(PC.rs_proveedor(F.getId_proveedor()));
                 lblnit.setText(PC.nit_proveedor(PC.rs_proveedor(F.getId_proveedor())));
                 lblempresa.setText(EMPC.empresa(F.getId_empresa()));
-                Date fecha = formatoDeFecha.parse(F.getFecha_recepcion());
-                lblfecharec.setText(formatoDeFecha.format(fecha));
+                if ("".equals(F.getFecha_recepcion())) {
+                    lblfecharec.setText("");
+                } else {
+                    Date fecha = formatoDeFecha.parse(F.getFecha_recepcion());
+                    lblfecharec.setText(formatoDeFecha.format(fecha));
+                }
                 Date fecha2 = formatoDeFecha.parse(F.getFecha_generada());
                 lblfechafact.setText(formatoDeFecha.format(fecha2));
                 if ("".equals(F.getFecha_venc())) {

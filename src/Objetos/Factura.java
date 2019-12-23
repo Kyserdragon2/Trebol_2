@@ -169,6 +169,25 @@ public class Factura {
         this.valor = valor;
     }
 
+    public Factura(int id, int id_proveedor, int id_tipo_factura, int id_gestion, int id_area, int id_empresa, String no_factura, 
+            String moneda, String fecha_recepcion, String fecha_generada, String fecha_venc, String no_radicado, double valor) {
+        this.id = id;
+        this.id_proveedor = id_proveedor;
+        this.id_tipo_factura = id_tipo_factura;
+        this.id_gestion = id_gestion;
+        this.id_area = id_area;
+        this.id_empresa = id_empresa;
+        this.no_factura = no_factura;
+        this.moneda = moneda;
+        this.fecha_recepcion = fecha_recepcion;
+        this.fecha_generada = fecha_generada;
+        this.fecha_venc = fecha_venc;
+        this.no_radicado = no_radicado;
+        this.valor = valor;
+    }
+    
+    
+
     public Factura(int id) {
         this.id = id;
     }

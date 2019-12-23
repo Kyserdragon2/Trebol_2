@@ -910,6 +910,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 Grabar_Factura.btnfile.setVisible(true);
                 Grabar_Factura.lblrequerido10.setVisible(true);
                 Grabar_Factura.lbldocfactura.setVisible(true);
+                Grabar_Factura.lblerrorconv.setVisible(false);
                 GF.setVisible(true);
             }
         } catch (PropertyVetoException e) {
@@ -1127,6 +1128,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                     break;
                                 case "Recepción":
                                     modificacion_factura(no_factura, proveedor, empresa, estado);
+
                                     break;
                                 case "Capital Humano":
                                 case "Compras":
@@ -1177,6 +1179,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             Grabar_Factura.lbldocfactura.setVisible(false);
             Grabar_Factura.jtabedpane.setSelectedIndex(0);
             GF.llenar_campos(no_factura, proveedor, empresa);
+            Grabar_Factura.lblerrorconv.setVisible(false);
             GF.setVisible(true);
         }
     }
@@ -1321,7 +1324,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 cmbempresa.setSelectedIndex(0);
                 break;
             case "Recepción":
-        btngf.setEnabled(true);
+                btngf.setEnabled(true);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
                 cmbempresa.setEnabled(true);
@@ -1348,6 +1351,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             case "AdminTrebol":
                 btnpreant.setEnabled(true);
                 btnusuarios.setEnabled(true);
+                btngf.setEnabled(true);
+                btngestmult.setEnabled(true);
+                btnpreant.setEnabled(true);
+                btnconv.setEnabled(true);
+                btnlotep.setEnabled(true);
                 break;
         }
     }

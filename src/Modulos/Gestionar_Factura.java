@@ -2377,9 +2377,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
 
     public void llenar_campos(String no_factura, String proveedor, String empresa, String area, String estado) {
         Factura F = FC.buscar(no_factura, proveedor, empresa);
-        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
         if (F != null) {
             try {
+                SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
                 lblproveedor.setText(PC.rs_proveedor(F.getId_proveedor()));
                 lblnit.setText(PC.nit_proveedor(PC.rs_proveedor(F.getId_proveedor())));
                 lblempresa.setText(EMPC.empresa(F.getId_empresa()));

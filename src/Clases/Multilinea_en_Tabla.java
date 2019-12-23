@@ -174,51 +174,15 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                 default:
                     break;
             }
-            if (!table.getValueAt(row, 8).toString().equals("Finalizada")
-                    && !table.getValueAt(row, 8).toString().equals("Retirada")
-                    && !table.getValueAt(row, 8).toString().equals("Anulada")) {
-                if (!table.getValueAt(row, 5).toString().equals("N/A")) {
-                    SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-                    Date d2;
-                    Date d1 = new Date();
-                    String f1 = table.getValueAt(row, 5).toString();
-                    try {
-                        d2 = formatoDelTexto.parse(f1);
-                        int dias = (int) ((d2.getTime() - d1.getTime()) / 86400000);
-                        if (dias < 0) {
-                            if (isSelected) {
-                                this.setBackground(new Color(168, 0, 0));
-                                this.setForeground(new Color(255, 255, 255));
-                            } else {
-                                this.setBackground(new Color(255, 193, 193));
-                                this.setForeground(new Color(0, 0, 0));
-                            }
-                        } else if (dias >= 0 && dias < 3) {
-                            if (isSelected) {
-                                this.setBackground(new Color(209, 155, 0));
-                                this.setForeground(new Color(0, 0, 0));
-                            } else {
-                                this.setBackground(new Color(255, 220, 117));
-                                this.setForeground(new Color(0, 0, 0));
-                            }
-                        } else {
-                            if (isSelected) {
-                                this.setBackground(new Color(162, 219, 238));
-                                this.setForeground(Color.black);
-                            } else {
-                                this.setBackground(Color.white);
-                                this.setForeground(Color.black);
-                            }
-                        }
-                    } catch (ParseException e) {
-                        Logger.getLogger(Multilinea_en_Tabla.class.getName()).log(Level.SEVERE, null, e);
-                    }
-                } else {
-                    if (!table.getValueAt(row, 4).toString().equals("N/A")) {
+            if (table.getColumnCount() >= 8) {
+                if (!table.getValueAt(row, 8).toString().equals("Finalizada")
+                        && !table.getValueAt(row, 8).toString().equals("Retirada")
+                        && !table.getValueAt(row, 8).toString().equals("Anulada")) {
+                    if (!table.getValueAt(row, 5).toString().equals("N/A")) {
                         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
                         Date d2;
                         Date d1 = new Date();
-                        String f1 = table.getValueAt(row, 4).toString();
+                        String f1 = table.getValueAt(row, 5).toString();
                         try {
                             d2 = formatoDelTexto.parse(f1);
                             int dias = (int) ((d2.getTime() - d1.getTime()) / 86400000);
@@ -251,16 +215,55 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                             Logger.getLogger(Multilinea_en_Tabla.class.getName()).log(Level.SEVERE, null, e);
                         }
                     } else {
-                        if (isSelected) {
-                            this.setBackground(new Color(162, 219, 238));
-                            this.setForeground(Color.black);
+                        if (!table.getValueAt(row, 4).toString().equals("N/A")) {
+                            SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+                            Date d2;
+                            Date d1 = new Date();
+                            String f1 = table.getValueAt(row, 4).toString();
+                            try {
+                                d2 = formatoDelTexto.parse(f1);
+                                int dias = (int) ((d2.getTime() - d1.getTime()) / 86400000);
+                                if (dias < 0) {
+                                    if (isSelected) {
+                                        this.setBackground(new Color(168, 0, 0));
+                                        this.setForeground(new Color(255, 255, 255));
+                                    } else {
+                                        this.setBackground(new Color(255, 193, 193));
+                                        this.setForeground(new Color(0, 0, 0));
+                                    }
+                                } else if (dias >= 0 && dias < 3) {
+                                    if (isSelected) {
+                                        this.setBackground(new Color(209, 155, 0));
+                                        this.setForeground(new Color(0, 0, 0));
+                                    } else {
+                                        this.setBackground(new Color(255, 220, 117));
+                                        this.setForeground(new Color(0, 0, 0));
+                                    }
+                                } else {
+                                    if (isSelected) {
+                                        this.setBackground(new Color(162, 219, 238));
+                                        this.setForeground(Color.black);
+                                    } else {
+                                        this.setBackground(Color.white);
+                                        this.setForeground(Color.black);
+                                    }
+                                }
+                            } catch (ParseException e) {
+                                Logger.getLogger(Multilinea_en_Tabla.class.getName()).log(Level.SEVERE, null, e);
+                            }
                         } else {
-                            this.setBackground(Color.white);
-                            this.setForeground(Color.black);
+                            if (isSelected) {
+                                this.setBackground(new Color(162, 219, 238));
+                                this.setForeground(Color.black);
+                            } else {
+                                this.setBackground(Color.white);
+                                this.setForeground(Color.black);
+                            }
                         }
                     }
                 }
             }
+
         }
 
         this.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
