@@ -86,7 +86,7 @@ public class Firmas {
         }
     }
 
-    public void firmar_rev(String Ubicacion, String fecha, String hora) {
+    public boolean firmar_rev(String Ubicacion, String fecha, String hora) {
         try {
             String rutausuario = System.getProperty("user.home");
             PdfReader pdfReader = new PdfReader(Ubicacion);
@@ -102,10 +102,10 @@ public class Firmas {
                 c2.setBackground(BaseColor.YELLOW);
                 c3.setBackground(BaseColor.YELLOW);
                 c4.setBackground(BaseColor.YELLOW);
-                ColumnText.showTextAligned(pdfStamper.getOverContent(i), Element.ALIGN_BOTTOM, new Phrase(c), 300, 18, 90);
-                ColumnText.showTextAligned(pdfStamper.getOverContent(i), Element.ALIGN_BOTTOM, new Phrase(c2), 300, 13, 90);
-                ColumnText.showTextAligned(pdfStamper.getOverContent(i), Element.ALIGN_BOTTOM, new Phrase(c3), 300, 8, 90);
-                ColumnText.showTextAligned(pdfStamper.getOverContent(i), Element.ALIGN_BOTTOM, new Phrase(c4), 300, 3, 90);
+                ColumnText.showTextAligned(pdfStamper.getOverContent(i), Element.ALIGN_CENTER, new Phrase(c), 500, 765, 330);
+                ColumnText.showTextAligned(pdfStamper.getOverContent(i), Element.ALIGN_CENTER, new Phrase(c2), 496, 760, 330);
+                ColumnText.showTextAligned(pdfStamper.getOverContent(i), Element.ALIGN_CENTER, new Phrase(c3), 492, 755, 330);
+                ColumnText.showTextAligned(pdfStamper.getOverContent(i), Element.ALIGN_CENTER, new Phrase(c4), 488, 750, 330);
             }
             NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication(null, "Soporte", "Rock2020");
             pdfStamper.close();
@@ -117,8 +117,10 @@ public class Firmas {
                 File doc = new File(origen.toString());
                 doc.delete();
             }
+            return true;
         } catch (IOException | DocumentException ex) {
             Logger.getLogger(Firmas.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 }

@@ -40,7 +40,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     Aprobacion_Controller ApC = new Aprobacion_Controller();
     Anticipo_Factura_Controller AntfC = new Anticipo_Factura_Controller();
     Anticipo_Controller AntC = new Anticipo_Controller();
-    suno_controller suno = new suno_controller();
+    Suno_controller suno = new Suno_controller();
     Revision_Controller RC = new Revision_Controller();
     Programacion_Controller ProgC = new Programacion_Controller();
     Firmas signature = new Firmas();
@@ -1292,7 +1292,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel10.add(btnSCdoc);
-        btnSCdoc.setBounds(270, 85, 120, 46);
+        btnSCdoc.setBounds(260, 85, 120, 46);
 
         btnDQdoc.setBackground(new java.awt.Color(224, 240, 177));
         btnDQdoc.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -1340,7 +1340,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel10.add(btnIMdoc);
-        btnIMdoc.setBounds(140, 140, 120, 46);
+        btnIMdoc.setBounds(135, 140, 120, 46);
 
         btnNPdoc.setBackground(new java.awt.Color(224, 240, 177));
         btnNPdoc.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -1356,7 +1356,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel10.add(btnNPdoc);
-        btnNPdoc.setBounds(270, 140, 120, 46);
+        btnNPdoc.setBounds(260, 140, 120, 46);
 
         btnordencompra.setBackground(new java.awt.Color(224, 240, 177));
         btnordencompra.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -1372,7 +1372,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel10.add(btnordencompra);
-        btnordencompra.setBounds(140, 30, 120, 46);
+        btnordencompra.setBounds(135, 30, 120, 46);
 
         btnordenservicio.setBackground(new java.awt.Color(224, 240, 177));
         btnordenservicio.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -1388,7 +1388,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel10.add(btnordenservicio);
-        btnordenservicio.setBounds(270, 30, 120, 46);
+        btnordenservicio.setBounds(260, 30, 120, 46);
 
         btnrecepservicio.setBackground(new java.awt.Color(224, 240, 177));
         btnrecepservicio.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -1420,7 +1420,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel10.add(btnrecepcompra);
-        btnrecepcompra.setBounds(140, 85, 120, 46);
+        btnrecepcompra.setBounds(135, 85, 120, 46);
 
         btnSUdoc.setBackground(new java.awt.Color(224, 240, 177));
         btnSUdoc.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -1436,7 +1436,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel10.add(btnSUdoc);
-        btnSUdoc.setBounds(140, 195, 120, 46);
+        btnSUdoc.setBounds(135, 195, 120, 46);
 
         btnfactura.setBackground(new java.awt.Color(224, 240, 177));
         btnfactura.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -1468,10 +1468,10 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             }
         });
         jPanel10.add(btnTVdoc);
-        btnTVdoc.setBounds(270, 195, 120, 46);
+        btnTVdoc.setBounds(260, 195, 120, 46);
 
         panelrevision.add(jPanel10);
-        jPanel10.setBounds(10, 10, 400, 250);
+        jPanel10.setBounds(10, 10, 390, 250);
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)), "Documentos Adicionales", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
@@ -1502,16 +1502,16 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jScrollPane9.setViewportView(jtdocumentos2);
 
         jPanel12.add(jScrollPane9);
-        jScrollPane9.setBounds(10, 23, 430, 127);
+        jScrollPane9.setBounds(10, 23, 460, 125);
 
         panelrevision.add(jPanel12);
-        jPanel12.setBounds(430, 10, 450, 160);
+        jPanel12.setBounds(410, 10, 480, 157);
 
         lblcoment3.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
         lblcoment3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblcoment3.setText("Comentario");
         panelrevision.add(lblcoment3);
-        lblcoment3.setBounds(430, 170, 120, 22);
+        lblcoment3.setBounds(410, 170, 120, 22);
 
         jScrollPane10.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black));
         jScrollPane10.setViewportBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1526,7 +1526,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         jScrollPane10.setViewportView(tacomentario3);
 
         panelrevision.add(jScrollPane10);
-        jScrollPane10.setBounds(430, 190, 450, 70);
+        jScrollPane10.setBounds(410, 190, 480, 70);
 
         Tabpane.addTab("Documentos Cargados", panelrevision);
 
@@ -1941,7 +1941,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 LT.Seguimiento(jtseguimiento, Integer.parseInt(lblid.getText()));
                 break;
             case "Documentos":
-                LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+                LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
                 Nuevo_T_Documento.setVisible(false);
                 btnactualizar.setVisible(false);
                 btncancelar.setVisible(false);
@@ -1981,7 +1981,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btncargar.setVisible(true);
         btnactualizar.setVisible(false);
         txtubA.setText("");
-        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
     }//GEN-LAST:event_btncancelarActionPerformed
 
     private void btnbuscarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarAActionPerformed
@@ -2491,20 +2491,44 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void enviar_a_revision() {
-        String no_factura = lblnfact.getText();
-        int id_usuario = UC.id_usuario(Principal.lbluser.getText());
-        int usuario_reviza = UC.id_usuario_rev(cmbRcont.getSelectedItem().toString());
-        int id_proveedor = PC.id_proveedor(lblproveedor.getText());
-        int id_empresa = EMPC.id_empresa(lblempresa.getText());
-        int id_factura = Integer.parseInt(lblid.getText());
-        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 13, 5)) {
-            RC.crear_revision(id_factura, usuario_reviza);
-            registro_procedimiento(no_factura, id_factura, id_usuario, 4, 13, tacomentario1.getText(), 5, id_empresa, "Factura por Revizar");
-            Principal.btnactualizar.doClick();
-            NS.notificaciones("Contabilización Factura", "La Factura " + lblnfact.getText() + " fue enviada a Revisión.", "correcto");
-            this.doDefaultCloseAction();
+        if (cmbRcont.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(Principal.Escritorio, "Por favor indicar la persona que revisara la contabilización.");
         } else {
-            NS.notificaciones("Contabilización Factura", "La Factura " + lblnfact.getText() + " no se envio a Revisión.", "error");
+            String no_factura = lblnfact.getText();
+            int id_usuario = UC.id_usuario(Principal.lbluser.getText());
+            int usuario_reviza = UC.id_usuario_rev(cmbRcont.getSelectedItem().toString());
+            int id_proveedor = PC.id_proveedor(lblproveedor.getText());
+            int id_empresa = EMPC.id_empresa(lblempresa.getText());
+            int id_factura = Integer.parseInt(lblid.getText());
+            if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 13, 5)) {
+                RC.crear_revision(id_factura, usuario_reviza);
+                registro_procedimiento(no_factura, id_factura, id_usuario, 4, 13, tacomentario1.getText(), 5, id_empresa, "Factura por Revizar");
+                Principal.btnactualizar.doClick();
+                NS.notificaciones("Contabilización Factura", "La Factura " + lblnfact.getText() + " fue enviada a Revisión.", "correcto");
+                this.doDefaultCloseAction();
+            } else {
+                NS.notificaciones("Contabilización Factura", "La Factura " + lblnfact.getText() + " no se envio a Revisión.", "error");
+            }
+        }
+    }
+
+    public boolean firmar_rev() {
+        Date fecha = new Date();
+        int id_factura = Integer.parseInt(lblid.getText());
+        SimpleDateFormat fechaactual = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat horaactual = new SimpleDateFormat("HH:mm:ss");
+        if (DC.existe_documento("Soporte de Causacion", id_factura)) {
+            return signature.firmar_rev(DC.ubicacion_documento("Soporte de Causacion", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
+        } else if (DC.existe_documento("Documento Equivalente Virtual", id_factura)) {
+            return signature.firmar_rev(DC.ubicacion_documento("Documento Equivalente Virtual", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
+        } else if (DC.existe_documento("Nota a Proveedor", id_factura)) {
+            return signature.firmar_rev(DC.ubicacion_documento("Nota a Proveedor", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
+        } else if (DC.existe_documento("Nota Interna", id_factura)) {
+            return signature.firmar_rev(DC.ubicacion_documento("Nota Interna", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
+        } else if (DC.existe_documento("Causacion en Dolares", id_factura)) {
+            return signature.firmar_rev(DC.ubicacion_documento("Causacion en Dolares", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
+        } else {
+            return false;
         }
     }
 
@@ -2514,16 +2538,21 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         int id_proveedor = PC.id_proveedor(lblproveedor.getText());
         int id_empresa = EMPC.id_empresa(lblempresa.getText());
         int id_factura = Integer.parseInt(lblid.getText());
-        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 9, 9)) {
-            FC.factura_revisada(id_factura);
-            RC.revizar(id_factura, id_usuario);
-            registro_procedimiento(no_factura, id_factura, id_usuario, 13, 9, tacomentario3.getText(), 9, id_empresa, "Factura Pendiente de Pago");
-            Principal.btnactualizar.doClick();
-            NS.notificaciones("Revisión Factura", "La Factura " + lblnfact.getText() + " fue enviada a Tesoreria.", "correcto");
-            this.doDefaultCloseAction();
+        if (firmar_rev()) {
+            if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 9, 9)) {
+                FC.factura_revisada(id_factura);
+                RC.revizar(id_factura, id_usuario);
+                registro_procedimiento(no_factura, id_factura, id_usuario, 13, 9, tacomentario3.getText(), 9, id_empresa, "Factura Pendiente de Pago");
+                Principal.btnactualizar.doClick();
+                NS.notificaciones("Revisión Factura", "La Factura " + lblnfact.getText() + " fue enviada a Tesoreria.", "correcto");
+                this.doDefaultCloseAction();
+            } else {
+                NS.notificaciones("Revisión Factura", "La Factura " + lblnfact.getText() + " no se envio a Tesoreria.", "error");
+            }
         } else {
-            NS.notificaciones("Revisión Factura", "La Factura " + lblnfact.getText() + " no se envio a Tesoreria.", "error");
+            JOptionPane.showMessageDialog(Principal.Escritorio, "No se pudo realizar la firma del documento.");
         }
+
     }
 
     public void confirmar_pago() {
@@ -2807,6 +2836,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 Tabpane.remove(panelgestion);
                 Tabpane.remove(panelcontabilidad);
                 Tabpane.remove(paneltesoreria);
+                Tabpane.remove(jpdocs);
                 Tabpane.setTitleAt(0, "Revision Contable");
                 lblcoment3.setEnabled(true);
                 tacomentario3.setEnabled(true);
@@ -2816,6 +2846,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 lblnombreu.setVisible(false);
                 jcbeliminar.setVisible(false);
                 btneliminar.setVisible(false);
+                btnctdoc.setVisible(false);
                 facturas_anticipadas(2);
                 btnok.setText("Enviar a Tesoreria");
                 break;
@@ -2945,7 +2976,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                             MD.eliminar_documento(DC.ubicacion_documento(columnadoc, Integer.parseInt(lblid.getText())));
                             DC.eliminar_documento(id_tipo_doc, Integer.parseInt(lblid.getText()));
                         }
-                        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+                        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
                         break;
                     case "editar":
                         btncancelar.setVisible(true);
@@ -2969,7 +3000,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         btncargar.setVisible(true);
         btnactualizar.setVisible(false);
         txtubA.setText("");
-        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
     }
 
     public void actualizar_documento_factura() {
@@ -2984,7 +3015,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             btnactualizar.setVisible(false);
             btncancelar.setVisible(false);
             txtubA.setText("");
-            LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+            LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
         } else {
             JOptionPane.showMessageDialog(Principal.Escritorio, "Por favor seleccionar el nuevo documento " + columnadoc + ".");
         }
@@ -3007,8 +3038,9 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "¿Desea Actualizar el Documento", "Actualizar", JOptionPane.YES_NO_OPTION);
         if (opc == 0) {
             String nit = lblnit.getText();
+            String no_factura = lblnfact.getText();
             int id_empresa = EMPC.id_empresa(lblempresa.getText());
-            String ubsuno = suno.ubicacion_documento(nit, id_empresa, tipo_doc);
+            String ubsuno = suno.ubicacion_documento(no_factura, nit, id_empresa, tipo_doc);
             suno.eliminar_suno(nit, id_empresa, tipo_doc);
             DC.eliminar_documento(tipo_doc, id_factura);
             MD.eliminar_documento(ubsuno);
@@ -3033,11 +3065,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         for (int i = 0; i <= 6; i++) {
             switch (i) {
                 case 1:
-                    if (suno.existe_documento(nit, id_empresa, 3)) {
+                    if (suno.existe_documento(no_factura, nit, id_empresa, 3)) {
                         btnSC.setEnabled(true);
                         btnuptSC.setEnabled(true);
-                        String consecutivo = suno.consecutivo_documento(nit, id_empresa, 3);
-                        String ruta = suno.ubicacion_documento(nit, id_empresa, 3);
+                        String consecutivo = suno.consecutivo_documento(no_factura, nit, id_empresa, 3);
+                        String ruta = suno.ubicacion_documento(no_factura, nit, id_empresa, 3);
                         if (!DC.existe_documento("Soporte de Causacion", Integer.parseInt(lblid.getText()))) {
                             MD.Cargar_Documento(no_factura, proveedor, empresa, "Soporte de Causacion", ruta, 3, consecutivo,
                                     id_proveedor, id_empresa);
@@ -3048,11 +3080,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 2:
-                    if (suno.existe_documento(nit, id_empresa, 4)) {
+                    if (suno.existe_documento(no_factura, nit, id_empresa, 4)) {
                         btnDQ.setEnabled(true);
                         btnuptDQ.setEnabled(true);
-                        String consecutivo = suno.consecutivo_documento(nit, id_empresa, 4);
-                        String ruta = suno.ubicacion_documento(nit, id_empresa, 4);
+                        String consecutivo = suno.consecutivo_documento(no_factura, nit, id_empresa, 4);
+                        String ruta = suno.ubicacion_documento(no_factura, nit, id_empresa, 4);
                         if (!DC.existe_documento("Documento Equivalente", Integer.parseInt(lblid.getText()))) {
                             MD.Cargar_Documento(no_factura, proveedor, empresa, "Documento Equivalente", ruta, 4, consecutivo,
                                     id_proveedor, id_empresa);
@@ -3063,7 +3095,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 3:
-                    if (suno.existe_documento(nit, id_empresa, 7)) {
+                    if (suno.existe_documento(no_factura, nit, id_empresa, 7)) {
                         btnNP.setEnabled(true);
                         btnuptNP.setEnabled(true);
                     } else {
@@ -3072,7 +3104,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 4:
-                    if (suno.existe_documento(nit, id_empresa, 6)) {
+                    if (suno.existe_documento(no_factura, nit, id_empresa, 6)) {
                         btnNI.setEnabled(true);
                         btnuptNI.setEnabled(true);
                     } else {
@@ -3182,6 +3214,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     break;
             }
         }
+        LT.Documentos_Factura(jtdocumentos2, idfact, 1);
     }
 
     public void estado_pago_factura() {
@@ -3252,7 +3285,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     tipo_doc = "Comprobante de Egreso";
                 }
                 id_tipo_doc = TDC.id_tipo_doc(tipo_doc);
-                ruta_doc = suno.ubicacion_documento(nit, id_empresa, id_tipo_doc);
+                ruta_doc = suno.ubicacion_documento(no_factura, nit, id_empresa, id_tipo_doc);
                 ruta_nueva = DC.ubicacion_documento("Factura", id_factura);
                 if (suno.existe_documento_suno(nit, id_empresa, id_tipo_doc, cons)) {
                     MD.Cargar_Documento(no_factura, proveedor, empresa, tipo_doc, ruta_doc, id_tipo_doc, cons, id_proveedor, id_empresa);
@@ -3268,7 +3301,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             case 2:
                 String ubicacion;
                 nit = PC.nit_proveedor(lblproveedor.getText());
-                ubicacion = suno.ubicacion_documento(nit, id_empresa, id_tipo_doc);
+                ubicacion = suno.ubicacion_documento(no_factura, nit, id_empresa, id_tipo_doc);
                 suno.ver_documento(ubicacion);
                 break;
             case 3:

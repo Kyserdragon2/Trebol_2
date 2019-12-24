@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.HeadlessException;
 import java.awt.event.ItemEvent;
+import java.beans.PropertyChangeEvent;
 import java.text.SimpleDateFormat;
 import javax.swing.table.TableRowSorter;
 import java.beans.PropertyVetoException;
@@ -395,7 +396,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jrbcargada.setBackground(new java.awt.Color(255, 255, 255));
         filtrofechas.add(jrbcargada);
         jrbcargada.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        jrbcargada.setText("Cargada");
+        jrbcargada.setText("Recibida");
         jrbcargada.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jrbcargada.setBorderPainted(true);
         jrbcargada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1035,7 +1036,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void abrirubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirubActionPerformed
         int fila = jtfacturas.getSelectedRow();
         if (fila >= 0) {
-            Path directorio = Paths.get("\\\\10.0.2.6\\Aviomar-R\\APLICACIONES\\Treból\\Facturas\\"
+            Path directorio = Paths.get("\\\\10.0.2.6\\Aviomar-R\\APLICACIONES\\Treból_V2\\Facturas\\"
                     + jtfacturas.getValueAt(jtfacturas.getSelectedRow(), 9) + "\\"
                     + jtfacturas.getValueAt(jtfacturas.getSelectedRow(), 11) + "\\"
                     + jtfacturas.getValueAt(jtfacturas.getSelectedRow(), 0));
@@ -1109,6 +1110,12 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 filtros();
             }
         });
+        jdcdesde.getDateEditor().addPropertyChangeListener((PropertyChangeEvent evt) -> {
+            filtarporfecha();
+        });
+        jdchasta.getDateEditor().addPropertyChangeListener((PropertyChangeEvent evt) -> {
+            filtarporfecha();
+        });
         jtfacturas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1128,7 +1135,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                                     break;
                                 case "Recepción":
                                     modificacion_factura(no_factura, proveedor, empresa, estado);
-
                                     break;
                                 case "Capital Humano":
                                 case "Compras":
@@ -1203,6 +1209,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             String area = UC.area_usuario(usuario);
             DetFact.llenar_campos(no_factura, proveedor, empresa, area, estado);
             DetFact.setBounds(145, 56, 930, 535);
+            Detalles_Factura.Tabpane.setSelectedIndex(0);
             DetFact.setVisible(true);
         }
     }
@@ -1279,20 +1286,14 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
-            cmbasignado.setSelectedIndex(0);
-            cmbfunrev.setSelectedIndex(0);
         } else if (jrbFinalizadas.isSelected()) {
             LT.Facturas(jtfacturas, 3, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
-            cmbasignado.setSelectedIndex(0);
-            cmbfunrev.setSelectedIndex(0);
         } else if (jrbretiradas.isSelected()) {
             LT.Facturas(jtfacturas, 4, proveedor, empresa, estado, asignado, frev);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
-            cmbasignado.setSelectedIndex(0);
-            cmbfunrev.setSelectedIndex(0);
         }
         if (jtfacturas.getRowCount() > 0) {
             filtarporfecha();
@@ -1361,6 +1362,30 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }
 
     public void limpiar_filtros() {
+        if (jrbPropias.isSelected()) {
+            lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
+            if (!lbluser.getText().equals("null")) {
+                datousuario(lbluser.getText());
+            }
+            if (cmbfunrev.getSelectedIndex() != 0 && UC.area_usuario(lbluser.getText()).equals("Contabilidad_Rev")) {
+                cmbfunrev.setSelectedItem(UC.nombre_rev(lbluser.getText()));
+            }
+        } else if (jrbtodas.isSelected()) {
+            lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
+            cmbasignado.setEnabled(true);
+            cmbasignado.setSelectedIndex(0);
+            cmbfunrev.setSelectedIndex(0);
+        } else if (jrbFinalizadas.isSelected()) {
+            lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
+            cmbasignado.setEnabled(true);
+            cmbasignado.setSelectedIndex(0);
+            cmbfunrev.setSelectedIndex(0);
+        } else if (jrbretiradas.isSelected()) {
+            lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
+            cmbasignado.setEnabled(true);
+            cmbasignado.setSelectedIndex(0);
+            cmbfunrev.setSelectedIndex(0);
+        }
         cmbproveedor.setSelectedIndex(0);
         cmbestado.setSelectedIndex(0);
         cmbMes.setSelectedIndex(0);
@@ -1371,9 +1396,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jdchasta.setDate(null);
         filtros();
         llenar_cmb();
-        if (cmbfunrev.getSelectedIndex() != 0 && UC.area_usuario(lbluser.getText()).equals("Contabilidad_Rev")) {
-            cmbfunrev.setSelectedItem(UC.nombre_rev(lbluser.getText()));
-        }
     }
 
     public void filtarporfecha() {

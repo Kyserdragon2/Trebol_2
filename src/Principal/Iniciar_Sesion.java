@@ -3,6 +3,7 @@ package Principal;
 import Controladores.Usuario_Controller;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -89,6 +90,11 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         jtxtpass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtpass.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black));
         jtxtpass.setNextFocusableComponent(btningreso);
+        jtxtpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtxtpassKeyPressed(evt);
+            }
+        });
         jPanel2.add(jtxtpass);
         jtxtpass.setBounds(115, 70, 170, 25);
 
@@ -235,6 +241,13 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         jtxtpass1.setText("");
     }//GEN-LAST:event_btncancelarActionPerformed
 
+    private void jtxtpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtpassKeyPressed
+        char cTeclaPresionada = evt.getKeyChar();
+        if (cTeclaPresionada == KeyEvent.VK_ENTER) {
+            btningreso.doClick();
+        }
+    }//GEN-LAST:event_jtxtpassKeyPressed
+
     @SuppressWarnings("Convert2Lambda")
     public static void main(String args[]) {
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -274,7 +287,7 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
             if (!UC.sesion(user, pass).equals("")) {
                 P = new Principal();
                 P.setVisible(true);
-                
+
                 P.datousuario(UC.sesion(user, pass));
 //                Principal.lbluser.setText(UC.sesion(user, pass));
                 UC.estado_sesion(1, UC.sesion(user, pass));

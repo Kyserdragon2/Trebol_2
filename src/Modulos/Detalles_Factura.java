@@ -743,7 +743,7 @@ public class Detalles_Factura extends javax.swing.JInternalFrame {
                 lblid.setVisible(false);
                 facturas_anticipadas();
                 buscar_docs();
-                LT.Documentos_Factura(jtdocumentos, Integer.parseInt(lblid.getText()));
+                LT.Documentos_Factura(jtdocumentos, Integer.parseInt(lblid.getText()), 2);
             } catch (ParseException ex) {
                 Logger.getLogger(Detalles_Factura.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -889,7 +889,7 @@ public class Detalles_Factura extends javax.swing.JInternalFrame {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane Tabpane;
+    public static javax.swing.JTabbedPane Tabpane;
     public javax.swing.JButton btnCE;
     public javax.swing.JButton btnCP;
     public javax.swing.JButton btnDQ;

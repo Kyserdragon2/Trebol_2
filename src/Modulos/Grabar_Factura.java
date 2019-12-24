@@ -921,7 +921,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
 
     private void jtabedpaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jtabedpaneStateChanged
         if (jtabedpane.getTitleAt(jtabedpane.getSelectedIndex()).equals("Documentos")) {
-            LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+            LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
             Nuevo_T_Documento.setVisible(false);
             btnactualizar.setVisible(false);
             btncancelar.setVisible(false);
@@ -943,7 +943,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         btncargar.setVisible(true);
         btnactualizar.setVisible(false);
         txtubA.setText("");
-        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
     }//GEN-LAST:event_btncancelarActionPerformed
 
     private void btncreartdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncreartdActionPerformed
@@ -1052,7 +1052,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                     MD.modificar_documento(no_factura.replaceAll(" ", ""), proveedor, empresa, txtruta.getText(), id_factura, id_proveedor, id_empresa);
                     corregir_factura("Correción de la Factura");
                 } else {
-                    NS.notificaciones("Modificación de Factura", "La factura " + no_factura.replaceAll(" ", "") + " no ha poido ser modificada.", "error");
+                    NS.notificaciones("Correción de Factura", "La factura " + no_factura.replaceAll(" ", "") + " no ha poido ser corregida.", "error");
                 }
                 break;
             case "crear documento":
@@ -1064,7 +1064,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                 btncargar.setVisible(true);
                 btnactualizar.setVisible(false);
                 txtubA.setText("");
-                LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+                LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
                 break;
             default:
                 break;
@@ -1085,7 +1085,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         int id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
         int id_area_rechazo = AC.id_area_rechazo(id_usuario_rechazo);
         int estado_prev = EstC.estado_prev(id_usuario_rechazo);
-        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, estado_prev, id_area_rechazo)) {
+        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 5, id_area_rechazo)) {
             registro_procedimiento_correcion(no_factura, id_factura, id_usuario, 11, estado_prev, comentario, id_area_rechazo, id_empresa, "Factura Corregida");
             switch (id_area_rechazo) {
                 case 1:
@@ -1506,7 +1506,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                             MD.eliminar_documento(DC.ubicacion_documento(columnadoc, Integer.parseInt(lblid.getText())));
                             DC.eliminar_documento(id_tipo_doc, Integer.parseInt(lblid.getText()));
                         }
-                        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+                        LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
                         break;
                     case "editar":
                         btncancelar.setVisible(true);
@@ -1533,7 +1533,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
             btnactualizar.setVisible(false);
             btncancelar.setVisible(false);
             txtubA.setText("");
-            LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()));
+            LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
         } else {
             JOptionPane.showMessageDialog(Principal.Escritorio, "Por favor seleccionar el nuevo documento " + columnadoc + ".");
         }

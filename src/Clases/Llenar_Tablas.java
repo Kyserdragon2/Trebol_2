@@ -1,5 +1,6 @@
 package Clases;
 
+import Controladores.Usuario_Controller;
 import java.awt.Color;
 import java.sql.*;
 import java.util.logging.Level;
@@ -11,6 +12,7 @@ import javax.swing.table.TableRowSorter;
 
 public class Llenar_Tablas {
 
+    Usuario_Controller UC = new Usuario_Controller();
     Conexion cc = new Conexion();
     DefaultTableModel model;
     TableRowSorter sorter;
@@ -467,19 +469,26 @@ public class Llenar_Tablas {
      *
      * @param tabla
      * @param id
+     * @param usuario
      */
-    public void Documentos(JTable tabla, int id) {
+    public void Documentos(JTable tabla, int id, String usuario) {
         Color H = new Color(75, 156, 109);
         Color T = new Color(255, 255, 255);
         Color CB = new Color(255, 255, 255);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.getTableHeader().setResizingAllowed(false);
         tabla.getTableHeader().setReorderingAllowed(false);
+        String estados;
+        if (UC.id_area_usuario(usuario) == 6 || UC.id_area_usuario(usuario) == 7) {
+            estados = "3,4,5,6,7,8,9,10,11,12,13,14";
+        } else {
+            estados = "1,3,4,5,6,7,8,9,10,11,12,13,14";
+        }
         String consulta = "SELECT ttd.`nombre`\n"
                 + "FROM trebol_documentos AS td\n"
                 + "JOIN trebol_facturas AS tf ON td.`id_factura`=tf.`id`\n"
                 + "JOIN trebol_tipo_documento AS ttd ON td.`id_tipo_doc`=ttd.`id`\n"
-                + "WHERE td.`id_tipo_doc` NOT IN (3,4,5,6,7,8,9,10,11,12,13,14)\n"
+                + "WHERE td.`id_tipo_doc` NOT IN (" + estados + ")\n"
                 + "AND tf.`id`=" + id + "\n"
                 + "ORDER BY td.id_tipo_doc ASC;";
         try (Connection cn = cc.Conexion();
@@ -509,15 +518,33 @@ public class Llenar_Tablas {
 
             while (rs.next()) {
                 registros[0] = rs.getString("ttd.nombre");
-                btnver = new JButton("");
-                btnver.setName("ver");
-                registros[1] = btnver;
-                btneditar = new JButton("");
-                btneditar.setName("editar");
-                registros[2] = btneditar;
-                btnborrar = new JButton("");
-                btnborrar.setName("borrar");
-                registros[3] = btnborrar;
+                if (rs.getString("ttd.nombre").equals("Anexo Recibido con la Factura")) {
+                    if (UC.id_area_usuario(usuario) == 6 || UC.id_area_usuario(usuario) == 7) {
+                        btnver = new JButton("");
+                        btnver.setName("ver");
+                        registros[1] = btnver;
+                        btneditar = new JButton("");
+                        btneditar.setName("editar");
+                        registros[2] = btneditar;
+                        btnborrar = new JButton("");
+                        btnborrar.setName("borrar");
+                        registros[3] = btnborrar;
+                    } else {
+                        registros[1] = "";
+                        registros[2] = "";
+                        registros[3] = "";
+                    }
+                } else {
+                    btnver = new JButton("");
+                    btnver.setName("ver");
+                    registros[1] = btnver;
+                    btneditar = new JButton("");
+                    btneditar.setName("editar");
+                    registros[2] = btneditar;
+                    btnborrar = new JButton("");
+                    btnborrar.setName("borrar");
+                    registros[3] = btnborrar;
+                }
                 model.addRow(registros);
             }
 
@@ -535,9 +562,9 @@ public class Llenar_Tablas {
             tabla.getColumnModel().getColumn(3).setPreferredWidth(55);
 
             tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
-            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
-            tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
-            tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 1, 14));
+            tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 2, 14));
+            tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 3, 14));
 
         } catch (SQLException ex) {
             Logger.getLogger(Llenar_Tablas.class.getName()).log(Level.SEVERE, null, ex);
@@ -549,7 +576,7 @@ public class Llenar_Tablas {
      * @param tabla
      * @param id
      */
-    public void Documentos_Factura(JTable tabla, int id) {
+    public void Documentos_Factura(JTable tabla, int id, int vista) {
         Color H = new Color(75, 156, 109);
         Color T = new Color(255, 255, 255);
         Color CB = new Color(255, 255, 255);
@@ -604,8 +631,13 @@ public class Llenar_Tablas {
                 tabla.getColumnModel().getColumn(i).setHeaderRenderer(new Encabezado_Tabla(H, T, tabla.getTableHeader().getDefaultRenderer(), 15));
             }
 
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(256);
-            tabla.getColumnModel().getColumn(1).setPreferredWidth(50);
+            if (vista == 1) {
+                tabla.getColumnModel().getColumn(0).setPreferredWidth(380);
+                tabla.getColumnModel().getColumn(1).setPreferredWidth(55);
+            } else {
+                tabla.getColumnModel().getColumn(0).setPreferredWidth(250);
+                tabla.getColumnModel().getColumn(1).setPreferredWidth(55);
+            }
 
             tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
             tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
@@ -618,7 +650,6 @@ public class Llenar_Tablas {
         Color H = new Color(75, 156, 109);
         Color T = new Color(255, 255, 255);
         Color CB = new Color(255, 255, 255);
-        Color CT = new Color(0, 0, 0);
         Object[] titulos = {"Doc.", "Cons.", "Valor", "Asociar", "Ver"};
         Object[] registros = new Object[5];
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -782,7 +813,6 @@ public class Llenar_Tablas {
         Color H = new Color(75, 156, 109);
         Color T = new Color(0, 0, 0);
         Color CB = new Color(255, 255, 255);
-        Color CT = new Color(0, 0, 0);
         Object[] titulos = {"Doc.", "Cons.", "Valor", "Asociar", "Ver"};
         Object[] registros = new Object[5];
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

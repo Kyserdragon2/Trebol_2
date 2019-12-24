@@ -38,77 +38,30 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
 
         if (value instanceof JButton) {
             JButton btn = (JButton) value;
+            if (isSelected) {
+                btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                btn.setBackground(Color.LIGHT_GRAY);
+                btn.setForeground(Color.white);
+            } else {
+                btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                btn.setBackground(Color.white);
+                btn.setForeground(Color.black);
+            }
             switch (btn.getName()) {
                 case "ver":
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver2.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(138, 193, 213));
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(183, 217, 229));
-                        btn.setForeground(Color.black);
-                    }
                     break;
                 case "aceptar":
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(138, 193, 213));
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(183, 217, 229));
-                        btn.setForeground(Color.black);
-                    }
                     break;
                 case "ver3":
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver3.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(138, 193, 213));
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(183, 217, 229));
-                        btn.setForeground(Color.black);
-                    }
                     break;
                 case "editar":
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/edicion.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(138, 193, 213));
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(183, 217, 229));
-                        btn.setForeground(Color.black);
-                    }
                     break;
                 case "borrar":
                     btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png")));
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(138, 193, 213));
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(183, 217, 229));
-                        btn.setForeground(Color.black);
-                    }
-                    break;
-                default:
-                    if (isSelected) {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(138, 193, 213));
-                        btn.setForeground(Color.black);
-                    } else {
-                        btn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-                        btn.setBackground(new Color(183, 217, 229));
-                        btn.setForeground(Color.black);
-                    }
                     break;
             }
             btn.setContentAreaFilled(false);
@@ -145,7 +98,7 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
             String strDate = new SimpleDateFormat("dd-MM-yyyy").format((Date) value);
             this.setText(strDate);
         }
-        
+
         if (isSelected) {
             this.setBackground(Color.DARK_GRAY);
             this.setForeground(Color.white);
@@ -164,7 +117,7 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
             }
         } else {
             if (columna == 5 && !table.getValueAt(row, 8).toString().equals("Finalizada")
-                    && !table.getValueAt(row, 8).toString().equals("Retirada") 
+                    && !table.getValueAt(row, 8).toString().equals("Retirada")
                     && !table.getValueAt(row, 8).toString().equals("Anulada")) {
                 if (!table.getValueAt(row, 5).toString().equals("N/A")) {
                     SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
@@ -192,8 +145,8 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                             }
                         } else {
                             if (isSelected) {
-                                this.setBackground(new Color(162, 219, 238));
-                                this.setForeground(Color.black);
+                                this.setBackground(Color.DARK_GRAY);
+                                this.setForeground(Color.white);
                             } else {
                                 this.setBackground(Color.white);
                                 this.setForeground(Color.black);
@@ -264,6 +217,7 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                     }
                     break;
                 case "Creación":
+                case "Corrección":
                 case "Gestión":
                     if (isSelected) {
                         this.setBackground(new Color(102, 76, 0));

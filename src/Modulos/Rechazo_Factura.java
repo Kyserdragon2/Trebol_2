@@ -39,29 +39,6 @@ public class Rechazo_Factura extends javax.swing.JInternalFrame {
 
     public Rechazo_Factura() {
         initComponents();
-        switch (UC.id_area_usuario(Principal.lbluser.getText())) {
-            case 1:
-                R.motivos_rechazo(cmbmotivo, "1,2");
-                R.proceso_rechazo(cmbarea, "1,2");
-                break;
-            case 2:
-            case 3:
-            case 8:
-                R.motivos_rechazo(cmbmotivo, "1");
-                R.proceso_rechazo(cmbarea, "1");
-                break;
-            case 4:
-                R.motivos_rechazo(cmbmotivo, "1,2,3");
-                R.proceso_rechazo(cmbarea, "1,2,3");
-                break;
-            case 5:
-                R.motivos_rechazo(cmbmotivo, "1,2,3,4");
-                R.proceso_rechazo(cmbarea, "1,2,3,4");
-            case 9:
-                R.motivos_rechazo(cmbmotivo, "1,2,3,4,5");
-                R.proceso_rechazo(cmbarea, "1,2,3,4,5");
-                break;
-        }
         render();
     }
 
@@ -186,6 +163,34 @@ public class Rechazo_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnrechazarActionPerformed
 
     private void render() {
+        cmbmotivo.removeAllItems();
+        cmbmotivo.addItem("---");
+        cmbarea.removeAllItems();
+        cmbarea.addItem("---");
+        switch (UC.id_area_usuario(Principal.lbluser.getText())) {
+            case 1:
+                R.motivos_rechazo(cmbmotivo, "1,2");
+                R.proceso_rechazo(cmbarea, "1,2");
+                break;
+            case 2:
+            case 3:
+            case 8:
+                R.motivos_rechazo(cmbmotivo, "1");
+                R.proceso_rechazo(cmbarea, "1");
+                break;
+            case 4:
+                R.motivos_rechazo(cmbmotivo, "1,2,3");
+                R.proceso_rechazo(cmbarea, "1,2,3");
+                break;
+            case 5:
+                R.motivos_rechazo(cmbmotivo, "1,2,3,4");
+                R.proceso_rechazo(cmbarea, "1,2,3,4");
+                break;
+            case 9:
+                R.motivos_rechazo(cmbmotivo, "1,2,3,4,5");
+                R.proceso_rechazo(cmbarea, "1,2,3,4,5");
+                break;
+        }
         cmbmotivo.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 if (cmbmotivo.getSelectedItem().toString().equals("Otro...")) {

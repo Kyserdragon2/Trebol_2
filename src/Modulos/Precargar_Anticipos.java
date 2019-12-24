@@ -33,7 +33,7 @@ public final class Precargar_Anticipos extends javax.swing.JInternalFrame {
     Manipuacion_Documentos MD = new Manipuacion_Documentos();
     Notificaciones_Sistema NS = new Notificaciones_Sistema();
     TipoFactura_Controller TFC = new TipoFactura_Controller();
-    suno_controller suno = new suno_controller();
+    Suno_controller suno = new Suno_controller();
 
     public Precargar_Anticipos() {
         initComponents();
@@ -253,7 +253,7 @@ public final class Precargar_Anticipos extends javax.swing.JInternalFrame {
         }
         valor = Double.parseDouble(datof);
         consecutivo = String.format("%06d", Integer.parseInt(txtdoc.getText()));
-        ubicacion = suno.ubicacion_documento(nit, id_empresa, id_tipo_doc);
+        ubicacion = suno.ubicacion_documento("", nit, id_empresa, id_tipo_doc);
         ub_documento = MD.Cargar_Documento_Ant(proveedor, empresa, ubicacion);
         if (AntC.crear_anticipo(id_proveedor, id_empresa, id_tipo_doc, consecutivo, ub_documento, valor)) {
             LT.pre_anticipos(jtant, "", "", "");
@@ -287,7 +287,7 @@ public final class Precargar_Anticipos extends javax.swing.JInternalFrame {
         id_empresa = EMPC.id_empresa(cmbempresa.getSelectedItem().toString());
         id_tipo_doc = TDC.id_tipo_doc_pref(cmbdoc.getSelectedItem().toString());
         nit = PC.nit_proveedor(cmbproveedor.getSelectedItem().toString());
-        ubicacion = suno.ubicacion_documento(nit, id_empresa, id_tipo_doc);
+        ubicacion = suno.ubicacion_documento("", nit, id_empresa, id_tipo_doc);
         suno.ver_documento(ubicacion);
     }//GEN-LAST:event_btnverActionPerformed
 

@@ -141,7 +141,7 @@ public class Renderizado {
     public void motivos_rechazo(JComboBox cmb, String proc) {
         try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
-                ResultSet rs = st.executeQuery("SELECT motivo\n"
+                ResultSet rs = st.executeQuery("SELECT DISTINCT motivo\n"
                         + "FROM trebol_motivos_rechazo\n"
                         + "WHERE id_proceso IN (" + proc + ")"
                         + "ORDER BY motivo ASC")) {
