@@ -1,6 +1,6 @@
 /*
 SQLyog Professional v13.1.1 (64 bit)
-MySQL - 5.6.42 : Database - trebol_2
+MySQL - 5.7.28 : Database - trebol_2
 *********************************************************************
 */
 
@@ -636,7 +636,7 @@ CREATE TABLE `trebol_sistema_uno` (
   KEY `id_tipo_doc` (`id_tipo_doc`),
   CONSTRAINT `trebol_sistema_uno_ibfk_1` FOREIGN KEY (`id_empresa`) REFERENCES `trebol_empresa` (`id`),
   CONSTRAINT `trebol_sistema_uno_ibfk_2` FOREIGN KEY (`id_tipo_doc`) REFERENCES `trebol_tipo_documento` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 /*Data for the table `trebol_sistema_uno` */
 
@@ -789,7 +789,7 @@ insert  into `trebol_usuario`(`id`,`usuario`,`nombres`,`apellidos`,`correo`,`con
 (14,'jcasallas','Juan Gabriel','Casallas','jcasallas@snider.com.co','81dc9bdb52d04dc20036dbd8313ed055',1,3,1,0,0,'2019-12-11 16:48:41','2019-12-11 16:48:41'),
 (15,'lurquijo','Liliana','Urquijo','lurquijo@aviomar.com.co','81dc9bdb52d04dc20036dbd8313ed055',1,1,1,0,0,'2019-12-11 16:50:47','2019-12-11 16:50:47'),
 (16,'dcapera','Daniela','Capera','asistente_contable2@aviomar.com.co','81dc9bdb52d04dc20036dbd8313ed055',4,1,0,0,0,'2019-12-11 16:51:34','2019-12-11 16:51:34'),
-(17,'kalfonoso','Karen','Alfonso','asistente_contable1@aviomar.com.co','81dc9bdb52d04dc20036dbd8313ed055',4,1,0,0,0,'2019-12-11 16:52:01','2019-12-11 16:52:01'),
+(17,'kalfonso','Karen','Alfonso','asistente_contable1@aviomar.com.co','81dc9bdb52d04dc20036dbd8313ed055',4,1,0,0,0,'2019-12-11 16:52:01','2019-12-11 16:52:01'),
 (18,'dcaballero','Deisy','Caballero','asistente_contable1@colvan.com.co','81dc9bdb52d04dc20036dbd8313ed055',4,2,0,0,0,'2019-12-11 16:53:45','2019-12-11 16:53:45'),
 (19,'ecacais','Emilce','Cacais','asistente_contable2@colvan.com.co','81dc9bdb52d04dc20036dbd8313ed055',4,2,0,0,0,'2019-12-11 16:55:08','2019-12-11 16:55:08'),
 (20,'aariza','Alejandra','Ariza','asistente_contable1@snider.com.co','81dc9bdb52d04dc20036dbd8313ed055',4,3,0,0,0,'2019-12-11 16:55:53','2019-12-11 16:55:53'),

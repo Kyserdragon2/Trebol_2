@@ -222,8 +222,9 @@ public class Llenar_Tablas {
      * @param estado
      * @param asignado
      * @param id_rev
+     * @param mes
      */
-    public void Facturas(JTable tabla, int area, String proveedor, String empresa, String estado, String asignado, String id_rev) {
+    public void Facturas(JTable tabla, int area, String proveedor, String empresa, String estado, String asignado, String id_rev, String mes) {
         Color H = new Color(75, 156, 109);
         Color T = new Color(255, 255, 255);
         Color CB = new Color(255, 255, 255);
@@ -251,7 +252,7 @@ public class Llenar_Tablas {
         if (id_rev.equals("")) {
             consulta = "SELECT DISTINCT tf.No_Factura, tp.razon_social, tp.nit, tem.`nom_empresa`, te.`nom_estado`, ta2.`nombre_area`, \n"
                     + "ta.`nombre_area`,IF(td.`ubicacion` IS NULL, '',td.`ubicacion`) AS doc_ubicacion, tf.`valor`,tf.`creacion`,\n"
-                    + "tf.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
+                    + "tf.`fecha_generada`,tf.`fecha_venc`,IF(tf.`fecha_venc` IS NULL,0,1) AS vence, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
                     + "tipo_fact.`tipo_factura`\n"
                     + "FROM trebol_facturas AS tf\n"
                     + "INNER JOIN trebol_proveedor AS tp ON tf.`id_proveedor`=tp.`id`\n"
@@ -267,12 +268,13 @@ public class Llenar_Tablas {
                     + "AND tem.`nom_empresa` LIKE '%" + empresa + "%'\n"
                     + "AND te.nom_estado LIKE '%" + estado + "%'\n"
                     + "AND ta2.nombre_area LIKE '%" + asignado + "'\n"
+                    + "AND MONTH(tf.`creacion`) LIKE '%" + mes + "%'\n"
                     + "GROUP BY tf.id\n"
-                    + "ORDER BY tf.`creacion` DESC;";
+                    + "ORDER BY vence DESC,tf.fecha_venc ASC,programada DESC, tprog.`fecha_prog` ASC;";
         } else {
             consulta = "SELECT DISTINCT tf.No_Factura, tp.razon_social, tp.nit, tem.`nom_empresa`, te.`nom_estado`, ta2.`nombre_area`, \n"
                     + "ta.`nombre_area`,IF(td.`ubicacion` IS NULL, '',td.`ubicacion`) AS doc_ubicacion, tf.`valor`,tf.`creacion`,\n"
-                    + "tf.`fecha_generada`,tf.`fecha_venc`, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
+                    + "tf.`fecha_generada`,tf.`fecha_venc`,IF(tf.`fecha_venc` IS NULL,0,1) AS vence, IF(tprog.`fecha_prog` IS NULL, 0,1) AS programada, tprog.`fecha_prog`,\n"
                     + "tipo_fact.`tipo_factura`\n"
                     + "FROM trebol_facturas AS tf\n"
                     + "INNER JOIN trebol_proveedor AS tp ON tf.`id_proveedor`=tp.`id`\n"
@@ -290,8 +292,9 @@ public class Llenar_Tablas {
                     + "AND te.nom_estado LIKE '%" + estado + "%'\n"
                     + "AND ta2.nombre_area LIKE '%" + asignado + "'\n"
                     + "AND tr.`id_usuario` LIKE '%" + id_rev + "%'"
+                    + "AND MONTH(tf.`creacion`) LIKE '%" + mes + "%'\n"
                     + "GROUP BY tf.id\n"
-                    + "ORDER BY tf.`creacion` DESC;";
+                    + "ORDER BY vence DESC,tf.fecha_venc ASC,programada DESC, tprog.`fecha_prog` ASC;";
 
         }
         try (Connection cn = cc.Conexion();
@@ -336,7 +339,11 @@ public class Llenar_Tablas {
                     registros[5] = rs.getDate("tprog.fecha_prog");
                 }
                 registros[6] = rs.getString("tipo_fact.tipo_factura");
-                registros[7] = rs.getString("ta2.nombre_area");
+                if (rs.getString("ta2.nombre_area").equals("Contabilidad_Rev")) {
+                    registros[7] = "Revisión Cont.";
+                } else {
+                    registros[7] = rs.getString("ta2.nombre_area");
+                }
                 registros[8] = rs.getString("te.nom_estado");
                 registros[9] = rs.getString("tem.nom_empresa");
                 registros[10] = rs.getString("tp.nit");
@@ -575,6 +582,7 @@ public class Llenar_Tablas {
      *
      * @param tabla
      * @param id
+     * @param vista
      */
     public void Documentos_Factura(JTable tabla, int id, int vista) {
         Color H = new Color(75, 156, 109);

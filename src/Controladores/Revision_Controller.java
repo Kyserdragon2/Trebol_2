@@ -51,4 +51,23 @@ public class Revision_Controller {
         }
     }
 
+    public String correo_usuario_rev(int id_factura) {
+        Revision R = new Revision(id_factura);
+        String correo = "", sql;
+        sql = "SELECT tu.`correo`\n"
+                + "FROM trebol_revisiones AS tr\n"
+                + "JOIN trebol_usuario AS tu ON tr.`id_usuario`=tu.`id`\n"
+                + "WHERE tr.`id_factura`=" + R.getId_factura() + ";";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            if (datos.next()) {
+                correo = datos.getString("tu.correo");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            correo = "";
+        }
+        return correo;
+    }
+
 }

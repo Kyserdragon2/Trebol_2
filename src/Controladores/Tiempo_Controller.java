@@ -2,7 +2,10 @@ package Controladores;
 
 import Clases.Conexion;
 import Objetos.Tiempo;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Tiempo_Controller {
 
@@ -17,6 +20,25 @@ public class Tiempo_Controller {
         } catch (SQLException ex) {
             return false;
         }
+    }
+
+    public int est_prev(int id_factura) {
+        int area = 0;
+        String sql = "SELECT id_estado_prev\n"
+                + "FROM trebol_tiempos AS tt\n"
+                + "WHERE id_factura = " + id_factura + "\n"
+                + "ORDER BY creacion DESC\n"
+                + "LIMIT 1;";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            while (datos.next()) {
+                area = datos.getInt("id_estado_prev");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Logs_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            area = 0;
+        }
+        return area;
     }
 
 }

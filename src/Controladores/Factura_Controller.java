@@ -301,5 +301,22 @@ public class Factura_Controller {
             return false;
         }
     }
+    
 
+    public int id_area_factura(int id_factura) {
+        int id_area = 0;
+        String sql = "SELECT DISTINCT id_area\n"
+                + "FROM trebol_facturas\n"
+                + "WHERE id =" + id_factura + ";";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            while (datos.next()) {
+                id_area = datos.getInt("id_area");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            id_area = 0;
+        }
+        return id_area;
+    }
 }

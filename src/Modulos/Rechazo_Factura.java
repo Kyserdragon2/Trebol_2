@@ -169,8 +169,13 @@ public class Rechazo_Factura extends javax.swing.JInternalFrame {
         cmbarea.addItem("---");
         switch (UC.id_area_usuario(Principal.lbluser.getText())) {
             case 1:
-                R.motivos_rechazo(cmbmotivo, "1,2");
-                R.proceso_rechazo(cmbarea, "1,2");
+                if (FC.id_estado_factura(Integer.parseInt(lblid.getText())) == 2) {
+                    R.motivos_rechazo(cmbmotivo, "1,2");
+                    R.proceso_rechazo(cmbarea, "1,2");
+                } else if (FC.id_estado_factura(Integer.parseInt(lblid.getText())) == 8) {
+                    R.motivos_rechazo(cmbmotivo, "1");
+                    R.proceso_rechazo(cmbarea, "1");
+                }
                 break;
             case 2:
             case 3:
@@ -249,7 +254,7 @@ public class Rechazo_Factura extends javax.swing.JInternalFrame {
                         }
                         break;
                     case 2:
-                        id_gestion = LC.area_creacion_fact(id_factura, 8);
+                        id_gestion = FC.id_area_factura(id_factura);
                         switch (est_prev) {
                             case 4:
                             case 5:
@@ -340,7 +345,7 @@ public class Rechazo_Factura extends javax.swing.JInternalFrame {
                         }
                         break;
                     case 2:
-                        id_gestion = LC.area_creacion_fact(id_factura, 8);
+                        id_gestion = FC.id_area_factura(id_factura);
                         switch (est_prev) {
                             case 4:
                             case 5:

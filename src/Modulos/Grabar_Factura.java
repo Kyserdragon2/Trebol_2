@@ -276,7 +276,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         txtnf.setMinimumSize(new java.awt.Dimension(6, 26));
         txtnf.setPreferredSize(new java.awt.Dimension(6, 26));
         jpgf.add(txtnf);
-        txtnf.setBounds(220, 60, 100, 26);
+        txtnf.setBounds(220, 60, 150, 26);
 
         txtccorresp.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         txtccorresp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -444,7 +444,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         lblvalor.setText("Valor");
         lblvalor.setPreferredSize(new java.awt.Dimension(35, 26));
         jpgf.add(lblvalor);
-        lblvalor.setBounds(355, 60, 100, 26);
+        lblvalor.setBounds(415, 60, 40, 26);
 
         lbltipofact.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbltipofact.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -768,7 +768,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         lblrequerido2.setForeground(new java.awt.Color(204, 0, 51));
         lblrequerido2.setText("*");
         jpgf.add(lblrequerido2);
-        lblrequerido2.setBounds(325, 60, 10, 20);
+        lblrequerido2.setBounds(375, 60, 10, 20);
 
         lblrequerido3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblrequerido3.setForeground(new java.awt.Color(204, 0, 51));
