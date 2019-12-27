@@ -8,8 +8,10 @@ import Objetos.Sistema_UNO;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import jcifs.smb.SmbFile;
 
-public class Suno_controller {
+public class Suno_controller2 {
 
     Conexion cc = new Conexion();
 
@@ -74,6 +76,24 @@ public class Suno_controller {
         return ub;
     }
 
+    public boolean existe_documento_suno_multi(int id_empresa, int id_tipo_doc, String consecutivo) {
+        boolean ub = false;
+        String sql;
+        sql = "SELECT *\n"
+                + "FROM trebol_sistema_uno\n"
+                + "WHERE id_empresa = " + id_empresa + "\n"
+                + "AND id_tipo_doc =" + id_tipo_doc + "\n"
+                + "AND consecutivo =" + consecutivo + ";";
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            ub = rs.next();
+        } catch (SQLException e) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return ub;
+    }
+
     public String ubicacion_documento(String no_factura, String nit, int id_empresa, int id_tipo_doc) {
         String ub = "";
         String sql;
@@ -99,6 +119,72 @@ public class Suno_controller {
             }
         } catch (SQLException e) {
             Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return ub;
+    }
+
+    public String ubicacion_documento_multi(int id_empresa, int id_tipo_doc, String consecutivo) {
+        String ub = "";
+        String sql;
+        sql = "SELECT *\n"
+                + "FROM trebol_sistema_uno\n"
+                + "WHERE id_empresa =" + id_empresa + "\n"
+                + "AND id_tipo_doc =" + id_tipo_doc + "\n"
+                + "AND consecutivo =" + consecutivo + ";";
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                ub = rs.getString("ubicacion");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return ub;
+    }
+
+    public String ubicacion_documento_txt(String no_factura, String nit, int id_empresa, int id_tipo_doc, String doc) {
+        String ub = "", ub2, ub3;
+        String sql;
+        if (no_factura.equals("")) {
+            sql = "SELECT *\n"
+                    + "FROM trebol_sistema_uno\n"
+                    + "WHERE nit LIKE '" + nit + "'\n"
+                    + "AND id_empresa = " + id_empresa + "\n"
+                    + "AND id_tipo_doc =" + id_tipo_doc + ";";
+        } else {
+            sql = "SELECT *\n"
+                    + "FROM trebol_sistema_uno\n"
+                    + "WHERE nit LIKE '" + nit + "'\n"
+                    + "AND no_factura LIKE '" + no_factura + "'"
+                    + "AND id_empresa = " + id_empresa + "\n"
+                    + "AND id_tipo_doc =" + id_tipo_doc + ";";
+        }
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                SmbFile fs = new SmbFile("smb:" + rs.getString("ubicacion"));
+                ub2 = fs.getParent();
+                switch (id_empresa) {
+                    case 1:
+                        ub3 = ub2.replace("Aviomar/" + doc, "") + "TXT/Aviomar/" + doc;
+                        ub = ub3 + "/" + fs.getName().replaceAll(".pdf", ".txt");
+                        break;
+                    case 2:
+                        ub3 = ub2.replace("Colvan/" + doc, "") + "TXT/Colvan/" + doc;
+                        ub = ub3 + "/" + fs.getName().replaceAll(".pdf", ".txt");
+                        break;
+                    case 3:
+                        ub3 = ub2.replace("Snider/" + doc, "") + "TXT/Snider/" + doc;
+                        ub = ub3 + "/" + fs.getName().replaceAll(".pdf", ".txt");
+                        break;
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, e);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Suno_controller2.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ub;
     }
@@ -137,7 +223,7 @@ public class Suno_controller {
             File ruta = new File(ubicacion);
             Desktop.getDesktop().open(ruta);
         } catch (IOException ex) {
-            Logger.getLogger(Suno_controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Suno_controller2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

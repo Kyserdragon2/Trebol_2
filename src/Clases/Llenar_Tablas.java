@@ -271,6 +271,7 @@ public class Llenar_Tablas {
                     + "AND te.nom_estado LIKE '%" + estado + "%'\n"
                     + "AND ta2.nombre_area LIKE '%" + asignado + "'\n"
                     + "AND MONTH(tf.`creacion`) LIKE '%" + mes + "%'\n"
+                    + "AND (tprog.`activo`= 1||tprog.`activo` IS NULL)\n"
                     + "GROUP BY tf.id\n"
                     + "ORDER BY vence DESC,tf.fecha_venc ASC,programada DESC, tprog.`fecha_prog` ASC;";
         } else {
@@ -296,6 +297,7 @@ public class Llenar_Tablas {
                     + "AND ta2.nombre_area LIKE '%" + asignado + "'\n"
                     + "AND tr.`id_usuario` LIKE '%" + id_rev + "%'"
                     + "AND MONTH(tf.`creacion`) LIKE '%" + mes + "%'\n"
+                    + "AND (tprog.`activo`= 1||tprog.`activo` IS NULL)\n"
                     + "GROUP BY tf.id\n"
                     + "ORDER BY vence DESC,tf.fecha_venc ASC,programada DESC, tprog.`fecha_prog` ASC;";
 

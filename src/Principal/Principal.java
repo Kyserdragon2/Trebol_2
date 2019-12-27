@@ -27,6 +27,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Calendar calendario;                                                            //crea la variable calendario con las propiedades de la libreria Calendar 
     Thread h1;
     Grabar_Factura GF;
+    Confirmacion_Multi CM;
     Gestionar_Factura GestF;
     Detalles_Factura DetFact;
     Renderizado R = new Renderizado();
@@ -738,6 +739,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btngestmult.setDoubleBuffered(true);
         btngestmult.setFocusPainted(false);
         btngestmult.setPreferredSize(new java.awt.Dimension(100, 52));
+        btngestmult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btngestmultActionPerformed(evt);
+            }
+        });
         jpmenu.add(btngestmult);
         btngestmult.setBounds(12, 185, 110, 45);
 
@@ -1061,6 +1067,31 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private void txtnfbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnfbKeyReleased
         filtros();
     }//GEN-LAST:event_txtnfbKeyReleased
+
+    private void btngestmultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngestmultActionPerformed
+        int[] selectedRows = Principal.jtfacturas.getSelectedRows();
+        if (selectedRows.length == 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione una o más Facturas");
+        } else {
+            if (CM == null) {
+                CM = new Confirmacion_Multi();
+                Principal.Escritorio.add(CM);
+            }
+            Principal.Escritorio.setSelectedFrame(CM);
+            try {
+                if (CM.isIcon()) {
+                    CM.setIcon(false);
+                } else if (CM.isShowing()) {
+                    CM.toFront();
+                } else {
+                    CM.setBounds(220, 135, 625, 325);
+                    CM.setVisible(true);
+                }
+            } catch (PropertyVetoException e) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }//GEN-LAST:event_btngestmultActionPerformed
 
     /**
      * @param args the command line arguments

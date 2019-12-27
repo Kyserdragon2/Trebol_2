@@ -33,7 +33,7 @@ public final class Precargar_Anticipos extends javax.swing.JInternalFrame {
     Manipuacion_Documentos MD = new Manipuacion_Documentos();
     Notificaciones_Sistema NS = new Notificaciones_Sistema();
     TipoFactura_Controller TFC = new TipoFactura_Controller();
-    Suno_controller suno = new Suno_controller();
+    Suno_controller2 suno = new Suno_controller2();
 
     public Precargar_Anticipos() {
         initComponents();

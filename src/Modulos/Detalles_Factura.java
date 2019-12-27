@@ -825,10 +825,10 @@ public class Detalles_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 11:
-                    if (DC.existe_documento("Causacion en Dolares", idfact)) {
-                        btnSU.setEnabled(true);
+                    if (DC.existe_documento("Comprobante de Egreso", idfact)) {
+                        btnCE.setEnabled(true);
                     } else {
-                        btnSU.setEnabled(false);
+                        btnCE.setEnabled(false);
                     }
                     break;
                 case 12:
@@ -839,21 +839,21 @@ public class Detalles_Factura extends javax.swing.JInternalFrame {
                     }
                 case 13:
                     if (DC.existe_documento("Transferencia Bancaria", idfact)) {
-                        btnTV.setEnabled(true);
+                        btnTB.setEnabled(true);
                     } else {
-                        btnTV.setEnabled(false);
+                        btnTB.setEnabled(false);
                     }
                 case 14:
                     if (DC.existe_documento("Causacion en Dolares", idfact)) {
-                        btnTV.setEnabled(true);
+                        btnSU.setEnabled(true);
                     } else {
-                        btnTV.setEnabled(false);
+                        btnSU.setEnabled(false);
                     }
                 case 15:
                     if (DC.existe_documento("Comprobante de Pago", idfact)) {
-                        btnTV.setEnabled(true);
+                        btnCP.setEnabled(true);
                     } else {
-                        btnTV.setEnabled(false);
+                        btnCP.setEnabled(false);
                     }
                     break;
             }

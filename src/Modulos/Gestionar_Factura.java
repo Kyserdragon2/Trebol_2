@@ -40,7 +40,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     Aprobacion_Controller ApC = new Aprobacion_Controller();
     Anticipo_Factura_Controller AntfC = new Anticipo_Factura_Controller();
     Anticipo_Controller AntC = new Anticipo_Controller();
-    Suno_controller suno = new Suno_controller();
+    Suno_controller2 suno = new Suno_controller2();
     Revision_Controller RC = new Revision_Controller();
     Programacion_Controller ProgC = new Programacion_Controller();
     Firmas signature = new Firmas();
@@ -2221,19 +2221,15 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbOpc1ActionPerformed
 
     private void jrbOpc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbOpc2ActionPerformed
-        int id_factura = Integer.parseInt(lblid.getText());
-        String fecha_prog = ProgC.fecha_programada(id_factura);
-        if (!fecha_prog.equals("")) {
-            jrbOpc1.setSelected(false);
-            jdcprogramar.setEnabled(false);
-            btnarchivo.setEnabled(true);
-            btneliminarcp.setEnabled(false);
-            btnmodificarcp.setEnabled(false);
-            btncargarcp.setEnabled(true);
-            btnaceptarcp.setVisible(false);
-            btncancelarcp.setVisible(false);
-            btnok.setText("Confirmar Pago");
-        }
+        jrbOpc1.setSelected(false);
+        jdcprogramar.setEnabled(false);
+        btnarchivo.setEnabled(true);
+        btneliminarcp.setEnabled(false);
+        btnmodificarcp.setEnabled(false);
+        btncargarcp.setEnabled(true);
+        btnaceptarcp.setVisible(false);
+        btncancelarcp.setVisible(false);
+        btnok.setText("Confirmar Pago");
     }//GEN-LAST:event_jrbOpc2ActionPerformed
 
     private void btnarchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnarchivoActionPerformed
@@ -2619,7 +2615,15 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         int id_usuario = UC.id_usuario(Principal.lbluser.getText());
         int id_factura = Integer.parseInt(lblid.getText());
         if (ProgC.crear_programacion(id_factura, id_usuario, fecha_prog)) {
-            System.out.println("Creada la Programacion");
+            FC.cambiar_estado_factura(lblnfact.getText(), PC.id_proveedor(lblproveedor.getText()), EMPC.id_empresa(lblempresa.getText()), 10);
+            if (!tacomentario2.getText().equals("")) {
+                CC.crear_comentario(0, id_usuario, id_factura, 10, tacomentario2.getText());
+                int com = CC.id_comentario(id_factura, id_usuario, 10, tacomentario2.getText());
+                LC.crear_log(id_usuario, id_factura, com, 10);
+            } else {
+                LC.crear_log(id_usuario, id_factura, 0, 10);
+            }
+            TC.crear_tiempo(id_usuario, id_factura, 9, 10);
         } else {
             System.out.println("error");
         }
@@ -3298,7 +3302,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     tipo_doc = "Comprobante de Egreso";
                 }
                 id_tipo_doc = TDC.id_tipo_doc(tipo_doc);
-                ruta_doc = suno.ubicacion_documento(no_factura, nit, id_empresa, id_tipo_doc);
+                ruta_doc = suno.ubicacion_documento("", nit, id_empresa, id_tipo_doc);
                 ruta_nueva = DC.ubicacion_documento("Factura", id_factura);
                 if (suno.existe_documento_suno(nit, id_empresa, id_tipo_doc, cons)) {
                     MD.Cargar_Documento(no_factura, proveedor, empresa, tipo_doc, ruta_doc, id_tipo_doc, cons, id_proveedor, id_empresa);
@@ -3314,7 +3318,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             case 2:
                 String ubicacion;
                 nit = PC.nit_proveedor(lblproveedor.getText());
-                ubicacion = suno.ubicacion_documento(no_factura, nit, id_empresa, id_tipo_doc);
+                ubicacion = suno.ubicacion_documento("", nit, id_empresa, id_tipo_doc);
                 suno.ver_documento(ubicacion);
                 break;
             case 3:
