@@ -466,6 +466,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         tacomentario.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         tacomentario.setLineWrap(true);
         tacomentario.setRows(3);
+        tacomentario.setToolTipText("");
         tacomentario.setWrapStyleWord(true);
         tacomentario.setBorder(null);
         tacomentario.setDisabledTextColor(new java.awt.Color(255, 255, 255));
@@ -978,7 +979,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         lblnodata.setText("<html><div align=\"center\">No existen Anticipos Precargados para este proveedor</div></html>");
         lblnodata.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jpant.add(lblnodata);
-        lblnodata.setBounds(40, 50, 320, 80);
+        lblnodata.setBounds(40, 65, 320, 80);
 
         panelcontabilidad.add(jpant);
         jpant.setBounds(10, 60, 400, 200);
@@ -2506,6 +2507,8 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 13, 5)) {
                 RC.crear_revision(id_factura, usuario_reviza);
                 registro_procedimiento(no_factura, id_factura, id_usuario, 4, 13, tacomentario1.getText(), 5, id_empresa, "Factura por Revizar");
+                cmbRcont.setSelectedIndex(0);
+                tacomentario1.setText("");
                 Principal.btnactualizar.doClick();
                 NS.notificaciones("Contabilización Factura", "La Factura " + lblnfact.getText() + " fue enviada a Revisión.", "correcto");
                 this.doDefaultCloseAction();

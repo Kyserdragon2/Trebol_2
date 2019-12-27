@@ -217,6 +217,7 @@ public class Llenar_Tablas {
      *
      * @param tabla
      * @param area
+     * @param no_factura
      * @param proveedor
      * @param empresa
      * @param estado
@@ -224,7 +225,7 @@ public class Llenar_Tablas {
      * @param id_rev
      * @param mes
      */
-    public void Facturas(JTable tabla, int area, String proveedor, String empresa, String estado, String asignado, String id_rev, String mes) {
+    public void Facturas(JTable tabla, int area, String no_factura, String proveedor, String empresa, String estado, String asignado, String id_rev, String mes) {
         Color H = new Color(75, 156, 109);
         Color T = new Color(255, 255, 255);
         Color CB = new Color(255, 255, 255);
@@ -264,6 +265,7 @@ public class Llenar_Tablas {
                     + "LEFT JOIN trebol_documentos AS td ON td.`id_factura`=tf.`id`\n"
                     + "LEFT JOIN trebol_programaciones AS tprog ON tprog.`id_factura`=tf.`id`\n"
                     + "WHERE te.`id` IN (" + estados + ")\n"
+                    + "AND tf.`no_factura` LIKE '%" + no_factura + "%'\n"
                     + "AND tp.razon_social LIKE '%" + proveedor + "%'\n"
                     + "AND tem.`nom_empresa` LIKE '%" + empresa + "%'\n"
                     + "AND te.nom_estado LIKE '%" + estado + "%'\n"
@@ -287,6 +289,7 @@ public class Llenar_Tablas {
                     + "LEFT JOIN trebol_documentos AS td ON td.`id_factura`=tf.`id`\n"
                     + "LEFT JOIN trebol_programaciones AS tprog ON tprog.`id_factura`=tf.`id`\n"
                     + "WHERE te.`id` IN (" + estados + ")\n"
+                    + "AND tf.`no_factura` LIKE '%" + no_factura + "%'\n"
                     + "AND tp.razon_social LIKE '%" + proveedor + "%'\n"
                     + "AND tem.`nom_empresa` LIKE '%" + empresa + "%'\n"
                     + "AND te.nom_estado LIKE '%" + estado + "%'\n"
@@ -359,31 +362,31 @@ public class Llenar_Tablas {
                 tabla.getColumnModel().getColumn(i).setHeaderRenderer(new Encabezado_Tabla(H, T, tabla.getTableHeader().getDefaultRenderer(), 15));
             }
 
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(115);
-            tabla.getColumnModel().getColumn(1).setPreferredWidth(90);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(110);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(94);
             tabla.getColumnModel().getColumn(2).setPreferredWidth(72);
             tabla.getColumnModel().getColumn(3).setPreferredWidth(75);
             tabla.getColumnModel().getColumn(4).setPreferredWidth(73);
-            tabla.getColumnModel().getColumn(5).setPreferredWidth(95);
-            tabla.getColumnModel().getColumn(6).setPreferredWidth(135);
-            tabla.getColumnModel().getColumn(7).setPreferredWidth(90);
+            tabla.getColumnModel().getColumn(5).setPreferredWidth(85);
+            tabla.getColumnModel().getColumn(6).setPreferredWidth(133);
+            tabla.getColumnModel().getColumn(7).setPreferredWidth(88);
             tabla.getColumnModel().getColumn(8).setPreferredWidth(80);
-            tabla.getColumnModel().getColumn(9).setPreferredWidth(65);
-            tabla.getColumnModel().getColumn(10).setPreferredWidth(65);
-            tabla.getColumnModel().getColumn(11).setPreferredWidth(220);
+            tabla.getColumnModel().getColumn(9).setPreferredWidth(60);
+            tabla.getColumnModel().getColumn(10).setPreferredWidth(75);
+            tabla.getColumnModel().getColumn(11).setPreferredWidth(230);
 
-            tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(4).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(5).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(6).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
+            tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
+            tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
+            tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
+            tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
+            tabla.getColumnModel().getColumn(4).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
+            tabla.getColumnModel().getColumn(5).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
+            tabla.getColumnModel().getColumn(6).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
             tabla.getColumnModel().getColumn(7).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(8).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 8, 12));
-            tabla.getColumnModel().getColumn(9).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(10).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 12));
-            tabla.getColumnModel().getColumn(11).setCellRenderer(ajustartabla = new Multilinea_en_Tabla(11, 12));
+            tabla.getColumnModel().getColumn(8).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 8, 14));
+            tabla.getColumnModel().getColumn(9).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
+            tabla.getColumnModel().getColumn(10).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 5, 13));
+            tabla.getColumnModel().getColumn(11).setCellRenderer(ajustartabla = new Multilinea_en_Tabla(11, 13));
 
         } catch (SQLException ex) {
             Logger.getLogger(Llenar_Tablas.class.getName()).log(Level.SEVERE, null, ex);

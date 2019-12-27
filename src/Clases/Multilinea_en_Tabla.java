@@ -31,7 +31,7 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
         setLineWrap(true);
         setWrapStyleWord(true);
         setOpaque(true);
-        this.font = new Font("Calibri", Font.BOLD, font_tam);
+        this.font = new Font("Calibri", 3, font_tam);
         this.columna = col;
     }
 
@@ -39,7 +39,7 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
         if (str.length() < MAX_LEN) {
             return str;
         } else {
-            return str.substring(0, MAX_LEN - 10) + "...";
+            return str.substring(0, MAX_LEN) + "...";
         }
     }
 
@@ -53,7 +53,7 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                 setBackground(UIManager.getColor("Table.focusCellBackground"));
             }
         } else {
-            setBorder(new EmptyBorder(1, 2, 1, 2));
+            setBorder(new EmptyBorder(2, 2, 2, 2));
         }
         if (value != null) {
             setText(shortener(value.toString()));
@@ -188,18 +188,18 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                             int dias = (int) ((d2.getTime() - d1.getTime()) / 86400000);
                             if (dias < 0) {
                                 if (isSelected) {
-                                    this.setBackground(new Color(168, 0, 0));
-                                    this.setForeground(new Color(255, 255, 255));
+                                    this.setBackground(new Color(255, 147, 147));
+                                    this.setForeground(new Color(0, 0, 0));
                                 } else {
                                     this.setBackground(new Color(255, 193, 193));
                                     this.setForeground(new Color(0, 0, 0));
                                 }
                             } else if (dias >= 0 && dias < 3) {
                                 if (isSelected) {
-                                    this.setBackground(new Color(209, 155, 0));
+                                    this.setBackground(new Color(227, 191, 94));
                                     this.setForeground(new Color(0, 0, 0));
                                 } else {
-                                    this.setBackground(new Color(255, 220, 117));
+                                    this.setBackground(new Color(255, 226, 147));
                                     this.setForeground(new Color(0, 0, 0));
                                 }
                             } else {
@@ -225,18 +225,18 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                                 int dias = (int) ((d2.getTime() - d1.getTime()) / 86400000);
                                 if (dias < 0) {
                                     if (isSelected) {
-                                        this.setBackground(new Color(168, 0, 0));
-                                        this.setForeground(new Color(255, 255, 255));
+                                        this.setBackground(new Color(255, 147, 147));
+                                        this.setForeground(new Color(0, 0, 0));
                                     } else {
                                         this.setBackground(new Color(255, 193, 193));
                                         this.setForeground(new Color(0, 0, 0));
                                     }
                                 } else if (dias >= 0 && dias < 3) {
                                     if (isSelected) {
-                                        this.setBackground(new Color(209, 155, 0));
+                                        this.setBackground(new Color(227, 191, 94));
                                         this.setForeground(new Color(0, 0, 0));
                                     } else {
-                                        this.setBackground(new Color(255, 220, 117));
+                                        this.setBackground(new Color(255, 226, 147));
                                         this.setForeground(new Color(0, 0, 0));
                                     }
                                 } else {

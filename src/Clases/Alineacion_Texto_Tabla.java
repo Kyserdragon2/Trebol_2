@@ -28,7 +28,7 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
         this.alineacion = align;
         this.background = background;
         this.foreground = foreground;
-        this.font = new Font("Calibri", Font.BOLD, font_tam);
+        this.font = new Font("Calibri", 3, font_tam);
         this.columna = col;
     }
 
@@ -129,18 +129,18 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                         int dias = (int) ((d2.getTime() - d1.getTime()) / 86400000);
                         if (dias < 0) {
                             if (isSelected) {
-                                this.setBackground(new Color(168, 0, 0));
-                                this.setForeground(new Color(255, 255, 255));
+                                this.setBackground(new Color(255, 147, 147));
+                                this.setForeground(new Color(0, 0, 0));
                             } else {
-                                this.setBackground(new Color(255, 193, 193));
+                                this.setBackground(new Color(255, 217, 142));
                                 this.setForeground(new Color(0, 0, 0));
                             }
                         } else if (dias >= 0 && dias < 3) {
                             if (isSelected) {
-                                this.setBackground(new Color(209, 155, 0));
+                                this.setBackground(new Color(227, 191, 94));
                                 this.setForeground(new Color(0, 0, 0));
                             } else {
-                                this.setBackground(new Color(255, 220, 117));
+                                this.setBackground(new Color(255, 226, 147));
                                 this.setForeground(new Color(0, 0, 0));
                             }
                         } else {
@@ -166,18 +166,18 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                             int dias = (int) ((d2.getTime() - d1.getTime()) / 86400000);
                             if (dias < 0) {
                                 if (isSelected) {
-                                    this.setBackground(new Color(168, 0, 0));
-                                    this.setForeground(new Color(255, 255, 255));
+                                    this.setBackground(new Color(255, 147, 147));
+                                    this.setForeground(new Color(0, 0, 0));
                                 } else {
                                     this.setBackground(new Color(255, 193, 193));
                                     this.setForeground(new Color(0, 0, 0));
                                 }
                             } else if (dias >= 0 && dias < 3) {
                                 if (isSelected) {
-                                    this.setBackground(new Color(209, 155, 0));
+                                    this.setBackground(new Color(227, 191, 94));
                                     this.setForeground(new Color(0, 0, 0));
                                 } else {
-                                    this.setBackground(new Color(255, 220, 117));
+                                    this.setBackground(new Color(255, 226, 147));
                                     this.setForeground(new Color(0, 0, 0));
                                 }
                             } else {
@@ -223,16 +223,16 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                         this.setBackground(new Color(102, 76, 0));
                         this.setForeground(new Color(255, 233, 168));
                     } else {
-                        this.setBackground(new Color(255, 220, 117));
-                        this.setForeground(new Color(102, 76, 0));
+                        this.setBackground(new Color(227, 191, 94));
+                        this.setForeground(new Color(75, 58, 5));
                     }
                     break;
                 case "Revisión":
                     if (isSelected) {
                         this.setBackground(new Color(81, 81, 0));
-                        this.setForeground(new Color(223, 223, 179));
+                        this.setForeground(new Color(194, 221, 0));
                     } else {
-                        this.setBackground(new Color(193, 193, 0));
+                        this.setBackground(new Color(194, 221, 0));
                         this.setForeground(new Color(81, 81, 0));
                     }
                     break;

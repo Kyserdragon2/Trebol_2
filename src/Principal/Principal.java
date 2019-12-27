@@ -65,10 +65,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         R.empresa(cmbempresa);
         btnactualizar.setVisible(false);
         jrbPropias.setSelected(true);
-        SimpleDateFormat mes = new SimpleDateFormat("MMMM");
-        cmbMes.setSelectedItem(mes.format(new Date()));
+        SimpleDateFormat mes = new SimpleDateFormat("MM");
+        cmbMes.setSelectedIndex(Integer.parseInt(mes.format(new Date())));
         render();
         filtros();
+        llenar_cmb();
     }
 
     @Override
@@ -282,11 +283,17 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         jLabel7.setBounds(20, 70, 90, 26);
 
         txtnfb.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtnfb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtnfb.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black));
         txtnfb.setMaximumSize(new java.awt.Dimension(216, 26));
         txtnfb.setMinimumSize(new java.awt.Dimension(216, 26));
         txtnfb.setName(""); // NOI18N
         txtnfb.setPreferredSize(new java.awt.Dimension(216, 26));
+        txtnfb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtnfbKeyReleased(evt);
+            }
+        });
         jPanel5.add(txtnfb);
         txtnfb.setBounds(120, 70, 270, 26);
 
@@ -614,7 +621,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         Escritorio.add(jrbretiradas);
         jrbretiradas.setBounds(1090, 170, 110, 25);
 
-        jLabel2.setBackground(new java.awt.Color(255, 220, 117));
+        jLabel2.setBackground(new java.awt.Color(255, 226, 147));
         jLabel2.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jLabel2.setOpaque(true);
         Escritorio.add(jLabel2);
@@ -705,7 +712,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnlotep.setText("<html><p align='center'>Lotes<br>de Pago</p></html>");
         btnlotep.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnlotep.setDoubleBuffered(true);
-        btnlotep.setEnabled(false);
         btnlotep.setFocusPainted(false);
         btnlotep.setPreferredSize(new java.awt.Dimension(100, 52));
         jpmenu.add(btnlotep);
@@ -730,7 +736,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btngestmult.setText("<html><div align='center'>Gestión<br>Multiple</div></html>");
         btngestmult.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btngestmult.setDoubleBuffered(true);
-        btngestmult.setEnabled(false);
         btngestmult.setFocusPainted(false);
         btngestmult.setPreferredSize(new java.awt.Dimension(100, 52));
         jpmenu.add(btngestmult);
@@ -793,11 +798,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnSUNO.setDoubleBuffered(true);
         btnSUNO.setFocusPainted(false);
         btnSUNO.setPreferredSize(new java.awt.Dimension(100, 52));
-        btnSUNO.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSUNOActionPerformed(evt);
-            }
-        });
         jpmenu.add(btnSUNO);
         btnSUNO.setBounds(12, 285, 110, 45);
 
@@ -1058,9 +1058,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_abrirubActionPerformed
 
-    private void btnSUNOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUNOActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSUNOActionPerformed
+    private void txtnfbKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnfbKeyReleased
+        filtros();
+    }//GEN-LAST:event_txtnfbKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1096,9 +1096,17 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }
 
     public void render() {
+        R.cmbcentrado(cmbMes);
+        R.cmbcentrado(cmbempresa);
+        R.cmbcentrado(cmbestado);
+        R.cmbcentrado(cmbproveedor);
+        R.cmbcentrado(cmbasignado);
+        R.cmbcentrado(cmbfunrev);
+        R.jdccentrado(jdcdesde);
+        R.jdccentrado(jdchasta);
         cmbempresa.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                filtros();
+                filtrar(cmbempresa);
             }
         });
         cmbproveedor.addItemListener((ItemEvent e) -> {
@@ -1255,7 +1263,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }
 
     public void filtros() {
-        String empresa, proveedor, factura, estado, mes, asignado, frev;
+        String empresa, proveedor, no_factura, estado, mes, asignado, frev;
         if (cmbproveedor.getSelectedItem().toString().equals("---")) {
             proveedor = "";
         } else {
@@ -1282,9 +1290,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             mes = "" + cmbMes.getSelectedIndex();
         }
         if (txtnfb.getText().equals("")) {
-            factura = "";
+            no_factura = "";
         } else {
-            factura = txtnfb.getText();
+            no_factura = txtnfb.getText();
         }
         if (cmbfunrev.getSelectedItem().toString().equals("---")) {
             frev = "";
@@ -1293,23 +1301,23 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             frev = String.valueOf(usuario);
         }
         if (jrbPropias.isSelected()) {
-            LT.Facturas(jtfacturas, 1, proveedor, empresa, estado, asignado, frev, mes);
-            lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
+            LT.Facturas(jtfacturas, 1, no_factura, proveedor, empresa, estado, asignado, frev, mes);
             if (!lbluser.getText().equals("null")) {
                 datousuario(lbluser.getText());
             }
+            lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
         } else if (jrbtodas.isSelected()) {
-            LT.Facturas(jtfacturas, 2, proveedor, empresa, estado, asignado, frev, mes);
+            LT.Facturas(jtfacturas, 2, no_factura, proveedor, empresa, estado, asignado, frev, mes);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbempresa.setEnabled(true);
         } else if (jrbFinalizadas.isSelected()) {
-            LT.Facturas(jtfacturas, 3, proveedor, empresa, estado, asignado, frev, mes);
+            LT.Facturas(jtfacturas, 3, no_factura, proveedor, empresa, estado, asignado, frev, mes);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbempresa.setEnabled(true);
         } else if (jrbretiradas.isSelected()) {
-            LT.Facturas(jtfacturas, 4, proveedor, empresa, estado, asignado, frev, mes);
+            LT.Facturas(jtfacturas, 4, no_factura, proveedor, empresa, estado, asignado, frev, mes);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbempresa.setEnabled(true);
@@ -1328,6 +1336,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnpreant.setEnabled(false);
         btnusuarios.setEnabled(false);
         btngf.setEnabled(false);
+        btngestmult.setEnabled(false);
+        btnlotep.setEnabled(false);
         switch (UC.area_usuario(usuario)) {
             case "Administrativo":
                 cmbfunrev.setSelectedIndex(0);
@@ -1367,6 +1377,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 cmbempresa.setEnabled(true);
                 cmbempresa.setSelectedIndex(0);
                 btnpreant.setEnabled(true);
+                btngestmult.setEnabled(true);
                 break;
             case "AdminTrebol":
                 btnpreant.setEnabled(true);
@@ -1377,6 +1388,8 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 btnconv.setEnabled(true);
                 btnlotep.setEnabled(true);
                 cmbfunrev.setEnabled(true);
+                btngestmult.setEnabled(true);
+                btnlotep.setEnabled(true);
                 break;
         }
     }
@@ -1414,7 +1427,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         }
         cmbproveedor.setSelectedIndex(0);
         cmbestado.setSelectedIndex(0);
-        cmbMes.setSelectedIndex(0);
         txtnfb.setText("");
         cmbempresa.setSelectedIndex(0);
         filtrofechas.clearSelection();
@@ -1473,7 +1485,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         String rs = cmbproveedor.getSelectedItem().toString();
         String est = cmbestado.getSelectedItem().toString();
         String asg = cmbasignado.getSelectedItem().toString();
-        String emp = cmbempresa.getSelectedItem().toString();
         if (cmbproveedor.getItemCount() == 1) {
             CA.llenar_cmb_tabla(cmbproveedor, jtfacturas, 11);
             cmbproveedor.setSelectedItem(rs);
@@ -1482,7 +1493,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             CA.llenar_cmb_tabla(cmbestado, jtfacturas, 8);
             cmbestado.setSelectedItem(est);
             cmbasignado.setSelectedItem(asg);
-            cmbempresa.setSelectedItem(emp);
         }
 
         if (cmbasignado.getItemCount() == 1) {
@@ -1493,20 +1503,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             CA.llenar_cmb_tabla(cmbestado, jtfacturas, 8);
             cmbproveedor.setSelectedItem(rs);
             cmbestado.setSelectedItem(est);
-            cmbempresa.setSelectedItem(emp);
         }
-
-        if (cmbempresa.getItemCount() == 1) {
-            cmbempresa.setSelectedItem(emp);
-        } else {
-            CA.llenar_cmb_tabla(cmbproveedor, jtfacturas, 11);
-            CA.llenar_cmb_tabla(cmbasignado, jtfacturas, 7);
-            CA.llenar_cmb_tabla(cmbestado, jtfacturas, 8);
-            cmbproveedor.setSelectedItem(rs);
-            cmbestado.setSelectedItem(est);
-            cmbasignado.setSelectedItem(asg);
-        }
-
         if (cmbestado.getItemCount() == 1) {
             CA.llenar_cmb_tabla(cmbestado, jtfacturas, 8);
             cmbestado.setSelectedItem(est);
@@ -1515,7 +1512,6 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             CA.llenar_cmb_tabla(cmbasignado, jtfacturas, 7);
             cmbproveedor.setSelectedItem(rs);
             cmbasignado.setSelectedItem(asg);
-            cmbempresa.setSelectedItem(emp);
         }
     }
 
