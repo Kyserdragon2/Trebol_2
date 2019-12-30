@@ -2453,7 +2453,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             int id_factura = Integer.parseInt(lblid.getText());
             if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 2, 1)) {
                 procedimiento_anticipo(id_factura);
-                registro_procedimiento(no_factura, id_factura, id_usuario, 8, 2, tacomentario.getText(), 1, 0, "Factura pendiente de Aprobar");
+                registro_procedimiento(no_factura, id_factura, id_usuario, 8, 2, tacomentario.getText(), 1, 0, "Factura pendiente de Aprobar", 1);
                 ApC.crear_aprobacion(id_factura, 1);
                 Principal.btnactualizar.doClick();
                 NS.notificaciones("Gestión Factura", "La Factura " + lblnfact.getText() + " fue enviada para su respectiva aprobacion.", "correcto");
@@ -2480,7 +2480,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             signature.firmar(DC.ubicacion_documento("Factura", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
             procedimiento_anticipo(id_factura);
             aprobar_factura(2);
-            registro_procedimiento(no_factura, id_factura, id_usuario, 2, 4, tacomentario.getText(), 4, id_empresa, "Factura para Contabilizar");
+            registro_procedimiento(no_factura, id_factura, id_usuario, 2, 4, tacomentario.getText(), 4, id_empresa, "Factura para Contabilizar", 1);
             Principal.btnactualizar.doClick();
             NS.notificaciones("Aprobación Factura", "La Factura " + lblnfact.getText() + " fue enviada a Contabilidad.", "correcto");
             btnlimpiarjcbs.doClick();
@@ -2502,7 +2502,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             int id_factura = Integer.parseInt(lblid.getText());
             if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 13, 5)) {
                 RC.crear_revision(id_factura, usuario_reviza);
-                registro_procedimiento(no_factura, id_factura, id_usuario, 4, 13, tacomentario1.getText(), 5, id_empresa, "Factura por Revizar");
+                registro_procedimiento(no_factura, id_factura, id_usuario, 4, 13, tacomentario1.getText(), 5, id_empresa, "Factura por Revizar", 1);
                 cmbRcont.setSelectedIndex(0);
                 tacomentario1.setText("");
                 Principal.btnactualizar.doClick();
@@ -2544,7 +2544,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 9, 9)) {
                 FC.factura_revisada(id_factura);
                 RC.revizar(id_factura, id_usuario);
-                registro_procedimiento(no_factura, id_factura, id_usuario, 13, 9, tacomentario3.getText(), 9, id_empresa, "Factura Pendiente de Pago");
+                registro_procedimiento(no_factura, id_factura, id_usuario, 13, 9, tacomentario3.getText(), 9, id_empresa, "Factura Pendiente de Pago", 1);
                 Principal.btnactualizar.doClick();
                 NS.notificaciones("Revisión Factura", "La Factura " + lblnfact.getText() + " fue enviada a Tesoreria.", "correcto");
                 this.doDefaultCloseAction();
@@ -2566,8 +2566,13 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         if (!DC.existe_documento("Comprobante de Pago", id_factura)) {
             JOptionPane.showMessageDialog(Principal.Escritorio, "No se ha cargado el comprobante de pago");
         } else {
+            int est_prev = FC.id_estado_factura(id_factura);
             if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 7, 9)) {
-                registro_procedimiento(no_factura, id_factura, id_usuario, 13, 7, tacomentario2.getText(), 9, id_empresa, "Fatura Pagada");
+                if (est_prev == 10) {
+                    registro_procedimiento(no_factura, id_factura, id_usuario, 10, 7, tacomentario2.getText(), 9, id_empresa, "Fatura Pagada", 0);
+                } else if (est_prev == 9) {
+                    registro_procedimiento(no_factura, id_factura, id_usuario, 9, 7, tacomentario2.getText(), 9, id_empresa, "Fatura Pagada", 0);
+                }
                 Principal.btnactualizar.doClick();
                 NS.notificaciones("Confirmación de Pago", "Se confirma el pago de la factura  " + lblnfact.getText() + ".", "correcto");
                 this.doDefaultCloseAction();
@@ -2614,16 +2619,29 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         String fecha_prog = formatoDeFecha.format(jdcprogramar.getDate());
         int id_usuario = UC.id_usuario(Principal.lbluser.getText());
         int id_factura = Integer.parseInt(lblid.getText());
+        String no_factura = lblnfact.getText();
+        int id_usuario_rechazo = UC.id_usuario_rechazo(id_factura);
+        int id_proveedor = PC.id_proveedor(lblproveedor.getText());
+        int id_empresa = EMPC.id_empresa(lblempresa.getText());
+        int id_area_rechazo = AC.id_area_rechazo(id_usuario_rechazo);
+        int estado_prev = EstC.estado_prev(id_usuario_rechazo);
         if (ProgC.crear_programacion(id_factura, id_usuario, fecha_prog)) {
-            FC.cambiar_estado_factura(lblnfact.getText(), PC.id_proveedor(lblproveedor.getText()), EMPC.id_empresa(lblempresa.getText()), 10);
-            if (!tacomentario2.getText().equals("")) {
-                CC.crear_comentario(0, id_usuario, id_factura, 10, tacomentario2.getText());
-                int com = CC.id_comentario(id_factura, id_usuario, 10, tacomentario2.getText());
-                LC.crear_log(id_usuario, id_factura, com, 10);
+            if (FC.cambiar_estado_factura(lblnfact.getText(), id_proveedor, id_empresa, 10)) {
+                registro_procedimiento(no_factura, id_factura, id_usuario, 9, 10, tacomentario2.getText(), 9, id_empresa, "", 0);
+                Principal.btnactualizar.doClick();
+                NS.notificaciones("Programación Factura", "La Factura " + lblnfact.getText() + " ha sido programada.", "correcto");
+                this.doDefaultCloseAction();
             } else {
-                LC.crear_log(id_usuario, id_factura, 0, 10);
+                NS.notificaciones("Programación Factura", "La Factura " + lblnfact.getText() + " no pudo ser programada", "error");
             }
-            TC.crear_tiempo(id_usuario, id_factura, 9, 10);
+//            if (!tacomentario2.getText().equals("")) {
+//                CC.crear_comentario(0, id_usuario, id_factura, 10, tacomentario2.getText());
+//                int com = CC.id_comentario(id_factura, id_usuario, 10, tacomentario2.getText());
+//                LC.crear_log(id_usuario, id_factura, com, 10);
+//            } else {
+//                LC.crear_log(id_usuario, id_factura, 0, 10);
+//            }
+//            TC.crear_tiempo(id_usuario, id_factura, 9, 10);
         } else {
             System.out.println("error");
         }
@@ -2652,7 +2670,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             } else {
                 if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 1, 1)) {
                     MD.retirar_documentos_factura(no_factura, proveedor, empresa, ruta, id_factura, id_proveedor, id_empresa);
-                    registro_procedimiento(no_factura, id_factura, id_usuario, 12, 12, com, 1, id_empresa, "");
+                    registro_procedimiento(no_factura, id_factura, id_usuario, 12, 12, com, 1, id_empresa, "", 1);
                     Principal.btnactualizar.doClick();
                     NS.notificaciones("Retirar Factura", "Se realiza el retiro de la factura  " + lblnfact.getText() + ".", "correcto");
                     this.doDefaultCloseAction();
@@ -2664,7 +2682,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void registro_procedimiento(String no_factura, int id_factura, int id_usuario, int estado_prev, int estado_post, String comentario,
-            int id_area_dest, int id_empresa, String asunto) {
+            int id_area_dest, int id_empresa, String asunto, int cor) {
         String usuario = UC.nombre_rev(Principal.lbluser.getText());
         if (!comentario.equals("")) {
             CC.crear_comentario(0, id_usuario, id_factura, estado_prev, comentario);
@@ -2674,22 +2692,23 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             LC.crear_log(id_usuario, id_factura, 0, estado_prev);
         }
         TC.crear_tiempo(id_usuario, id_factura, estado_prev, estado_post);
-        if (id_area_dest == 4) {
-            CorC.crear_correo(id_factura, UC.correos(id_area_dest, id_empresa), asunto, EC.plantilla_correo(asunto,
-                    no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
-                    lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, comentario));
-        } else {
-            if (asunto.equals("Factura por Revizar")) {
-                CorC.crear_correo(id_factura, RC.correo_usuario_rev(id_factura), asunto, EC.plantilla_correo(asunto,
+        if (cor == 1) {
+            if (id_area_dest == 4) {
+                CorC.crear_correo(id_factura, UC.correos(id_area_dest, id_empresa), asunto, EC.plantilla_correo(asunto,
                         no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
                         lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, comentario));
             } else {
-                CorC.crear_correo(id_factura, UC.correos(id_area_dest, 0), asunto, EC.plantilla_correo(asunto,
-                        no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
-                        lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, comentario));
+                if (asunto.equals("Factura por Revizar")) {
+                    CorC.crear_correo(id_factura, RC.correo_usuario_rev(id_factura), asunto, EC.plantilla_correo(asunto,
+                            no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
+                            lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, comentario));
+                } else {
+                    CorC.crear_correo(id_factura, UC.correos(id_area_dest, 0), asunto, EC.plantilla_correo(asunto,
+                            no_factura, lblempresa.getText(), lblnit.getText(), lblcorresp.getText(), lblproveedor.getText(),
+                            lblvalor.getText(), lblfecharec.getText(), lblfechafact.getText(), lblfechavenc.getText(), usuario, comentario));
+                }
             }
         }
-
     }
 
     public void registro_procedimiento_correcion(String no_factura, int id_factura, int id_usuario, int estado_prev, int estado_post, String comentario,

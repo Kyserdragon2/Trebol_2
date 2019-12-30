@@ -187,12 +187,14 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btncpro = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         btnlotep = new javax.swing.JButton();
-        btnactualizar = new javax.swing.JButton();
         btngestmult = new javax.swing.JButton();
         btnconv = new javax.swing.JButton();
         btnpreant = new javax.swing.JButton();
         btnusuarios = new javax.swing.JButton();
         btnSUNO = new javax.swing.JButton();
+        btntablasb = new javax.swing.JButton();
+        btnactualizar = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbluser = new javax.swing.JLabel();
@@ -703,9 +705,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
         jpmenu.add(btncpro);
-        btncpro.setBounds(12, 600, 110, 40);
+        btncpro.setBounds(12, 555, 110, 40);
         jpmenu.add(jSeparator3);
-        jSeparator3.setBounds(8, 547, 120, 10);
+        jSeparator3.setBounds(8, 504, 120, 10);
 
         btnlotep.setBackground(new java.awt.Color(0, 102, 153));
         btnlotep.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -716,20 +718,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnlotep.setFocusPainted(false);
         btnlotep.setPreferredSize(new java.awt.Dimension(100, 52));
         jpmenu.add(btnlotep);
-        btnlotep.setBounds(12, 495, 110, 45);
-
-        btnactualizar.setBackground(new java.awt.Color(0, 102, 153));
-        btnactualizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnactualizar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnactualizar.setFocusPainted(false);
-        btnactualizar.setPreferredSize(new java.awt.Dimension(100, 52));
-        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnactualizarActionPerformed(evt);
-            }
-        });
-        jpmenu.add(btnactualizar);
-        btnactualizar.setBounds(40, 610, 52, 22);
+        btnlotep.setBounds(12, 455, 110, 45);
 
         btngestmult.setBackground(new java.awt.Color(0, 102, 153));
         btngestmult.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -762,7 +751,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
         jpmenu.add(btnconv);
-        btnconv.setBounds(12, 450, 110, 40);
+        btnconv.setBounds(12, 410, 110, 40);
 
         btnpreant.setBackground(new java.awt.Color(0, 102, 153));
         btnpreant.setFont(new java.awt.Font("Arial", 3, 16)); // NOI18N
@@ -794,7 +783,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             }
         });
         jpmenu.add(btnusuarios);
-        btnusuarios.setBounds(12, 555, 110, 40);
+        btnusuarios.setBounds(12, 510, 110, 40);
 
         btnSUNO.setBackground(new java.awt.Color(0, 102, 153));
         btnSUNO.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
@@ -805,7 +794,33 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnSUNO.setFocusPainted(false);
         btnSUNO.setPreferredSize(new java.awt.Dimension(100, 52));
         jpmenu.add(btnSUNO);
-        btnSUNO.setBounds(12, 285, 110, 45);
+        btnSUNO.setBounds(12, 292, 110, 45);
+
+        btntablasb.setBackground(new java.awt.Color(0, 102, 153));
+        btntablasb.setFont(new java.awt.Font("Arial", 3, 15)); // NOI18N
+        btntablasb.setForeground(new java.awt.Color(255, 255, 255));
+        btntablasb.setText("<html><p align='center'>Tablas<br>Basicas</p></html>");
+        btntablasb.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btntablasb.setDoubleBuffered(true);
+        btntablasb.setFocusPainted(false);
+        btntablasb.setPreferredSize(new java.awt.Dimension(100, 52));
+        jpmenu.add(btntablasb);
+        btntablasb.setBounds(12, 600, 110, 45);
+
+        btnactualizar.setBackground(new java.awt.Color(0, 102, 153));
+        btnactualizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnactualizar.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        btnactualizar.setFocusPainted(false);
+        btnactualizar.setPreferredSize(new java.awt.Dimension(100, 52));
+        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnactualizarActionPerformed(evt);
+            }
+        });
+        jpmenu.add(btnactualizar);
+        btnactualizar.setBounds(40, 610, 52, 22);
+        jpmenu.add(jSeparator4);
+        jSeparator4.setBounds(8, 285, 120, 10);
 
         jPanel1.add(jpmenu);
         jpmenu.setBounds(0, 0, 132, 650);
@@ -1566,6 +1581,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     public static javax.swing.JButton btnlotep;
     public static javax.swing.JButton btnpreant;
     private javax.swing.JButton btnrest;
+    public static javax.swing.JButton btntablasb;
     public static javax.swing.JButton btnusuarios;
     private javax.swing.JComboBox<String> cmbMes;
     private javax.swing.JComboBox<String> cmbasignado;
@@ -1600,6 +1616,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     public static com.toedter.calendar.JDateChooser jdcdesde;
     public static com.toedter.calendar.JDateChooser jdchasta;
     public javax.swing.JPanel jpmenu;

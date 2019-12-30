@@ -81,8 +81,8 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                         this.setBackground(new Color(0, 122, 40));
                         this.setForeground(new Color(211, 244, 184));
                     } else {
-                        this.setBackground(new Color(174, 235, 124));
-                        this.setForeground(new Color(0, 122, 40));
+                        this.setBackground(new Color(224, 240, 177));
+                        this.setForeground(new Color(37, 112, 0));
                     }
                     break;
                 case "Creación":
@@ -204,8 +204,8 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                                 }
                             } else {
                                 if (isSelected) {
-                                    this.setBackground(new Color(162, 219, 238));
-                                    this.setForeground(Color.black);
+                                    this.setBackground(Color.DARK_GRAY);
+                                    this.setForeground(Color.white);
                                 } else {
                                     this.setBackground(Color.white);
                                     this.setForeground(Color.black);
@@ -241,8 +241,8 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                                     }
                                 } else {
                                     if (isSelected) {
-                                        this.setBackground(new Color(162, 219, 238));
-                                        this.setForeground(Color.black);
+                                        this.setBackground(Color.DARK_GRAY);
+                                        this.setForeground(Color.white);
                                     } else {
                                         this.setBackground(Color.white);
                                         this.setForeground(Color.black);
@@ -253,8 +253,8 @@ public class Multilinea_en_Tabla extends JTextArea implements TableCellRenderer 
                             }
                         } else {
                             if (isSelected) {
-                                this.setBackground(new Color(162, 219, 238));
-                                this.setForeground(Color.black);
+                                this.setBackground(Color.DARK_GRAY);
+                                this.setForeground(Color.white);
                             } else {
                                 this.setBackground(Color.white);
                                 this.setForeground(Color.black);

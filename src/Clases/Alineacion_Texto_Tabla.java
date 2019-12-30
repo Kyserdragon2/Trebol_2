@@ -106,6 +106,7 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
             this.setBackground(Color.white);
             this.setForeground(Color.black);
         }
+
         if (table.getValueAt(row, columna).equals("SI")) {
             if (isSelected) {
                 this.setBackground(new Color(51, 153, 0));
@@ -132,7 +133,7 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                                 this.setBackground(new Color(255, 147, 147));
                                 this.setForeground(new Color(0, 0, 0));
                             } else {
-                                this.setBackground(new Color(255, 217, 142));
+                                this.setBackground(new Color(255, 193, 193));
                                 this.setForeground(new Color(0, 0, 0));
                             }
                         } else if (dias >= 0 && dias < 3) {
@@ -194,8 +195,8 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                         }
                     } else {
                         if (isSelected) {
-                            this.setBackground(new Color(162, 219, 238));
-                            this.setForeground(Color.black);
+                            this.setBackground(Color.DARK_GRAY);
+                            this.setForeground(Color.white);
                         } else {
                             this.setBackground(Color.white);
                             this.setForeground(Color.black);
@@ -212,8 +213,8 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                         this.setBackground(new Color(0, 122, 40));
                         this.setForeground(new Color(211, 244, 184));
                     } else {
-                        this.setBackground(new Color(174, 235, 124));
-                        this.setForeground(new Color(0, 122, 40));
+                        this.setBackground(new Color(224, 240, 177));
+                        this.setForeground(new Color(37, 112, 0));
                     }
                     break;
                 case "Creación":
@@ -279,7 +280,7 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                     }
                     break;
                 case "Aprobación":
-                case "Aprob. Area":
+                case "Aprobación Area":
                     if (isSelected) {
                         this.setBackground(new Color(119, 55, 23));
                         this.setForeground(new Color(255, 224, 209));
