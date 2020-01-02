@@ -122,6 +122,11 @@ public class Usuario_obj {
         this.contraseña = contraseña;
     }
 
+    public Usuario_obj(int id, String contraseña) {
+        this.id = id;
+        this.contraseña = contraseña;
+    }
+    
     public Usuario_obj(int sesiones) {
         this.sesiones = sesiones;
     }

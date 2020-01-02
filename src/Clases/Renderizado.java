@@ -93,7 +93,8 @@ public class Renderizado {
     public void razon_social(JComboBox cmb) {
         try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
-                ResultSet rs = st.executeQuery("SELECT razon_social FROM trebol_proveedor;")) {
+                ResultSet rs = st.executeQuery("SELECT razon_social FROM trebol_proveedor\n"
+                        + "ORDER BY razon_social;")) {
             while (rs.next()) {
                 cmb.addItem(rs.getString("razon_social"));
             }

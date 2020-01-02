@@ -183,8 +183,8 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                                 }
                             } else {
                                 if (isSelected) {
-                                    this.setBackground(new Color(162, 219, 238));
-                                    this.setForeground(Color.black);
+                                    this.setBackground(Color.DARK_GRAY);
+                                    this.setForeground(Color.white);
                                 } else {
                                     this.setBackground(Color.white);
                                     this.setForeground(Color.black);
@@ -297,8 +297,8 @@ public class Alineacion_Texto_Tabla extends DefaultTableCellRenderer {
                 case "Orden de Compra":
                 case "Orden de Servicio":
                     if (isSelected) {
-                        this.setBackground(new Color(162, 219, 238));
-                        this.setForeground(Color.black);
+                        this.setBackground(Color.DARK_GRAY);
+                        this.setForeground(Color.white);
                     } else {
                         this.setBackground(Color.white);
                         this.setForeground(Color.black);

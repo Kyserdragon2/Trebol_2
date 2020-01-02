@@ -27,7 +27,7 @@ public class Firmas {
 
     Usuario_Controller UC = new Usuario_Controller();
 
-    public void firmar(String Ubicacion, String fecha, String hora) {
+    public boolean firmar(String Ubicacion, String fecha, String hora) {
         try {
             String rutausuario = System.getProperty("user.home");
             PdfReader pdfReader = new PdfReader(Ubicacion);
@@ -81,8 +81,9 @@ public class Firmas {
                 File doc = new File(origen.toString());
                 doc.delete();
             }
+            return true;
         } catch (IOException | DocumentException ex) {
-            Logger.getLogger(Firmas.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 
@@ -119,7 +120,7 @@ public class Firmas {
             }
             return true;
         } catch (IOException | DocumentException ex) {
-            Logger.getLogger(Firmas.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(Firmas.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }

@@ -15,6 +15,9 @@ public class Notificaciones_Sistema {
             case "error":
                 DesktopNotify.showDesktopMessage(titulo, mensaje, DesktopNotify.ERROR, 5000);
                 break;
+            case "error firma":
+                DesktopNotify.showDesktopMessage(titulo, mensaje, DesktopNotify.ERROR, 10000);
+                break;
             default:
                 DesktopNotify.showDesktopMessage(titulo, mensaje, DesktopNotify.INFORMATION, 5000);
                 break;

@@ -241,7 +241,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         jLabel5.setText("-");
         jLabel5.setPreferredSize(new java.awt.Dimension(35, 26));
         jpgf.add(jLabel5);
-        jLabel5.setBounds(205, 60, 10, 26);
+        jLabel5.setBounds(220, 60, 10, 26);
 
         lbldocfactura.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbldocfactura.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -275,8 +275,18 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         txtnf.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black));
         txtnf.setMinimumSize(new java.awt.Dimension(6, 26));
         txtnf.setPreferredSize(new java.awt.Dimension(6, 26));
+        txtnf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtnfFocusGained(evt);
+            }
+        });
+        txtnf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnfKeyTyped(evt);
+            }
+        });
         jpgf.add(txtnf);
-        txtnf.setBounds(220, 60, 150, 26);
+        txtnf.setBounds(235, 60, 150, 26);
 
         txtccorresp.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         txtccorresp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -436,8 +446,13 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         txtpref.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.black));
         txtpref.setMinimumSize(new java.awt.Dimension(6, 26));
         txtpref.setPreferredSize(new java.awt.Dimension(6, 26));
+        txtpref.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtprefKeyTyped(evt);
+            }
+        });
         jpgf.add(txtpref);
-        txtpref.setBounds(130, 60, 70, 26);
+        txtpref.setBounds(130, 60, 85, 26);
 
         lblvalor.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblvalor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -768,7 +783,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         lblrequerido2.setForeground(new java.awt.Color(204, 0, 51));
         lblrequerido2.setText("*");
         jpgf.add(lblrequerido2);
-        lblrequerido2.setBounds(375, 60, 10, 20);
+        lblrequerido2.setBounds(390, 60, 10, 20);
 
         lblrequerido3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblrequerido3.setForeground(new java.awt.Color(204, 0, 51));
@@ -954,6 +969,50 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         validar_campos("crear documento");
     }//GEN-LAST:event_btncargarActionPerformed
 
+    private void txtprefKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprefKeyTyped
+        Character c = evt.getKeyChar();
+        String numero = txtpref.getText();
+        String replaceFirst = numero.replaceFirst("^0*", "");
+        txtpref.setText(replaceFirst);
+        if (c == KeyEvent.VK_SPACE || c == '-') {
+            txtnf.requestFocus();
+        } else {
+            if (Character.isLetter(c)) {
+                evt.setKeyChar(Character.toUpperCase(c));
+            }
+        }
+    }//GEN-LAST:event_txtprefKeyTyped
+
+    private void txtnfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnfKeyTyped
+        char c = evt.getKeyChar();
+        String numero = txtnf.getText();
+        String replaceFirst = numero.replaceFirst("^0*", "");
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+        } else {
+            txtnf.setText(replaceFirst);
+        }
+        if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE) && (c != '-')) {
+            if (Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE)) {
+                txtpref.requestFocus();
+                String pr = txtpref.getText();
+                txtpref.setText(String.valueOf(pr + Character.toUpperCase(c)));
+            } else {
+                evt.consume();
+            }
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtnfKeyTyped
+
+    private void txtnfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnfFocusGained
+        String pref = txtpref.getText().trim();
+        txtpref.setText(pref);
+        if (txtpref.getText().contains("-")) {
+            txtpref.setText(pref.replaceAll("-", ""));
+        }
+    }//GEN-LAST:event_txtnfFocusGained
+
     public void accion(String accion) {
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
         String nit, no_factura, moneda, fecha_generada, fecha_venc, no_radicado, ruta_origen, proveedor, empresa, no_cuenta;
@@ -1029,6 +1088,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                     CorC.crear_correo(id_fact, UC.correos(id_area, 0), "Asignacion de Factura",
                             EC.plantilla_correo("Factura Nueva", no_factura.replaceAll(" ", ""), empresa, nit, no_radicado, proveedor, datot, fecha_rec, fecha_generada2,
                                     fecha_venc2, usuario, ""));
+                    Principal.btnactualizar.doClick();
                     NS.notificaciones("Factura Creada", "La factura " + no_factura.replaceAll(" ", "") + " ha sido creada con exito.", "correcto");
                     int opc = JOptionPane.showConfirmDialog(Principal.Escritorio, "Desea Cargar otra factura?", "Crear Factura",
                             JOptionPane.YES_NO_OPTION);
@@ -1038,7 +1098,6 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
                     } else {
                         this.doDefaultCloseAction();
                     }
-                    Principal.btnactualizar.doClick();
                 } else {
                     NS.notificaciones("Factura no Creada", "La factura " + no_factura.replaceAll(" ", "") + " ya existe.", "error");
                 }

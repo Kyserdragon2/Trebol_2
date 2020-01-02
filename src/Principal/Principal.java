@@ -2,7 +2,6 @@ package Principal;
 
 import Clases.*;
 import Modulos.*;
-import java.util.*;
 import javax.swing.*;
 import Controladores.*;
 import java.awt.Desktop;
@@ -11,6 +10,8 @@ import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.beans.PropertyChangeEvent;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Principal extends javax.swing.JFrame implements Runnable {
 
@@ -30,6 +36,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Confirmacion_Multi CM;
     Gestionar_Factura GestF;
     Detalles_Factura DetFact;
+    Cambiar_contraseña Cpass;
     Renderizado R = new Renderizado();
     Llenar_Tablas LT = new Llenar_Tablas();
     Envio_Correos EC = new Envio_Correos();
@@ -52,6 +59,38 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     TipoFactura_Controller TFC = new TipoFactura_Controller();
     Precargar_Anticipos PANT;
     Factura_Convenio_Controller FCC = new Factura_Convenio_Controller();
+    SimpleDateFormat mes = new SimpleDateFormat("MM");
+
+    @SuppressWarnings("Convert2Lambda")
+    Timer contraseña_usuario = new Timer(1000, new ActionListener() {
+        @SuppressWarnings("override")
+        public void actionPerformed(ActionEvent e) {
+            if (UC.contraseña_usuario(lbluser.getText()).equals("81dc9bdb52d04dc20036dbd8313ed055")) {
+                JOptionPane.showMessageDialog(Principal.Escritorio, "Debe actualizar la contraseña");
+                if (Cpass == null) {
+                    Cpass = new Cambiar_contraseña();
+                    Principal.Escritorio.add(Cpass);
+                }
+                Principal.Escritorio.setSelectedFrame(Cpass);
+                try {
+                    if (Cpass.isIcon()) {
+                        Cpass.setIcon(false);
+                    } else if (Cpass.isShowing()) {
+                        Cpass.toFront();
+                    } else {
+                        Cpass.setBounds(432, 186, 356, 228);
+                        Cpass.setClosable(false);
+                        Cpass.setIconifiable(false);
+                        Cpass.setVisible(true);
+                    }
+                    contraseña_usuario.stop();
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    contraseña_usuario.stop();
+                }
+            }
+        }
+    });
 
     @SuppressWarnings({"CallToThreadStartDuringObjectConstruction", "OverridableMethodCallInConstructor"})
     public Principal() {
@@ -66,11 +105,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         R.empresa(cmbempresa);
         btnactualizar.setVisible(false);
         jrbPropias.setSelected(true);
-        SimpleDateFormat mes = new SimpleDateFormat("MM");
         cmbMes.setSelectedIndex(Integer.parseInt(mes.format(new Date())));
         render();
         filtros();
         llenar_cmb();
+        contraseña_usuario.start();
     }
 
     @Override
@@ -205,6 +244,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         lblhora = new javax.swing.JLabel();
 
         cpass.setText("Cambiar Contraseña");
+        cpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cpassActionPerformed(evt);
+            }
+        });
         Menu.add(cpass);
 
         jpmfactura.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -841,6 +885,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         lbluser.setForeground(new java.awt.Color(255, 255, 255));
         lbluser.setText("null");
         lbluser.setComponentPopupMenu(Menu);
+        lbluser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lbluserMouseReleased(evt);
+            }
+        });
         jPanel2.add(lbluser);
         lbluser.setBounds(90, 0, 480, 24);
 
@@ -1108,6 +1157,32 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_btngestmultActionPerformed
 
+    private void lbluserMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbluserMouseReleased
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            Menu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_lbluserMouseReleased
+
+    private void cpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpassActionPerformed
+        if (Cpass == null) {
+            Cpass = new Cambiar_contraseña();
+            Principal.Escritorio.add(Cpass);
+        }
+        Principal.Escritorio.setSelectedFrame(Cpass);
+        try {
+            if (Cpass.isIcon()) {
+                Cpass.setIcon(false);
+            } else if (Cpass.isShowing()) {
+                Cpass.toFront();
+            } else {
+                Cpass.setBounds(432, 186, 356, 228);
+                Cpass.setVisible(true);
+            }
+        } catch (PropertyVetoException e) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_cpassActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1309,7 +1384,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     }
 
     public void filtros() {
-        String empresa, proveedor, no_factura, estado, mes, asignado, frev;
+        String empresa, proveedor, no_factura, estado, mesaño, asignado, frev;
         if (cmbproveedor.getSelectedItem().toString().equals("---")) {
             proveedor = "";
         } else {
@@ -1331,9 +1406,9 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             estado = cmbestado.getSelectedItem().toString();
         }
         if (cmbMes.getSelectedIndex() == 0) {
-            mes = "";
+            mesaño = "";
         } else {
-            mes = "" + cmbMes.getSelectedIndex();
+            mesaño = "" + cmbMes.getSelectedIndex();
         }
         if (txtnfb.getText().equals("")) {
             no_factura = "";
@@ -1347,23 +1422,23 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             frev = String.valueOf(usuario);
         }
         if (jrbPropias.isSelected()) {
-            LT.Facturas(jtfacturas, 1, no_factura, proveedor, empresa, estado, asignado, frev, mes);
+            LT.Facturas(jtfacturas, 1, no_factura, proveedor, empresa, estado, asignado, frev, mesaño);
             if (!lbluser.getText().equals("null")) {
                 datousuario(lbluser.getText());
             }
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
         } else if (jrbtodas.isSelected()) {
-            LT.Facturas(jtfacturas, 2, no_factura, proveedor, empresa, estado, asignado, frev, mes);
+            LT.Facturas(jtfacturas, 2, no_factura, proveedor, empresa, estado, asignado, frev, mesaño);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbempresa.setEnabled(true);
         } else if (jrbFinalizadas.isSelected()) {
-            LT.Facturas(jtfacturas, 3, no_factura, proveedor, empresa, estado, asignado, frev, mes);
+            LT.Facturas(jtfacturas, 3, no_factura, proveedor, empresa, estado, asignado, frev, mesaño);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbempresa.setEnabled(true);
         } else if (jrbretiradas.isSelected()) {
-            LT.Facturas(jtfacturas, 4, no_factura, proveedor, empresa, estado, asignado, frev, mes);
+            LT.Facturas(jtfacturas, 4, no_factura, proveedor, empresa, estado, asignado, frev, mesaño);
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbempresa.setEnabled(true);
@@ -1384,6 +1459,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btngf.setEnabled(false);
         btngestmult.setEnabled(false);
         btnlotep.setEnabled(false);
+        btnSUNO.setEnabled(false);
         switch (UC.area_usuario(usuario)) {
             case "Administrativo":
                 cmbfunrev.setSelectedIndex(0);
@@ -1400,6 +1476,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 cmbempresa.setSelectedIndex(0);
                 break;
             case "Recepción":
+            case "Correspondencia":
                 btngf.setEnabled(true);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
@@ -1411,6 +1488,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 cmbempresa.setEnabled(false);
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
+                btnSUNO.setEnabled(true);
                 break;
             case "Contabilidad_Rev":
                 if (cmbfunrev.getSelectedIndex() == 0) {
@@ -1421,9 +1499,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 cmbfunrev.setSelectedIndex(0);
                 cmbfunrev.setEnabled(false);
                 cmbempresa.setEnabled(true);
+                btnconv.setEnabled(true);
                 cmbempresa.setSelectedIndex(0);
                 btnpreant.setEnabled(true);
                 btngestmult.setEnabled(true);
+                btnSUNO.setEnabled(true);
                 break;
             case "AdminTrebol":
                 btnpreant.setEnabled(true);
@@ -1436,6 +1516,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 cmbfunrev.setEnabled(true);
                 btngestmult.setEnabled(true);
                 btnlotep.setEnabled(true);
+                btnSUNO.setEnabled(true);
                 break;
         }
     }
@@ -1452,12 +1533,16 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             } else {
                 cmbfunrev.setEnabled(false);
             }
+            if (cmbasignado.getSelectedItem().equals("Tesoreria")) {
+                btngestmult.setEnabled(false);
+            }
         } else if (jrbtodas.isSelected()) {
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbasignado.setSelectedIndex(0);
             cmbfunrev.setSelectedIndex(0);
             cmbfunrev.setEnabled(true);
+            btngestmult.setEnabled(false);
         } else if (jrbFinalizadas.isSelected()) {
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
@@ -1478,6 +1563,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         filtrofechas.clearSelection();
         jdcdesde.setDate(null);
         jdchasta.setDate(null);
+        cmbMes.setSelectedIndex(Integer.parseInt(mes.format(new Date())));
         filtros();
         llenar_cmb();
     }
@@ -1509,7 +1595,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         } else if (jdcdesde.getDate() != null && jdchasta.getDate() != null) {
             Calendar startCal = Calendar.getInstance();
             startCal.setTime(jdcdesde.getDate());
-            startCal.add(Calendar.DAY_OF_MONTH, 0);
+            startCal.add(Calendar.DAY_OF_MONTH, -1);
             if (jrbcargada.isSelected()) {
                 filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.AFTER, startCal.getTime(), 2));
                 filters.add(RowFilter.dateFilter(RowFilter.ComparisonType.BEFORE, jdchasta.getDate(), 2));

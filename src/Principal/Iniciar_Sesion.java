@@ -13,6 +13,7 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
 
     Usuario_Controller UC = new Usuario_Controller();
     Principal P;
+    Cambiar_contraseña CC;
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public Iniciar_Sesion() {
@@ -285,13 +286,11 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
             jtxtuser.requestFocus();
         } else {
             if (!UC.sesion(user, pass).equals("")) {
-                P = new Principal();
-                P.setVisible(true);
-
-                P.datousuario(UC.sesion(user, pass));
-//                Principal.lbluser.setText(UC.sesion(user, pass));
-                UC.estado_sesion(1, UC.sesion(user, pass));
-                dispose();
+                    P = new Principal();
+                    P.setVisible(true);
+                    P.datousuario(UC.sesion(user, pass));
+                    UC.estado_sesion(1, UC.sesion(user, pass));
+                    dispose();
             }
         }
     }

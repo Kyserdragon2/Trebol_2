@@ -1,6 +1,14 @@
 package Principal;
 
+import Clases.Conexion;
+import Controladores.Usuario_Controller;
+import org.apache.commons.codec.digest.DigestUtils;
+import javax.swing.JOptionPane;
+
 public class Cambiar_contraseña extends javax.swing.JInternalFrame {
+
+    Conexion cc = new Conexion();
+    Usuario_Controller UC = new Usuario_Controller();
 
     public Cambiar_contraseña() {
         initComponents();
@@ -26,7 +34,7 @@ public class Cambiar_contraseña extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setTitle("Cambio de Contraseña");
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Sistema_Imagenes/Trébol2.png"))); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Trébol2.png"))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -74,6 +82,11 @@ public class Cambiar_contraseña extends javax.swing.JInternalFrame {
         jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButton1.setText("Cambiar");
         jButton1.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1);
         jButton1.setBounds(130, 150, 92, 26);
 
@@ -93,6 +106,49 @@ public class Cambiar_contraseña extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        char[] arrayA = jpactual.getPassword();
+        String passwA = (String.valueOf(arrayA));
+        String encriptMD5A = DigestUtils.md5Hex(passwA);
+
+        char[] arrayN = jpnueva.getPassword();
+        String passwN = (String.valueOf(arrayN));
+        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
+        if (!passwN.matches(pattern)) {
+            JOptionPane.showMessageDialog(Principal.Escritorio, "La contraseña no cumple los requisitos minimos");
+            jpcnueva.setText("");
+            jpnueva.setText("");
+            jpnueva.requestFocus();
+        } else {
+            String encriptMD5N = DigestUtils.md5Hex(passwN);
+
+            char[] arrayCN = jpcnueva.getPassword();
+            String passwCN = (String.valueOf(arrayCN));
+            String encriptMD5CN = DigestUtils.md5Hex(passwCN);
+
+            String Actual = encriptMD5A;
+            String Nueva = encriptMD5N;
+            String CNueva = encriptMD5CN;
+            if (Actual.equals(UC.contraseña_usuario(Principal.lbluser.getText()))) {
+                if (Nueva.equals(CNueva)) {
+                    if (UC.cambiar_contraseña(UC.id_usuario(Principal.lbluser.getText()), Nueva)) {
+                        JOptionPane.showMessageDialog(Principal.Escritorio, "Contraseña Actualizada");
+                        Principal.Escritorio.remove(this);
+                    } else {
+                        JOptionPane.showMessageDialog(Principal.Escritorio, "La contraseña no pudo ser actualizada");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(Principal.Escritorio, "Las contraseñas ingresadas no coinciden");
+                    jpcnueva.setText("");
+                    jpnueva.setText("");
+                    jpnueva.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(Principal.Escritorio, "La contraseña ingresada no es la actual");
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

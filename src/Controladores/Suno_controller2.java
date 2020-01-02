@@ -29,6 +29,22 @@ public class Suno_controller2 {
             return false;
         }
     }
+    
+    public boolean eliminar_suno_cont(String no_factura, String nit, int id_empresa, int id_tipo_doc) {
+        Sistema_UNO D = new Sistema_UNO(nit, no_factura, id_empresa, id_tipo_doc);
+        String sql;
+        sql = "DELETE FROM trebol_sistema_uno\n"
+                + "WHERE nit LIKE '" + D.getNit() + "'\n"
+                + "AND id_empresa = " + D.getId_empresa() + "\n"
+                + "AND id_tipo_doc  =" + D.getId_tipo_doc() + "\n"
+                + "AND no_factura = '" + D.getNo_factura() + "';";
+        try {
+            return cc.sentenciaSQL(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
 
     public boolean existe_documento(String no_factura, String nit, int id_empresa, int id_tipo_doc) {
         boolean ub = false;

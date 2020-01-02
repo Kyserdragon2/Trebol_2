@@ -2,7 +2,6 @@ package Controladores;
 
 import Clases.Conexion;
 import Objetos.Usuario_obj;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,7 +21,6 @@ public class Usuario_Controller {
         try {
             return cc.sentenciaSQL(sql);
         } catch (SQLException ex) {
-//            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
@@ -65,6 +63,19 @@ public class Usuario_Controller {
                 + "id_empresa=" + U.getId_empresa() + ", "
                 + "aprueba=" + U.getAprueba() + ", "
                 + "retirado=" + U.getRetirado() + "\n"
+                + "WHERE id =" + U.getId() + ";";
+        try {
+            return cc.sentenciaSQL(sql);
+        } catch (SQLException ex) {
+//            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public boolean cambiar_contraseña(int id, String contraseña) {
+        Usuario_obj U = new Usuario_obj(id, contraseña);
+        String sql = "UPDATE trebol_usuario "
+                + "SET contraseña='" + U.getContraseña() + "'\n"
                 + "WHERE id =" + U.getId() + ";";
         try {
             return cc.sentenciaSQL(sql);
@@ -164,6 +175,24 @@ public class Usuario_Controller {
         try {
             while (datos.next()) {
                 nom = datos.getString("tu.usuario");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            nom = "";
+        }
+        return nom;
+    }
+
+    public String contraseña_usuario(String nombre) {
+        String nom = "";
+        String sql = "SELECT tu.contraseña\n"
+                + "FROM trebol_usuario AS tu\n"
+                + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
+                + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
+        ResultSet datos = cc.consultas(sql);
+        try {
+            while (datos.next()) {
+                nom = datos.getString("tu.contraseña");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
