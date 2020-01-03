@@ -424,10 +424,10 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
 
         jLabel11.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Cuenta:");
+        jLabel11.setText("Convenio:");
         jLabel11.setPreferredSize(new java.awt.Dimension(38, 26));
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(535, 110, 60, 26);
+        jLabel11.setBounds(535, 110, 70, 26);
 
         lblncuenta.setBackground(new java.awt.Color(255, 255, 255));
         lblncuenta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -436,7 +436,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         lblncuenta.setOpaque(true);
         lblncuenta.setPreferredSize(new java.awt.Dimension(100, 26));
         jPanel1.add(lblncuenta);
-        lblncuenta.setBounds(600, 110, 100, 26);
+        lblncuenta.setBounds(610, 110, 100, 26);
 
         jPanel6.add(jPanel1);
         jPanel1.setBounds(10, 10, 900, 150);

@@ -29,7 +29,7 @@ public class Suno_controller2 {
             return false;
         }
     }
-    
+
     public boolean eliminar_suno_cont(String no_factura, String nit, int id_empresa, int id_tipo_doc) {
         Sistema_UNO D = new Sistema_UNO(nit, no_factura, id_empresa, id_tipo_doc);
         String sql;
@@ -132,6 +132,31 @@ public class Suno_controller2 {
                 ResultSet rs = st.executeQuery(sql)) {
             if (rs.next()) {
                 ub = rs.getString("ubicacion");
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return ub;
+    }
+
+    public String ubicacion_documento_suno(String consecutivo, String nit, String empresa, String doc) {
+        String ub = "";
+        String sql;
+        sql = "SELECT suno.`ubicacion`\n"
+                + "FROM trebol_sistema_uno AS suno\n"
+                + "JOIN trebol_proveedor AS tp ON suno.`nit`=tp.`nit`\n"
+                + "JOIN trebol_tipo_documento AS ttd ON suno.`id_tipo_doc`=ttd.`id`\n"
+                + "JOIN trebol_empresa AS temp ON suno.`id_empresa`=temp.`id`\n"
+                + "WHERE CONCAT(ttd.`tipo_doc`,'-',suno.`consecutivo`) LIKE '%" + consecutivo + "%'\n"
+                + "AND temp.`nom_empresa` LIKE '%" + empresa + "%'\n"
+                + "AND suno.`nit` LIKE '%" + nit + "%'\n"
+                + "AND ttd.`nombre` LIKE '%" + doc + "%'\n"
+                + "ORDER BY consecutivo;";
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                ub = rs.getString("suno.ubicacion");
             }
         } catch (SQLException e) {
             Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, e);

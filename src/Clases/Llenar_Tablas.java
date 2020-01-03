@@ -900,7 +900,6 @@ public class Llenar_Tablas {
         Color H = new Color(75, 156, 109);
         Color T = new Color(0, 0, 0);
         Color CB = new Color(255, 255, 255);
-        Color CT = new Color(0, 0, 0);
         Object[] titulos = {"Doc.", "Cons.", "Ver", "Borrar"};
         Object[] registros = new Object[4];
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -965,6 +964,95 @@ public class Llenar_Tablas {
         tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
         tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
         tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+    }
+
+    public void docs_suno(JTable tabla, String tipo_doc, String empresa) {
+        Color H = new Color(75, 156, 109);
+        Color T = new Color(0, 0, 0);
+        Color CB = new Color(255, 255, 255);
+        Object[] titulos = {"Proveedor", "NIT", "Tipo Documento", "Consecutivo", "Empresa", "Ver"};
+        Object[] registros = new Object[6];
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabla.getTableHeader().setResizingAllowed(false);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        model = new DefaultTableModel(null, titulos) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+
+            @Override
+            public Class getColumnClass(int column) {
+                Class returnValue;
+                if (column == 2 && tabla.getRowCount() > 0) {
+                    returnValue = getValueAt(0, column).getClass();
+                } else {
+                    returnValue = Object.class;
+                }
+                return returnValue;
+            }
+        };
+        sorter = new TableRowSorter(model);
+        String sql;
+        if (tipo_doc.equals("---")) {
+            sql = "SELECT tp.`razon_social`, suno.`nit`, ttd.`nombre`, "
+                    + "CONCAT(ttd.`tipo_doc`,'-',suno.`consecutivo`) AS consecutivo, temp.`nom_empresa`\n"
+                    + "FROM trebol_sistema_uno AS suno\n"
+                    + "JOIN trebol_proveedor AS tp ON suno.`nit`=tp.`nit`\n"
+                    + "JOIN trebol_tipo_documento AS ttd ON suno.`id_tipo_doc`=ttd.`id`\n"
+                    + "JOIN trebol_empresa AS temp ON suno.`id_empresa`=temp.`id`\n"
+                    + "WHERE temp.nom_empresa LIKE '%" + empresa + "%'"
+                    + "ORDER BY razon_social ASC, ttd.`nombre` ASC, temp.`nom_empresa` ASC, consecutivo ASC";
+        } else {
+            sql = "SELECT tp.`razon_social`, suno.`nit`, ttd.`nombre`, "
+                    + "CONCAT(ttd.`tipo_doc`,'-',suno.`consecutivo`) AS consecutivo, temp.`nom_empresa`\n"
+                    + "FROM trebol_sistema_uno AS suno\n"
+                    + "JOIN trebol_proveedor AS tp ON suno.`nit`=tp.`nit`\n"
+                    + "JOIN trebol_tipo_documento AS ttd ON suno.`id_tipo_doc`=ttd.`id`\n"
+                    + "JOIN trebol_empresa AS temp ON suno.`id_empresa`=temp.`id`\n"
+                    + "WHERE ttd.`nombre` LIKE '%" + tipo_doc + "%'\n"
+                    + "AND temp.nom_empresa LIKE '%" + empresa + "%'"
+                    + "ORDER BY razon_social ASC, ttd.`nombre` ASC, temp.`nom_empresa` ASC, consecutivo ASC";
+        }
+        try (Connection cn = cc.Conexion();
+                Statement stg = cn.createStatement();
+                ResultSet rsg = stg.executeQuery(sql);) {
+            while (rsg.next()) {
+                registros[0] = rsg.getString("tp.razon_social");
+                registros[1] = rsg.getString("suno.nit");
+                registros[2] = rsg.getString("ttd.nombre");
+                registros[3] = rsg.getString("consecutivo");
+                registros[4] = rsg.getString("temp.nom_empresa");
+                btnver = new JButton("");
+                btnver.setName("ver");
+                registros[5] = btnver;
+                model.addRow(registros);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Llenar_Tablas.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        tabla.setModel(model);
+        tabla.setRowSorter(sorter);
+        tabla.setRowHeight(25);
+
+        for (int i = 0; i < 6; i++) {
+            tabla.getColumnModel().getColumn(i).setHeaderRenderer(new Encabezado_Tabla(H, T, tabla.getTableHeader().getDefaultRenderer(), 15));
+        }
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(450);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(180);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(94);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(90);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(90);
+
+        tabla.getColumnModel().getColumn(0).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("izquierda", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(1).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(2).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(3).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(4).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
+        tabla.getColumnModel().getColumn(5).setCellRenderer(alineacion = new Alineacion_Texto_Tabla("centrado", CB, T, 0, 14));
     }
 
 }

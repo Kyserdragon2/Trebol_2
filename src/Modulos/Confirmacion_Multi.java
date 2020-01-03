@@ -336,11 +336,11 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnok);
-        btnok.setBounds(220, 270, 150, 26);
+        btnok.setBounds(450, 270, 150, 26);
 
-        btnok1.setBackground(new java.awt.Color(224, 240, 177));
+        btnok1.setBackground(new java.awt.Color(0, 102, 153));
         btnok1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnok1.setForeground(new java.awt.Color(37, 112, 0));
+        btnok1.setForeground(new java.awt.Color(255, 255, 255));
         btnok1.setText("Limpiar");
         btnok1.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btnok1.addActionListener(new java.awt.event.ActionListener() {
@@ -349,7 +349,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnok1);
-        btnok1.setBounds(540, 270, 70, 26);
+        btnok1.setBounds(20, 270, 70, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -495,6 +495,14 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
                                 if (ProgC.cambiar_est_prog(id_factura, id_usuario, ProgC.fecha_programada_sql(id_factura))) {
                                     if (ProgC.crear_programacion(id_factura, id_usuario, fecha_prog)) {
                                         if (FC.cambiar_estado_factura(no_factura, PC.id_proveedor(proveedor), EMPC.id_empresa(empresa), 10)) {
+                                            if (!tacomentario2.getText().equals("")) {
+                                                CC.crear_comentario(0, id_usuario, id_factura, 10, tacomentario2.getText());
+                                                int com = CC.id_comentario(id_factura, id_usuario, 10, tacomentario2.getText());
+                                                LC.crear_log(id_usuario, id_factura, com, 10);
+                                            } else {
+                                                LC.crear_log(id_usuario, id_factura, 0, 10);
+                                            }
+                                            TC.crear_tiempo(id_usuario, id_factura, 10, 10);
                                             prog = true;
                                         } else {
                                             prog = false;
@@ -510,6 +518,14 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
                         } else {
                             if (ProgC.crear_programacion(id_factura, id_usuario, fecha_prog)) {
                                 if (FC.cambiar_estado_factura(no_factura, PC.id_proveedor(proveedor), EMPC.id_empresa(empresa), 10)) {
+                                    if (!tacomentario2.getText().equals("")) {
+                                        CC.crear_comentario(0, id_usuario, id_factura, 10, tacomentario2.getText());
+                                        int com = CC.id_comentario(id_factura, id_usuario, 10, tacomentario2.getText());
+                                        LC.crear_log(id_usuario, id_factura, com, 10);
+                                    } else {
+                                        LC.crear_log(id_usuario, id_factura, 0, 10);
+                                    }
+                                    TC.crear_tiempo(id_usuario, id_factura, 9, 10);
                                     prog = true;
                                 } else {
                                     prog = false;
@@ -599,8 +615,8 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
                             Principal.btnactualizar.doClick();
                             this.doDefaultCloseAction();
                             limpiar();
-                        }else{
-                            JOptionPane.showMessageDialog(Principal.Escritorio, "La factura '"+no_factura+"' no cuenta con un comprobante de pago cargado.");
+                        } else {
+                            JOptionPane.showMessageDialog(Principal.Escritorio, "La factura '" + no_factura + "' no cuenta con un comprobante de pago cargado.");
                         }
                         break;
                 }

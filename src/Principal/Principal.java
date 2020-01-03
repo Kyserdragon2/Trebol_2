@@ -57,6 +57,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     Manipuacion_Documentos MD = new Manipuacion_Documentos();
     Notificaciones_Sistema NS = new Notificaciones_Sistema();
     TipoFactura_Controller TFC = new TipoFactura_Controller();
+
     Precargar_Anticipos PANT;
     Factura_Convenio_Controller FCC = new Factura_Convenio_Controller();
     SimpleDateFormat mes = new SimpleDateFormat("MM");
@@ -837,6 +838,11 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btnSUNO.setDoubleBuffered(true);
         btnSUNO.setFocusPainted(false);
         btnSUNO.setPreferredSize(new java.awt.Dimension(100, 52));
+        btnSUNO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSUNOActionPerformed(evt);
+            }
+        });
         jpmenu.add(btnSUNO);
         btnSUNO.setBounds(12, 292, 110, 45);
 
@@ -846,6 +852,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
         btntablasb.setText("<html><p align='center'>Tablas<br>Basicas</p></html>");
         btntablasb.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         btntablasb.setDoubleBuffered(true);
+        btntablasb.setEnabled(false);
         btntablasb.setFocusPainted(false);
         btntablasb.setPreferredSize(new java.awt.Dimension(100, 52));
         jpmenu.add(btntablasb);
@@ -1182,6 +1189,13 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_cpassActionPerformed
+
+    private void btnSUNOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUNOActionPerformed
+        Documentos_SUNO dsuno = new Documentos_SUNO();
+        Principal.Escritorio.add(dsuno);
+        dsuno.setBounds(80, 50, 1055, 500);
+        dsuno.setVisible(true);
+    }//GEN-LAST:event_btnSUNOActionPerformed
 
     /**
      * @param args the command line arguments
