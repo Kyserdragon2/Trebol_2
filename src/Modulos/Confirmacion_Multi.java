@@ -5,6 +5,7 @@ import Clases.Manipuacion_Documentos;
 import Controladores.*;
 import Principal.Principal;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class Confirmacion_Multi extends javax.swing.JInternalFrame {
@@ -27,6 +28,8 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
 
     public Confirmacion_Multi() {
         initComponents();
+        jdcfechapago.setDate(new Date());
+        jdcfechapago.setMaxSelectableDate(new Date());
     }
 
     @SuppressWarnings("unchecked")
@@ -57,6 +60,8 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
         txtdocte = new javax.swing.JTextField();
         btnokte = new javax.swing.JButton();
         btnverte = new javax.swing.JButton();
+        lblfechapago = new javax.swing.JLabel();
+        jdcfechapago = new com.toedter.calendar.JDateChooser();
         btnok = new javax.swing.JButton();
         btnok1 = new javax.swing.JButton();
 
@@ -79,7 +84,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel25.setText("Comentario");
         paneltesoreria.add(jLabel25);
-        jLabel25.setBounds(250, 125, 120, 19);
+        jLabel25.setBounds(290, 125, 120, 19);
 
         jScrollPane8.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, null, java.awt.Color.black));
         jScrollPane8.setViewportBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -94,7 +99,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
         jScrollPane8.setViewportView(tacomentario2);
 
         paneltesoreria.add(jScrollPane8);
-        jScrollPane8.setBounds(250, 145, 340, 95);
+        jScrollPane8.setBounds(290, 145, 340, 95);
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)), "Gestion", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
@@ -153,14 +158,14 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel15.add(btnarchivo);
-        btnarchivo.setBounds(490, 30, 77, 26);
+        btnarchivo.setBounds(540, 30, 77, 26);
 
         txtcomprobante.setEditable(false);
         txtcomprobante.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         txtcomprobante.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtcomprobante.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel15.add(txtcomprobante);
-        txtcomprobante.setBounds(250, 30, 241, 26);
+        txtcomprobante.setBounds(250, 30, 290, 26);
 
         btneliminarcp.setBackground(new java.awt.Color(255, 153, 153));
         btneliminarcp.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
@@ -175,7 +180,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel15.add(btneliminarcp);
-        btneliminarcp.setBounds(310, 70, 77, 26);
+        btneliminarcp.setBounds(360, 70, 77, 26);
 
         btnvercp.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         btnvercp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver2.png"))); // NOI18N
@@ -203,7 +208,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel15.add(btnmodificarcp);
-        btnmodificarcp.setBounds(400, 70, 77, 26);
+        btnmodificarcp.setBounds(450, 70, 77, 26);
 
         btncancelarcp.setBackground(new java.awt.Color(255, 153, 153));
         btncancelarcp.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
@@ -217,7 +222,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel15.add(btncancelarcp);
-        btncancelarcp.setBounds(400, 70, 77, 26);
+        btncancelarcp.setBounds(450, 70, 77, 26);
 
         btncargarcp.setBackground(new java.awt.Color(224, 240, 177));
         btncargarcp.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
@@ -232,7 +237,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel15.add(btncargarcp);
-        btncargarcp.setBounds(490, 70, 77, 26);
+        btncargarcp.setBounds(540, 70, 77, 26);
 
         btnaceptarcp.setBackground(new java.awt.Color(224, 240, 177));
         btnaceptarcp.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
@@ -246,10 +251,10 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel15.add(btnaceptarcp);
-        btnaceptarcp.setBounds(490, 70, 77, 26);
+        btnaceptarcp.setBounds(540, 70, 77, 26);
 
         paneltesoreria.add(jPanel15);
-        jPanel15.setBounds(10, 10, 580, 110);
+        jPanel15.setBounds(10, 10, 630, 110);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)), "Documentos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
         jPanel3.setOpaque(false);
@@ -260,13 +265,13 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
         cmbdocte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "TV", "CE" }));
         cmbdocte.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel3.add(cmbdocte);
-        cmbdocte.setBounds(10, 40, 60, 26);
+        cmbdocte.setBounds(20, 30, 70, 26);
 
         jLabel29.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("-");
         jPanel3.add(jLabel29);
-        jLabel29.setBounds(70, 40, 20, 26);
+        jLabel29.setBounds(90, 30, 20, 26);
 
         txtdocte.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtdocte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -277,7 +282,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel3.add(txtdocte);
-        txtdocte.setBounds(90, 40, 60, 26);
+        txtdocte.setBounds(110, 30, 60, 26);
 
         btnokte.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         btnokte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ok.png"))); // NOI18N
@@ -295,7 +300,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel3.add(btnokte);
-        btnokte.setBounds(160, 40, 19, 26);
+        btnokte.setBounds(180, 30, 19, 26);
 
         btnverte.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
         btnverte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver2.png"))); // NOI18N
@@ -317,13 +322,29 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         jPanel3.add(btnverte);
-        btnverte.setBounds(185, 40, 40, 26);
+        btnverte.setBounds(210, 30, 40, 26);
 
         paneltesoreria.add(jPanel3);
-        jPanel3.setBounds(10, 130, 235, 110);
+        jPanel3.setBounds(10, 130, 270, 70);
+
+        lblfechapago.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
+        lblfechapago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfechapago.setText("Fecha de Pago");
+        lblfechapago.setEnabled(false);
+        paneltesoreria.add(lblfechapago);
+        lblfechapago.setBounds(10, 210, 120, 26);
+
+        jdcfechapago.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jdcfechapago.setDateFormatString("dd/MM/yyyy");
+        jdcfechapago.setEnabled(false);
+        jdcfechapago.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jdcfechapago.setMaxSelectableDate(new java.util.Date(1577941199000L));
+        jdcfechapago.setMinSelectableDate(new java.util.Date(1546318860000L));
+        paneltesoreria.add(jdcfechapago);
+        jdcfechapago.setBounds(130, 210, 130, 26);
 
         getContentPane().add(paneltesoreria);
-        paneltesoreria.setBounds(10, 10, 600, 250);
+        paneltesoreria.setBounds(10, 10, 650, 250);
 
         btnok.setBackground(new java.awt.Color(224, 240, 177));
         btnok.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -336,7 +357,7 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnok);
-        btnok.setBounds(450, 270, 150, 26);
+        btnok.setBounds(500, 270, 150, 26);
 
         btnok1.setBackground(new java.awt.Color(0, 102, 153));
         btnok1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -469,10 +490,12 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnverteActionPerformed
 
     public void gestion_facturas(String procedimiento) {
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat fechaactual = new SimpleDateFormat("dd-MM-yyyy");
         int Tes = JOptionPane.showConfirmDialog(Principal.Escritorio, "Continuar?", "Continuar",
                 JOptionPane.YES_NO_OPTION);
         if (Tes == 0) {
-            boolean prog = false;
+            boolean prog = false, pago = false;
             int[] selectedRows = Principal.jtfacturas.getSelectedRows();
             for (int i = 0; i < selectedRows.length; i++) {
                 int id_factura;
@@ -486,7 +509,6 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
                 id_factura = FC.id_factura(no_factura, PC.id_proveedor(proveedor), EMPC.id_empresa(empresa));
                 switch (procedimiento) {
                     case "Programar":
-                        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
                         String fecha_prog = formatoDeFecha.format(jdcprogramar.getDate());
                         if (ProgC.existe_programacion(id_factura)) {
                             int rep = JOptionPane.showConfirmDialog(Principal.Escritorio, "La factura " + no_factura + " ya se encuentra programada\ndesea reprogramarla?",
@@ -554,6 +576,8 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
                         btnvercp.setEnabled(true);
                         btncargarcp.setEnabled(false);
                         btnarchivo.setEnabled(false);
+                        lblfechapago.setEnabled(true);
+                        jdcfechapago.setEnabled(true);
                         txtcomprobante.setText(DC.ubicacion_documento("Comprobante de Pago", id_factura));
                         break;
                     case "Modificar Comprobante":
@@ -602,27 +626,44 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
                         }
                         break;
                     case "Confirmar Pago":
-                        if (DC.existe_documento("Comprobante de Pago", id_factura)) {
-                            FC.cambiar_estado_factura(no_factura, PC.id_proveedor(proveedor), EMPC.id_empresa(empresa), 7);
-                            if (!tacomentario2.getText().equals("")) {
-                                CC.crear_comentario(0, id_usuario, id_factura, 7, tacomentario2.getText());
-                                int com = CC.id_comentario(id_factura, id_usuario, 7, tacomentario2.getText());
+//                        if (DC.existe_documento("Comprobante de Pago", id_factura)) {
+                        String fecha_pago = formatoDeFecha.format(jdcfechapago.getDate());
+                        String comentario;
+                        if (jdcfechapago != null && !tacomentario2.getText().equals("")) {
+                            comentario = "Pagada el: " + fechaactual.format(jdcfechapago.getDate()) + "\n" + tacomentario2.getText();
+                        } else if (jdcfechapago != null && tacomentario2.getText().equals("")) {
+                            comentario = "Pagada el: " + fechaactual.format(jdcfechapago.getDate());
+                        } else if (jdcfechapago == null && !tacomentario2.getText().equals("")) {
+                            comentario = tacomentario2.getText();
+                        } else {
+                            comentario = "";
+                        }
+                        if (FC.confirmacion_pago(no_factura, PC.id_proveedor(proveedor), EMPC.id_empresa(empresa), 7, 9, fecha_pago)) {
+                            if (!comentario.equals("")) {
+                                CC.crear_comentario(0, id_usuario, id_factura, 7, comentario);
+                                int com = CC.id_comentario(id_factura, id_usuario, 7, comentario);
                                 LC.crear_log(id_usuario, id_factura, com, 7);
                             } else {
                                 LC.crear_log(id_usuario, id_factura, 0, 7);
                             }
                             TC.crear_tiempo(id_usuario, id_factura, FC.id_estado_factura(id_factura), 7);
-                            Principal.btnactualizar.doClick();
-                            this.doDefaultCloseAction();
-                            limpiar();
+                            pago = true;
                         } else {
-                            JOptionPane.showMessageDialog(Principal.Escritorio, "La factura '" + no_factura + "' no cuenta con un comprobante de pago cargado.");
+                            pago = false;
                         }
+//                        } else {
+//                            JOptionPane.showMessageDialog(Principal.Escritorio, "La factura '" + no_factura + "' no cuenta con un comprobante de pago cargado.");
+//                        }
                         break;
                 }
             }
             if (jrbOpc1.isSelected() && prog) {
                 NS.notificaciones("Programación Facturas", "Se ha realizado la programacion de las facturas.", "correcto");
+                Principal.btnactualizar.doClick();
+                this.doDefaultCloseAction();
+                limpiar();
+            } else if (jrbOpc2.isSelected() && pago) {
+                NS.notificaciones("Pago Facturas", "Se ha realizado el pago de las facturas.", "correcto");
                 Principal.btnactualizar.doClick();
                 this.doDefaultCloseAction();
                 limpiar();
@@ -673,9 +714,11 @@ public class Confirmacion_Multi extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator3;
+    private com.toedter.calendar.JDateChooser jdcfechapago;
     private com.toedter.calendar.JDateChooser jdcprogramar;
     private javax.swing.JRadioButton jrbOpc1;
     private javax.swing.JRadioButton jrbOpc2;
+    private javax.swing.JLabel lblfechapago;
     public static javax.swing.JPanel paneltesoreria;
     private javax.swing.JTextArea tacomentario2;
     private javax.swing.JTextField txtcomprobante;

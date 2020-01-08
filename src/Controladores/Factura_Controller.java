@@ -196,6 +196,22 @@ public class Factura_Controller {
         }
     }
 
+    public boolean confirmacion_pago(String no_factura, int id_proveedor, int id_empresa, int id_estado, int id_gestion, String fecha_pago) {
+        String sql = "UPDATE trebol_facturas\n"
+                + "SET fecha_pago = '"+fecha_pago+"',\n"
+                + "id_estado=" + id_estado + ",\n"
+                + "id_gestion=" + id_gestion + "\n"
+                + "WHERE no_factura LIKE '" + no_factura + "'\n"
+                + "AND id_proveedor=" + id_proveedor + "\n"
+                + "AND id_empresa=" + id_empresa + ";";
+        try {
+            return cc.sentenciaSQL(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Factura_Controller.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
     public boolean cambiar_estado_factura(String no_factura, int id_proveedor, int id_empresa, int id_estado) {
         String sql = "UPDATE trebol_facturas\n"
                 + "SET id_estado=" + id_estado + "\n"

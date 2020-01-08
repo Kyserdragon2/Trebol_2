@@ -2034,7 +2034,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSCdocActionPerformed
 
     private void btnDQdocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDQdocActionPerformed
-        DC.ver_documento("Documento Equivalente Virtual", Integer.parseInt(lblid.getText()));
+        DC.ver_documento("Documento Equivalente", Integer.parseInt(lblid.getText()));
     }//GEN-LAST:event_btnDQdocActionPerformed
 
     private void btnIMdocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIMdocActionPerformed
@@ -2496,8 +2496,8 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         int id_factura = Integer.parseInt(lblid.getText());
         SimpleDateFormat fechaactual = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat horaactual = new SimpleDateFormat("HH:mm:ss");
-        if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 4, 4)) {
-            if (signature.firmar(DC.ubicacion_documento("Factura", id_factura), fechaactual.format(fecha), horaactual.format(fecha))) {
+        if (signature.firmar(DC.ubicacion_documento("Factura", id_factura), fechaactual.format(fecha), horaactual.format(fecha))) {
+            if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 4, 4)) {
                 procedimiento_anticipo(id_factura);
                 aprobar_factura(2);
                 registro_procedimiento(no_factura, id_factura, id_usuario, 2, 4, tacomentario.getText(), 4, id_empresa, "Factura para Contabilizar", 1);
@@ -2506,11 +2506,11 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 btnlimpiarjcbs.doClick();
                 this.doDefaultCloseAction();
             } else {
-                NS.notificaciones("Aprobación Factura", "La Factura '" + lblnfact.getText() + "' no pudo ser firmada debido a que el documento se encuentra abierto.\n"
-                        + "Por favor validar que el archivo no se encuentre abierto y esperar 15 segundos.", "error firma");
+                NS.notificaciones("Aprobación Factura", "La Factura " + lblnfact.getText() + " no se envio a Contabilidad.", "error");
             }
         } else {
-            NS.notificaciones("Aprobación Factura", "La Factura " + lblnfact.getText() + " no se envio a Contabilidad.", "error");
+            NS.notificaciones("Aprobación Factura", "La Factura '" + lblnfact.getText() + "' no pudo ser firmada debido a que el documento se encuentra abierto.\n"
+                    + "Por favor validar que el documento se encuentre cerrado y esperar 15 segundos.", "error firma");
         }
     }
 
@@ -2526,7 +2526,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             int id_factura = Integer.parseInt(lblid.getText());
             if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 13, 5)) {
                 RC.crear_revision(id_factura, usuario_reviza);
-                registro_procedimiento(no_factura, id_factura, id_usuario, 4, 13, tacomentario1.getText(), 5, id_empresa, "Factura por Revizar", 1);
+                registro_procedimiento(no_factura, id_factura, id_usuario, 4, 13, tacomentario1.getText(), 5, id_empresa, "Factura por Revisar", 1);
                 cmbRcont.setSelectedIndex(0);
                 tacomentario1.setText("");
                 Principal.btnactualizar.doClick();
@@ -2534,7 +2534,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 this.doDefaultCloseAction();
             } else {
                 NS.notificaciones("Revisión Factura", "El soporte no pudo ser firmado debido a que el documento se encuentra abierto.\n"
-                        + "Por favor validar que el archivo no se encuentre abierto y esperar 15 segundos.", "error firma");
+                        + "Por favor validar que el documento se encuentre cerrado y esperar 15 segundos.", "error firma");
             }
         }
     }
@@ -2546,8 +2546,8 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         SimpleDateFormat horaactual = new SimpleDateFormat("HH:mm:ss");
         if (DC.existe_documento("Soporte de Causacion", id_factura)) {
             return signature.firmar_rev(DC.ubicacion_documento("Soporte de Causacion", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
-        } else if (DC.existe_documento("Documento Equivalente Virtual", id_factura)) {
-            return signature.firmar_rev(DC.ubicacion_documento("Documento Equivalente Virtual", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
+        } else if (DC.existe_documento("Documento Equivalente", id_factura)) {
+            return signature.firmar_rev(DC.ubicacion_documento("Documento Equivalente", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
         } else if (DC.existe_documento("Nota a Proveedor", id_factura)) {
             return signature.firmar_rev(DC.ubicacion_documento("Nota a Proveedor", id_factura), fechaactual.format(fecha), horaactual.format(fecha));
         } else if (DC.existe_documento("Nota Interna", id_factura)) {
@@ -2583,8 +2583,10 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
     }
 
     public void confirmar_pago() {
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat fechaactual = new SimpleDateFormat("dd-MM-yyyy");
         String no_factura = lblnfact.getText();
+        String fecha_pago = formatoDeFecha.format(jdcfechapago.getDate());
         int id_usuario = UC.id_usuario(Principal.lbluser.getText());
         int id_proveedor = PC.id_proveedor(lblproveedor.getText());
         int id_empresa = EMPC.id_empresa(lblempresa.getText());
@@ -2603,7 +2605,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
             } else {
                 comentario = "";
             }
-            if (FC.cambiar_asignacion_factura(no_factura, id_proveedor, id_empresa, 7, 9)) {
+            if (FC.confirmacion_pago(no_factura, id_proveedor, id_empresa, 7, 9, fecha_pago)) {
                 if (est_prev == 10) {
                     registro_procedimiento(no_factura, id_factura, id_usuario, 10, 7, comentario, 9, id_empresa, "Fatura Pagada", 0);
                 } else if (est_prev == 9) {
@@ -2805,7 +2807,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
         cmbtipodoc.addItem("--Seleccione--");
         R.tipo_documento(cmbtipodoc);
         cmbtipodoc.setSelectedIndex(0);
-
+        jdcfechapago.setDate(new Date());
         jdcfechapago.setMaxSelectableDate(new Date());
         cmbtipodoc.addItemListener((ItemEvent e) -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -2851,6 +2853,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 lblant.setVisible(false);
                 btnok.setText("Enviar a Contabilidad");
                 facturas_anticipadas(1);
+                btnctdoc.setVisible(true);
                 break;
             case "Capital Humano":
             case "Compras":
@@ -2883,6 +2886,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                         Gestionar_Factura.btnaprobar.setVisible(true);
                     }
                 }
+                btnctdoc.setVisible(false);
                 facturas_anticipadas(1);
                 break;
             case "Contabilidad":
@@ -2901,6 +2905,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 facturas_anticipadas(2);
                 LT.anticipos_proveedor(jtantprov, lblproveedor.getText(), lblempresa.getText());
                 docs_cont(1);
+                btnctdoc.setVisible(false);
                 break;
             case "Contabilidad_Rev":
                 Tabpane.remove(panelgestion);
@@ -2918,6 +2923,14 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 btneliminar.setVisible(false);
                 btnctdoc.setVisible(false);
                 facturas_anticipadas(2);
+                switch (UC.id_usuario(Principal.lbluser.getText())) {
+                    case 21:
+                        btnctdoc.setVisible(true);
+                        break;
+                    default:
+                        btnctdoc.setVisible(false);
+                        break;
+                }
                 btnok.setText("Enviar a Tesoreria");
                 break;
             case "Tesoreria":
@@ -2942,12 +2955,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                 }
                 LT.docs_tesoreria(jtdocsT, id_factura);
                 btnok.setText("Confirmar Pago");
-                break;
-        }
-        switch (UC.id_usuario(Principal.lbluser.getText())) {
-            case 21:
-            case 14:
-                btnctdoc.setVisible(true);
+                btnctdoc.setVisible(false);
                 break;
         }
     }
@@ -3292,7 +3300,7 @@ public final class Gestionar_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 7:
-                    if (DC.existe_documento("Documento Equivalente Virtual", idfact)) {
+                    if (DC.existe_documento("Documento Equivalente", idfact)) {
                         btnDQdoc.setEnabled(true);
                     } else {
                         btnDQdoc.setEnabled(false);

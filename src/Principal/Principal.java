@@ -1155,7 +1155,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
                 } else if (CM.isShowing()) {
                     CM.toFront();
                 } else {
-                    CM.setBounds(220, 135, 625, 325);
+                    CM.setBounds(195, 130, 675, 335);
                     CM.setVisible(true);
                 }
             } catch (PropertyVetoException e) {
@@ -1563,12 +1563,14 @@ public class Principal extends javax.swing.JFrame implements Runnable {
             cmbasignado.setSelectedIndex(0);
             cmbfunrev.setSelectedIndex(0);
             cmbfunrev.setEnabled(true);
+            btngestmult.setEnabled(false);
         } else if (jrbretiradas.isSelected()) {
             lblNdatos.setText(String.valueOf(jtfacturas.getRowCount()));
             cmbasignado.setEnabled(true);
             cmbasignado.setSelectedIndex(0);
             cmbfunrev.setSelectedIndex(0);
             cmbfunrev.setEnabled(true);
+            btngestmult.setEnabled(false);
         }
         cmbproveedor.setSelectedIndex(0);
         cmbestado.setSelectedIndex(0);

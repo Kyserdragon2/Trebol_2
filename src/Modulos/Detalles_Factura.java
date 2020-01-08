@@ -656,7 +656,7 @@ public class Detalles_Factura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSCActionPerformed
 
     private void btnDQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDQActionPerformed
-        DC.ver_documento("Documento Equivalente Virtual", Integer.parseInt(lblid.getText()));
+        DC.ver_documento("Documento Equivalente", Integer.parseInt(lblid.getText()));
     }//GEN-LAST:event_btnDQActionPerformed
 
     private void btnIMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIMActionPerformed
@@ -797,7 +797,7 @@ public class Detalles_Factura extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 7:
-                    if (DC.existe_documento("Documento Equivalente Virtual", idfact)) {
+                    if (DC.existe_documento("Documento Equivalente", idfact)) {
                         btnDQ.setEnabled(true);
                     } else {
                         btnDQ.setEnabled(false);

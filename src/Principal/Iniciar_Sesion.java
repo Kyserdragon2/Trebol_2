@@ -51,7 +51,7 @@ public class Iniciar_Sesion extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 183));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.black), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         jPanel1.setDoubleBuffered(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(320, 315));

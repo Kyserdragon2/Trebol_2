@@ -273,7 +273,7 @@ public class Llenar_Tablas {
                     + "AND MONTH(tf.`creacion`) LIKE '%" + mes + "%'\n"
                     + "AND (tprog.`activo`= 1||tprog.`activo` IS NULL)\n"
                     + "GROUP BY tf.id\n"
-                    + "ORDER BY vence DESC,tf.fecha_venc ASC,programada DESC, tprog.`fecha_prog` ASC;";
+                    + "ORDER BY vence DESC,tf.fecha_venc ASC,programada DESC, tprog.`fecha_prog` ASC, tp.razon_social ASC;";
         } else {
             consulta = "SELECT DISTINCT tf.No_Factura, tp.razon_social, tp.nit, tem.`nom_empresa`, te.`nom_estado`, ta2.`nombre_area`, \n"
                     + "ta.`nombre_area`,IF(td.`ubicacion` IS NULL, '',td.`ubicacion`) AS doc_ubicacion, tf.`valor`,tf.`creacion`,\n"
@@ -299,7 +299,7 @@ public class Llenar_Tablas {
                     + "AND MONTH(tf.`creacion`) LIKE '%" + mes + "%'\n"
                     + "AND (tprog.`activo`= 1||tprog.`activo` IS NULL)\n"
                     + "GROUP BY tf.id\n"
-                    + "ORDER BY vence DESC,tf.fecha_venc ASC,programada DESC, tprog.`fecha_prog` ASC;";
+                    + "ORDER BY vence DESC,tf.fecha_venc ASC,programada DESC, tprog.`fecha_prog` ASC, tp.razon_social ASC;";
 
         }
         try (Connection cn = cc.Conexion();

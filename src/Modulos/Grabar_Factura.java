@@ -100,15 +100,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         jLabel27 = new javax.swing.JLabel();
         cmbtipodoc = new javax.swing.JComboBox<>();
         txtubA = new javax.swing.JTextField();
-        Nuevo_T_Documento = new javax.swing.JPanel();
-        txtnombretd = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        btncreartd = new javax.swing.JButton();
-        btncancelartd = new javax.swing.JButton();
-        jLabel38 = new javax.swing.JLabel();
-        txtnpreftd = new javax.swing.JTextField();
         btncargar = new javax.swing.JButton();
-        btnctdoc = new javax.swing.JButton();
         btnbuscarA = new javax.swing.JButton();
         btnactualizar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
@@ -625,73 +617,6 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         jpdocs.add(txtubA);
         txtubA.setBounds(120, 60, 240, 26);
 
-        Nuevo_T_Documento.setBackground(new java.awt.Color(255, 255, 255));
-        Nuevo_T_Documento.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)), "Nuevo Documento", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 3, 18))); // NOI18N
-        Nuevo_T_Documento.setLayout(null);
-
-        txtnombretd.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
-        txtnombretd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        txtnombretd.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        txtnombretd.setPreferredSize(new java.awt.Dimension(6, 26));
-        Nuevo_T_Documento.add(txtnombretd);
-        txtnombretd.setBounds(100, 30, 240, 26);
-
-        jLabel37.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel37.setText("Prefijo");
-        jLabel37.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel37.setPreferredSize(new java.awt.Dimension(55, 26));
-        Nuevo_T_Documento.add(jLabel37);
-        jLabel37.setBounds(10, 65, 80, 26);
-
-        btncreartd.setBackground(new java.awt.Color(224, 240, 177));
-        btncreartd.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btncreartd.setForeground(new java.awt.Color(37, 112, 0));
-        btncreartd.setText("Crear");
-        btncreartd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btncreartd.setFocusPainted(false);
-        btncreartd.setFocusable(false);
-        btncreartd.setPreferredSize(new java.awt.Dimension(83, 26));
-        btncreartd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncreartdActionPerformed(evt);
-            }
-        });
-        Nuevo_T_Documento.add(btncreartd);
-        btncreartd.setBounds(280, 65, 60, 26);
-
-        btncancelartd.setBackground(new java.awt.Color(255, 153, 153));
-        btncancelartd.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btncancelartd.setForeground(new java.awt.Color(153, 0, 0));
-        btncancelartd.setText("Cancelar");
-        btncancelartd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btncancelartd.setFocusPainted(false);
-        btncancelartd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelartdActionPerformed(evt);
-            }
-        });
-        Nuevo_T_Documento.add(btncancelartd);
-        btncancelartd.setBounds(180, 65, 83, 26);
-
-        jLabel38.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel38.setText("Documento");
-        jLabel38.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel38.setPreferredSize(new java.awt.Dimension(55, 26));
-        Nuevo_T_Documento.add(jLabel38);
-        jLabel38.setBounds(10, 30, 80, 26);
-
-        txtnpreftd.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
-        txtnpreftd.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        txtnpreftd.setDisabledTextColor(new java.awt.Color(255, 255, 255));
-        txtnpreftd.setPreferredSize(new java.awt.Dimension(6, 26));
-        Nuevo_T_Documento.add(txtnpreftd);
-        txtnpreftd.setBounds(100, 65, 50, 26);
-
-        jpdocs.add(Nuevo_T_Documento);
-        Nuevo_T_Documento.setBounds(10, 130, 350, 110);
-
         btncargar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btncargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cargar.png"))); // NOI18N
         btncargar.setText("Cargar");
@@ -710,22 +635,6 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         });
         jpdocs.add(btncargar);
         btncargar.setBounds(220, 90, 140, 45);
-
-        btnctdoc.setBackground(new java.awt.Color(224, 240, 177));
-        btnctdoc.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
-        btnctdoc.setForeground(new java.awt.Color(37, 112, 0));
-        btnctdoc.setText("Nuevo Tipo de Documento");
-        btnctdoc.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        btnctdoc.setFocusPainted(false);
-        btnctdoc.setFocusable(false);
-        btnctdoc.setPreferredSize(new java.awt.Dimension(83, 26));
-        btnctdoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnctdocActionPerformed(evt);
-            }
-        });
-        jpdocs.add(btnctdoc);
-        btnctdoc.setBounds(10, 210, 200, 26);
 
         btnbuscarA.setBackground(new java.awt.Color(0, 153, 204));
         btnbuscarA.setFont(new java.awt.Font("Arial", 3, 14)); // NOI18N
@@ -937,20 +846,10 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     private void jtabedpaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jtabedpaneStateChanged
         if (jtabedpane.getTitleAt(jtabedpane.getSelectedIndex()).equals("Documentos")) {
             LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
-            Nuevo_T_Documento.setVisible(false);
             btnactualizar.setVisible(false);
             btncancelar.setVisible(false);
         }
     }//GEN-LAST:event_jtabedpaneStateChanged
-
-    private void btnctdocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnctdocActionPerformed
-        Nuevo_T_Documento.setLocation(10, 90);
-        Nuevo_T_Documento.setVisible(true);
-    }//GEN-LAST:event_btnctdocActionPerformed
-
-    private void btncancelartdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelartdActionPerformed
-        Nuevo_T_Documento.setVisible(false);
-    }//GEN-LAST:event_btncancelartdActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         btncancelar.setVisible(false);
@@ -960,10 +859,6 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         txtubA.setText("");
         LT.Documentos(jtdocumentos, Integer.parseInt(lblid.getText()), Principal.lbluser.getText());
     }//GEN-LAST:event_btncancelarActionPerformed
-
-    private void btncreartdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncreartdActionPerformed
-        crear_tipo_documento();
-    }//GEN-LAST:event_btncreartdActionPerformed
 
     private void btncargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncargarActionPerformed
         validar_campos("crear documento");
@@ -1206,7 +1101,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         limpiar();
         if (F != null) {
             try {
-                cmbproveedor.setSelectedIndex(F.getId_proveedor());
+                cmbproveedor.setSelectedItem(PC.rs_proveedor(F.getId_proveedor()));
                 txtpref.setText(CA.no_factura_pref(F.getNo_factura(), no_factura, proveedor, empresa));
                 txtnf.setText(CA.no_factura_nf(F.getNo_factura(), no_factura, proveedor, empresa));
                 NumberFormat formatomoneda = NumberFormat.getCurrencyInstance();
@@ -1384,6 +1279,7 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         btnanexo.setEnabled(false);
         lblerrorconv.setVisible(false);
         btncrear.setEnabled(true);
+        render();
     }
 
     public void render() {
@@ -1598,30 +1494,13 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
         }
     }
 
-    public void crear_tipo_documento() {
-        if (TDC.crear_tipo_documento(txtnombretd.getText(), txtnpreftd.getText())) {
-            Nuevo_T_Documento.setVisible(false);
-            cmbtipodoc.removeAllItems();
-            cmbtipodoc.addItem("--Seleccione--");
-            R.tipo_documento(cmbtipodoc);
-            cmbtipodoc.setSelectedIndex(0);
-            NS.notificaciones("Creación Tipo Documento", "El tipo de documento ha sido creado con exito.", "correcto");
-        } else {
-            NS.notificaciones("Creación Tipo Documento", "El tipo de documento no ha sido creado.", "error");
-        }
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Nuevo_T_Documento;
     private javax.swing.JButton btnactualizar;
     public static javax.swing.JButton btnanexo;
     public javax.swing.JButton btnbuscarA;
     private javax.swing.JButton btncancelar;
-    private javax.swing.JButton btncancelartd;
     private javax.swing.JButton btncargar;
     public static javax.swing.JButton btncrear;
-    private javax.swing.JButton btncreartd;
-    private javax.swing.JButton btnctdoc;
     public static javax.swing.JButton btnfile;
     public static javax.swing.JButton btnlimpiar;
     public static javax.swing.JButton btnmodificar;
@@ -1633,8 +1512,6 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     public static javax.swing.JComboBox<String> cmbtfactura;
     private javax.swing.JComboBox<String> cmbtipodoc;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane6;
     public static javax.swing.JCheckBox jcbanexo;
@@ -1679,8 +1556,6 @@ public final class Grabar_Factura extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField txtccorresp;
     public static javax.swing.JTextField txtnf;
     public static javax.swing.JTextField txtnit;
-    public javax.swing.JTextField txtnombretd;
-    public javax.swing.JTextField txtnpreftd;
     public static javax.swing.JTextField txtpref;
     public static javax.swing.JTextField txtruta;
     public javax.swing.JTextField txtubA;

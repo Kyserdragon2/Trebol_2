@@ -3,6 +3,7 @@ package Modulos;
 import Clases.Llenar_Tablas;
 import Clases.Renderizado;
 import Controladores.Proveedor_Controller;
+import Controladores.TipoFactura_Controller;
 import Objetos.Proveedor;
 import Principal.Principal;
 import ds.desktop.notify.DesktopNotify;
@@ -15,6 +16,7 @@ public final class Proveedores extends javax.swing.JInternalFrame {
 
     Llenar_Tablas LT = new Llenar_Tablas();
     Renderizado R = new Renderizado();
+    TipoFactura_Controller TF = new TipoFactura_Controller();
 
     public Proveedores() {
         initComponents();
@@ -425,7 +427,7 @@ public final class Proveedores extends javax.swing.JInternalFrame {
         direccion = txtdir.getText();
         telefono = txttel.getText();
         id_area = cmbarea.getSelectedIndex();
-        id_tipo_factura = cmbtipofact.getSelectedIndex();
+        id_tipo_factura = TF.id_tipo_factura(cmbtipofact.getSelectedItem().toString());
         if (PC.crear_proveedor(id_tipo_factura, id_area, nit, razon_social, correo, direccion, telefono)) {
             DesktopNotify.showDesktopMessage("Proveedor Creado", "El Proveedor " + razon_social + " ha sido creado con exito.",
                     DesktopNotify.SUCCESS);
