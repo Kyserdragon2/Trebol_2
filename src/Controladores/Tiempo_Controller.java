@@ -2,8 +2,10 @@ package Controladores;
 
 import Clases.Conexion;
 import Objetos.Tiempo;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,10 +31,11 @@ public class Tiempo_Controller {
                 + "WHERE id_factura = " + id_factura + "\n"
                 + "ORDER BY creacion DESC\n"
                 + "LIMIT 1;";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                area = datos.getInt("id_estado_prev");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                area = rs.getInt("id_estado_prev");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Logs_Controller.class.getName()).log(Level.SEVERE, null, ex);

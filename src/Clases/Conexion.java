@@ -3,11 +3,7 @@ package Clases;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Conexion {
 
@@ -29,25 +25,5 @@ public class Conexion {
 //        System.out.println(SQL);
         PreparedStatement CAE = cn.prepareStatement(SQL);
         return !CAE.execute();
-    }
-
-    public ResultSet ejecutarSql(String sentencia, boolean retorno) throws SQLException, Exception {
-        Connection cn = Conexion();
-        Statement st = cn.createStatement();
-//        System.out.println(sentencia);
-        ResultSet rs;
-        rs = st.executeQuery(sentencia);
-        return rs;
-    }
-
-    public ResultSet consultas(String sql) {
-        ResultSet resultado = null;
-        try {
-//        System.out.println(sql);
-            resultado = ejecutarSql(sql, true);
-        } catch (Exception ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return resultado;
     }
 }

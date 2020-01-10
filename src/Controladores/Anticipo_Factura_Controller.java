@@ -27,9 +27,10 @@ public class Anticipo_Factura_Controller {
         String sql = "SELECT *\n"
                 + "FROM trebol_anticipos_fact\n"
                 + "WHERE id_factura = " + id_factura + ";";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            if (datos.next()) {
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)){
+            if (rs.next()) {
                 existe_u = true;
             }
         } catch (SQLException ex) {
@@ -67,10 +68,11 @@ public class Anticipo_Factura_Controller {
         String sql = "SELECT id_tipo_factura\n"
                 + "FROM trebol_anticipos_fact\n"
                 + "WHERE id_factura = " + id_factura + ";";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            if (datos.next()) {
-                ta = datos.getInt("id_tipo_factura");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);){
+            if (rs.next()) {
+                ta = rs.getInt("id_tipo_factura");
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);

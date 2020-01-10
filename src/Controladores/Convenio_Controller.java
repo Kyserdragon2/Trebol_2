@@ -17,10 +17,11 @@ public class Convenio_Controller {
                 + "WHERE no_cuenta LIKE '" + no_cuenta + "'\n"
                 + "AND id_proveedor LIKE '" + id_proveedor + "'\n"
                 + "AND id_empresa LIKE '" + id_empresa + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                id = datos.getInt("id");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                id = rs.getInt("id");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Convenio_Controller.class.getName()).log(Level.SEVERE, null, ex);

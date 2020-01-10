@@ -43,16 +43,17 @@ public class Anticipo_Controller {
     }
 
     public void ver_documento_anticipo(int id_proveedor, int id_empresa, int id_tipo_doc, String consecutivo) {
+        String sql = "SELECT ta.`ub_documento`\n"
+                + "FROM trebol_anticipos ta\n"
+                + "INNER JOIN trebol_proveedor AS tp ON ta.`id_proveedor`=tp.`id`\n"
+                + "INNER JOIN trebol_empresa AS te ON ta.`id_empresa`=te.`id`\n"
+                + "WHERE id_proveedor=" + id_proveedor + "\n"
+                + "AND id_empresa=" + id_empresa + "\n"
+                + "AND id_tipo_doc=" + id_tipo_doc + "\n"
+                + "AND consecutivo=" + consecutivo + ";";
         try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
-                ResultSet rs = st.executeQuery("SELECT ta.`ub_documento`\n"
-                        + "FROM trebol_anticipos ta\n"
-                        + "INNER JOIN trebol_proveedor AS tp ON ta.`id_proveedor`=tp.`id`\n"
-                        + "INNER JOIN trebol_empresa AS te ON ta.`id_empresa`=te.`id`\n"
-                        + "WHERE id_proveedor=" + id_proveedor + "\n"
-                        + "AND id_empresa=" + id_empresa + "\n"
-                        + "AND id_tipo_doc=" + id_tipo_doc + "\n"
-                        + "AND consecutivo=" + consecutivo + ";")) {
+                ResultSet rs = st.executeQuery(sql)) {
             if (rs.next()) {
                 File ruta = new File(rs.getString("ub_documento"));
                 Desktop.getDesktop().open(ruta);

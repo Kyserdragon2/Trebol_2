@@ -67,35 +67,36 @@ public class Factura_Controller {
                 + "AND razon_social LIKE '" + proveedor + "'\n"
                 + "AND nom_empresa LIKE '" + empresa + "'\n"
                 + "LIMIT 1;";
-        ResultSet datos = cc.consultas(sql);
-        try {
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
             SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
-            while (datos.next()) {
-                F.setId(datos.getInt("tf.id"));
-                F.setNo_factura(datos.getString("tf.no_factura"));
-                F.setValor(datos.getDouble("tf.valor"));
-                F.setMoneda(datos.getString("tf.moneda"));
-                F.setFecha_recepcion(formatoDeFecha.format(datos.getDate("tf.creacion")));
-                F.setFecha_generada(formatoDeFecha.format(datos.getTimestamp("tf.fecha_generada")));
-                if (datos.getTimestamp("tf.fecha_venc") == null) {
+            while (rs.next()) {
+                F.setId(rs.getInt("tf.id"));
+                F.setNo_factura(rs.getString("tf.no_factura"));
+                F.setValor(rs.getDouble("tf.valor"));
+                F.setMoneda(rs.getString("tf.moneda"));
+                F.setFecha_recepcion(formatoDeFecha.format(rs.getDate("tf.creacion")));
+                F.setFecha_generada(formatoDeFecha.format(rs.getTimestamp("tf.fecha_generada")));
+                if (rs.getTimestamp("tf.fecha_venc") == null) {
                     F.setFecha_venc("");
                 } else {
-                    F.setFecha_venc(formatoDeFecha.format(datos.getTimestamp("tf.fecha_venc")));
+                    F.setFecha_venc(formatoDeFecha.format(rs.getTimestamp("tf.fecha_venc")));
                 }
-                F.setAprobada(datos.getInt("tf.aprobada"));
-                F.setRevisada(datos.getInt("tf.revisada"));
-                F.setNo_radicado(datos.getString("tf.no_radicado"));
-                F.setId_proveedor(datos.getInt("tf.id_proveedor"));
-                F.setId_tipo_factura(datos.getInt("tf.id_tipo_factura"));
-                F.setId_gestion(datos.getInt("tf.id_gestion"));
-                F.setId_area(datos.getInt("tf.id_area"));
-                F.setId_empresa(datos.getInt("tf.id_empresa"));
-                F.setId_estado(datos.getInt("tf.id_estado"));
-                F.setUbicacion(datos.getString("td.ubicacion"));
-                if (datos.getString("tc.no_cuenta") == null) {
+                F.setAprobada(rs.getInt("tf.aprobada"));
+                F.setRevisada(rs.getInt("tf.revisada"));
+                F.setNo_radicado(rs.getString("tf.no_radicado"));
+                F.setId_proveedor(rs.getInt("tf.id_proveedor"));
+                F.setId_tipo_factura(rs.getInt("tf.id_tipo_factura"));
+                F.setId_gestion(rs.getInt("tf.id_gestion"));
+                F.setId_area(rs.getInt("tf.id_area"));
+                F.setId_empresa(rs.getInt("tf.id_empresa"));
+                F.setId_estado(rs.getInt("tf.id_estado"));
+                F.setUbicacion(rs.getString("td.ubicacion"));
+                if (rs.getString("tc.no_cuenta") == null) {
                     F.setConvenio("");
                 } else {
-                    F.setConvenio(datos.getString("tc.no_cuenta"));
+                    F.setConvenio(rs.getString("tc.no_cuenta"));
                 }
             }
             return F;
@@ -198,7 +199,7 @@ public class Factura_Controller {
 
     public boolean confirmacion_pago(String no_factura, int id_proveedor, int id_empresa, int id_estado, int id_gestion, String fecha_pago) {
         String sql = "UPDATE trebol_facturas\n"
-                + "SET fecha_pago = '"+fecha_pago+"',\n"
+                + "SET fecha_pago = '" + fecha_pago + "',\n"
                 + "id_estado=" + id_estado + ",\n"
                 + "id_gestion=" + id_gestion + "\n"
                 + "WHERE no_factura LIKE '" + no_factura + "'\n"
@@ -261,10 +262,11 @@ public class Factura_Controller {
                 + "WHERE no_factura LIKE '" + no_factura + "'\n"
                 + "AND id_proveedor LIKE '" + proveedor + "'\n"
                 + "AND id_empresa LIKE '" + empresa + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                id = datos.getInt("id");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)){
+            while (rs.next()) {
+                id = rs.getInt("id");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,10 +280,11 @@ public class Factura_Controller {
         String sql = "SELECT DISTINCT id_estado\n"
                 + "FROM trebol_facturas\n"
                 + "WHERE id =" + id_factura + ";";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                id_est = datos.getInt("id_estado");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)){
+            while (rs.next()) {
+                id_est = rs.getInt("id_estado");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -317,17 +320,17 @@ public class Factura_Controller {
             return false;
         }
     }
-    
 
     public int id_area_factura(int id_factura) {
         int id_area = 0;
         String sql = "SELECT DISTINCT id_area\n"
                 + "FROM trebol_facturas\n"
                 + "WHERE id =" + id_factura + ";";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                id_area = datos.getInt("id_area");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)){
+            while (rs.next()) {
+                id_area = rs.getInt("id_area");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);

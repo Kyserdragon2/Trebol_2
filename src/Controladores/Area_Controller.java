@@ -11,11 +11,11 @@ public class Area_Controller {
 
     public int id_area(String dato) {
         int id = 0;
-        String idc = "SELECT id FROM trebol_areas\n"
+        String sql = "SELECT id FROM trebol_areas\n"
                 + "WHERE nombre_area='" + dato + "'";
         try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
-                ResultSet rs = st.executeQuery(idc)) {
+                ResultSet rs = st.executeQuery(sql)) {
             if (rs.next()) {
                 id = rs.getInt("id");
             }
@@ -27,7 +27,7 @@ public class Area_Controller {
 
     public int id_area_rechazo(int id_usuario_rechazo) {
         int id = 0;
-        String idc = "SELECT tu.id_area\n"
+        String sql = "SELECT tu.id_area\n"
                 + "FROM trebol_tiempos AS tt\n"
                 + "JOIN trebol_usuario AS tu ON tt.`id_usuario`=tu.`id`\n"
                 + "WHERE tt.`id_estado_post`=11\n"
@@ -35,7 +35,7 @@ public class Area_Controller {
                 + "ORDER BY tt.creacion DESC;";
         try (Connection cn = cc.Conexion();
                 Statement st = cn.createStatement();
-                ResultSet rs = st.executeQuery(idc)) {
+                ResultSet rs = st.executeQuery(sql)) {
             if (rs.next()) {
                 id = rs.getInt("tu.id_area");
             }

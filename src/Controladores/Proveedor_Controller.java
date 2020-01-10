@@ -27,17 +27,18 @@ public class Proveedor_Controller {
         Proveedor P = new Proveedor();
         P.setRazon_social(razon_social);
         String sql = "SELECT * FROM trebol_proveedor WHERE razon_social LIKE '" + P.getRazon_social() + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                P.setId(datos.getInt("id"));
-                P.setNit(datos.getString("nit"));
-                P.setRazon_social(datos.getString("razon_social"));
-                P.setCorreo(datos.getString("correo"));
-                P.setDireccion(datos.getString("direccion"));
-                P.setTelefono(datos.getString("telefono"));
-                P.setId_area(datos.getInt("id_area"));
-                P.setId_tipo_factura(datos.getInt("id_tipo_factura"));
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                P.setId(rs.getInt("id"));
+                P.setNit(rs.getString("nit"));
+                P.setRazon_social(rs.getString("razon_social"));
+                P.setCorreo(rs.getString("correo"));
+                P.setDireccion(rs.getString("direccion"));
+                P.setTelefono(rs.getString("telefono"));
+                P.setId_area(rs.getInt("id_area"));
+                P.setId_tipo_factura(rs.getInt("id_tipo_factura"));
             }
             return P;
         } catch (SQLException ex) {
@@ -110,7 +111,7 @@ public class Proveedor_Controller {
         }
         return id;
     }
-    
+
     public int id_proveedor(String dato) {
         int id = 0;
         String idc = "SELECT id FROM trebol_proveedor\n"
@@ -126,7 +127,7 @@ public class Proveedor_Controller {
         }
         return id;
     }
-    
+
     public String nit_proveedor(String dato) {
         String nit = "";
         String idc = "SELECT nit FROM trebol_proveedor\n"
@@ -142,7 +143,7 @@ public class Proveedor_Controller {
         }
         return nit;
     }
-    
+
     public String rs_proveedor(int dato) {
         String razon_s = "";
         String idc = "SELECT razon_social FROM trebol_proveedor\n"

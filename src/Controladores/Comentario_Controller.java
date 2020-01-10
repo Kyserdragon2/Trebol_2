@@ -30,10 +30,11 @@ public class Comentario_Controller {
                 + "AND id_usuario = "+id_usuario+"\n"
                 + "AND id_estado = "+id_estado+"\n"
                 + "AND detalle LIKE '"+detalle+"'";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                id = datos.getInt("id");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)){
+            while (rs.next()) {
+                id = rs.getInt("id");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Comentario_Controller.class.getName()).log(Level.SEVERE, null, ex);

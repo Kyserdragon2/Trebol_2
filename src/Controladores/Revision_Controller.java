@@ -58,10 +58,11 @@ public class Revision_Controller {
                 + "FROM trebol_revisiones AS tr\n"
                 + "JOIN trebol_usuario AS tu ON tr.`id_usuario`=tu.`id`\n"
                 + "WHERE tr.`id_factura`=" + R.getId_factura() + ";";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            if (datos.next()) {
-                correo = datos.getString("tu.correo");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                correo = rs.getString("tu.correo");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Documento_Controller.class.getName()).log(Level.SEVERE, null, ex);

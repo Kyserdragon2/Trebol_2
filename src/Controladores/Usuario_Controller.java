@@ -2,8 +2,10 @@ package Controladores;
 
 import Clases.Conexion;
 import Objetos.Usuario_obj;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,19 +31,20 @@ public class Usuario_Controller {
         Usuario_obj U = new Usuario_obj();
         U.setUsuario(usuario);
         String sql = "SELECT * FROM trebol_usuario WHERE usuario LIKE '" + U.getUsuario() + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                U.setId(datos.getInt("id"));
-                U.setUsuario(datos.getString("usuario"));
-                U.setNombres(datos.getString("nombres"));
-                U.setApellidos(datos.getString("apellidos"));
-                U.setCorreo(datos.getString("correo"));
-                U.setContraseña(datos.getString("contraseña"));
-                U.setId_area(datos.getInt("id_area"));
-                U.setId_empresa(datos.getInt("id_empresa"));
-                U.setAprueba(datos.getInt("aprueba"));
-                U.setRetirado(datos.getInt("retirado"));
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                U.setId(rs.getInt("id"));
+                U.setUsuario(rs.getString("usuario"));
+                U.setNombres(rs.getString("nombres"));
+                U.setApellidos(rs.getString("apellidos"));
+                U.setCorreo(rs.getString("correo"));
+                U.setContraseña(rs.getString("contraseña"));
+                U.setId_area(rs.getInt("id_area"));
+                U.setId_empresa(rs.getInt("id_empresa"));
+                U.setAprueba(rs.getInt("aprueba"));
+                U.setRetirado(rs.getInt("retirado"));
             }
             return U;
         } catch (SQLException ex) {
@@ -87,22 +90,23 @@ public class Usuario_Controller {
 
     public String correos(int id_area, int id_empresa) {
         String correos = "";
-        String consulta;
+        String sql;
         if (id_empresa == 0) {
-            consulta = "SELECT GROUP_CONCAT(IF(correo ='N/A',NULL,correo)) AS 'Correos'\n"
+            sql = "SELECT GROUP_CONCAT(IF(correo ='N/A',NULL,correo)) AS 'Correos'\n"
                     + "FROM trebol_usuario\n"
                     + "WHERE id_area = " + id_area + "\n"
                     + "GROUP BY id_area;";
         } else {
-            consulta = "SELECT GROUP_CONCAT(IF(correo ='N/A',NULL,correo)) AS 'Correos'\n"
+            sql = "SELECT GROUP_CONCAT(IF(correo ='N/A',NULL,correo)) AS 'Correos'\n"
                     + "FROM trebol_usuario\n"
                     + "WHERE id_area = " + id_area + " AND id_empresa =" + id_empresa + "\n"
                     + "GROUP BY id_area;";
         }
-        ResultSet datos = cc.consultas(consulta);
-        try {
-            if (datos.next()) {
-                correos = datos.getString("Correos");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                correos = rs.getString("Correos");
             }
             return correos;
         } catch (SQLException e) {
@@ -117,10 +121,11 @@ public class Usuario_Controller {
                 + "FROM trebol_usuario AS tu\n"
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                id = datos.getInt("id");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                id = rs.getInt("id");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -135,10 +140,11 @@ public class Usuario_Controller {
                 + "FROM trebol_usuario AS tu\n"
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`)='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                id = datos.getInt("id");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                id = rs.getInt("id");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,10 +159,11 @@ public class Usuario_Controller {
                 + "FROM trebol_usuario AS tu\n"
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                nom = datos.getString("Nombre");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                nom = rs.getString("Nombre");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,10 +178,11 @@ public class Usuario_Controller {
                 + "FROM trebol_usuario AS tu\n"
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                nom = datos.getString("tu.usuario");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                nom = rs.getString("tu.usuario");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -189,10 +197,11 @@ public class Usuario_Controller {
                 + "FROM trebol_usuario AS tu\n"
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                nom = datos.getString("tu.contraseña");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                nom = rs.getString("tu.contraseña");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,10 +216,11 @@ public class Usuario_Controller {
                 + "FROM trebol_usuario AS tu\n"
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                id = datos.getInt("id_area");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                id = rs.getInt("id_area");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,10 +235,11 @@ public class Usuario_Controller {
                 + "FROM trebol_usuario AS tu\n"
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                aprueba = datos.getInt("aprueba");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                aprueba = rs.getInt("aprueba");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -243,10 +254,11 @@ public class Usuario_Controller {
                 + "FROM trebol_usuario AS tu\n"
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            if (datos.next()) {
-                area = datos.getString("ta.nombre_area");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                area = rs.getString("ta.nombre_area");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -262,10 +274,11 @@ public class Usuario_Controller {
                 + "JOIN trebol_areas AS ta ON tu.`id_area`=ta.`id`\n"
                 + "JOIN trebol_empresa AS temp ON tu.id_empresa=temp.id\n"
                 + "WHERE CONCAT(tu.`nombres`,' ',tu.`apellidos`,' (',ta.`nombre_area`,')')='" + nombre + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            if (datos.next()) {
-                empresa = datos.getString("temp.nom_empresa");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                empresa = rs.getString("temp.nom_empresa");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -282,9 +295,10 @@ public class Usuario_Controller {
                 + "INNER JOIN trebol_areas AS ta ON tu.id_area=ta.id\n"
                 + "INNER JOIN trebol_empresa AS tempr ON tu.`id_empresa`=tempr.`id`\n"
                 + "WHERE tu.`usuario` LIKE '" + usuario + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            if (datos.next()) {
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
                 existe_u = true;
             }
         } catch (SQLException ex) {
@@ -303,9 +317,10 @@ public class Usuario_Controller {
                 + "INNER JOIN trebol_empresa AS tempr ON tu.`id_empresa`=tempr.`id`\n"
                 + "WHERE tu.`usuario` LIKE '" + usuario + "'\n"
                 + "AND tu.sesion_activa=1;";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            if (datos.next()) {
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
                 sesion = true;
             }
         } catch (SQLException ex) {
@@ -324,9 +339,10 @@ public class Usuario_Controller {
                 + "INNER JOIN trebol_empresa AS tempr ON tu.`id_empresa`=tempr.`id`\n"
                 + "WHERE tu.`usuario` LIKE '" + usuario + "'\n"
                 + "AND tu.contraseña LIKE '" + pass + "';";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            if (datos.next()) {
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
                 val_pass = true;
             }
         } catch (SQLException ex) {
@@ -345,10 +361,11 @@ public class Usuario_Controller {
                             + "FROM trebol_usuario AS tu\n"
                             + "JOIN trebol_areas AS ta ON tu.id_area=ta.id\n"
                             + "WHERE usuario LIKE '" + usuario + "';";
-                    ResultSet datos = cc.consultas(sql);
-                    try {
-                        if (datos.next()) {
-                            sesion = datos.getString("NombreC");
+                    try (Connection cn = cc.Conexion();
+                            Statement st = cn.createStatement();
+                            ResultSet rs = st.executeQuery(sql)) {
+                        if (rs.next()) {
+                            sesion = rs.getString("NombreC");
                         }
                     } catch (SQLException ex) {
 //                        Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -388,10 +405,11 @@ public class Usuario_Controller {
                             + "FROM trebol_usuario AS tu\n"
                             + "JOIN trebol_areas AS ta ON tu.id_area=ta.id\n"
                             + "WHERE usuario LIKE '" + usuario + "';";
-                    ResultSet datos = cc.consultas(sql);
-                    try {
-                        while (datos.next()) {
-                            sesion = estado_sesion(0, datos.getString("NombreC"));
+                    try (Connection cn = cc.Conexion();
+                            Statement st = cn.createStatement();
+                            ResultSet rs = st.executeQuery(sql)) {
+                        while (rs.next()) {
+                            sesion = estado_sesion(0, rs.getString("NombreC"));
                         }
                     } catch (SQLException ex) {
 //                        Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -413,13 +431,14 @@ public class Usuario_Controller {
                 + "FROM trebol_tiempos AS tt\n"
                 + "JOIN trebol_usuario AS tu ON tt.`id_usuario`=tu.`id`\n"
                 + "WHERE tt.`id_estado_post`=11\n"
-                + "AND tt.`id_factura` = "+id_factura+"\n"
+                + "AND tt.`id_factura` = " + id_factura + "\n"
                 + "ORDER BY tt.creacion DESC\n"
                 + "LIMIT 1;";
-        ResultSet datos = cc.consultas(sql);
-        try {
-            while (datos.next()) {
-                aprueba = datos.getInt("tt.id_usuario");
+        try (Connection cn = cc.Conexion();
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                aprueba = rs.getInt("tt.id_usuario");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_Controller.class.getName()).log(Level.SEVERE, null, ex);
